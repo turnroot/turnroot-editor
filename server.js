@@ -7,10 +7,13 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
+import bodyParser from 'body-parser'
+import {createSubscription, cancelSubscription, getSubscription, stripe} from './stripe.js'
 
-import { loginUser, getUser, createUser, getUserUserId } from './db.js'
+import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './db.js'
 
 const app = express()
+app.use(bodyParser.raw({type: 'application/json'}))
 dotenv.config()
 
 //app.use(cors())
@@ -90,6 +93,75 @@ app.post('/user/:userId', async (req, res) => {
         return
     }
     res.send(user)
+})
+
+app.post('/subscription', async (req, res) => {
+    if (!req.user) {
+        res.status(401).send('Unauthorized')
+        return
+    }
+    const subscription = await getSubscription(req.user.username)
+    res.send(subscription)
+})
+
+app.post('/subscription/create', async (req, res) => {
+    if (!req.user) {
+        res.status(401).send('Unauthorized')
+        return
+    }
+    const subscription = await createSubscription(req.user.username, req.body.extraDonation)
+    res.send(subscription)
+})
+
+app.post('/subscription/cancel', async (req, res) => {
+    if (!req.user) {
+        res.status(401).send('Unauthorized')
+        return
+    }
+    await cancelSubscription(req.user.username)
+    res.send('Subscription canceled')
+})
+
+app.post('/webhook', async (req, res) => {
+    const sig = req.headers['stripe-signature']
+    let event
+    try {
+        event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET)
+    } catch (err) {
+        res.status(400).send(`Webhook Error: ${err.message}`)
+        return
+    }
+
+    switch (event.type) {
+        case 'invoice.payment_succeeded':
+            let invoice = event.data.object
+            customer = await stripe.customers.retrieve(invoice.customer)
+            user = await getUserByEmail(customer.email)
+            subscription = await getSubscription(user.username)
+            if (subscription.status === 'canceled') {
+                await createSubscription(user.username)
+            }
+            console.log('Payment succeeded for', user.username)
+            break
+        case 'invoice.payment_failed':
+            let paymentIntent = event.data.object
+            let customer = await stripe.customers.retrieve(paymentIntent.customer)
+            let user = await getUserByEmail(customer.email)
+            await cancelSubscription(user.username)
+            let sql = 'UPDATE Users SET stripeCustomerId = NULL, stripeSubscriptionId = NULL, paymentMethodId = NULL WHERE username = ?'
+            await db.query(sql, [user.username]).catch(console.error)
+            break
+        case 'customer.subscription.deleted':
+            let subscription = event.data.object
+            customer = await stripe.customers.retrieve(subscription.customer)
+            user = await getUserByEmail(customer.email)
+            sql = 'UPDATE Users SET stripeCustomerId = NULL, stripeSubscriptionId = NULL, paymentMethodId = NULL WHERE username = ?'
+            await db.query(sql, [user.username]).catch(console.error)
+            break
+        default:
+            return res.status(400).end()
+    }
+    res.json({received: true})
 })
 
 app.use((err, req, res, next) => {

@@ -29,9 +29,14 @@ db.query(sql,[process.env.DB_NAME], (err, result) => {
 
     if (!result[0][Object.keys(result[0])[0]]) {
         sql = `CREATE TABLE Users(
-    userId VARCHAR(255),
-    username VARCHAR(255),
-    email VARCHAR(255),
+    userId VARCHAR(255) UNIQUE,
+    username VARCHAR(255) UNIQUE,
+    email VARCHAR(255) UNIQUE,
+    lastLogin TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    isSubscribed BOOLEAN DEFAULT FALSE,
+    stripeCustomerId VARCHAR(255),
+    stripeSubscriptionId VARCHAR(255),
+    paymentMethodId VARCHAR(255),
     password VARCHAR(255))`
 
         db.query(sql, (err, result) => {
@@ -124,6 +129,25 @@ const getUser = (username) => {
             if (err) reject(err)
             let user = result[0]
             delete user.password
+            delete user.stripeCustomerId
+            delete user.stripeSubscriptionId
+            delete user.paymentMethodId
+            resolve(user)
+        })
+    })
+}
+
+const getUserByEmail = (email) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'SELECT * FROM Users WHERE email = ?'
+
+        db.query(sql, [email], (err, result) => {
+            if (err) reject(err)
+            let user = result[0]
+            delete user.password
+            delete user.stripeCustomerId
+            delete user.stripeSubscriptionId
+            delete user.paymentMethodId
             resolve(user)
         })
     })
@@ -149,6 +173,10 @@ const loginUser = (username, password, email=null) => {
                     if (err) reject(err)
 
                     if (res) {
+                        let sql = 'UPDATE Users SET lastLogin = CURRENT_TIMESTAMP WHERE username = ?'
+                        db.query(sql, [result[0].username], (err, result) => {
+                            if (err) reject(err)
+                        })
                         resolve(result[0])
                     } else {
                         resolve(null)
@@ -173,4 +201,4 @@ const getUserUserId = (userId, thisUser) => {
     })
 }
 
-export {createUser, getUser, getUserUserId, loginUser, db}
+export {createUser, getUser, getUserUserId, getUserByEmail, loginUser, db}
