@@ -9,6 +9,8 @@ import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
 import {createSubscription, cancelSubscription, getSubscription, stripe} from './stripe.js'
+import path from 'path'
+import { fileURLToPath } from 'url'
 
 import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './db.js'
 
@@ -54,6 +56,17 @@ app.use(morgan('combined'))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+
+const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'view')
+
+app.use('/components', express.static(path.join(__dirname, 'components')))
+app.use('/functions', express.static(path.join(__dirname, 'functions')))
+app.use('/style', express.static(path.join(__dirname, 'style')))
+app.use('/lib', express.static(path.join(__dirname, 'lib')))
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, './preview.html'))
+})
 
 app.post('/login', function(req, res, next) {
     if (process.env.LOCAL === 'true'){

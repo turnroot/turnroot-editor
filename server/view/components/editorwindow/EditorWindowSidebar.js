@@ -1,4 +1,4 @@
-import { w2sidebar, w2ui } from '/lib/w2ui.es6.min.js'
+import { w2sidebar, w2ui } from './lib/w2ui.es6.min.js'
 import UnitEditor from '../uniteditor/UnitEditor.js'
 import ClassEditor from '../classeditor/ClassEditor.js'
 import GameEditor from '../gameeditor/GameEditor.js'
