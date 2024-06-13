@@ -1,7 +1,7 @@
 import {
     w2toolbar,
     w2ui
-} from './lib/w2ui.es6.min.js'
+} from '../../lib/w2ui.es6.min.js'
 import topMenu from '../../functions/ui/topMenu.js'
 
 let startupView = 'welcome-message'

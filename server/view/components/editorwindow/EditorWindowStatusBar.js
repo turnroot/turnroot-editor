@@ -1,4 +1,4 @@
-import { w2toolbar, w2ui } from './lib/w2ui.es6.min.js'
+import { w2toolbar, w2ui } from '../../lib/w2ui.es6.min.js'
 
 const autosavedIcon = '<div style="margin-top:-.5rem; margin-right:.25rem;"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-check"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="m9 15 2 2 4-4"/></svg></div>'
 

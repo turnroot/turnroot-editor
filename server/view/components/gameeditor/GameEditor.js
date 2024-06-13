@@ -1,4 +1,4 @@
-import { w2layout } from './lib/w2ui.es6.min.js'
+import { w2layout } from '../../lib/w2ui.es6.min.js'
 
 let layout = new w2layout({
     name: 'GameEditor',

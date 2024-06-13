@@ -11,6 +11,7 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME
 })
 
+if (process.env.local === 'false') {
 db.connect((err) => {
     if (err) {
         console.log(err)
@@ -63,7 +64,7 @@ db.query(sql, [process.env.DB_NAME], (err, result) => {
             console.log("UsedStrings table created")
         })
     }
-})
+})}
 
 const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
 const length = 18

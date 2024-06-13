@@ -1,5 +1,5 @@
 import updateUiTheme from './updateTheme.js'
-import { w2ui } from './lib/w2ui.es6.min.js'
+import { w2ui } from '../../../lib/w2ui.es6.min.js'
 
 let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor"]
 let themes = ["ocean_waves", "turnroot", "charcoal", "charcoal_blue", "charcoal_green", "chocolate", "midnight_spark", "rainforest"]

@@ -8,13 +8,13 @@ import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
-import {createSubscription, cancelSubscription, getSubscription, stripe} from './stripe.js'
+import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './db.js'
+import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './functions/db.js'
 
-import { establishConnection, sendToFromDatabase } from './hit_schemas.js'
+import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
 const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
@@ -22,7 +22,24 @@ dotenv.config()
 
 //app.use(cors())
 
-app.use(helmet())
+app.use(helmet(
+    {
+        contentSecurityPolicy: {
+            directives: {
+                defaultSrc: ["'self'"],
+                scriptSrc: ["'self'", "'unsafe-inline'", 'https://js.stripe.com', 'https://cdn.jsdelivr.net'],
+                styleSrc: ["'self'", "'unsafe-inline'", 'https://cdn.jsdelivr.net', 'https://code.cdn.mozilla.net'],
+                imgSrc: ["'self'", 'data:', 'https://js.stripe.com'],
+                connectSrc: ["'self'", 'https://api.stripe.com', 'https://js.stripe.com'],
+                frameSrc: ["'self'", 'https://js.stripe.com'],
+                objectSrc: ["'none'"],
+                baseUri: ["'self'"],
+                formAction: ["'self'"],
+                upgradeInsecureRequests: [],
+            },
+        },
+    }
+))
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }))
 
 app.use(passport.initialize())
@@ -52,7 +69,7 @@ const limiter = rateLimit({
 })
 app.use(limiter)
 
-app.use(morgan('combined'))
+app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
@@ -238,8 +255,8 @@ app.use((err, req, res, next) => {
     res.status(500).send(err.message)
 })
 
-import './crons.js'
+import './functions/crons.js'
 
 app.listen(26068, () => {
-    console.log('Server started')
+    console.log('Server started on http://localhost:26068')
 })
