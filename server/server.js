@@ -20,7 +20,12 @@ const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
 dotenv.config()
 
-//app.use(cors())
+app.use(cors(
+    {
+        origin: process.env.LOCAL === 'true' ? 'http://localhost:26068' : 'https://editor.turnroot.com',
+        credentials: true,
+    }
+))
 
 app.use(helmet(
     {
@@ -40,7 +45,7 @@ app.use(helmet(
         },
     }
 ))
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }))
+app.use(session({ secret: process.env.SESSION_SECRET }))
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
@@ -65,7 +70,7 @@ app.use(passport.session())
 
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 100 
+  max: 120 
 })
 app.use(limiter)
 
