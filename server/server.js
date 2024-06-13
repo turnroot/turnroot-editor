@@ -45,7 +45,7 @@ app.use(helmet(
         },
     }
 ))
-app.use(session({ secret: process.env.SESSION_SECRET }))
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false}))
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
