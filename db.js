@@ -153,15 +153,11 @@ const getUserByEmail = (email) => {
     })
 }
 
-const loginUser = (username, password, email=null) => {
+const loginUser = (req, res) => {
+    const {username, password} = req.body
     return new Promise((resolve, reject) => {
         let sql = 'SELECT * FROM Users WHERE username = ?'
         let value = username
-
-        if (email) {
-            sql = 'SELECT * FROM Users WHERE email = ?'
-            value = email
-        }
 
         db.query(sql, [value], (err, result) => {
             if (err) reject(err)

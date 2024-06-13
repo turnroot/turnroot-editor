@@ -12,6 +12,8 @@ import {createSubscription, cancelSubscription, getSubscription, stripe} from '.
 
 import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './db.js'
 
+import { establishConnection, sendToDatabase } from './hit_schemas.js'
+
 const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
 dotenv.config()
@@ -33,11 +35,10 @@ passport.use(new LocalStrategy(
 ))
 
 passport.serializeUser((user, done) => {
-    done(null, user.username)
+    done(null, { username: user.username, userId: user.userId })
 })
 
-passport.deserializeUser(async (username, done) => {
-    const user = await getUser(username)
+passport.deserializeUser((user, done) => {
     done(null, user)
 })
 
@@ -54,8 +55,34 @@ app.use(morgan('combined'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 
-app.post('/login', passport.authenticate('local', { failureRedirect: '/login' }), function(req, res) {
-    res.redirect('/')
+app.post('/login', function(req, res, next) {
+    if (process.env.LOCAL === 'true'){
+        establishConnection(req, res).catch((err) => {
+            console.error(err)
+        })
+    }
+    passport.authenticate('local', function(err, user, info) {
+        if (err) { 
+            return next(err) 
+        }
+        if (!user) { 
+            return res.status(418).send('User not found')
+        }
+        req.logIn(user, async function(err) {
+            if (err) { 
+                return next(err)
+            }
+            let loginresult = await loginUser(req, res).catch((err) => {
+                console.error(err)
+            })
+            if (!loginresult) {
+                return res.status(500).send('Login failure')
+            }
+            establishConnection(req, res).catch((err) => {
+                console.error(err)
+            })
+        })
+    })(req, res, next)
 })
 
 app.post('/register', async (req, res) => {
@@ -65,12 +92,44 @@ app.post('/register', async (req, res) => {
         res.status(400).send('User creation failed')
         return
     }
-    res.send(newUser)
+
+    req.logIn(newUser, async function(err) {
+        if (err) {
+            console.error(err)
+            return res.status(500).send('Login after registration failed')
+        }
+
+        try {
+            await loginUser(req, res)
+            establishConnection(req, res).catch((err) => {
+                console.error(err)
+            })
+        } catch (err) {
+            console.error(err)
+            return res.status(500).send('Login after registration failed')
+        }
+    })
+})
+
+app.post('/save', async (req, res) => {
+    if (process.env.LOCAL === 'false'){
+    if (!req.user) {
+        res.status(401).send('Unauthorized')
+        return
+    }}
+    const subscription = process.env.LOCAL === 'false' ? await getSubscription(req.user.username) : 'local'
+    if (!subscription) {
+        res.status(401).send('User is not subscribed')
+        return
+    }
+    sendToDatabase(req, res).catch((err) => {
+        console.error(err)
+    })
 })
 
 app.get('/logout', (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.status(200).send('Logged out')
 })
 
 app.get('/user/:username', async (req, res) => {
@@ -93,15 +152,6 @@ app.post('/user/:userId', async (req, res) => {
         return
     }
     res.send(user)
-})
-
-app.post('/subscription', async (req, res) => {
-    if (!req.user) {
-        res.status(401).send('Unauthorized')
-        return
-    }
-    const subscription = await getSubscription(req.user.username)
-    res.send(subscription)
 })
 
 app.post('/subscription/create', async (req, res) => {
@@ -168,6 +218,8 @@ app.use((err, req, res, next) => {
     console.error(err.stack)
     res.status(500).send(err.message)
 })
+
+import './crons.js'
 
 app.listen(26068, () => {
     console.log('Server started')
