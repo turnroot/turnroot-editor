@@ -12,7 +12,7 @@ import {createSubscription, cancelSubscription, getSubscription, stripe} from '.
 
 import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './db.js'
 
-import { establishConnection, sendToDatabase } from './hit_schemas.js'
+import { establishConnection, sendToFromDatabase } from './hit_schemas.js'
 
 const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
@@ -111,18 +111,24 @@ app.post('/register', async (req, res) => {
     })
 })
 
-app.post('/save', async (req, res) => {
+app.post('/data', async (req, res) => {
     if (process.env.LOCAL === 'false'){
     if (!req.user) {
         res.status(401).send('Unauthorized')
         return
     }}
-    const subscription = process.env.LOCAL === 'false' ? await getSubscription(req.user.username) : 'local'
+    let subscription
+    if (!req.user.subscription) {
+        subscription = process.env.LOCAL === 'false' ? await getSubscription(req.user.username) : 'local'
+        req.user.subscription = subscription
+    } else {
+        subscription = req.user.subscription
+    }
     if (!subscription) {
         res.status(401).send('User is not subscribed')
         return
     }
-    sendToDatabase(req, res).catch((err) => {
+    sendToFromDatabase(req, res).catch((err) => {
         console.error(err)
     })
 })

@@ -29,12 +29,12 @@ const establishConnection = async (req, res) => {
     }
 }
 
-const sendToDatabase = async (req, res) => {
-    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/save' : 'http://localhost:9194/save'
+const sendToFromDatabase = async (req, res) => {
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://localhost:9194/data'
     let body = {
         userId: req.user.userId,
         key: process.env.SCHEMAS_SERVER_KEY,
-        data: req.body
+        action: req.body
     }
     let options = {
         method: 'POST',
@@ -53,4 +53,4 @@ const sendToDatabase = async (req, res) => {
     }
 }
 
-export { establishConnection, sendToDatabase }
+export { establishConnection, sendToFromDatabase }
