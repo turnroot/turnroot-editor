@@ -27,6 +27,7 @@ app.use(cors(
     }
 ))
 
+if (process.env.LOCAL === 'false') {
 app.use(helmet(
     {
         contentSecurityPolicy: {
@@ -45,6 +46,8 @@ app.use(helmet(
         },
     }
 ))
+}
+
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false}))
 
 app.use(passport.initialize())
@@ -68,11 +71,13 @@ passport.deserializeUser((user, done) => {
 
 app.use(passport.session())
 
+if (process.env.LOCAL === 'false') {
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 120 
+  max: 300 
 })
 app.use(limiter)
+}
 
 app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 

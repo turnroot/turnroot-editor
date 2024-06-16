@@ -22,7 +22,7 @@ let sidebar = new w2sidebar({
         {id: 'sidebar-editors-list', text: 'Editors', expanded: true, group: true, groupShowHide: false,
         nodes: [
             {id: 'sidebar-editors-game-editor', text: 'Project'},
-            {id: 'sidebar-editors-unit-editor', text: 'Units', disabled: true},
+            {id: 'sidebar-editors-unit-editor', text: 'Units', disabled: false},
             {id: 'sidebar-editors-class-editor', text: 'Classes', disabled: true},
         ],
         onCollapse(event) {
