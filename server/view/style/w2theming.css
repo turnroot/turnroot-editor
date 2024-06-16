@@ -313,3 +313,67 @@ html :has(#main.charcoal_green){
   .w2ui-toolbar-input:hover{
     background-color: color-mix(in srgb, var(--window-background) 40%, var(--window-background-alt));
   }
+
+  .w2ui-form input:not([type='radio']).w2ui-input{
+    background-color: var(--window-background-alt);
+    outline: none;
+    appearance: none;
+    border: 0;
+    border-radius: .25rem;
+    color: var(--window-text);
+    accent-color: var(--accent);
+  }
+  
+  .w2ui-form input:not([type='radio']).w2ui-input:focus, .w2ui-form select:focus{
+    background-color: color-mix(in srgb, var(--list-background) 40%, var(--window-background-alt));
+    color: (--node-title);
+  }
+
+  .w2ui-form input:not([type='radio']).w2ui-input:hover, .w2ui-form select:hover{
+    background-color: color-mix(in srgb, var(--list-background) 20%, var(--window-background-alt));
+    color: (--node-title);
+  }
+
+  .w2ui-form input[type='radio'].w2ui-input{
+    accent-color: var(--accent);
+  }
+
+  .w2ui-form select{
+    background-color: var(--window-background-alt);
+    color: var(--node-title);
+    appearance: none;
+    border: 0;
+    border-radius: .25rem;
+  }
+
+  .w2ui-field > div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .w2ui-field {
+    display: flex;
+  }
+
+  .w2ui-field > label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .w2ui-form .w2ui-btn {
+    background-color: var(--node-background);
+    color: var(--node-text);
+    border: 0;
+    border-radius: .25rem;
+    appearance: none;
+    outline: none;
+  }
+
+  .w2ui-form .w2ui-btn:hover {
+    background-color: color-mix(in srgb, var(--node-background) 80%, var(--slider-1));
+    cursor: pointer;
+  }

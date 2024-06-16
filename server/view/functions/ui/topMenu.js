@@ -18,6 +18,12 @@ const handleEvent = (event, toolbar) => {
     if (event.detail.item.id === 'collapseSidebar') {
         window.goFlat()
     }
+    if (event.detail.item.id === 'forums') {
+        window.open('https://community.turnroot.com', '_blank')
+    }
+    if (event.detail.item.id === 'help') {
+        window.open('https://docs.turnroot.com', '_blank')
+    }
     if (event.detail.item.id === 'show-status-bar') {
         let statusBar = w2ui.EditorWindowStatusBar
         let layout = w2ui.EditorWindowLayout
