@@ -1,30 +1,13 @@
 import {
     w2form,
-    w2layout,
     w2alert,
     query,
     w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
-let layout = new w2layout({
-    name: 'unitEditorBasicFields',
-    panels: [
-        {
-            type: 'left',
-            size: '50%',
-            resizable: true,
-            style: 'border-right: 1px solid color-mix(in srgb, var(--window-background-alt) 20%, var(--list-background));',
-        },
-        {
-            type: 'main',
-            size: '50%',
-            resizable: true,
-        }
-    ]
-})
 
-let left = new w2form({
-    name: 'unit-editor-basic-fields-left',
+let form = new w2form({
+    name: 'unit-editor-basic-fields',
     record: {
         left: {
             name: 'New Unit',
@@ -38,6 +21,7 @@ let left = new w2form({
             html: {
                 label: 'Unit name',
                 attr: '',
+                column: 0,
             }
         },
         {
@@ -46,6 +30,7 @@ let left = new w2form({
             html: {
                 label: 'Pronouns',
                 attr: '',
+                column: 0,
             },
             options: {
                 items: ['he/him/his/his', 'she/her/her/hers', 'they/them/their/theirs']
@@ -57,20 +42,22 @@ let left = new w2form({
             html: {
                 label: 'Subtype',
                 attr: '',
+                column: 0,
             },
             options: {
                 items: ['Avatar', 'NPC', 'Friend', 'Enemy']
             }
-        }
-    ],
-    actions: {
-        Reset() {
-            this.clear()
         },
-        Save() {}
-    }
+        {
+            type: 'textarea',
+            field: 'notes',
+            html: {
+                label: 'Notes',
+                attr: '',
+                column: 1,
+            }
+        },
+    ],
 })
 
-layout.html('left', left)
-
-export default layout
+export default form

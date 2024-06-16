@@ -7,6 +7,7 @@ let layout = new w2layout({
         { type: 'top', size: 30, resizable: false, content: 'top', html: '<div style="padding: 10px;">Top</div>'},
         { type: 'main', content: 'main', html: unitEditorBasicFields},
         { type: 'left', size: 200, resizable: true, content: 'left', html: '<div style="padding: 10px;">Left</div>'},
+        { type: 'bottom', size: 30, resizable: false, content: 'bottom', html: '<div style="padding: 10px;">Bottom</div>'},
     ]
 })
 

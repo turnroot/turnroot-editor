@@ -314,7 +314,7 @@ html :has(#main.charcoal_green){
     background-color: color-mix(in srgb, var(--window-background) 40%, var(--window-background-alt));
   }
 
-  .w2ui-form input:not([type='radio']).w2ui-input{
+  .w2ui-form input:not([type='radio']).w2ui-input, .w2ui-form textarea{
     background-color: var(--window-background-alt);
     outline: none;
     appearance: none;
@@ -323,14 +323,13 @@ html :has(#main.charcoal_green){
     color: var(--window-text);
     accent-color: var(--accent);
   }
-  
-  .w2ui-form input:not([type='radio']).w2ui-input:focus, .w2ui-form select:focus{
-    background-color: color-mix(in srgb, var(--list-background) 40%, var(--window-background-alt));
-    color: (--node-title);
-  }
 
-  .w2ui-form input:not([type='radio']).w2ui-input:hover, .w2ui-form select:hover{
-    background-color: color-mix(in srgb, var(--list-background) 20%, var(--window-background-alt));
+  .w2ui-form textarea{
+    flex-grow:2;
+  }
+  
+  .w2ui-form input:not([type='radio']).w2ui-input:focus, .w2ui-form select:focus, .w2ui-form textarea:focus{
+    background-color: color-mix(in srgb, var(--list-background) 40%, var(--window-background-alt));
     color: (--node-title);
   }
 
@@ -376,4 +375,18 @@ html :has(#main.charcoal_green){
   .w2ui-form .w2ui-btn:hover {
     background-color: color-mix(in srgb, var(--node-background) 80%, var(--slider-1));
     cursor: pointer;
+  }
+
+  .w2ui-column-container{
+    flex-wrap:wrap;
+    justify-content:space-between;
+  }
+
+  .w2ui-column-container .w2ui-column{
+    width:max-content!important;
+    padding:2rem!important;
+  }
+
+  .w2ui-column-container .w2ui-column:not(:last-child) {
+    border-right: 1px solid var(--window-background-alt);
   }
