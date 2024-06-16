@@ -317,7 +317,6 @@ html :has(#main.charcoal_green){
   .w2ui-form input:not([type='radio']).w2ui-input, .w2ui-form textarea{
     background-color: var(--window-background-alt);
     outline: none;
-    appearance: none;
     border: 0;
     border-radius: .25rem;
     color: var(--window-text);
@@ -390,3 +389,7 @@ html :has(#main.charcoal_green){
   .w2ui-column-container .w2ui-column:not(:last-child) {
     border-right: 1px solid var(--window-background-alt);
   }
+
+.w2ui-column-container:has(.col-1):not(:has(.col-2)) .col-0, .w2ui-column-container:has(.col-1):not(:has(.col-2)) .col-1{
+    width:50%!important;
+}

@@ -5,18 +5,33 @@ import {
     w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
+import globalStats from '../functions/getGlobalStats.js'
 
-let form = new w2form({
+let config = {
     name: 'unit-editor-basic-fields',
     record: {
-        left: {
             name: 'New Unit',
             pronouns: 'they/them/their/theirs',
             subtype: 'Avatar',
-        }
+            notes: '',
+            age: 18,
+            orientation: 'straight',
+            canSSupport: true,
+            canHaveChildren: true,
+            height: 168,
+
     },
-    fields: [{
-            field: 'left.name',
+    fields: [
+        {
+            field: '',
+            type: 'html',
+            html: {
+                html: '<h2>Basic Info</h2>',
+                column: 0,
+            }
+        },
+        {
+            field: 'name',
             type: 'text',
             html: {
                 label: 'Unit name',
@@ -25,7 +40,7 @@ let form = new w2form({
             }
         },
         {
-            field: 'left.pronouns',
+            field: 'pronouns',
             type: 'select',
             html: {
                 label: 'Pronouns',
@@ -37,7 +52,7 @@ let form = new w2form({
             }
         },
         {
-            field: 'left.subtype',
+            field: 'subtype',
             type: 'radio',
             html: {
                 label: 'Subtype',
@@ -49,15 +64,125 @@ let form = new w2form({
             }
         },
         {
-            type: 'textarea',
-            field: 'notes',
+            field: 'age',
+            type: 'int',
+            options: { min: 0},
             html: {
-                label: 'Notes',
+                label: 'Age',
+                column: 0,
+            }
+        },
+        {
+            field: 'orientation',
+            type: 'select',
+            html: {
+                label: 'Orientation',
                 attr: '',
+                column: 0,
+            },
+            options: {
+                items: [
+                    'straight',
+                    'gay/lesbian',
+                    'bisexual',
+                    'pansexual',
+                    'asexual',
+                ]
+            }
+        },
+        {
+            field: 'canSSupport',
+            type: 'checkbox',
+            html: {
+                label: 'Can S-Support',
+                column: 0,
+            }
+        },
+        {
+            field: "canHaveChildren",
+            type: 'checkbox',
+            html: {
+                label: 'Can have children',
+                column: 0,
+            }
+        },
+        {
+            field: 'height',
+            type: 'int',
+            options: { min: 0},
+            html: {
+                label: 'Height (cm)',
+                column: 0,
+            }
+        },
+        {
+            field: '',
+            type: 'html',
+            html: {
+                html: '<h2>Base Stats</h2>',
                 column: 1,
             }
         },
+        {
+            field: 'birthdayDay',
+            type: 'int',
+            options: { min: 1, max: 31},
+            html: {
+                label: 'Birthday Day',
+                column: 0,
+            }
+        },
+        {
+            field: 'birthdayMonth',
+            type: 'int',
+            options: { min: 1, max: 12},
+            html: {
+                label: 'Birthday Month',
+                column: 0,
+            }
+        },
     ],
+}
+
+globalStats.forEach((stat, index) => {
+    config.fields.push(
+        {
+            field: stat.field,
+            type: 'int',
+            options: { min: 0},
+            html: {
+                label: stat.html.label,
+                attr: 'style="width:2rem"',
+                column: 1,
+            }
+        }
+    ),
+    config.record[stat.field] = 0
 })
+
+config.fields.push(
+    {
+        type: 'html',
+        html: {
+            html: "<button class='w2ui-btn'>Growth Rates</button>",
+            column: 1,
+            attr: 'style="width:100%;margin-top:.5rem"'
+        }
+    }
+)
+
+config.fields.push( {
+    type: 'textarea',
+    field: 'notes',
+    html: {
+        label: 'Notes',
+        attr: '',
+        column: 2,
+    }
+})
+
+
+let form = new w2form(config)
+form
 
 export default form

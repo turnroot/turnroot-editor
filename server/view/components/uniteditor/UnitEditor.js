@@ -1,6 +1,7 @@
 import { w2layout } from '../../lib/w2ui.es6.min.js'
 import unitEditorBasicFields from './tabs/basic.js'
 
+
 let layout = new w2layout({
     name: 'UnitEditor',
     panels: [
@@ -10,6 +11,8 @@ let layout = new w2layout({
         { type: 'bottom', size: 30, resizable: false, content: 'bottom', html: '<div style="padding: 10px;">Bottom</div>'},
     ]
 })
+
+layout.html('main', )
 
 
 export default layout
