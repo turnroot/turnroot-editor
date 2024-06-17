@@ -4,14 +4,14 @@ import {
 
 import handleEvent from '../functions/handleBasic.js'
 
-import globalStats from '../functions/getGlobalStats.js'
+import globalStats from '../functions/globals/getGlobalStats.js'
 
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
             name: 'New Unit',
             pronouns: 'they/them/their/theirs',
-            subtype: 'Friend',
+            subtype: 'Avatar',
             notes: '',
             age: 18,
             orientation: 'straight',

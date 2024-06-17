@@ -2,7 +2,7 @@ import {
     w2alert
 } from '../../../lib/w2ui.es6.min.js'
 
-import globalStats from '../functions/getGlobalStats.js'
+import globalStats from './globals/getGlobalStats.js'
 
 let numAvatars = 0 //get from database
 
