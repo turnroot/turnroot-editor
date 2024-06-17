@@ -21,7 +21,6 @@ let toolbar = new w2toolbar({
                 items: [{
                         text: 'Ocean Waves',
                         id: 'ocean_waves',
-                        style: 'background-color: var(--window-background-alt);'
                     },
                     {
                         text: 'Turnroot',
@@ -101,7 +100,8 @@ let toolbar = new w2toolbar({
                 {
                     text: 'Import from file',
                     id: 'import-file'
-                }
+                },
+                
             ]
         },
         {type: 'button',
@@ -144,5 +144,21 @@ toolbar.on('click', function (event) {
     })
 
 })
+
+let savedTheme = localStorage.getItem('theme')
+if (savedTheme) {
+    console.log(toolbar.get('settings:themes').items)
+    toolbar.get('settings:themes').items.forEach(item => {
+        if (item.id === savedTheme) {
+            main.classList.remove('ocean_waves', 'turnroot', 'charcoal', 'charcoal_blue', 'charcoal_green', 'chocolate', 'midnight_spark', 'rainforest')
+            main.classList.add(savedTheme)
+            main.dataset.theme = savedTheme
+            item.style = 'background-color: var(--window-background-alt);'
+        } else {
+            item.style = ''
+        }
+    })
+    
+}
 
 export default toolbar

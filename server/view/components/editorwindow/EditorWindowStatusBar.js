@@ -21,7 +21,7 @@ let toolbar = new w2toolbar({
 toolbar.on('click', function (event) {
     event.done(() => {
         if (event.target === 'status-bar-report-issue') {
-            window.open('https://community.turnroot.com/, _blank')
+            window.open('https://community.turnroot.com/c/turnroot-editor/editor-support/6', '_blank')
         }
         else if (event.target === 'status-bar-project-status'){
             let sidebar = w2ui.EditorWindowSidebar
