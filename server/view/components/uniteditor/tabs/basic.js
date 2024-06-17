@@ -9,22 +9,21 @@ import globalStats from '../functions/globals/getGlobalStats.js'
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
-            name: 'New Unit',
-            pronouns: 'they/them/their/theirs',
-            subtype: 'Avatar',
-            notes: '',
-            age: 18,
-            orientation: 'straight',
-            canSSupport: true,
-            canHaveChildren: true,
-            height: 168,
-            birthdayDay: 1,
-            birthdayMonth: 1,
-            shortBio: '',
-            useAccentColors: false,
+        name: 'New Unit',
+        pronouns: 'they/them/their/theirs',
+        subtype: 'Avatar',
+        notes: '',
+        age: 18,
+        orientation: 'straight',
+        canSSupport: true,
+        canHaveChildren: true,
+        height: 168,
+        birthdayDay: 1,
+        birthdayMonth: 1,
+        shortBio: '',
+        useAccentColors: false,
     },
-    fields: [
-        {
+    fields: [{
             field: '',
             type: 'html',
             html: {
@@ -68,7 +67,9 @@ let config = {
         {
             field: 'age',
             type: 'int',
-            options: { min: 0},
+            options: {
+                min: 0
+            },
             html: {
                 label: 'Age',
                 column: 0,
@@ -112,7 +113,10 @@ let config = {
         {
             field: 'height',
             type: 'int',
-            options: { min: 32, max: 214},
+            options: {
+                min: 32,
+                max: 214
+            },
             html: {
                 label: 'Height (cm)',
                 column: 0,
@@ -130,7 +134,10 @@ let config = {
         {
             field: 'birthdayDay',
             type: 'int',
-            options: { min: 1, max: 31},
+            options: {
+                min: 1,
+                max: 31
+            },
             html: {
                 label: 'Birthday Day',
                 column: 0,
@@ -139,7 +146,10 @@ let config = {
         {
             field: 'birthdayMonth',
             type: 'int',
-            options: { min: 1, max: 12},
+            options: {
+                min: 1,
+                max: 12
+            },
             html: {
                 label: 'Birthday Month',
                 column: 0,
@@ -149,36 +159,34 @@ let config = {
 }
 
 globalStats.forEach((stat, index) => {
-    config.fields.push(
-        {
+    config.fields.push({
             field: stat.field,
             type: 'int',
-            options: { min: 0},
+            options: {
+                min: 0
+            },
             html: {
                 label: stat.html.label,
                 attr: 'style="width:2rem"',
                 column: 1,
             }
-        }
-    ),
-    config.record[stat.field] = 0
+        }),
+        config.record[stat.field] = 0
 })
 
-config.fields.push(
-    {
-        type: 'html',
-        field: 'growth-rates',
+config.fields.push({
+    type: 'html',
+    field: 'growth-rates',
+    class: 'no-label',
+    html: {
         class: 'no-label',
-        html: {
-            class: 'no-label',
-            html: "<button class='w2ui-btn'>Growth Rates</button>",
-            column: 1,
-            attr: 'style="width:100%;margin-top:.5rem"'
-        }
+        html: "<button class='w2ui-btn'>Growth Rates</button>",
+        column: 1,
+        attr: 'style="width:100%;margin-top:.5rem"'
     }
-)
+})
 
-config.fields.push( {
+config.fields.push({
     type: 'textarea',
     field: 'notes',
     html: {
@@ -251,20 +259,20 @@ config.fields.push({
     },
 })
 
-if (window.unitsCanHaveChildren){
-    config.record.canHaveChildren = true
-    console.log('Find:', config.fields.find(field => field.field === 'canHaveChildren'))
-} else {
-    let toRemove =  config.fields.find(field => field.field === 'canHaveChildren')
-    let index = config.fields.indexOf(toRemove)
-    config.fields.splice(index, 1)
-    delete config.record.canHaveChildren
-}
-
 let form = new w2form(config)
 
 form.on('change', (event) => {
     handleEvent(form, event)
 })
+
+form.updateGlobals = () => {
+    if (!window.unitsCanHaveChildren) {
+        form.fields.find(field => field.field === 'canHaveChildren').hidden = true
+    } else {
+        form.fields.find(field => field.field === 'canHaveChildren').hidden = false
+    }
+}
+
+form.updateGlobals()
 
 export default form

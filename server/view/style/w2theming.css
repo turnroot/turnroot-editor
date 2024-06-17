@@ -327,7 +327,7 @@ html :has(#main.midnight_spark) {
   
   .w2ui-field > div {
   display:flex;
-  flex-direction:row;
+  flex-direction:row-reverse;
   align-items:center;
   gap:10px;
   flex-wrap:wrap
@@ -468,6 +468,14 @@ html :has(#main.midnight_spark) {
   display:flex
   }
   
-  .w2ui-field:has(.no-label) > label,.w2ui-group:has(.group-flex) .w2ui-group-title {
+  .w2ui-field:has(:not([type='checkbox']).no-label) > label,.w2ui-group:has(.group-flex) .w2ui-group-title {
   display:none
+  }
+
+  label:has(input.no-label) span{
+    display: none!important;
+  }
+
+  .w2ui-field > label{
+    width: fit-content!important;
   }

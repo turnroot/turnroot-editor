@@ -11,8 +11,7 @@ import globalExperiences from '../functions/globals/getGlobalExperiences.js'
 let config = {
     name: 'unit-editor-avatar-fields',
     record: {},
-    fields: [
-        {
+    fields: [{
             type: 'html',
             html: {
                 html: '<div><h2>Uniques</h2><small>Set classes, items, and skills only this unit (or their children, if inheritance is on), can have. Personal skills and classes are set here.</br></br>If there are no classes, items, or skills available to select, you can create them by clicking Skills, Items, or Classes on the left sidebar.</small></div>'
@@ -95,7 +94,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: '<h3>Hair colors</h3>',
+                html: `<div><h3>Hair colors</h3><small>Default: <span style = "width:2rem;height:1rem;background-color:${window.unitEditorAvatarDefaultHairColor};display:inline-block;border-radius:.25rem;"</small></div>`,
                 column: 1
             }
         },
@@ -112,7 +111,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: '<h3>Eye colors</h3>',
+                html: `<div><h3>Eye colors</h3><small>Default: <span style = "width:2rem;height:1rem;background-color:${window.unitEditorAvatarDefaultEyeColor};display:inline-block;border-radius:.25rem;"</small></div>`,
                 column: 1
             }
         },
@@ -125,19 +124,17 @@ let config = {
                 column: 1,
                 html: eyeColorsHtml,
             },
-        },        
+        },
     ],
 }
 
-config.fields.push(
-    {
-        type: 'html',
-        html: {
-            html: window.useExperienceAptitudes?'<small>Set this unit\'s starting aptitudes, as well as their affinity for them (positive, negative, or neutral).</br>A positive affinity means this unit will learn it faster, a negative means slower.</small>':'<small>Set this unit\'s starting aptitudes.</small>',
-            column: 0
-        }
+config.fields.push({
+    type: 'html',
+    html: {
+        html: window.useExperienceAptitudes ? '<small>Set this unit\'s starting aptitudes, as well as their affinity for them (positive, negative, or neutral).</br>A positive affinity means this unit will learn it faster, a negative means slower.</small>' : '<small>Set this unit\'s starting aptitudes.</small>',
+        column: 0
     }
-)
+})
 
 globalExperiences.forEach((experience, index) => {
     experience.field = 'avatar-base-aptitudes-' + experience.field.toLowerCase()
@@ -146,26 +143,36 @@ globalExperiences.forEach((experience, index) => {
     config.fields.push(
         experience
     )
-    if (window.useExperienceAptitudes) {
-    config.fields.push(
-        {
-            type: 'html',
-            field: experience.field + '-affinity',
-            html: {
-                class: 'no-label',
-                attr: 'style="width:max-content"',
-                column: 0,
-                html: `<div style = "display:flex;align-items:center;flex-wrap:wrap;width:100%;"><p style = "margin-right:.25rem;">Affinity:</p><input type = "radio" name = "${experience.field + '-affinity-radio'}" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">-</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input" checked><label style = "font-size:1rem;margin-right:.5rem;">None</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">+</label></input></div>`
-            }
+    config.fields.push({
+        type: 'html',
+        field: experience.field + '-affinity-avatar',
+        html: {
+            class: 'no-label',
+            attr: 'style="width:max-content"',
+            column: 0,
+            html: `<div style = "display:flex;align-items:center;flex-wrap:wrap;width:100%;"><p style = "margin-right:.25rem;">Affinity:</p><input type = "radio" name = "${experience.field + '-affinity-radio'}" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">-</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input" checked><label style = "font-size:1rem;margin-right:.5rem;">None</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">+</label></input></div>`
         }
-    )
-    config.record[experience.field + '-affinity'] = 'None'}
+    })
+    config.record[experience.field + '-affinity-avatar'] = 'None'
     config.record[experience.field] = 'E'
 })
 
 let form = new w2form(config)
 
-form.on('change', function(event) {
+form.updateGlobals = () => {
+    let toHide
+    if (!window.useExperienceAptitudes) {
+        toHide = form.fields.filter(field => field.field?.includes('affinity'))
+        toHide.forEach(field => field.html.hidden = true)
+    } else {
+        toHide = form.fields.filter(field => field.field?.includes('affinity'))
+        toHide.forEach(field => field.html.hidden = false)
+    }
+}
+
+form.updateGlobals()
+
+form.on('change', function (event) {
     handleEvent(event, form)
 })
 

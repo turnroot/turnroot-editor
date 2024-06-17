@@ -1,10 +1,18 @@
 import defaults from './defaults.js'
 
+import {w2ui} from './w2ui.es6.min.js'
+
 const booleans = ['unitsCanHaveChildren', 'useExperienceSublevels', 'useExperienceAptitudes', 'combatCombatArts', 'combatWeaponTriangle', 'combatExpandedWeaponTriangle', 'combatMagicTriangle', 'combatBattalions', 'combatBattalionEndurance', 'combatPairUp', 'combatAdjutants', 'combatAdjutantHeal', 'combatAdjutantGuard', 'combatAdjutantAttack', 'statsUseExtraStatWeight', 'statsExtraStatWeightAffectsMovement', 'statsUseExtraStatLuck', 'combatSeparateCritAvoid', 'statsUseExtraStatAuthority', 'statsUseExtraStatCharm', 'statsAptitudesUseRiding', 'statsAptitudesUseFlying', 'statsAptitudesUseAuthority', 'statsAptitudesUseArmor']
+
 const integers = ['combatCombatArtLimit', 'combatWeaponTriangleAdvantage', 'combatWeaponTriangleDisadvantage', 'combatMagicTriangleAdvantage', 'combatMagicTriangleDisadvantage', 'combatBattalionLimit']
-const strings = ['unitEditorAvatarDefaultHairColor']
+
+const strings = ['unitEditorAvatarDefaultHairColor', 'unitEditorAvatarDefaultEyeColor']
+
 const json = ['combatTriangleMapping', 'combatMagicTriangleMapping', 'globalWeaponsTypes']
+
 const lists = ['combatTriangleTypes', 'combatNeutralTypes', 'combatMagicTriangleTypes', 'combatNeutralMagicTypes']
+
+const formNames = ['unit-editor-basic-fields', 'unit-editor-friend-fields', 'unit-editor-avatar-fields', 'unit-editor-enemy-fields', 'unit-editor-npc-fields']
 
 booleans.forEach(property => {
     Object.defineProperty(window, property, {
@@ -81,3 +89,15 @@ lists.forEach(property => {
         window[property] = defaults[property]
     }
 })
+
+const updateFormGlobals = () => {
+    formNames.forEach(formName => {
+        if (w2ui[formName]) {
+            w2ui[formName].updateGlobals()
+        } else {
+            console.log(`Form ${formName} not found`)
+        }
+    })
+}
+
+export { booleans, integers, strings, json, lists, updateFormGlobals }
