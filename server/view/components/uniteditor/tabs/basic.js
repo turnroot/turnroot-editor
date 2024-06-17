@@ -97,6 +97,7 @@ let config = {
         {
             field: 'canSSupport',
             type: 'checkbox',
+            disabled: false,
             html: {
                 label: 'Can S-Support',
                 column: 0,
@@ -205,21 +206,21 @@ config.fields.push({
 })
 
 config.fields.push({
+    type: 'html',
+    html: {
+        html: "<em><small>Color class sprites with unique unit colors</small></em>",
+        column: 2,
+        attr: 'style="width:100%;margin-top:.5rem"'
+    }
+})
+
+config.fields.push({
     type: 'checkbox',
     field: 'useAccentColors',
     html: {
         label: 'Use accent colors',
         attr: '',
         column: 2,
-    }
-})
-
-config.fields.push({
-    type: 'html',
-    html: {
-        html: "<em><small>Color class sprites with unique unit colors</small></em>",
-        column: 2,
-        attr: 'style="width:100%;margin-top:.5rem"'
     }
 })
 

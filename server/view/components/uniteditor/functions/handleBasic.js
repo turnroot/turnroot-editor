@@ -2,7 +2,7 @@ import {
     w2alert
 } from '../../../lib/w2ui.es6.min.js'
 
-let numAvatars = 1 //get from database
+let numAvatars = 0 //get from database
 
 const handleEvent = (form, event) => {
     let field = event.detail.field
@@ -42,6 +42,13 @@ const handleEvent = (form, event) => {
                 height: 200,
                 actions: {
                     Yes() {
+                        if (value.current === 'Avatar' && numAvatars === 0) {
+                            numAvatars++
+                            form.unlock()
+                            form.message()
+                            form.disable('canSSupport')
+                        
+                        }
                         form.unlock()
                         form.message()
                     },
@@ -54,10 +61,6 @@ const handleEvent = (form, event) => {
             })
         }
     }
-
-
-    form.setValue('canSSupport', true)
-    form.disable('canSSupport')
 }
 
 export default handleEvent
