@@ -48,7 +48,7 @@ app.use(helmet(
 ))
 }
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false}))
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }))
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
@@ -224,7 +224,8 @@ app.post('/webhook', async (req, res) => {
     try {
         event = stripe.webhooks.constructEvent(req.body, sig, process.env.STRIPE_WEBHOOK_SECRET)
     } catch (err) {
-        res.status(400).send(`Webhook Error: ${err.message}`)
+        let textOnly = err.message.replace(/[^a-zA-Z ]/g, '')
+        res.status(400).send(`Webhook Error: ${textOnly}`)
         return
     }
 
