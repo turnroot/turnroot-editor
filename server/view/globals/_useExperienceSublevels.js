@@ -1,2 +1,0 @@
-window.useExperienceSublevels = false
-export default window.useExperienceSublevels

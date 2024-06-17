@@ -251,6 +251,16 @@ config.fields.push({
     },
 })
 
+if (window.unitsCanHaveChildren){
+    config.record.canHaveChildren = true
+    console.log('Find:', config.fields.find(field => field.field === 'canHaveChildren'))
+} else {
+    let toRemove =  config.fields.find(field => field.field === 'canHaveChildren')
+    let index = config.fields.indexOf(toRemove)
+    config.fields.splice(index, 1)
+    delete config.record.canHaveChildren
+}
+
 let form = new w2form(config)
 
 form.on('change', (event) => {

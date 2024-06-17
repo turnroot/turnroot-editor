@@ -1,7 +1,4 @@
 let globalExperiences = []
-// get from database
-
-// get global weapon types and add them as well
 
 import globalWeaponTypes from './getGlobalWeaponTypes.js'
 
@@ -14,12 +11,29 @@ if (useExperienceSublevels) {
     options = { items: ['E', 'D', 'C', 'B', 'A', 'S'] }
 }
 
-globalExperiences = [
-    { field: 'riding', type: 'select', options: options, html: { label: 'Riding', attr: '', column: 0 } },
-    { field: 'flying', type: 'select', options: options, html: { label: 'Flying', attr: '', column: 0 } },
-    { field: 'authority', type: 'select', options: options, html: { label: 'Authority', attr: '', column: 0 } },
-    { field: 'armor', type: 'select', options: options, html: { label: 'Armor', attr: '', column: 0 } },
-]
+if (window.statsAptitudesUseRiding){
+    globalExperiences.push(
+        { field: 'riding', type: 'select', options: options, html: { label: 'Riding', attr: '', column: 0 } }
+    )
+}
+
+if (window.statsAptitudesUseFlying){
+    globalExperiences.push(
+        { field: 'flying', type: 'select', options: options, html: { label: 'Flying', attr: '', column: 0 } }
+    )
+}
+
+if (window.statsAptitudesUseAuthority){
+    globalExperiences.push(
+        { field: 'authority', type: 'select', options: options, html: { label: 'Authority', attr: '', column: 0 } }
+    )
+}
+
+if (window.statsAptitudesUseArmor){
+    globalExperiences.push(
+        { field: 'armor', type: 'select', options: options, html: { label: 'Armor', attr: '', column: 0 } }
+    )
+}
 
 for (let weaponType of globalWeaponTypes) {
     globalExperiences.push(

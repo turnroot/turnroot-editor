@@ -7,7 +7,7 @@ if (localStorage.getItem('hairColors')) {
         'rgb(39, 31, 86)',
         'rgb(218, 145, 32)',
         'rgb(139, 69, 19)',
-        'rgb(104, 52, 2)',
+        'rgb(84, 42, 2)',
         'rgb(171, 33, 0)',
         'rgb(34, 223, 154)',
         'rgb(34, 162, 231)',
@@ -17,8 +17,6 @@ if (localStorage.getItem('hairColors')) {
     ]
     localStorage.setItem('hairColors', JSON.stringify(hairColors))
 }
-
-window.unitEditorAvatarDefaultHairColor = localStorage.getItem('unitEditorAvatarDefaultHairColor') || ""
 
 const hexToRGB = (hex) => {
     let r = parseInt(hex.substring(1, 3), 16)
@@ -49,8 +47,6 @@ const setDefaultHairColor = (event) => {
     colorDivs.forEach(div => div.style.border = '')
     event.target.style.border = '2px solid var(--accent)'
     window.unitEditorAvatarDefaultHairColor = event.target.style.backgroundColor
-
-    localStorage.setItem('unitEditorAvatarDefaultHairColor', window.unitEditorAvatarDefaultHairColor)
 }
 
 window.setDefaultHairColor = setDefaultHairColor

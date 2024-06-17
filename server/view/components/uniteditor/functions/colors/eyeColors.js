@@ -6,13 +6,11 @@ if (localStorage.getItem('eyeColors')) {
     eyeColors  = [
         'rgb(104, 52, 2)',
         'rgb(124, 183, 74)',
-        'rgb(34, 162, 231)',
+        'rgb(34, 132, 181)',
         'rgb(130, 150, 210)'
     ]
     localStorage.setItem('eyeColors', JSON.stringify(eyeColors))
 }
-
-window.unitEditorAvatarDefaultEyeColor = localStorage.getItem('unitEditorAvatarDefaultEyeColor') || ""
 
 const hexToRGB = (hex) => {
     let r = parseInt(hex.substring(1, 3), 16)
@@ -43,7 +41,6 @@ const setDefaultEyeColor = (event) => {
     colorDivs.forEach(div => div.style.border = '')
     event.target.style.border = '2px solid var(--accent)'
     window.unitEditorAvatarDefaultEyeColor = event.target.style.backgroundColor
-    localStorage.setItem('unitEditorAvatarDefaultEyeColor', window.unitEditorAvatarDefaultEyeColor)
 }
 
 window.setDefaultEyeColor = setDefaultEyeColor

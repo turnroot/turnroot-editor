@@ -133,7 +133,7 @@ config.fields.push(
     {
         type: 'html',
         html: {
-            html: '<small>Set this unit\'s starting aptitudes, as well as their affinity for them (positive, negative, or neutral).</br>A positive affinity means this unit will learn it faster, a negative means slower.</small>',
+            html: window.useExperienceAptitudes?'<small>Set this unit\'s starting aptitudes, as well as their affinity for them (positive, negative, or neutral).</br>A positive affinity means this unit will learn it faster, a negative means slower.</small>':'<small>Set this unit\'s starting aptitudes.</small>',
             column: 0
         }
     }
@@ -146,6 +146,7 @@ globalExperiences.forEach((experience, index) => {
     config.fields.push(
         experience
     )
+    if (window.useExperienceAptitudes) {
     config.fields.push(
         {
             type: 'html',
@@ -158,6 +159,7 @@ globalExperiences.forEach((experience, index) => {
             }
         }
     )
+    config.record[experience.field + '-affinity'] = 'None'}
     config.record[experience.field] = 'E'
 })
 
