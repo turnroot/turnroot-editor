@@ -420,3 +420,24 @@ html :has(#main.midnight_spark) {
   .w2ui-panel .w2ui-panel .w2ui-toolbar,.w2ui-tb-button.checked {
   background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt))
   }
+
+  .panel-tabs.checked{
+    background-color:var(--accent);
+  }
+
+  .panel-tabs:hover{
+    background-color: color-mix(in srgb, color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt)) 50%, var(--accent));
+  }
+
+  .panel-tabs:not(.checked){
+    background-color: color-mix(in srgb,var(--window-background) 10%,var(--window-background-alt))
+  }
+
+  .panel-tabs{
+    border-top-left-radius: .25rem;
+    border-top-right-radius: .25rem;
+  }
+
+  .w2ui-field:has(div.no-label) > label{
+    display: none;
+  }

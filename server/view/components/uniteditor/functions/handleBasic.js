@@ -2,6 +2,8 @@ import {
     w2alert
 } from '../../../lib/w2ui.es6.min.js'
 
+import globalStats from '../functions/getGlobalStats.js'
+
 let numAvatars = 0 //get from database
 
 const handleEvent = (form, event) => {
@@ -10,8 +12,8 @@ const handleEvent = (form, event) => {
 
     console.log('Field:', field, 'Value:', value)
 
-    if (field === 'useAccentColors'){
-        if (value.current === true){
+    if (field === 'useAccentColors') {
+        if (value.current === true) {
             form.show('unit-accent-color-1')
             form.show('unit-accent-color-2')
         } else {
@@ -42,14 +44,67 @@ const handleEvent = (form, event) => {
                 height: 200,
                 actions: {
                     Yes() {
-                        if (value.current === 'Avatar' && numAvatars === 0) {
-                            numAvatars++
-                            form.unlock()
-                            form.message()
-                            form.disable('canSSupport')
-                        
-                        } else {
-                            form.enable('canSSupport')
+                        if (value.previous === 'Avatar' && value.current !== 'Avatar') {
+                            numAvatars--
+                        }
+                        switch (value.current) {
+                            case 'Avatar':
+                                numAvatars++
+                                form.show('orientation')
+                                form.show('canSSupport')
+                                form.show('canHaveChildren')
+                                globalStats.forEach((stat, index) => {
+                                    form.show(stat.field)
+                                })
+                                form.show('useAccentColors')
+                                form.show('growth-rates')
+                                form.show('base-stats-header')
+                                form.unlock()
+                                form.message()
+                                form.disable('canSSupport')
+                                break
+                            case 'NPC':
+                                form.hide('orientation')
+                                form.hide('canSSupport')
+                                form.hide('canHaveChildren')
+                                globalStats.forEach((stat, index) => {
+                                    form.hide(stat.field)
+                                })
+                                form.hide('growth-rates')
+                                form.hide('unit-accent-color-1')
+                                form.hide('unit-accent-color-2')
+                                form.hide('base-stats-header')
+                                form.hide('useAccentColors')
+                                form.unlock()
+                                form.message()
+                                break
+                            case 'Friend':
+                                form.show('orientation')
+                                form.show('canSSupport')
+                                form.show('canHaveChildren')
+                                globalStats.forEach((stat, index) => {
+                                    form.show(stat.field)
+                                })
+                                form.show('growth-rates')
+                                form.show('useAccentColors')
+                                form.show('base-stats-header')
+                                form.unlock()
+                                form.message()
+                                form.enable('canSSupport')
+                                break
+                            case 'Enemy':
+                                form.hide('canSSupport')
+                                form.hide('orientation')
+                                form.hide('canHaveChildren')
+                                globalStats.forEach((stat, index) => {
+                                    form.hide(stat.field)
+                                })
+                                form.show('useAccentColors')
+                                form.hide('growth-rates')
+                                form.hide('base-stats-header')
+                                form.unlock()
+                                form.message()
+                                break
                         }
                         form.unlock()
                         form.message()

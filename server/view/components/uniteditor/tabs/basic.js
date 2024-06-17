@@ -2,8 +2,6 @@ import {
     w2form
 } from '../../../lib/w2ui.es6.min.js'
 
-
-
 import handleEvent from '../functions/handleBasic.js'
 
 import globalStats from '../functions/getGlobalStats.js'
@@ -121,9 +119,10 @@ let config = {
             }
         },
         {
-            field: '',
+            field: 'base-stats-header',
             type: 'html',
             html: {
+                class: 'no-label',
                 html: '<h2>Base Stats</h2>',
                 column: 1,
             }
@@ -168,7 +167,10 @@ globalStats.forEach((stat, index) => {
 config.fields.push(
     {
         type: 'html',
+        field: 'growth-rates',
+        class: 'no-label',
         html: {
+            class: 'no-label',
             html: "<button class='w2ui-btn'>Growth Rates</button>",
             column: 1,
             attr: 'style="width:100%;margin-top:.5rem"'
@@ -232,7 +234,7 @@ config.fields.push({
         label: 'Accent color 1',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#ff0000">',
+        html: '<input type="color" value="#000000">',
     },
 })
 
@@ -245,7 +247,7 @@ config.fields.push({
         label: 'Accent color 2',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#ff0000">',
+        html: '<input type="color" value="#000000">',
     },
 })
 

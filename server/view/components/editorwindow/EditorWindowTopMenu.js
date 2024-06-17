@@ -142,7 +142,6 @@ toolbar.on('click', function (event) {
     event.done(() => {
         topMenu(event, toolbar)
     })
-
 })
 
 let savedTheme = localStorage.getItem('theme')
