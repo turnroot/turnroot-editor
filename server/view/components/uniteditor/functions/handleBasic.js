@@ -48,6 +48,8 @@ const handleEvent = (form, event) => {
                             form.message()
                             form.disable('canSSupport')
                         
+                        } else {
+                            form.enable('canSSupport')
                         }
                         form.unlock()
                         form.message()
