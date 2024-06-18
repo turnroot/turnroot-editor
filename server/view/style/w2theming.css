@@ -1,5 +1,5 @@
 html :has(#main.midnight_spark) {
-  --accent:#9ad6df;
+  --accent:#8F30DF;
   --button-alt-text:#30403b;
   --list-background:#234f9e;
   --node-background:#144db8;
@@ -52,7 +52,7 @@ html :has(#main.midnight_spark) {
   --node-title:#fff;
   --node-title-background:#ff202e3b;
   --slider-0:#5FE3E3;
-  --slider-1:#768ba5;
+  --slider-1:#92513b;
   --window-background:#394159;
   --window-background-alt:#568EBF;
   --window-text:#DCEEF2
@@ -108,6 +108,10 @@ html :has(#main.midnight_spark) {
   
   *,::after,::before {
   transition:background-color,color,background .25s
+  }
+
+  .no-transition {
+    transition:none!important
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {

@@ -1,5 +1,5 @@
 import {
-    w2alert
+    w2alert, w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
 import globalStats from './globals/getGlobalStats.js'
@@ -47,6 +47,7 @@ const handleEvent = (form, event) => {
                         if (value.previous === 'Avatar' && value.current !== 'Avatar') {
                             numAvatars--
                         }
+                        let bottomToolbar = w2ui['unit-editor-bottom-toolbar']
                         switch (value.current) {
                             case 'Avatar':
                                 numAvatars++
@@ -62,6 +63,8 @@ const handleEvent = (form, event) => {
                                 form.unlock()
                                 form.message()
                                 form.disable('canSSupport')
+                                bottomToolbar.get('unit-editor-bottom-toolbar-behavior').hidden = true
+                                bottomToolbar.refresh()
                                 break
                             case 'NPC':
                                 form.hide('orientation')
@@ -77,6 +80,8 @@ const handleEvent = (form, event) => {
                                 form.hide('useAccentColors')
                                 form.unlock()
                                 form.message()
+                                bottomToolbar.get('unit-editor-bottom-toolbar-behavior').hidden = true
+                                bottomToolbar.refresh()
                                 break
                             case 'Friend':
                                 form.show('orientation')
@@ -91,6 +96,8 @@ const handleEvent = (form, event) => {
                                 form.unlock()
                                 form.message()
                                 form.enable('canSSupport')
+                                bottomToolbar.get('unit-editor-bottom-toolbar-behavior').hidden = false
+                                bottomToolbar.refresh()
                                 break
                             case 'Enemy':
                                 form.hide('canSSupport')
@@ -104,6 +111,8 @@ const handleEvent = (form, event) => {
                                 form.hide('base-stats-header')
                                 form.unlock()
                                 form.message()
+                                bottomToolbar.get('unit-editor-bottom-toolbar-behavior').hidden = false
+                                bottomToolbar.refresh()
                                 break
                         }
                         form.unlock()
