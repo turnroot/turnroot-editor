@@ -1,4 +1,4 @@
-.li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form select,.w2ui-form textarea,.w2ui-toolbar-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
+.li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input, select,.w2ui-form textarea,.w2ui-toolbar-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
   border:0;
   outline:0
   }
@@ -6,8 +6,8 @@
   .li-search,.w2ui-field, .w2ui-group:has(.group-flex) .w2ui-group-fields, .w2ui-tb-button, .w2ui-field>div, .w2ui-field>label, .w2ui-message-buttons {
     display:flex
   }
-  
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form select,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar {
+
+  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input, select,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar {
   background-color:var(--window-background-alt)
   }
   
@@ -24,7 +24,7 @@
   transition:none!important
   }
   
-  .w2ui-form select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
+select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
   color:var(--node-title)
   }
   
@@ -206,12 +206,12 @@
   flex-grow:2
   }
   
-  .w2ui-form input:not([type=radio]).w2ui-input:focus,.w2ui-form select:focus,.w2ui-form textarea:focus {
+  .w2ui-form input:not([type=radio]).w2ui-input:focus,select:focus,.w2ui-form textarea:focus {
   background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
   color:(--node-title)
   }
   
-  .w2ui-btn,.w2ui-form select {
+  .w2ui-btn,select {
   appearance:none;
   border-radius:.25rem
   }
