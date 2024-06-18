@@ -185,10 +185,9 @@ const updateWindow = () => {
     window.unitEditorBehaviorSelfless = values['unitEditorBehavior.Selfless']
 
     let rulesRows = rules.children
-    let index = 0
     console.log(rulesRows)
 
-    for (let i = 0; i < rulesRows.length; i += 4) {
+    for (let i = 4; i < rulesRows.length; i += 4) {
         let row = [rulesRows[i], rulesRows[i + 1], rulesRows[i + 2], rulesRows[i + 3]]
         let value = row[2].children[0].value
         if (value === 'Team Player' || value === 'Lone Wolf'){
