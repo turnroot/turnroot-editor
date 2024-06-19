@@ -58,7 +58,7 @@ rows.forEach(row => {
     rules.appendChild(right)
 
     let far_right = document.createElement('div')
-    far_right.innerHTML = `<input type="checkbox" class="w2ui-input" style="width:2rem;height:2rem;" id = "unitEditorBehaviorSpecials${row.left.replace(" ", "").replace("'", "")}">`
+    far_right.innerHTML = `<input type="checkbox" class="w2ui-input" style="width:2rem;height:2rem;" id = "unitEditorBehaviorSpecials${row.left.replace(/ /g, "").replace(/'/g, "")}">`
     applyCommonStyles(far_right, commonStyles)
     far_right.style.backgroundColor = 'var(--node-title)'
     far_right.style.color = 'var(--window-background-alt)'
