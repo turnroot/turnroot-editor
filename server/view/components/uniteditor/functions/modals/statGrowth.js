@@ -3,6 +3,17 @@ import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 let currentLevel = 1
 let testStats = {}
 
+const resetTestGrowths = (unchanged) => {
+    Object.keys(unchanged).forEach((stat) => {
+        testStats[stat] = unchanged[stat]
+    })
+    currentLevel = 1
+}
+
+window.unitEditorStatGrowthModalReset = (unchanged) => { return resetTestGrowths(unchanged) }
+
+window.unitEditorStatGrowthModalReset = (stats) => { return resetTestGrowths(stats) }
+
 let testGrowth = (stats, currentLevel) => {
     let html = ''
     Object.keys(stats).forEach((stat) => {
@@ -29,7 +40,8 @@ const build = (stats) => {
         </tr>
         ${Object.entries(stats).map(([stat, growth]) => `<tr><td>${stat}</td><td><input type="number" class="w2ui-input w2field" value="${growth}" id="growth-rate-modal-${stat}"></td></tr>`).join('')}
     </table>
-    <button class="w2ui-btn" id ='test-growth-btn'>Test Growth</button>
+    <div class = "flex"><button class="w2ui-btn" id ='test-growth-btn'>Test Growth</button><button class="w2ui-btn" id ='reset-growth-btn'>Reset </button></div>
+    
     <p>This will take the base stats and the current growth rates and "level up" your unit. Each click increases the level by 1.<br/>Note that this isn't a prediction of what <em>will</em> happen- just an example of what <em>might</em> happen.</p>
     <p id="current-level">Current Level: Level ${currentLevel}</p>
     <table id ='level-up-table'>
@@ -95,6 +107,17 @@ const statGrowthPopup = (stats) => {
                 ${levelUpTable}
             `
             currentLevel++
+            document.getElementById('current-level').innerHTML = `Current Level: Level ${currentLevel}`
+        })
+        document.getElementById('reset-growth-btn').addEventListener('click', () => {
+            resetTestGrowths(unchanged)
+            document.getElementById('level-up-table').innerHTML = `
+                <tr>
+                    <th>Stat</th>
+                    <th>Value</th>
+                </tr>
+            `
+            currentLevel = 1
             document.getElementById('current-level').innerHTML = `Current Level: Level ${currentLevel}`
         })
     })
