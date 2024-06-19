@@ -1,13 +1,13 @@
-.li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input, select,.w2ui-form textarea,.w2ui-toolbar-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
+.li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-toolbar-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border:0;
   outline:0
   }
   
-  .li-search,.w2ui-field, .w2ui-group:has(.group-flex) .w2ui-group-fields, .w2ui-tb-button, .w2ui-field>div, .w2ui-field>label, .w2ui-message-buttons {
-    display:flex
+  .li-search,.w2ui-field,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
+  display:flex
   }
-
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input, select,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar {
+  
+  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar,select {
   background-color:var(--window-background-alt)
   }
   
@@ -24,7 +24,7 @@
   transition:none!important
   }
   
-select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
+  .w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,select {
   color:var(--node-title)
   }
   
@@ -206,7 +206,7 @@ select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
   flex-grow:2
   }
   
-  .w2ui-form input:not([type=radio]).w2ui-input:focus,select:focus,.w2ui-form textarea:focus {
+  .w2ui-form input:not([type=radio]).w2ui-input:focus,.w2ui-form textarea:focus,select:focus {
   background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
   color:(--node-title)
   }
@@ -292,7 +292,7 @@ select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
   background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt))
   }
   
-  .panel-tabs.checked, .w2ui-tb-check.checked .w2ui-tb-text::before {
+  .panel-tabs.checked,.w2ui-tb-check.checked .w2ui-tb-text::before {
   background-color:var(--accent)
   }
   
@@ -339,4 +339,50 @@ select,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text {
   
   .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span {
   display:none!important
+  }
+  
+  highlight {
+  background-color:var(--slider-1);
+  color:(--node-title);
+  padding:1px 2px
+  }
+  
+  .w2ui-multi-items {
+  align-items:center;
+  display:flex;
+  flex-wrap:wrap;
+  height:100%!important;
+  justify-content:center;
+  width:100%
+  }
+  
+  .w2ui-multi-items .li-item {
+  background-color:var(--window-text);
+  border-radius:.25rem;
+  color:var(--window-background-alt);
+  cursor:default;
+  padding:.25rem
+  }
+  
+  .w2ui-field-helper.w2ui-list {
+  display:block;
+  height:100%!important;
+  min-width:100%;
+  overflow:hidden;
+  position:relative;
+  width:100%
+  }
+  
+  .w2ui-field-helper.w2ui-list .w2ui-input {
+  width:0!important
+  }
+  
+  .w2ui-field:has(.w2ui-multi-items) {
+  height:100%
+  }
+  
+  .w2ui-menu {
+  max-height:12rem;
+  overflow-x:hidden;
+  overflow-y:auto
   }

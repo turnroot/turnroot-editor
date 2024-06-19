@@ -4,7 +4,7 @@ import uniteditorFriendFields from '../tabs/friend.js'
 import unitEditorAvatarFields from '../tabs/avatar.js'
 import unitEditorEnemyFields from '../tabs/enemy.js'
 import unitEditorNPCFields from '../tabs/npc.js'
-import unitEditorBehaviorFields from '../tabs/behavior.js'
+import unitEditorBehaviorContainer from '../tabs/behavior.js'
 
 const handleBottom = (event, toolbar) => {
     console.log(event.detail)
@@ -25,7 +25,7 @@ const handleBottom = (event, toolbar) => {
             unitEditor.html('main', unitEditorNPCFields)
         }
     } else if (event.detail.item.id === 'unit-editor-bottom-toolbar-behavior'){
-        unitEditor.html('main', unitEditorBehaviorFields)
+        unitEditor.html('main', unitEditorBehaviorContainer)
     }
 }
 
