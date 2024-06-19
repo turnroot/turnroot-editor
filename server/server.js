@@ -3,6 +3,7 @@ import dotenv from 'dotenv'
 import cors from 'cors'
 import helmet from 'helmet'
 import passport from 'passport'
+import csrf from 'lusca'
 import { Strategy as LocalStrategy } from 'passport-local'
 import session from 'express-session'
 import rateLimit from 'express-rate-limit'
@@ -49,6 +50,10 @@ app.use(helmet(
 }
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }}))
+
+app.use(csrf({
+    key: process.env.CSRF_KEY,
+}))
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
