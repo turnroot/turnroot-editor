@@ -123,8 +123,6 @@ headerLeft.innerHTML = '<strong>Rule</strong>'
 headerCenter.innerHTML = '<strong>Target</strong>'
 headerRight.innerHTML = '<strong>Priority</strong>'
 
-headerFarRight.innerHTML
-
 rules.appendChild(headerLeft)
 rules.appendChild(headerCenter)
 rules.appendChild(headerRight)

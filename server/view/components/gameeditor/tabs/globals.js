@@ -3,7 +3,14 @@ import { w2form } from "../../../lib/w2ui.es6.min.js"
 let config = {
     name: 'game-editor-global-fields',
     record: {},
-    fields: []
+    fields: [
+        {
+            type: 'html',
+            html: {
+                html: '<h3 style = "margin-top:2rem;padding-top:.5rem;">General</h3>',
+            }
+        }
+    ]
 }
 
 import handleGlobals from '../functions/handleGlobals.js'
@@ -16,6 +23,11 @@ let booleansHeadingsAfter = {
     combatAdjutantAttack: "Unit stats",
     statsUseExtraStatCharm: 'Aptitudes'
 }
+
+let integersHeadingsAfter = {
+    combatBattalionLimit: 'Avatar defaults',
+}
+
 booleans.forEach(property => {
 
     config.fields.push({
@@ -44,6 +56,16 @@ booleans.forEach(property => {
     }
 })
 
+config.fields.push({
+    type: 'html',
+    html: {
+        html: '<h3 style = "margin-top:2rem;padding-top:.5rem;">Combat</h3>',
+        class: 'no-label',
+        column: 1
+    }
+
+})
+
 integers.forEach(property => {
     config.fields.push({
         field: property,
@@ -55,6 +77,18 @@ integers.forEach(property => {
         }
     })
     config.record[property] = window[property]
+    if (integersHeadingsAfter[property]) {
+        config.fields.push(
+            {
+                type: 'html',
+                html: {
+                    html: `<h3 style = "margin-top:2rem;padding-top:.5rem;">${integersHeadingsAfter[property]}</h3>`,
+                    class: 'no-label',
+                    column: 1
+                }
+            }
+        )
+    }
 })
 
 strings.forEach(property => {
