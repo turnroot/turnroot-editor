@@ -9,9 +9,7 @@ import pirateRows from "./presets/tiles/pirate.js"
 import beastRows from "./presets/tiles/beast.js"
 
 let innerHtml = `<div><h2>Tile rules</h2>
-Units that move on their own get their tile interaction rules from here. Exercise extreme caution here- you can very easily break your game with a single misclick here. There are no guardrails. Pick a preset and do not modify specifics unless you're confident in what you're doing! The default tile rules are correct for 99% of units, including riding and infantry units.
-<h3>What about fliers?</h3>
-Flying units are a special case- they ignore guard, heal, tile damage, slow, and avoid rules. You should use the "Flier" tile preset for all flying units.
+Units that move on their own get their tile interaction rules from here. Exercise extreme caution here- you can very easily break your game with a single misclick here. There are no guardrails. Pick a preset and do not modify specifics unless you're confident in what you're doing! The default tile rules are correct for 99% of units, including riding and infantry units. You should use the "Flier" tile preset for all flying units.
 <h3>What are the presets?</h3>
 <ul>
     <li><highlight>Default</highlight>: The default tile rules for most units.</li>

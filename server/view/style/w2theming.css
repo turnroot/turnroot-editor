@@ -220,7 +220,7 @@
   
   .w2ui-field>div {
   align-items:center;
-  flex-direction:row-reverse;
+  flex-direction:row;
   flex-wrap:wrap;
   gap:10px
   }

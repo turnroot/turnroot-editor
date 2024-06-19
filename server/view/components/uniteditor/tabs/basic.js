@@ -122,6 +122,15 @@ let config = {
             }
         },
         {
+            field: 'canRecruit',
+            type: 'checkbox',
+            hidden: true,
+            html: {
+                label: 'Can be recruited to join player\'s team',
+                column: 0,
+            }
+        },
+        {
             field: 'height',
             type: 'int',
             options: {

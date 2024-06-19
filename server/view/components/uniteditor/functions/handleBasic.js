@@ -22,7 +22,25 @@ const handleEvent = (form, event) => {
         }
     }
 
-    if (field === 'subtype') {
+    else if (field === 'canRecruit'){
+        if (value.current === true){
+            let isUnique = form.get('isUnique')
+            if (isUnique.el.checked === false){
+                form.setValue('isUnique', true)
+                w2alert('A recruitable unit must be unique. The "isUnique" checkbox has been checked.')
+            }
+        }
+    }
+
+    else if (field === 'isUnique' && value.current === false && form.get('canRecruit').el.checked === true){
+        let canRecruit = form.get('canRecruit')
+        if (canRecruit.el.checked === true){
+            form.setValue('canRecruit', false)
+            w2alert('A recruitable unit must be unique. The "canRecruit" checkbox has been unchecked.')
+        }
+    }
+
+    else if (field === 'subtype') {
         form.lock('', true)
         if (value.current === 'Avatar' && numAvatars > 0) {
             form.message({
@@ -54,6 +72,7 @@ const handleEvent = (form, event) => {
                                 form.show('orientation')
                                 form.show('canSSupport')
                                 form.show('canHaveChildren')
+                                form.hide('canRecruit')
                                 form.show('height')
                                 form.show('birthdayDay')
                                 form.show('birthdayMonth')
@@ -75,6 +94,7 @@ const handleEvent = (form, event) => {
                                 form.hide('orientation')
                                 form.hide('canSSupport')
                                 form.hide('canHaveChildren')
+                                form.hide('canRecruit')
                                 globalStats.forEach((stat, index) => {
                                     form.hide(stat.field)
                                 })
@@ -97,6 +117,7 @@ const handleEvent = (form, event) => {
                                 form.show('orientation')
                                 form.show('canSSupport')
                                 form.show('canHaveChildren')
+                                form.show('canRecruit')
                                 globalStats.forEach((stat, index) => {
                                     form.show(stat.field)
                                 })
@@ -118,6 +139,7 @@ const handleEvent = (form, event) => {
                                 form.hide('canSSupport')
                                 form.hide('orientation')
                                 form.hide('canHaveChildren')
+                                form.show('canRecruit')
                                 globalStats.forEach((stat, index) => {
                                     form.hide(stat.field)
                                 })

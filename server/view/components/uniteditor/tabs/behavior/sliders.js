@@ -148,16 +148,16 @@ rows.forEach(row => {
     left.innerHTML = row.left
     center.innerHTML = row.center
     right.innerHTML = `
-         <select id="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" name="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" class="w2ui-input " tabindex="1" style = "width:100%;height:100%;margin:0;font-size:1rem;border-radius:0;" onchange='window.unitEditorBehaviorUpdateWindow()'>
-            <option value="Team Player" ${row.right === 'Team Player' ? 'selected' : ''}>Team Player</option>
-            <option value="Lone Wolf" ${row.right === 'Lone Wolf' ? 'selected' : ''}>Lone Wolf</option>
-            <option value="Hero" ${row.right === 'Hero' ? 'selected' : ''}>Hero</option>
-            <option value="Coward" ${row.right === 'Coward' ? 'selected' : ''}>Coward</option>
-            <option value="Strategic" ${row.right === 'Strategic' ? 'selected' : ''}>Strategic</option>
-            <option value="Mindless" ${row.right === 'Mindless' ? 'selected' : ''}>Mindless</option>
-            <option value="Selfless" ${row.right === 'Selfless' ? 'selected' : ''}>Selfless</option>
-            <option value="Greedy" ${row.right === 'Greedy' ? 'selected' : ''}>Greedy</option>
-         </select>`
+        <select id="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" name="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" class="w2ui-input " tabindex="1" style = "width:100%;height:100%;margin:0;font-size:1rem;border-radius:0;" onchange='window.unitEditorBehaviorUpdateWindow()'>
+        <option value="Team Player" ${row.right === 'Team Player' ? 'selected' : ''}>Team Player</option>
+        <option value="Lone Wolf" ${row.right === 'Lone Wolf' ? 'selected' : ''}>Lone Wolf</option>
+        <option value="Hero" ${row.right === 'Hero' ? 'selected' : ''}>Hero</option>
+        <option value="Coward" ${row.right === 'Coward' ? 'selected' : ''}>Coward</option>
+        <option value="Strategic" ${row.right === 'Strategic' ? 'selected' : ''}>Strategic</option>
+        <option value="Mindless" ${row.right === 'Mindless' ? 'selected' : ''}>Mindless</option>
+        <option value="Selfless" ${row.right === 'Selfless' ? 'selected' : ''}>Selfless</option>
+        <option value="Greedy" ${row.right === 'Greedy' ? 'selected' : ''}>Greedy</option>
+        </select>`
 
     applyCommonStyles(left, commonStyles)
     applyCommonStyles(center, commonStyles)
@@ -215,7 +215,6 @@ div.appendChild(rules)
 const setInnerHtml = (currentRoll) => {
     let html= `
     <div><h2>How does all this work?</h2>
- 
     <em>As noted above, you should generally not worry about specific rules and just load a preset, then tweak the sliders.</em> 
     <h3>Disabling a rule</h3>
     The presets are designed to be subtractive- if you want to disable a certain rule, click on the 'bot-hide' icon in the right column. For example, if you want to disable the unit from moving towards chests, ever, click on the 'bot-hide' icon in the right column of the 'Move towards chest (if can open)' row. The unit will no longer move towards chests.
@@ -233,6 +232,7 @@ const setInnerHtml = (currentRoll) => {
     As this unit is not injured, the "Move towards safety (Coward)" rule is not used.  There are no hurt allies, so "Move towards hurt ally (Selfless)" is ignored.<br/><br/>
     There is no objective tile, so "Move towards nearest objective tile (Strategic)" is ignored.<br/><br/>
     There is no chest, so "Move towards chest (if can open) (Greedy)" is ignored.<br/><br/>
+    If no rules are selected, the unit will use the first (default) rule.<br/><br/>
     Now we know that these rules will be used:<br/>
     ${currentRoll > 40 ? 'Move towards nearest foe (Mindless)<br/>' : ''}
     ${currentRoll > 50 ? 'Move towards disadvantaged foe (Strategic)<br/>' : ''}
@@ -254,7 +254,7 @@ html +=`
 </details>
 <h3>Customizing rules</h3>
 You can customize any rule with the dropdowns. For example, you could change Move towards nearest foe (Mindless) to Move towards nearest foe (Lone Wolf) by selecting 'Lone Wolf' from the dropdown.<br/><br/>
-The Priority and Target columns are customizable- the rule columns are set in stone. You can disable rules, but not add or change them. Rules control every aspect of unit movement, so be careful when changing them. You could, for instance, easily change a 'cannot move on high walls' rule to 'cannot move on ground' rule, which would prevent the unit from moving at all under any circumstances.<br/><br/>`
+The Priority and Target columns are customizable- the rule columns are set in stone. You can disable rules, but not add or change them. <br/><br/>`
 
 return html
 
