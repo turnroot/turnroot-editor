@@ -6,6 +6,8 @@ import handleEvent from '../functions/handleBasic.js'
 
 import globalStats from '../functions/globals/getGlobalStats.js'
 
+import statGrowthPopup from '../functions/modals/statGrowth.js'
+
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
@@ -111,6 +113,15 @@ let config = {
             }
         },
         {
+            field: 'isUnique',
+            type: 'checkbox',
+            hidden: true,
+            html: {
+                label: 'Unique (only one of this unit can exist in the game)',
+                column: 0,
+            }
+        },
+        {
             field: 'height',
             type: 'int',
             options: {
@@ -174,13 +185,24 @@ globalStats.forEach((stat, index) => {
         config.record[stat.field] = 0
 })
 
+const handleStatGrowthPopup = (event) => {
+    console.log('clicked')
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = 0
+        return obj
+    }, {})
+    statGrowthPopup(stats)
+}
+
+window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
+
 config.fields.push({
     type: 'html',
     field: 'growth-rates',
     class: 'no-label',
     html: {
         class: 'no-label',
-        html: "<button class='w2ui-btn'>Growth Rates</button>",
+        html: "<button id='growth-rates-button' onclick='window.unitEditorHandleStatsGrowthPopup()' class='w2ui-btn'>Growth Rates</button>",
         column: 1,
         attr: 'style="width:100%;margin-top:.5rem"'
     }

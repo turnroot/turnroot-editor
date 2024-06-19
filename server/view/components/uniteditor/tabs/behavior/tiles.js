@@ -133,7 +133,7 @@ const build = (preset) => {
         right.style.padding = '0'
 
         let selectContainer = document.createElement('div')
-        selectContainer.className = 'w2ui-field'
+        selectContainer.className = 'w2ui-field expand'
         selectContainer.style.backgroundColor = 'var(--node-title-background)'
         selectContainer.style.color = 'var(--node-title)'
         let select = document.createElement('input')
