@@ -111,7 +111,7 @@ function applyCommonStyles(element, styles) {
 let commonStyles = {
     padding: '.5rem',
     backgroundColor: 'var(--list-background)',
-    border: '1px solid var(--window-text)',
+    border: '1px solid var(--window-background)',
     height: '4rem',
     color: 'var(--node-title)'
 }
@@ -137,7 +137,7 @@ const build = (preset) => {
         selectContainer.style.backgroundColor = 'var(--node-title-background)'
         selectContainer.style.color = 'var(--node-title)'
         let select = document.createElement('input')
-        select.id = 'unitEditorBehaviorTiles' + row.left
+        select.id = 'unitEditorBehaviorTiles' + row.left.replace(' ', '')
 
         selectContainer.appendChild(select)
 

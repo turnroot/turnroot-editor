@@ -73,7 +73,7 @@ function applyCommonStyles(element, styles) {
 
 let commonStyles = {
     padding: '.5rem',
-    border: '1px solid var(--window-text)',
+    border: '1px solid var(--window-background)',
     height: '2.5rem',
     color: 'var(--window-background-alt)'
 }
@@ -148,7 +148,7 @@ rows.forEach(row => {
     left.innerHTML = row.left
     center.innerHTML = row.center
     right.innerHTML = `
-         <select id="unitEditorBehaviorRule${row.left.replace(' ', '')}" name="unitEditorBehaviorRule${row.left.replace(' ', '')}" class="w2ui-input " tabindex="1" style = "width:100%;height:100%;margin:0;font-size:1rem;border-radius:0;" onchange='window.unitEditorBehaviorUpdateWindow()'>
+         <select id="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" name="unitEditorBehaviorRule${row.left.replace(' ', '')+row.center.replace(' ', '')}" class="w2ui-input " tabindex="1" style = "width:100%;height:100%;margin:0;font-size:1rem;border-radius:0;" onchange='window.unitEditorBehaviorUpdateWindow()'>
             <option value="Team Player" ${row.right === 'Team Player' ? 'selected' : ''}>Team Player</option>
             <option value="Lone Wolf" ${row.right === 'Lone Wolf' ? 'selected' : ''}>Lone Wolf</option>
             <option value="Hero" ${row.right === 'Hero' ? 'selected' : ''}>Hero</option>

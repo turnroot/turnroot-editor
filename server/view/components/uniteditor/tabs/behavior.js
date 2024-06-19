@@ -5,6 +5,7 @@ import handleBottom from './behavior/handleBottom.js'
 let config = [
     {type: 'radio', group: '1', id: 'unit-editor-behavior-container-bottom-toolbar-sliders', text: 'Sliders', class: 'panel-tabs', checked: true},
     {type: 'radio', group: '1', id: 'unit-editor-behavior-container-bottom-toolbar-tiles', text: 'Tiles', class: 'panel-tabs'},
+    {type: 'radio', group: '1', id: 'unit-editor-behavior-container-bottom-toolbar-specials', text: 'Specials', class: 'panel-tabs'},
 ]
 
 let toolbar = new w2toolbar({
