@@ -95,6 +95,7 @@ app.use('/components', express.static(path.join(__dirname, 'components')))
 app.use('/functions', express.static(path.join(__dirname, 'functions')))
 app.use('/style', express.static(path.join(__dirname, 'style')))
 app.use('/lib', express.static(path.join(__dirname, 'lib')))
+app.use('/bundle.js', express.static(path.join(__dirname, 'bundle.js')))
 
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))

@@ -3,7 +3,7 @@
   outline:0
   }
   
-  .li-search,.w2ui-field,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
+  .li-search,.w2ui-field,.w2ui-field:has(.full-width-field) div,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
   display:flex
   }
   
@@ -126,9 +126,8 @@
   cursor:pointer!important
   }
   
-  .w2ui-tb-button {
+  .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand .w2ui-multi-items,.w2ui-field>div,.w2ui-field>label,.w2ui-message-buttons,.w2ui-tb-button {
   align-items:center;
-  height:100%;
   justify-content:center
   }
   
@@ -167,9 +166,12 @@
   height:75%
   }
   
-  .report-issue,.status-bar,.status-bar .w2ui-tb-text,.status-bar:hover {
-  background-color:transparent;
+  .report-issue,.status-bar,.status-bar .w2ui-tb-text,.status-bar:hover,.w2ui-enum-placeholder,.w2ui-group-fields,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
   padding:0!important
+  }
+  
+  .report-issue,.status-bar,.status-bar .w2ui-tb-text,.status-bar:hover {
+  background-color:transparent
   }
   
   .report-issue,.status-bar .w2ui-tb-text {
@@ -190,20 +192,13 @@
   background-color:color-mix(in srgb,var(--window-background) 40%,var(--window-background-alt))
   }
   
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea {
-  border-radius:.25rem
-  }
-  
   .w2ui-form textarea:focus,input:not([type=radio]).w2ui-input:focus,select:focus {
   background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
   color:(--node-title)
   }
   
   .w2ui-btn,.w2ui-input.w2field,select {
-  appearance:none;
-  border-radius:.25rem;
-  --moz-appearance:none;
-  --webkit-appearance:none
+  appearance:none
   }
   
   .w2ui-btn {
@@ -211,15 +206,12 @@
   }
   
   .w2ui-field>div {
-  align-items:center;
   flex-direction:row;
   flex-wrap:wrap;
   gap:10px
   }
   
   .w2ui-field>label {
-  align-items:center;
-  justify-content:center;
   white-space:nowrap;
   width:max-content!important
   }
@@ -251,15 +243,13 @@
   }
   
   .w2ui-message {
-  border-radius:.25rem;
   left:1vw!important;
   padding:3rem;
   top:1vw!important
   }
   
   .w2ui-message-buttons {
-  gap:1rem;
-  justify-content:center
+  gap:1rem
   }
   
   .w2ui-lock {
@@ -269,16 +259,13 @@
   
   .w2ui-popup {
   background-color:var(--window-background);
-  border-radius:.25rem;
   padding:1rem;
   z-index:1390
   }
   
   input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
   appearance:none;
-  border-radius:.25rem;
   height:2rem!important;
-  padding:0!important;
   width:4rem!important
   }
   
@@ -327,8 +314,7 @@
   }
   
   .w2ui-group-fields {
-  margin:0!important;
-  padding:0!important
+  margin:0!important
   }
   
   .w2ui-group-fields label {
@@ -347,7 +333,6 @@
   
   .w2ui-multi-items .li-item {
   background-color:var(--window-text);
-  border-radius:.25rem;
   color:var(--window-background-alt);
   cursor:default;
   padding:.25rem
@@ -358,25 +343,17 @@
   height:100%!important;
   min-width:100%;
   overflow:hidden;
-  position:relative;
-  width:100%
+  position:relative
+  }
+  
+  .w2ui-field.expand .w2ui-multi-items {
+  display:flex;
+  flex-wrap:wrap;
+  height:100%!important
   }
   
   .w2ui-field-helper.w2ui-list .w2ui-input {
   width:0!important
-  }
-  
-  .w2ui-field.expand:has(.w2ui-multi-items) {
-  height:100%
-  }
-  
-  .w2ui-field.expand .w2ui-multi-items {
-  align-items:center;
-  display:flex;
-  flex-wrap:wrap;
-  height:100%!important;
-  justify-content:center;
-  width:100%
   }
   
   .w2ui-menu {
@@ -411,18 +388,11 @@
   }
   
   .w2ui-column-container:not(:has(.col-1)) {
-  align-items:center;
   display:flex;
-  height:100%;
-  justify-content:center
+  height:100%
   }
   
-  .w2ui-field:has(.full-width-field) div {
-  display:flex;
-  width:100%!important
-  }
-  
-  .w2ui-field:has(.full-width-field) {
+  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div {
   width:100%!important
   }
   
@@ -430,16 +400,23 @@
   height:min-content;
   left:1rem;
   margin:auto;
-  padding:0!important;
   pointer-events:none;
   position:relative!important;
   z-index:10
   }
   
-  .li-search input,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select,.w2ui-multi-file {
+  .li-search input,.w2ui-form textarea,.w2ui-message,.w2ui-multi-file,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select {
   background-color:var(--window-background-alt)
   }
   
-  .w2ui-form textarea,.w2ui-field:has(.full-width-field) div input {
+  .w2ui-field:has(.full-width-field) div input,.w2ui-form textarea {
   flex-grow:2
+  }
+  
+  .w2ui-field.expand:has(.w2ui-multi-items),.w2ui-tb-button {
+  height:100%
+  }
+  
+  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-btn,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
+  border-radius:.25rem
   }
