@@ -33,7 +33,7 @@ booleans.forEach(property => {
     config.fields.push({
         field: property,
         type: 'checkbox',
-        attr:'style="width:100%"x',
+        attr:'style="width:100%"',
         html: {
             text: labels[property],
             class: 'no-label',

@@ -7,10 +7,6 @@
   display:flex
   }
   
-  .li-search input,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select {
-  background-color:var(--window-background-alt)
-  }
-  
   .w2ui-panel .w2ui-panel .w2ui-sidebar {
   background-color:color-mix(in srgb,var(--window-background-alt) 85%,var(--window-background))
   }
@@ -198,10 +194,6 @@
   border-radius:.25rem
   }
   
-  .w2ui-form textarea {
-  flex-grow:2
-  }
-  
   .w2ui-form textarea:focus,input:not([type=radio]).w2ui-input:focus,select:focus {
   background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
   color:(--node-title)
@@ -228,7 +220,8 @@
   .w2ui-field>label {
   align-items:center;
   justify-content:center;
-  width:fit-content!important
+  white-space:nowrap;
+  width:max-content!important
   }
   
   .w2ui-btn.slider1 {
@@ -407,12 +400,46 @@
   background-color:var(--accent)!important;
   color:var(--accent)!important
   }
-
-  .w2ui-popup-resizer.resize-point{
-    width: 1.1em!important;
-    height: 1.1em!important;
+  
+  .w2ui-popup-resizer.resize-point {
+  height:1.1em!important;
+  width:1.1em!important
   }
   
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-message,.w2ui-overlay,.w2ui-panel,.w2ui-sidebar,.w2ui-popup * {
+  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-message,.w2ui-overlay,.w2ui-panel,.w2ui-popup *,.w2ui-sidebar {
   color:var(--window-text)
+  }
+  
+  .w2ui-column-container:not(:has(.col-1)) {
+  align-items:center;
+  display:flex;
+  height:100%;
+  justify-content:center
+  }
+  
+  .w2ui-field:has(.full-width-field) div {
+  display:flex;
+  width:100%!important
+  }
+  
+  .w2ui-field:has(.full-width-field) {
+  width:100%!important
+  }
+  
+  .w2ui-enum-placeholder {
+  height:min-content;
+  left:1rem;
+  margin:auto;
+  padding:0!important;
+  pointer-events:none;
+  position:relative!important;
+  z-index:10
+  }
+  
+  .li-search input,.w2ui-form textarea,.w2ui-message,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select,.w2ui-multi-file {
+  background-color:var(--window-background-alt)
+  }
+  
+  .w2ui-form textarea,.w2ui-field:has(.full-width-field) div input {
+  flex-grow:2
   }
