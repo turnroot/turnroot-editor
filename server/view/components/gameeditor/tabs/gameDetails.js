@@ -1,6 +1,8 @@
 import {
-    w2form,
+    w2form, w2ui, w2alert
 } from "../../../lib/w2ui.es6.min.js"
+import handleGameDetails from '../functions/handleGameDetails.js'
+import Globals from './globals.js'
 
 
 let config = {
@@ -114,12 +116,37 @@ let config = {
         {
             type: 'html',
             html: {
-                html: '<div><p>When you\'re happy with the settings above, click Next to move on to more advanced game settings. Clicking Next will also unlock the other editors.</p><button class="w2ui-btn" style="width:100%;font-size:150%;">Next</button></div>',
+                html: '<div><p>When you\'re happy with the settings above, click Next to move on to more advanced game settings. Clicking Next will also unlock the other editors.</p><button class="w2ui-btn" onclick="window.gameEditorGameDetailsFinishInitialAndNext()" style="width:100%;font-size:150%;">Next</button></div>',
             }
         }
     ]
 }
 
+window.gameEditorGameDetailsFinishInitialAndNext = () => {
+    let gameEditor = w2ui['GameEditor']
+    let gameEditorTabs = w2ui['game-editor-bottom-toolbar']
+    gameEditorTabs.show('game-editor-bottom-toolbar-game-settings')
+    gameEditorTabs.show('game-editor-bottom-toolbar-assets')
+    gameEditorTabs.show('game-editor-bottom-toolbar-build-and-export')
+    gameEditorTabs.click('game-editor-bottom-toolbar-game-settings')
+    let statusbar = w2ui['EditorWindowStatusBar']
+    statusbar.set('status-bar-project-status', {text: 'game details saved'})
+    setTimeout(() => {
+        statusbar.set('status-bar-project-status', {text: ''})
+        statusbar.hide('status-bar-project-status')
+    }, 5000)
+    gameEditor.html('main', Globals)
+    let sidebar = w2ui['EditorWindowSidebar']
+    let nodes = sidebar.get('sidebar-editors-list').nodes
+    nodes.forEach(element => {
+        sidebar.enable(element.id)
+    })
+    w2alert('You can now access the other editors in the left sidebar, as well as more advanced game settings. If you feel overwhelmed, please see docs.turnroot.com/your-first-hour for a guided tour on what to do next and where everything is. Check out the docs or the forums for additional resources.<br/><br/> Happy turnrooting!', '<h3>Game details saved</h3>')
+}
+
 let form = new w2form(config)
+form.on('change', function(event) {
+    handleGameDetails(event, form)
+})
 
 export default form
