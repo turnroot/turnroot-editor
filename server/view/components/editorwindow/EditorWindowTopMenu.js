@@ -43,9 +43,29 @@ let toolbar = new w2toolbar({
                         id: 'chocolate'
                     },
                     {
-                        text: 'Midnight Spark',
-                        id: 'midnight_spark'
+                        text: 'Snowdrift',
+                        id: 'snowdrift'
                     },
+                    {
+                        text: 'Tokyo Night',
+                        id: 'tokyo_night'
+                    },
+                    {
+                        text: 'Pink Dream',
+                        id: 'pink_dream'
+                    },
+                    {
+                        text: 'Forest Mist',
+                        id: 'forest_mist'
+                    },
+                    {
+                        text: 'Sunset Glow',
+                        id: 'sunset_glow'
+                    },
+                    {
+                        text: 'Pine Coast',
+                        id: 'pine_coast'
+                    }
                 ]
             },
             {
@@ -142,7 +162,6 @@ toolbar.on('click', function (event) {
     event.done(() => {
         topMenu(event, toolbar)
     })
-
 })
 
 let savedTheme = localStorage.getItem('theme')
@@ -150,7 +169,7 @@ if (savedTheme) {
     console.log(toolbar.get('settings:themes').items)
     toolbar.get('settings:themes').items.forEach(item => {
         if (item.id === savedTheme) {
-            main.classList.remove('ocean_waves', 'turnroot', 'charcoal', 'charcoal_blue', 'charcoal_green', 'chocolate', 'midnight_spark', 'rainforest')
+            main.classList.remove('ocean_waves', 'turnroot', 'charcoal', 'charcoal_blue', 'charcoal_green', 'chocolate', 'midnight_spark', 'forest_mist', 'snowdrift', 'tokyo_night', 'pink_dream', 'sunset_glow', 'pine_coast')
             main.classList.add(savedTheme)
             main.dataset.theme = savedTheme
             item.style = 'background-color: var(--window-background-alt);'

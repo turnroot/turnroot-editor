@@ -4,6 +4,7 @@
 <head>
     <title>Component Preview</title>
     <link rel="stylesheet" href="./style/fira-sans/fira.css">
+    <link rel="stylesheet" type="text/css" href="./style/themes.css">
     <link rel="stylesheet" type="text/css" href="./style/w2ui3.css">
     <link rel="stylesheet" type="text/css" href="./style/style.css">
     <link rel="stylesheet" type="text/css" href="./style/w2theming.css">
@@ -28,12 +29,7 @@
 
     <script type="module">
 
-    import { w2layout, w2grid, query } from './lib/w2ui.es6.min.js'
-    import EditorWindowSidebar from './components/editorwindow/EditorWindowSidebar.js'
-    import EditorWindowTopMenu from './components/editorwindow/EditorWindowTopMenu.js'
-    import EditorWindowStatusBar from './components/editorwindow/EditorWindowStatusBar.js'
-    import EditorWindow from './components/editorwindow/EditorWindow.js'
-    import DefaultStart from './components/editorwindow/default.js'
+    import './bundle.js'
 
     let config = {
         layout: {

@@ -2,31 +2,30 @@ import {
     w2form
 } from '../../../lib/w2ui.es6.min.js'
 
-
-
 import handleEvent from '../functions/handleBasic.js'
 
-import globalStats from '../functions/getGlobalStats.js'
+import globalStats from '../functions/globals/getGlobalStats.js'
+
+import statGrowthPopup from '../functions/modals/statGrowth.js'
 
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
-            name: 'New Unit',
-            pronouns: 'they/them/their/theirs',
-            subtype: 'Friend',
-            notes: '',
-            age: 18,
-            orientation: 'straight',
-            canSSupport: true,
-            canHaveChildren: true,
-            height: 168,
-            birthdayDay: 1,
-            birthdayMonth: 1,
-            shortBio: '',
-            useAccentColors: false,
+        name: 'New Unit',
+        pronouns: 'they/them/their/theirs',
+        subtype: 'Avatar',
+        notes: '',
+        age: 18,
+        orientation: 'straight',
+        canSSupport: true,
+        canHaveChildren: true,
+        height: 168,
+        birthdayDay: 1,
+        birthdayMonth: 1,
+        shortBio: '',
+        useAccentColors: false,
     },
-    fields: [
-        {
+    fields: [{
             field: '',
             type: 'html',
             html: {
@@ -70,7 +69,9 @@ let config = {
         {
             field: 'age',
             type: 'int',
-            options: { min: 0},
+            options: {
+                min: 0
+            },
             html: {
                 label: 'Age',
                 column: 0,
@@ -112,18 +113,40 @@ let config = {
             }
         },
         {
+            field: 'isUnique',
+            type: 'checkbox',
+            hidden: true,
+            html: {
+                label: 'Unique (only one of this unit can exist in the game)',
+                column: 0,
+            }
+        },
+        {
+            field: 'canRecruit',
+            type: 'checkbox',
+            hidden: true,
+            html: {
+                label: 'Can be recruited to join player\'s team',
+                column: 0,
+            }
+        },
+        {
             field: 'height',
             type: 'int',
-            options: { min: 32, max: 214},
+            options: {
+                min: 32,
+                max: 214
+            },
             html: {
                 label: 'Height (cm)',
                 column: 0,
             }
         },
         {
-            field: '',
+            field: 'base-stats-header',
             type: 'html',
             html: {
+                class: 'no-label',
                 html: '<h2>Base Stats</h2>',
                 column: 1,
             }
@@ -131,7 +154,10 @@ let config = {
         {
             field: 'birthdayDay',
             type: 'int',
-            options: { min: 1, max: 31},
+            options: {
+                min: 1,
+                max: 31
+            },
             html: {
                 label: 'Birthday Day',
                 column: 0,
@@ -140,7 +166,10 @@ let config = {
         {
             field: 'birthdayMonth',
             type: 'int',
-            options: { min: 1, max: 12},
+            options: {
+                min: 1,
+                max: 12
+            },
             html: {
                 label: 'Birthday Month',
                 column: 0,
@@ -150,33 +179,45 @@ let config = {
 }
 
 globalStats.forEach((stat, index) => {
-    config.fields.push(
-        {
+    config.fields.push({
             field: stat.field,
             type: 'int',
-            options: { min: 0},
+            options: {
+                min: 0
+            },
             html: {
                 label: stat.html.label,
                 attr: 'style="width:2rem"',
                 column: 1,
             }
-        }
-    ),
-    config.record[stat.field] = 0
+        }),
+        config.record[stat.field] = 0
 })
 
-config.fields.push(
-    {
-        type: 'html',
-        html: {
-            html: "<button class='w2ui-btn'>Growth Rates</button>",
-            column: 1,
-            attr: 'style="width:100%;margin-top:.5rem"'
-        }
-    }
-)
+const handleStatGrowthPopup = (event) => {
+    console.log('clicked')
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = 0
+        return obj
+    }, {})
+    statGrowthPopup(stats)
+}
 
-config.fields.push( {
+window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
+
+config.fields.push({
+    type: 'html',
+    field: 'growth-rates',
+    class: 'no-label',
+    html: {
+        class: 'no-label',
+        html: "<button id='growth-rates-button' onclick='window.unitEditorHandleStatsGrowthPopup()' class='w2ui-btn'>Growth Rates</button>",
+        column: 1,
+        attr: 'style="width:100%;margin-top:.5rem"'
+    }
+})
+
+config.fields.push({
     type: 'textarea',
     field: 'notes',
     html: {
@@ -232,7 +273,7 @@ config.fields.push({
         label: 'Accent color 1',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#ff0000">',
+        html: '<input type="color" value="#000000">',
     },
 })
 
@@ -245,7 +286,7 @@ config.fields.push({
         label: 'Accent color 2',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#ff0000">',
+        html: '<input type="color" value="#000000">',
     },
 })
 
@@ -254,5 +295,15 @@ let form = new w2form(config)
 form.on('change', (event) => {
     handleEvent(form, event)
 })
+
+form.updateGlobals = () => {
+    if (!window.unitsCanHaveChildren) {
+        form.fields.find(field => field.field === 'canHaveChildren').hidden = true
+    } else {
+        form.fields.find(field => field.field === 'canHaveChildren').hidden = false
+    }
+}
+
+form.updateGlobals()
 
 export default form

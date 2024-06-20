@@ -1,0 +1,188 @@
+html :has(#main.midnight_spark) {
+    --accent:#8F30DF;
+    --button-alt-text:#30403b;
+    --list-background:#234f9e;
+    --node-background:#144db8;
+    --node-text:#8bdfc7;
+    --node-title:#8bdfc7;
+    --node-title-background:#0f3c91;
+    --slider-0:#e9f321;
+    --slider-1:#EF3054;
+    --window-background:#26385a;
+    --window-background-alt:#2f6657;
+    --window-text:#8bdfc7
+    }
+    
+    html :has(#main.turnroot) {
+    --accent:#64b5c1;
+    --button-alt-text:#cdc9b5;
+    --list-background:#43a188;
+    --node-background:#43a188;
+    --node-text:#f8f5da;
+    --node-title:#f8f5da;
+    --node-title-background:#79a38e;
+    --slider-0:#78f0bc;
+    --slider-1:#9c9a39;
+    --window-background:#5b6067;
+    --window-background-alt:#4c5157;
+    --window-text:#f8f5Da
+    }
+    
+    html :has(#main.charcoal) {
+    --accent:#ffa754;
+    --button-alt-text:#959595;
+    --list-background:#545454;
+    --node-background:#323232;
+    --node-text:#d0d0d0;
+    --node-title:#fff;
+    --node-title-background:#494949;
+    --slider-0:#5a82d1;
+    --slider-1:#D95F80;
+    --window-background:#272727;
+    --window-background-alt:#111;
+    --window-text:#c4c4c4
+    }
+    
+    html :has(#main.ocean_waves) {
+    --accent:#78ffe8;
+    --button-alt-text:#7AA6CD;
+    --list-background:#394159;
+    --node-background:#dd273d52;
+    --node-text:#b6cfe6;
+    --node-title:#fff;
+    --node-title-background:#ff202e3b;
+    --slider-0:#5FE3E3;
+    --slider-1:#92513b;
+    --window-background:#394159;
+    --window-background-alt:#568EBF;
+    --window-text:#DCEEF2
+    }
+    
+    html :has(#main.chocolate) {
+    --accent:#F9C27E;
+    --button-alt-text:#694746;
+    --list-background:#733A2D;
+    --node-background:#512C2A;
+    --node-text:#FBF4EB;
+    --node-title:#DB8C50;
+    --node-title-background:#59302C;
+    --slider-0:#943F5F;
+    --slider-1:#EF965E;
+    --window-background:#391c16;
+    --window-background-alt:#5c2e24;
+    --window-text:#DB8C50
+    }
+    
+    html :has(#main.charcoal_blue),html :has(#main.charcoal_green) {
+    --button-alt-text:#959595;
+    --node-background:#323232;
+    --node-text:#d0d0d0;
+    --node-title:#fff;
+    --node-title-background:#494949;
+    --window-background:#232323;
+    --window-background-alt:#111;
+    --window-text:#c4c4c4
+    }
+    
+    html :has(#main.charcoal_blue) {
+    --accent:#009EFF;
+    --list-background:#5a82d1;
+    --slider-0:#D95F80;
+    --slider-1:#5a82d1
+    }
+    
+    html :has(#main.charcoal_green) {
+    --accent:#6ee98b;
+    --list-background:#4bb771;
+    --slider-0:#c9dd45;
+    --slider-1:#59be68
+    }
+    
+    html :has(#main.pink_dream) {
+    --accent:#FF69B4;
+    --list-background:#F8BBD0;
+    --node-background:#F3E5F5;
+    --node-text:#6A1B9A;
+    --node-title:#FF69B4;
+    --node-title-background:#E1BEE7;
+    --slider-0:#FFB6C1;
+    --slider-1:#CE93D8;
+    --window-background:#FFF0F5;
+    --window-background-alt:#F3E5F5;
+    --window-text:#6A1B9A
+    }
+    
+    html :has(#main.snowdrift) {
+    --accent:#AEC6CF;
+    --button-alt-text:#595959;
+    --list-background:#F5F5F5;
+    --node-background:#E0E0E0;
+    --node-text:#333;
+    --node-title:#AEC6CF;
+    --node-title-background:#D8D8D8;
+    --slider-0:#D3D3D3;
+    --slider-1:#B0C4DE;
+    --window-background:#FFF;
+    --window-background-alt:#F0F0F0;
+    --window-text:#333
+    }
+    
+    html :has(#main.tokyo_night) {
+    --accent:#FFBF00;
+    --button-alt-text:#FF8C00;
+    --list-background:#2D2A4A;
+    --node-background:#1F1B3A;
+    --node-text:#76EEC6;
+    --node-title:#FFBF00;
+    --node-title-background:#342D61;
+    --slider-0:#76EEC6;
+    --slider-1:#FF8C00;
+    --window-background:#1A1733;
+    --window-background-alt:#2D2A4A;
+    --window-text:#76EEC6
+    }
+    
+    html :has(#main.forest_mist) {
+    --accent:#556B2F;
+    --button-alt-text:#8FBC8F;
+    --list-background:#98FB98;
+    --node-background:#2E8B57;
+    --node-text:#2F4F4F;
+    --node-title:#556B2F;
+    --node-title-background:#3CB371;
+    --slider-0:#66CDAA;
+    --slider-1:#8FBC8F;
+    --window-background:#F5FFFA;
+    --window-background-alt:#F0FFF0;
+    --window-text:#2F4F4F
+    }
+    
+    html :has(#main.sunset_glow) {
+    --accent:#FF4500;
+    --button-alt-text:#FF6347;
+    --list-background:#FFDAB9;
+    --node-background:#FFB6C1;
+    --node-text:#8B0000;
+    --node-title:#FF4500;
+    --node-title-background:#FF69B4;
+    --slider-0:#FFA07A;
+    --slider-1:#FF8C00;
+    --window-background:#FFF5EE;
+    --window-background-alt:#FFE4E1;
+    --window-text:#8B0000
+    }
+    
+    html :has(#main.pine_coast) {
+    --accent:#5F9EA0;
+    --button-alt-text:#6B8E23;
+    --list-background:#2F4F4F;
+    --node-background:#2E8B57;
+    --node-text:#B0C4DE;
+    --node-title:#5F9EA0;
+    --node-title-background:#3B5323;
+    --slider-0:#4682B4;
+    --slider-1:#8B4513;
+    --window-background:#1C1C1C;
+    --window-background-alt:#3B3B3B;
+    --window-text:#B0C4DE
+    }

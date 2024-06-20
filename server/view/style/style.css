@@ -1,236 +1,198 @@
 :root {
-    --spacing-1: .0625rem;
-    --spacing-10: 3rem;
-    --spacing-11: 3.5rem;
-    --spacing-12: 4.0625rem;
-    --spacing-13: 4.6875rem;
-    --spacing-14: 5rem;
-    --spacing-15: 5.9375rem;
-    --spacing-16: 6.25rem;
-    --spacing-17: 6.875rem;
-    --spacing-18: 7.5rem;
-    --spacing-19: 7.8125rem;
-    --spacing-2: .375rem;
-    --spacing-20: 8.75rem;
-    --spacing-21: 9.375rem;
-    --spacing-22: 10rem;
-    --spacing-23: 11.25rem;
-    --spacing-24: 12.5rem;
-    --spacing-25: 14.375rem;
-    --spacing-26: 15rem;
-    --spacing-27: 16.875rem;
-    --spacing-28: 17.5rem;
-    --spacing-29: 18.75rem;
-    --spacing-3: .6875rem;
-    --spacing-4: 1rem;
-    --spacing-5: 1.3125rem;
-    --spacing-6: 1.625rem;
-    --spacing-7: 2rem;
-    --spacing-8: 2.375rem;
-    --spacing-9: 2.6875rem;
-    --spacing-01: .25rem;
-    --spacing-02: .5rem;
-    --spacing-03: .75rem;
-    --spacing-04: 1rem;
-    --spacing-05: 1.25rem;
-    --spacing-06: 1.5rem;
-    --spacing-07: 1.75rem;
-    --spacing-08: 2rem;
-}
-
-body,
-html {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: 'Fira Sans', sans-serif;
-}
-
-@supports not (has) {
+    --spacing-01:.25rem;
+    --spacing-02:.5rem;
+    --spacing-03:.75rem;
+    --spacing-04:1rem;
+    --spacing-05:1.25rem;
+    --spacing-06:1.5rem;
+    --spacing-07:1.75rem;
+    --spacing-08:2rem;
+    --spacing-1:.0625rem;
+    --spacing-10:3rem;
+    --spacing-11:3.5rem;
+    --spacing-12:4.0625rem;
+    --spacing-13:4.6875rem;
+    --spacing-14:5rem;
+    --spacing-15:5.9375rem;
+    --spacing-16:6.25rem;
+    --spacing-17:6.875rem;
+    --spacing-18:7.5rem;
+    --spacing-19:7.8125rem;
+    --spacing-2:.375rem;
+    --spacing-20:8.75rem;
+    --spacing-21:9.375rem;
+    --spacing-22:10rem;
+    --spacing-23:11.25rem;
+    --spacing-24:12.5rem;
+    --spacing-25:14.375rem;
+    --spacing-26:15rem;
+    --spacing-27:16.875rem;
+    --spacing-28:17.5rem;
+    --spacing-29:18.75rem;
+    --spacing-3:.6875rem;
+    --spacing-4:1rem;
+    --spacing-5:1.3125rem;
+    --spacing-6:1.625rem;
+    --spacing-7:2rem;
+    --spacing-8:2.375rem;
+    --spacing-9:2.6875rem
+    }
+    
+    body,html {
+    font-family:"Fira Sans",sans-serif;
+    height:100%;
+    margin:0;
+    padding:0;
+    width:100%
+    }
+    
+    @supports not (has) {
     #css-support {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        background-color: #333;
-        display: flex;
-        font-size: var(--spacing-06);
-        z-index: 9999;
-        color: #eee;
-        justify-content: center;
-        align-items: center;
+    align-items:center;
+    background-color:#333;
+    color:#eee;
+    display:flex;
+    font-size:var(--spacing-06);
+    height:100vh;
+    justify-content:center;
+    left:0;
+    overflow:hidden;
+    position:fixed;
+    top:0;
+    width:100vw;
+    z-index:9999
     }
-}
-
-#js-supports {
-    width: 100vw;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    background-color: #333;
-    display: flex;
-    font-size: var(--spacing-06);
-    z-index: 9999;
-    color: #eee;
-    justify-content: center;
-    align-items: center;
-}
-
-@media screen and (max-width: 600px) {
+    }
+    
+    #js-supports {
+    align-items:center;
+    background-color:#333;
+    color:#eee;
+    display:flex;
+    font-size:var(--spacing-06);
+    height:100vh;
+    justify-content:center;
+    left:0;
+    overflow:hidden;
+    position:fixed;
+    top:0;
+    width:100vw;
+    z-index:9999
+    }
+    
+    @media screen and (max-width:600px) {
     #mobile-support {
-        width: 100vw;
-        height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-        background-color: #333;
-        display: flex !important;
-        font-size: var(--spacing-06);
-        z-index: 9999;
-        color: #eee;
-        justify-content: center;
-        align-items: center;
+    align-items:center;
+    background-color:#333;
+    color:#eee;
+    display:flex!important;
+    font-size:var(--spacing-06);
+    height:100vh;
+    justify-content:center;
+    left:0;
+    overflow:hidden;
+    position:fixed;
+    top:0;
+    width:100vw;
+    z-index:9999
     }
-}
-
-#main {
-    width: 100vw;
-    height: 100%;
-    min-height: 100%;
-    box-sizing: border-box;
-    overflow-x: hidden;
-    overflow-y: hidden;
-    padding: 0;
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
-    scroll-behavior: smooth;
-    overscroll-behavior: contain;
-    text-shadow: none !important;
-    box-shadow: none !important;
-}
-
-*:active,
-*:focus,
-*:focus-within,
-*:focus-visible {
-    outline: none;
-}
-
-@media screen and (prefers-reduced-motion: reduce) {
+    }
+    
+    #main {
+    box-sizing:border-box;
+    height:100%;
+    min-height:100%;
+    overflow-x:hidden;
+    overflow-y:hidden;
+    padding:0;
+    width:100vw
+    }
+    
+    *,::after,::before {
+    box-shadow:none!important;
+    box-sizing:border-box;
+    overscroll-behavior:contain;
+    scroll-behavior:smooth;
+    text-shadow:none!important
+    }
+    
+    :active,:focus,:focus-visible,:focus-within {
+    outline:0
+    }
+    
+    @media screen and (prefers-reduced-motion:reduce) {
     * {
-        animation-duration: 0.0ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.00ms !important;
-        scroll-behavior: auto !important;
+    animation-duration:0ms!important;
+    animation-iteration-count:1!important;
+    scroll-behavior:auto!important;
+    transition-duration:0ms!important
     }
-}
-
-@media screen and (prefers-contrast: more) {
+    }
+    
+    @media screen and (prefers-contrast:more) {
     html {
-        filter: invert(100%) saturate(180%);
+    filter:invert(100%) saturate(180%)
     }
-}
-
-@media screen and (prefers-contrast: less) {
+    }
+    
+    @media screen and (prefers-contrast:less) {
     html {
-        filter: grayscale(100%);
+    filter:grayscale(100%)
     }
-}
-
-@media screen and (forced-colors: active) {
-    *:focus {
-        outline-color: transparent;
     }
-
-    input,
-    textarea,
-    button,
-    select,
-    option,
-    section {
-        border: 1px solid transparent !important;
+    
+    @media screen and (forced-colors:active) {
+    :focus {
+    outline-color:transparent
     }
-
+    
+    button,input,option,section,select,textarea {
+    border:1px solid transparent!important
+    }
+    
     svg {
-        stroke: CanvasText !important;
-        fill: Canvas !important;
+    fill:Canvas!important;
+    stroke:CanvasText!important
     }
-}
-
-input,
-button,
-textarea,
-select {
-    font: inherit;
-}
-
-p,
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-    overflow-wrap: break-word;
-}
-
-.square-img-container {
-    position: relative;
-}
-
-.square-img-container::after {
-    content: "";
-    display: block;
-    padding-bottom: 100%;
-}
-
-.square-img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hd-img-container {
-    position: relative;
-}
-
-.hd-img-container::after {
-    content: "";
-    display: block;
-    padding-bottom: 56.25%;
-}
-
-.hd-img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.hd-portrait-img-container {
-    position: relative;
-}
-
-.hd-portrait-img-container::after {
-    content: "";
-    display: block;
-    padding-bottom: 177.77%;
-}
-
-.hd-portrait-img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
+    }
+    
+    button,input,select,textarea {
+    font:;
+    font-family:inherit;
+    font-style:normal;
+    font-variant:normal;
+    font-weight:normal
+    }
+    
+    h1,h2,h3,h4,h5,h6,p {
+    overflow-wrap:break-word
+    }
+    
+    .square-img-container::after {
+    content:"";
+    display:block;
+    padding-bottom:100%
+    }
+    
+    .hd-img-container::after {
+    content:"";
+    display:block;
+    padding-bottom:56.25%
+    }
+    
+    .hd-portrait-img-container::after {
+    content:"";
+    display:block;
+    padding-bottom:177.77%
+    }
+    
+    .square-img-container,.hd-img-container,.hd-portrait-img-container {
+    position:relative
+    }
+    
+    .square-img,.hd-img,.hd-portrait-img {
+    height:100%;
+    object-fit:cover;
+    position:absolute;
+    width:100%
+    }
