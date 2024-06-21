@@ -186,7 +186,8 @@ const build = (p) => {
     })
 
     let preset = presets[p]
-    updateWindow(presetSliders[p])
+    
+
     
     let headerLeft = document.createElement('div')
     let headerCenter = document.createElement('div')
@@ -251,6 +252,7 @@ defaultButton.onclick = () => {
     })
     defaultButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('Default')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.Default)
 }
 
 mindlessCreatureButton.onclick = () => {
@@ -259,6 +261,7 @@ mindlessCreatureButton.onclick = () => {
     })
     mindlessCreatureButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('MindlessCreature')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.MindlessCreature)
 }
 
 cautiousHealerButton.onclick = () => {
@@ -267,6 +270,7 @@ cautiousHealerButton.onclick = () => {
     })
     cautiousHealerButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('CautiousHealer')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.CautiousHealer)
 }
 
 sniperButton.onclick = () => {
@@ -275,6 +279,7 @@ sniperButton.onclick = () => {
     })
     sniperButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('Sniper')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.Sniper)
 }
 
 steadfastTankButton.onclick = () => {
@@ -283,6 +288,7 @@ steadfastTankButton.onclick = () => {
     })
     steadfastTankButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('SteadfastTank')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.SteadfastTank)
 }
 
 independentAssassinButton.onclick = () => {
@@ -291,6 +297,7 @@ independentAssassinButton.onclick = () => {
     })
     independentAssassinButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('IndependentAssassin')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.IndependentAssassin)
 }
 
 weakCowardButton.onclick = () => {
@@ -299,6 +306,7 @@ weakCowardButton.onclick = () => {
     })
     weakCowardButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('WeakCoward')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.WeakCoward)
 }
 
 vengefulDemonButton.onclick = () => {
@@ -307,6 +315,7 @@ vengefulDemonButton.onclick = () => {
     })
     vengefulDemonButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('VengefulDemon')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.VengefulDemon)
 }
 
 looterButton.onclick = () => {
@@ -315,6 +324,7 @@ looterButton.onclick = () => {
     })
     looterButton.style.backgroundColor = 'color-mix(in srgb,var(--node-background) 40%,var(--slider-1))'
     build('Looter')
+    window.unitEditorBehaviorUpdateWindow(presetSliders.Looter)
 }
 
 
@@ -424,7 +434,6 @@ rules.appendChild(headerRight)
 
 const updateWindow = (v=null) => {
     if (!v) v = values
-    console.log('updating window')
     window.unitEditorBehaviorTeamPlayer = v['unitEditorBehavior.TeamPlayer']
     window.unitEditorBehaviorHero = v['unitEditorBehavior.Hero']
     window.unitEditorBehaviorStrategic = v['unitEditorBehavior.Strategic']
@@ -438,6 +447,7 @@ const updateWindow = (v=null) => {
         let row = [rulesRows[i], rulesRows[i + 1], rulesRows[i + 2]]
         let value = row[2].children[0].value
         let select = row[2].children[0]
+        console.log(select)
         if (value === 'Team Player' || value === 'Lone Wolf'){
             select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorTeamPlayer}%,var(--slider-1))`}
         else if (value === 'Hero' || value === 'Coward'){
