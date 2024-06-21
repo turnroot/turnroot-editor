@@ -49,11 +49,12 @@ app.use(helmet(
 ))
 }
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }}))
-
 app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
+
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }}))
+
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
@@ -79,7 +80,7 @@ app.use(passport.session())
 if (process.env.LOCAL === 'false') {
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 300 
+  max: 100 
 })
 app.use(limiter)
 }
