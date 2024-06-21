@@ -9,6 +9,7 @@ import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -19,6 +20,7 @@ import { establishConnection, sendToFromDatabase } from './functions/hit_schemas
 
 const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
+app.use(cookieParser())
 dotenv.config()
 
 app.use(cors(
