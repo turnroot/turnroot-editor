@@ -186,19 +186,7 @@ const build = (p) => {
     })
 
     let preset = presets[p]
-
-    let behaviorStyles = {
-        'Team Player': 'unitEditorBehaviorTeamPlayer',
-        'Lone Wolf': 'unitEditorBehaviorTeamPlayer',
-        'Hero': 'unitEditorBehaviorHero',
-        'Coward': 'unitEditorBehaviorHero',
-        'Strategic': 'unitEditorBehaviorStrategic',
-        'Mindless': 'unitEditorBehaviorStrategic',
-        'Selfless': 'unitEditorBehaviorSelfless',
-        'Greedy': 'unitEditorBehaviorSelfless'
-    }
-    
-    let index = 0
+    updateWindow(presetSliders[p])
     
     let headerLeft = document.createElement('div')
     let headerCenter = document.createElement('div')
@@ -251,11 +239,6 @@ const build = (p) => {
     
         left.style.backgroundColor = 'var(--node-text)'
         center.style.backgroundColor = 'var(--node-title)'
-        if (behaviorStyles[row.right]) {
-            right.children[0].style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window[behaviorStyles[row.right]]}%,var(--slider-1))`
-        } else {
-            right.children[0].style.backgroundColor = 'var(--node-text)'
-        }
         rules.appendChild(left)
         rules.appendChild(center)
         rules.appendChild(right)
@@ -417,19 +400,6 @@ let commonStyles = {
     color: 'var(--window-background-alt)'
 }
 
-let behaviorStyles = {
-    'Team Player': 'unitEditorBehaviorTeamPlayer',
-    'Lone Wolf': 'unitEditorBehaviorTeamPlayer',
-    'Hero': 'unitEditorBehaviorHero',
-    'Coward': 'unitEditorBehaviorHero',
-    'Strategic': 'unitEditorBehaviorStrategic',
-    'Mindless': 'unitEditorBehaviorStrategic',
-    'Selfless': 'unitEditorBehaviorSelfless',
-    'Greedy': 'unitEditorBehaviorSelfless'
-}
-
-let index = 0
-
 let headerLeft = document.createElement('div')
 let headerCenter = document.createElement('div')
 let headerRight = document.createElement('div')
@@ -452,42 +422,44 @@ rules.appendChild(headerLeft)
 rules.appendChild(headerCenter)
 rules.appendChild(headerRight)
 
-const updateWindow = () => {
+const updateWindow = (v=null) => {
+    if (!v) v = values
     console.log('updating window')
-    window.unitEditorBehaviorTeamPlayer = values['unitEditorBehavior.TeamPlayer']
-    window.unitEditorBehaviorHero = values['unitEditorBehavior.Hero']
-    window.unitEditorBehaviorStrategic = values['unitEditorBehavior.Strategic']
-    window.unitEditorBehaviorSelfless = values['unitEditorBehavior.Selfless']
+    window.unitEditorBehaviorTeamPlayer = v['unitEditorBehavior.TeamPlayer']
+    window.unitEditorBehaviorHero = v['unitEditorBehavior.Hero']
+    window.unitEditorBehaviorStrategic = v['unitEditorBehavior.Strategic']
+    window.unitEditorBehaviorSelfless = v['unitEditorBehavior.Selfless']
 
-    values.list = [window.unitEditorBehaviorTeamPlayer, window.unitEditorBehaviorHero, window.unitEditorBehaviorStrategic, window.unitEditorBehaviorSelfless]
+    v.list = [window.unitEditorBehaviorTeamPlayer, window.unitEditorBehaviorHero, window.unitEditorBehaviorStrategic, window.unitEditorBehaviorSelfless]
 
     let rulesRows = rules.children
 
     for (let i = 3; i < rulesRows.length; i += 3) {
         let row = [rulesRows[i], rulesRows[i + 1], rulesRows[i + 2]]
         let value = row[2].children[0].value
+        let select = row[2].children[0]
         if (value === 'Team Player' || value === 'Lone Wolf'){
-            row[2].style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorTeamPlayer}%,var(--slider-1))`}
+            select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorTeamPlayer}%,var(--slider-1))`}
         else if (value === 'Hero' || value === 'Coward'){
-            row[2].style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorHero}%,var(--slider-1))`}
+            select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorHero}%,var(--slider-1))`}
         else if (value === 'Strategic' || value === 'Mindless'){
-            row[2].style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorStrategic}%,var(--slider-1))`}
+            select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorStrategic}%,var(--slider-1))`}
         else if (value === 'Selfless' || value === 'Greedy'){
-            row[2].style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorSelfless}%,var(--slider-1))`}
+            select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorSelfless}%,var(--slider-1))`}
         else {
-            row[2].style.backgroundColor = 'var(--node-text)'
+            select.style.backgroundColor = 'var(--node-text)'
         } 
-        console.log(row[2].style.backgroundColor)
+        
     }
 }
 
 window.unitEditorBehaviorUpdateWindow = updateWindow
 
-updateWindow()
 sliders.forEach((slider, index) => {
     let value = values.list[index]
     slider.setValue(value)
 })
+updateWindow()
 
 div.appendChild(rules)
 
