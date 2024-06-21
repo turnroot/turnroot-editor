@@ -187,8 +187,6 @@ const build = (p) => {
 
     let preset = presets[p]
     
-
-    
     let headerLeft = document.createElement('div')
     let headerCenter = document.createElement('div')
     let headerRight = document.createElement('div')

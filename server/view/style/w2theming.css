@@ -126,9 +126,13 @@
   cursor:pointer!important
   }
   
-  .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand .w2ui-multi-items,.w2ui-field>div,.w2ui-field>label,.w2ui-message-buttons,.w2ui-tb-button {
+  .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand .w2ui-multi-items,.w2ui-field>label,.w2ui-message-buttons,.w2ui-tb-button {
   align-items:center;
-  justify-content:center
+  justify-content:center;
+  }
+
+  .w2ui-field > div{
+    justify-content:start;
   }
   
   .w2ui-tb-button .w2ui-tb-icon {

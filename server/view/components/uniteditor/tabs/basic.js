@@ -121,6 +121,7 @@ let config = {
                 column: 0,
             }
         },
+        {type: 'html', field: 'uniqueBaseStatsRandomizer', hidden:true, html: {html: '<button class="w2ui-btn">Randomize base stats</button>', column: 0, class: 'no-label'}},
         {
             field: 'canRecruit',
             type: 'checkbox',
