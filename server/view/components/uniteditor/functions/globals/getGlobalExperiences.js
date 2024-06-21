@@ -3,7 +3,6 @@ let globalExperiences = []
 import globalWeaponTypes from './getGlobalWeaponTypes.js'
 
 let useExperienceSublevels = window.useExperienceSublevels || false
-console.log('useExperienceSublevels:', useExperienceSublevels)
 let options
 if (useExperienceSublevels) {
     options = { items: ['E', 'E+', 'D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+', 'S'] }
@@ -45,7 +44,5 @@ for (let weaponType of globalWeaponTypes) {
         }
     )
 }
-
-console.log(globalExperiences)
 
 export default globalExperiences

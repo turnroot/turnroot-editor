@@ -195,7 +195,6 @@ globalStats.forEach((stat, index) => {
 })
 
 const handleStatGrowthPopup = (event) => {
-    console.log('clicked')
     let stats = globalStats.reduce((obj, stat) => {
         obj[stat.field] = 0
         return obj
