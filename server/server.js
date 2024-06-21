@@ -55,7 +55,7 @@ app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }}))
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
 
 
 app.use(passport.initialize())
