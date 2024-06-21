@@ -51,12 +51,11 @@ app.use(helmet(
 ))
 }
 
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
+
 app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
-
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
-
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
