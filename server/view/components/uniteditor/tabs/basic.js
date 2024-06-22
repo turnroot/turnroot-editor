@@ -8,6 +8,8 @@ import globalStats from '../functions/globals/getGlobalStats.js'
 
 import statGrowthPopup from '../functions/modals/statGrowth.js'
 
+import baseStatRandomizerPopup from '../functions/modals/randomizeBaseStats.js'
+
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
@@ -34,7 +36,6 @@ let config = {
             }
         },
         {
-            field: 'name',
             type: 'text',
             html: {
                 label: 'Unit name',
@@ -43,7 +44,6 @@ let config = {
             }
         },
         {
-            field: 'pronouns',
             type: 'select',
             html: {
                 label: 'Pronouns',
@@ -55,7 +55,6 @@ let config = {
             }
         },
         {
-            field: 'subtype',
             type: 'radio',
             html: {
                 label: 'Subtype',
@@ -201,6 +200,14 @@ const handleStatGrowthPopup = (event) => {
         return obj
     }, {})
     statGrowthPopup(stats)
+}
+
+const handleBaseStatRandomizerPopup = (event) => {
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = 0
+        return obj
+    }, {})
+    baseStatRandomizerPopup(stats) 
 }
 
 window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
