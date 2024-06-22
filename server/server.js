@@ -160,6 +160,7 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/data', async (req, res) => {
+    req.body.queue = window.editsQueue.queue
     if (process.env.LOCAL === 'false'){
     if (!req.user) {
         res.status(401).send('Unauthorized')
