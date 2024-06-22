@@ -36,6 +36,7 @@ let config = {
             }
         },
         {
+            field: 'name',
             type: 'text',
             html: {
                 label: 'Unit name',
@@ -44,6 +45,7 @@ let config = {
             }
         },
         {
+            field: 'pronouns',
             type: 'select',
             html: {
                 label: 'Pronouns',
@@ -55,6 +57,7 @@ let config = {
             }
         },
         {
+            field: 'subtype',
             type: 'radio',
             html: {
                 label: 'Subtype',

@@ -10,8 +10,6 @@ const handleEvent = (form, event) => {
     let field = event.detail.field
     let value = event.detail.value
 
-    window[field] = value.current
-
     console.log('Field:', field, 'Value:', value)
 
     if (field === 'useAccentColors') {
@@ -51,6 +49,7 @@ const handleEvent = (form, event) => {
         }
     }
 
+    else if (field === 'subtype') {
         form.lock('', true)
         if (value.current === 'Avatar' && numAvatars > 0) {
             form.message({
@@ -59,6 +58,7 @@ const handleEvent = (form, event) => {
                 height: 200,
                 actions: {
                     OK() {
+                        form.setValue('subtype', value.previous)
                         form.unlock()
                         form.message()
                     }
@@ -170,6 +170,7 @@ const handleEvent = (form, event) => {
                         form.message()
                     },
                     No() {
+                        form.setValue('subtype', value.previous)
                         form.unlock()
                         form.message()
                     }
