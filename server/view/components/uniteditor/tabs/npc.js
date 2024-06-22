@@ -12,6 +12,12 @@ let config = {
 
 let form = new w2form(config)
 
+form.updateGlobals = () => {
+    console.log('Updating globals')
+}
+
+form.updateGlobals()
+
 form.on('change', function(event) {
     handleEvent(event, form)
 })
