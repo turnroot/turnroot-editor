@@ -56,7 +56,7 @@ app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
 
-console.log(dbInit())
+dbInit()
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
