@@ -14,7 +14,7 @@ import {createSubscription, cancelSubscription, getSubscription, stripe} from '.
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './functions/db.js'
+import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, dbInit } from './functions/db.js'
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
@@ -55,6 +55,10 @@ app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUniniti
 app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
+
+dbInit().catch((err) => {
+    console.error(err)
+})
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(

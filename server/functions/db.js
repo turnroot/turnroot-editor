@@ -11,6 +11,8 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME
 })
 
+const dbInit = () => {
+
 if (process.env.local === 'false') {
 db.connect((err) => {
     if (err) {
@@ -65,6 +67,7 @@ db.query(sql, [process.env.DB_NAME], (err, result) => {
         })
     }
 })}
+}
 
 const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
 const length = 18
@@ -198,4 +201,4 @@ const getUserUserId = (userId, thisUser) => {
     })
 }
 
-export {createUser, getUser, getUserUserId, getUserByEmail, loginUser, db}
+export {createUser, getUser, getUserUserId, getUserByEmail, loginUser, db, dbInit}
