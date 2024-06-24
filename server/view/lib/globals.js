@@ -95,7 +95,7 @@ const updateFormGlobals = () => {
         if (w2ui[formName]) {
             w2ui[formName].updateGlobals()
         } else {
-            console.log(`Form ${formName} not found`)
+            window.turnrootEditorLogs.push(`${new Date()}||error||Form ${formName} not found`)
         }
     })
 }

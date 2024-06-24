@@ -7,14 +7,13 @@ import unitEditorNPCFields from '../tabs/npc.js'
 import unitEditorBehaviorContainer from '../tabs/behavior.js'
 
 const handleBottom = (event, toolbar) => {
-    console.log(event.detail)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Unit editor bottom toolbar item clicked: ${event.detail.item.id}`)
     let unitEditor = w2ui['UnitEditor']
     if (event.detail.item.id === 'unit-editor-bottom-toolbar-basic'){
         unitEditor.html('main', unitEditorBasicFields)
     }
     else if (event.detail.item.id === 'unit-editor-bottom-toolbar-subtype'){
         let subtype = w2ui['unit-editor-basic-fields'].record.subtype
-        console.log('Subtype:', subtype)
         if (subtype === 'Friend'){
             unitEditor.html('main', uniteditorFriendFields)
         } else if (subtype === 'Avatar'){

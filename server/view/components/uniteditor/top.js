@@ -30,7 +30,7 @@ let toolbar = new w2toolbar({
 
 toolbar.on('click', function (event) {
     event.done(() => {
-        console.log(event)
+        window.turnrootEditorLogs.push(`${new Date()}||info||Unit toolbar button clicked: ${JSON.stringify(event.target)}`)
     })
 
 })

@@ -26,9 +26,17 @@
             <p>This page needs JavaScript to run. Please turn on JavaScript and refresh the page.</p>
         </div>
     </noscript>
-
+    <script>
+        let logs = []
+        window.turnrootEditorLogs = logs
+        console.log = function (message) {
+            window.turnrootEditorLogs.push(`${new Date()}||info||${message}`)
+        }
+        console.error = function (message) {
+            window.turnrootEditorLogs.push(`${new Date()}||error||${message}`)
+        }
+    </script>
     <script type="module">
-
     import './bundle.js'
 
     let config = {
@@ -49,12 +57,14 @@
     let topmenu = EditorWindowTopMenu
     let statusbar = EditorWindowStatusBar
     let mainwindow = EditorWindow
+    
 
     window.EditorWindowSidebar = EditorWindowSidebar
     window.MainEditorWindow = layout
     window.EditorWindow = mainwindow
     window.EditorWindowTopMenu = topmenu
     window.EditorWindowStatusBar = statusbar
+
 
     layout.render('#main')
 

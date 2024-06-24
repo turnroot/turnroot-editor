@@ -10,4 +10,6 @@ const format = () => {
 
 format()
 
+window.turnrootEditorLogs.push(`${new Date()}||info||Global weapon types loaded`)
+
 export default globalWeaponTypes

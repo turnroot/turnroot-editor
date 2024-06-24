@@ -41,6 +41,7 @@ onFlat(event) {
 
 sidebar.on('click', function(event) {
     if (event.object.disabled) return
+    window.turnrootEditorLogs.push(`${new Date()}||info||Sidebar button clicked: ${JSON.stringify(event.target)}`)
     if (event.target === 'sidebar-editors-unit-editor') {
         let layout = w2ui.EditorWindowLayout
         layout.html('main', UnitEditor).removed()

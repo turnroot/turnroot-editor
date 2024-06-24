@@ -22,9 +22,8 @@ const hexToRGB = (hex) => {
 const removeColor = (event) => {
     event.preventDefault()
     let color = event.target.style.backgroundColor
-    console.log(color, eyeColors)
     eyeColors = eyeColors.filter(c => c !== color)
-    console.log('Removed color:', color)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Removed eye color: ${color}`)
     let eyeColorsHtml = `<div id = "unit-editor-avatar-eye-colors">`
     for (let color of eyeColors) {
         eyeColorsHtml += `<div class="hidden-until-hover-wrapper" style="background-color:${color};width:2rem;height:2rem;display:inline-block;margin:0.25rem;border-radius:.25rem;" oncontextmenu="setDefaultEyeColor(event)" onclick="unitEditorAvatarRemoveEyeColor(event)"></div>`
@@ -49,7 +48,7 @@ window.unitEditorAvatarRemoveEyeColor = removeColor
 const addEyeColor = (e) => {
     let color = hexToRGB(e.target.previousElementSibling.value)
     eyeColors.push(color)
-    console.log('Added color:', color)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Added eye color: ${color}`)
     let eyeColorsHtml = `<div id = "unit-editor-avatar-eye-colors">`
     for (let color of eyeColors) {
         eyeColorsHtml += `<div id="unit-editor-avatar-eye-colors" class="hidden-until-hover-wrapper" style="background-color:${color};width:2rem;height:2rem;display:inline-block;margin:0.25rem;border-radius:.25rem;" oncontextmenu="setDefaultEyeColor(event)" onclick="unitEditorAvatarRemoveEyeColor(event)"></div>`

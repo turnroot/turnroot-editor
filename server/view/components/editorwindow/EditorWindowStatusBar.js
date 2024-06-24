@@ -22,6 +22,7 @@ let toolbar = new w2toolbar({
 
 toolbar.on('click', function (event) {
     event.done(() => {
+        window.turnrootEditorLogs.push(`${new Date()}||info||Status bar button clicked: ${JSON.stringify(event.target)}`)
         if (event.target === 'status-bar-report-issue') {
             window.open('https://community.turnroot.com/c/turnroot-editor/editor-support/6', '_blank')
         }

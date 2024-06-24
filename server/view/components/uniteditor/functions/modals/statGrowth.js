@@ -79,12 +79,12 @@ const statGrowthPopup = (stats) => {
                 text: 'Save',
                 class: 'w2ui-btn',
                 onClick(event) {
-                    console.log('changed', stats)
+                    window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates changed`)
                     w2popup.close()
                 }
             },
             Cancel() {
-                console.log('unchanged')
+                window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates unchanged`)
                 stats = unchanged
                 w2popup.close()
             }
@@ -96,7 +96,7 @@ const statGrowthPopup = (stats) => {
         popup.style.minHeight = '400px'
         popup.style.top = '20vh'
         popup.style.left = '25vw'
-        console.log('popup ready', stats)
+        window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates modal opened`)
         document.getElementById('test-growth-btn').addEventListener('click', () => {
             let levelUpTable = testGrowth(stats, currentLevel)
             document.getElementById('level-up-table').innerHTML = `

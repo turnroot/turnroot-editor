@@ -10,7 +10,7 @@ const handleEvent = (form, event) => {
     let field = event.detail.field
     let value = event.detail.value
 
-    console.log('Field:', field, 'Value:', value)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Unit field ${field} requested change to ${value.current}`)
 
     if (field === 'useAccentColors') {
         if (value.current === true) {

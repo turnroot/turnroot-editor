@@ -8,7 +8,6 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
-import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
 import path from 'path'
@@ -17,6 +16,7 @@ import { fileURLToPath } from 'url'
 import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbInit } from './functions/db.js'
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
+
 
 const app = express()
 app.use(express.urlencoded({ extended: true }))
@@ -92,6 +92,10 @@ app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 
 const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'view')
 
+app.get('/logs', (req, res) => {
+    res.send(errors)
+})
+
 app.use('/components', express.static(path.join(__dirname, 'components')))
 app.use('/functions', express.static(path.join(__dirname, 'functions')))
 app.use('/style', express.static(path.join(__dirname, 'style')))
@@ -102,6 +106,7 @@ function ensureAuthenticated(req, res, next) {
     if (process.env.LOCAL === 'true'){
         req.user = {}
         req.user.userId = 'local'
+        if (process.env.ENV !== 'dev'){
         establishConnection(req, res).catch((err) => {
             console.error(err)
         })
@@ -110,7 +115,9 @@ function ensureAuthenticated(req, res, next) {
     if (req.isAuthenticated()) {
         return next()
     }
-    res.sendFile(path.join(__dirname, './login.html'))
+    res.sendFile(path.join(__dirname, './login.html'))} else {
+        res.sendFile(path.join(__dirname, './preview.html'))
+    }
 }
 
 app.get('/', ensureAuthenticated, (req, res) => {

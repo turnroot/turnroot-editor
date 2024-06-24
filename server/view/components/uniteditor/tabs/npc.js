@@ -13,7 +13,7 @@ let config = {
 let form = new w2form(config)
 
 form.updateGlobals = () => {
-    console.log('Updating globals')
+    window.turnrootEditorLogs.push(`${new Date()}||info||Updating NPC form globals`)
 }
 
 form.updateGlobals()
