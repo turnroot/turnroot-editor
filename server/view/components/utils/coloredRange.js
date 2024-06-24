@@ -18,7 +18,6 @@ class CustomRangeSlider {
     }
 
     setValue(value) {
-        console.log(value, typeof value)
         this.value = parseInt(value)
         this.thumb.style.right = `${100 - this.value}%`
         let scaledPercent = Math.ceil((this.value * 1.1) - 10 - 1)

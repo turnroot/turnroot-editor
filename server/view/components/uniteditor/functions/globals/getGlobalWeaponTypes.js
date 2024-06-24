@@ -1,5 +1,4 @@
 let globalWeaponTypes = window.globalWeaponsTypes.types
-console.log(globalWeaponTypes)
 
 const format = () => {
     globalWeaponTypes.forEach(weapon => {

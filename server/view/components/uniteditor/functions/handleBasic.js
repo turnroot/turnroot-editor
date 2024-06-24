@@ -28,6 +28,7 @@ const handleEvent = (form, event) => {
             if (isUnique.el.checked === false){
                 form.setValue('isUnique', true)
                 w2alert('A recruitable unit must be unique. The "isUnique" checkbox has been checked.')
+                form.show('uniqueBaseStatsRandomizer')
             }
         }
     }
@@ -37,6 +38,14 @@ const handleEvent = (form, event) => {
         if (canRecruit.el.checked === true){
             form.setValue('canRecruit', false)
             w2alert('A recruitable unit must be unique. The "canRecruit" checkbox has been unchecked.')
+            form.hide('uniqueBaseStatsRandomizer')
+        }
+    }
+
+    else if (field === 'isUnique'){
+        if (value.current === true){
+        form.show('uniqueBaseStatsRandomizer')} else {
+        form.hide('uniqueBaseStatsRandomizer')
         }
     }
 

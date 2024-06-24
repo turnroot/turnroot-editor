@@ -166,7 +166,6 @@ toolbar.on('click', function (event) {
 
 let savedTheme = localStorage.getItem('theme')
 if (savedTheme) {
-    console.log(toolbar.get('settings:themes').items)
     toolbar.get('settings:themes').items.forEach(item => {
         if (item.id === savedTheme) {
             main.classList.remove('ocean_waves', 'turnroot', 'charcoal', 'charcoal_blue', 'charcoal_green', 'chocolate', 'midnight_spark', 'forest_mist', 'snowdrift', 'tokyo_night', 'pink_dream', 'sunset_glow', 'pine_coast')

@@ -9,6 +9,7 @@ import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import bodyParser from 'body-parser'
+import cookieParser from 'cookie-parser'
 import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -19,6 +20,7 @@ import { establishConnection, sendToFromDatabase } from './functions/hit_schemas
 
 const app = express()
 app.use(bodyParser.raw({type: 'application/json'}))
+app.use(cookieParser())
 dotenv.config()
 
 app.use(cors(
@@ -49,7 +51,7 @@ app.use(helmet(
 ))
 }
 
-app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure: process.env.LOCAL === 'false' ? true : false }}))
+app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
 
 app.use(csrf({
     key: process.env.CSRF_KEY,
@@ -79,7 +81,7 @@ app.use(passport.session())
 if (process.env.LOCAL === 'false') {
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000,
-  max: 300 
+  max: 100 
 })
 app.use(limiter)
 }
@@ -158,6 +160,7 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/data', async (req, res) => {
+    req.body.queue = window.editsQueue.queue
     if (process.env.LOCAL === 'false'){
     if (!req.user) {
         res.status(401).send('Unauthorized')

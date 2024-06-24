@@ -5,7 +5,7 @@ div.style.height = '100%'
 div.style.padding = '1rem'
 
 let innerHtml = `<div><h2>Specials</h2>
-Specials are a way to add unique behaviors to units. They're mainly for special behaviors for bosses, or for levels with unique mechanics. 99% of the time, you should leave all of these unchecked.
+Specials are a way to add unique behaviors to units.
 `
 div.innerHTML = innerHtml
 let rules = document.createElement('div')

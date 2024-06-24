@@ -8,6 +8,8 @@ import globalStats from '../functions/globals/getGlobalStats.js'
 
 import statGrowthPopup from '../functions/modals/statGrowth.js'
 
+import baseStatRandomizerPopup from '../functions/modals/randomizeBaseStats.js'
+
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
@@ -121,6 +123,7 @@ let config = {
                 column: 0,
             }
         },
+        {type: 'html', field: 'uniqueBaseStatsRandomizer', hidden:true, html: {html: '<button class="w2ui-btn">Randomize base stats</button>', column: 0, class: 'no-label'}},
         {
             field: 'canRecruit',
             type: 'checkbox',
@@ -195,12 +198,19 @@ globalStats.forEach((stat, index) => {
 })
 
 const handleStatGrowthPopup = (event) => {
-    console.log('clicked')
     let stats = globalStats.reduce((obj, stat) => {
         obj[stat.field] = 0
         return obj
     }, {})
     statGrowthPopup(stats)
+}
+
+const handleBaseStatRandomizerPopup = (event) => {
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = 0
+        return obj
+    }, {})
+    baseStatRandomizerPopup(stats) 
 }
 
 window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
