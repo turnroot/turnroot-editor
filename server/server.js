@@ -31,8 +31,7 @@ app.use(cors(
 ))
 
 if (process.env.LOCAL === 'false') {
-app.use(helmet(
-    {
+    app.use(helmet({
         contentSecurityPolicy: {
             directives: {
                 defaultSrc: ["'self'"],
@@ -45,10 +44,10 @@ app.use(helmet(
                 baseUri: ["'self'"],
                 formAction: ["'self'"],
                 upgradeInsecureRequests: [],
+                scriptSrcAttr: ["'unsafe-inline'"]
             },
         },
-    }
-))
+    }))
 }
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
