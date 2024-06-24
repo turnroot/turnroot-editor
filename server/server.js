@@ -19,7 +19,8 @@ import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbIn
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
 const app = express()
-app.use(bodyParser.raw({type: 'application/json'}))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(cookieParser())
 dotenv.config()
 
@@ -89,9 +90,6 @@ app.use(limiter)
 
 app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
 const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'view')
 
 app.use('/components', express.static(path.join(__dirname, 'components')))
@@ -100,11 +98,35 @@ app.use('/style', express.static(path.join(__dirname, 'style')))
 app.use('/lib', express.static(path.join(__dirname, 'lib')))
 app.use('/bundle.js', express.static(path.join(__dirname, 'bundle.js')))
 
-app.get('/', (req, res) => {
+function ensureAuthenticated(req, res, next) {
+    if (process.env.LOCAL === 'true'){
+        req.user = {}
+        req.user.userId = 'local'
+        establishConnection(req, res).catch((err) => {
+            console.error(err)
+        })
+        return next()
+    }
+    if (req.isAuthenticated()) {
+        return next()
+    }
+    res.sendFile(path.join(__dirname, './login.html'))
+}
+
+app.get('/', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))
 })
 
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, './login.html'))
+})
+
+app.get('/register', (req, res) => {
+    res.redirect('/login?register=true')
+})
+
 app.post('/login', function(req, res, next) {
+    console.log(req.body)
     if (process.env.LOCAL === 'true'){
         establishConnection(req, res).catch((err) => {
             console.error(err)
@@ -115,21 +137,25 @@ app.post('/login', function(req, res, next) {
             return next(err) 
         }
         if (!user) { 
-            return res.status(418).send('User not found')
+            return res.redirect(`/login?error=${encodeURIComponent('User not found')}`)
         }
         req.logIn(user, async function(err) {
             if (err) { 
                 return next(err)
             }
-            let loginresult = await loginUser(req, res).catch((err) => {
+            try{
+            let loginresult = await loginUser(req.body.username, req.body.password).catch((err) => {
                 console.error(err)
             })
             if (!loginresult) {
-                return res.status(500).send('Login failure')
+                return res.redirect(`/login?error=${encodeURIComponent('Login failed')}`)
             }
             establishConnection(req, res).catch((err) => {
                 console.error(err)
             })
+            return res.redirect('/')} catch (err) {
+                console.error(err)
+            }
         })
     })(req, res, next)
 })
@@ -138,24 +164,26 @@ app.post('/register', async (req, res) => {
     const user = req.body
     const newUser = await createUser(user)
     if (!newUser) {
-        res.status(400).send('User creation failed')
-        return
+        return res.redirect(`/login?error=${encodeURIComponent('Registration failed')}`)
     }
 
     req.logIn(newUser, async function(err) {
         if (err) {
             console.error(err)
-            return res.status(500).send('Login after registration failed')
+            return res.redirect(`/login?error=${encodeURIComponent('Login after registration failed')}`)
         }
 
         try {
-            await loginUser(req, res)
+            await loginUser(req.body.username, req.body.password).catch((err) => {
+                console.error(err)
+            })
             establishConnection(req, res).catch((err) => {
                 console.error(err)
             })
+            return res.redirect('/')
         } catch (err) {
             console.error(err)
-            return res.status(500).send('Login after registration failed')
+            return res.redirect(`/login?error=${encodeURIComponent('Login after registration failed')}`)
         }
     })
 })
@@ -185,7 +213,7 @@ app.post('/data', async (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.logout()
-    res.status(200).send('Logged out')
+    res.redirect('/login')
 })
 
 app.get('/user/:username', async (req, res) => {

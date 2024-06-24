@@ -1,4 +1,5 @@
 import dotenv from 'dotenv'
+import fetch from 'node-fetch'
 dotenv.config()
 
 const establishConnection = async (req, res) => {
@@ -7,9 +8,11 @@ const establishConnection = async (req, res) => {
             return res.status(401).send('Unauthorized')
         }
     } else {
+        console.log(req.user)
+        req.user = {}
         req.user.userId = 'local'
     }
-    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL : 'http://localhost:9194/'
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL : 'http://127.0.0.1:9194/'
     let body = {
         userId: req.user.userId,
         key: process.env.SCHEMAS_SERVER_KEY,
@@ -21,6 +24,7 @@ const establishConnection = async (req, res) => {
         },
         body: JSON.stringify(body)
     }
+    console.log(url, options)
     let response = await fetch(url, options).catch(err => console.error(err))
     try {
     let data = await response.json()

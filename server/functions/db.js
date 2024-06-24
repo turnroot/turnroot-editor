@@ -131,7 +131,16 @@ const generateDbName = async () => {
     return "_trdb_" + uniqueString
 }
 
-const createUser = async (username, email, password) => {
+const createUser = async (user) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
+    let username = user.username
+    let email = user.email
+    let password = user.password
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, async (err, hash) => {
             if (err) reject(err)
@@ -152,6 +161,12 @@ const createUser = async (username, email, password) => {
 }
 
 const getUser = (username) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users WHERE username = ?'
 
@@ -168,6 +183,12 @@ const getUser = (username) => {
 }
 
 const getUserByEmail = (email) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users WHERE email = ?'
 
@@ -183,11 +204,13 @@ const getUserByEmail = (email) => {
     })
 }
 
-const loginUser = (req, res) => {
-    const {
-        username,
-        password
-    } = req.body
+const loginUser = (username, password) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         let sql = 'SELECT * FROM Users WHERE username = ?'
         let value = username
@@ -195,7 +218,9 @@ const loginUser = (req, res) => {
         db.query(sql, [value], (err, result) => {
             if (err) reject(err)
 
-            if (result.length === 0) {
+            if (result === undefined) {
+                resolve(null)
+            } else if (result && result.length === 0){
                 resolve(null)
             } else {
                 bcrypt.compare(password, result[0].password, (err, res) => {
@@ -217,6 +242,12 @@ const loginUser = (req, res) => {
 }
 
 const getUserUserId = (userId, thisUser) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         const sql = `SELECT * FROM Users WHERE userId = ?`
         db.query(sql, [userId], (err, result) => {
