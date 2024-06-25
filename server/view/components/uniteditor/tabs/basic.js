@@ -12,7 +12,7 @@ import baseStatRandomizerPopup from '../functions/modals/randomizeBaseStats.js'
 
 import balanceMeter from '../../utils/balanceMeter.js'
 
-let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>If the needle is no longer visible, your base stats are probably too small or too large to be fun and fair. Please see the docs for details.<br/><br/>Mov is not included in the total</small>')
+let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>If the needle is visible, your base stats probably are fun and fair. Please see the docs for details.<br/><br/>Mov is not included in the total</small>')
 
 let config = {
     name: 'unit-editor-basic-fields',
