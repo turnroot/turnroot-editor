@@ -5,6 +5,7 @@ import EditorWindowTopMenu from './components/editorwindow/EditorWindowTopMenu.j
 import EditorWindowStatusBar from './components/editorwindow/EditorWindowStatusBar.js'
 import EditorWindow from './components/editorwindow/EditorWindow.js'
 import DefaultStart from './components/editorwindow/default.js'
+import { initQueue, sendQueue, updateQueue } from './functions/edits/queue.js'
 
 window.w2layout = w2layout
 window.w2grid = w2grid
@@ -14,3 +15,6 @@ window.EditorWindowTopMenu = EditorWindowTopMenu
 window.EditorWindowStatusBar = EditorWindowStatusBar
 window.EditorWindow = EditorWindow
 window.DefaultStart = DefaultStart
+initQueue()
+window.updateQueue = updateQueue
+window.sendQueue = sendQueue

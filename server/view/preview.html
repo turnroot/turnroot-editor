@@ -72,6 +72,19 @@
     layout.html('left', sidebar)
     layout.html('top', topmenu)
     layout.html('bottom', statusbar)
+
+
+    setInterval(function() {
+        window.sendQueue()
+    }, 120000)
+
+    document.addEventListener('keydown', function(event) {
+        event.preventDefault()
+        if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+            window.sendQueue()
+        }
+    })
+    
 </script>
 
 </body>

@@ -3,6 +3,7 @@ import fetch from 'node-fetch'
 dotenv.config()
 
 const establishConnection = async (req, res) => {
+    console.log('establishing connection')
     if (process.env.LOCAL === 'false'){
         if (!req.user || !req.user.userId){
             return res.status(401).send('Unauthorized')
@@ -28,6 +29,7 @@ const establishConnection = async (req, res) => {
     let response = await fetch(url, options).catch(err => console.error(err))
     try {
     let data = await response.json()
+    console.log(data)
     return res.send(data)} catch (err) {
         return res.status(500).send('Error: invalid response from schemas server' + err)
     }

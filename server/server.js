@@ -17,7 +17,6 @@ import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbIn
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
-
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
@@ -50,6 +49,9 @@ if (process.env.LOCAL === 'false') {
         },
     }))
 }
+
+const loggedInUsers = []
+const workQueues = {}
 
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
 
@@ -92,10 +94,6 @@ app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 
 const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'view')
 
-app.get('/logs', (req, res) => {
-    res.send(errors)
-})
-
 app.use('/components', express.static(path.join(__dirname, 'components')))
 app.use('/functions', express.static(path.join(__dirname, 'functions')))
 app.use('/style', express.static(path.join(__dirname, 'style')))
@@ -103,25 +101,30 @@ app.use('/lib', express.static(path.join(__dirname, 'lib')))
 app.use('/bundle.js', express.static(path.join(__dirname, 'bundle.js')))
 
 function ensureAuthenticated(req, res, next) {
+    console.log("Checking authentication")
     if (process.env.LOCAL === 'true'){
         req.user = {}
         req.user.userId = 'local'
-        if (process.env.ENV !== 'dev'){
+
         establishConnection(req, res).catch((err) => {
             console.error(err)
         })
-        return next()
+
+        if (req.isAuthenticated()) {
+            return next()
     }
-    if (req.isAuthenticated()) {
-        return next()
-    }
-    res.sendFile(path.join(__dirname, './login.html'))} else {
-        res.sendFile(path.join(__dirname, './preview.html'))
+    res.sendFile(path.join(__dirname, './preview.html'))} else {
+        res.sendFile(path.join(__dirname, './login.html'))
     }
 }
 
 app.get('/', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))
+})
+
+app.post('/queue', ensureAuthenticated, (req, res) => {
+    workQueues[req.user.userId] = req.body.actions
+    res.send({status: 'success'})
 })
 
 app.get('/login', (req, res) => {
@@ -160,6 +163,7 @@ app.post('/login', function(req, res, next) {
             establishConnection(req, res).catch((err) => {
                 console.error(err)
             })
+            loggedInUsers.push(req.user)
             return res.redirect('/')} catch (err) {
                 console.error(err)
             }
@@ -187,6 +191,7 @@ app.post('/register', async (req, res) => {
             establishConnection(req, res).catch((err) => {
                 console.error(err)
             })
+            loggedInUsers.push(req.user)
             return res.redirect('/')
         } catch (err) {
             console.error(err)
@@ -196,7 +201,6 @@ app.post('/register', async (req, res) => {
 })
 
 app.post('/data', async (req, res) => {
-    req.body.queue = window.editsQueue.queue
     if (process.env.LOCAL === 'false'){
     if (!req.user) {
         res.status(401).send('Unauthorized')
@@ -219,6 +223,7 @@ app.post('/data', async (req, res) => {
 })
 
 app.get('/logout', (req, res) => {
+    loggedInUsers.splice(loggedInUsers.indexOf(req.user), 1)
     req.logout()
     res.redirect('/login')
 })
