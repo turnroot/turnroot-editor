@@ -122,9 +122,30 @@ app.get('/', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))
 })
 
-app.post('/queue', ensureAuthenticated, (req, res) => {
-    workQueues[req.user.userId] = req.body.actions
-    res.send({status: 'success'})
+app.post('/queue', ensureAuthenticated, async(req, res) => {
+    console.log(req.body)
+    workQueues[req.user.userId] = req.body
+    let thisQueue = workQueues[req.user.userId]
+    console.log(workQueues, thisQueue)
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://127.0.0.1:9194/data' 
+    let body = {
+        userId: req.user.userId,
+        key: process.env.SCHEMAS_SERVER_KEY,
+        actions: thisQueue
+    }
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+    let response = await fetch(url, options).catch(err => console.error(err))
+    if (response && response.status === 200) {
+    res.send({status: 'success'})} else {
+        console.error('Error: invalid response from schemas server')
+        res.send({status: 'failure'})
+    }
 })
 
 app.get('/login', (req, res) => {

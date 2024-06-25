@@ -32,7 +32,7 @@ const sendQueue = async () => {
     window.window.EditorWindowStatusBar.set('status-bar-autosave-status', { icon: autoSavingIcon, text: 'Saving changes' })
     let url = '/queue'
     let body = {
-        actions: window.editsQueue.queue
+        actions: window.editsQueue.queue || []
     }
     let options = {
         method: 'POST',
@@ -52,11 +52,13 @@ const sendQueue = async () => {
             window.editsQueue.queue = []
             currentTime = Date.now()
             let timeDiff = currentTime - startTime
-            if (timeDiff < 500) {
+            if (timeDiff < 300) {
                 setTimeout(() => {
                     window.window.EditorWindowStatusBar.set('status-bar-autosave-status', { icon: autosavedIcon, text: 'Changes saved' })
-                }, 500 - timeDiff)
+                }, 300 - timeDiff)
             }
+        } else {
+            console.error('Error: invalid response ' + data)
         }
         console.log('Data saved to schema server')
         return data
