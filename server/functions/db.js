@@ -108,7 +108,7 @@ const randomStringUnique = () => {
 
         const checkAndInsertString = () => {
             db.query(sql, [str], (err, result) => {
-                if (err) reject(err)
+                if (err) resolve(err)
 
                 if (result[0][Object.keys(result[0])[0]]) {
                     str = randomString()
@@ -116,7 +116,7 @@ const randomStringUnique = () => {
                 } else {
                     sql = 'INSERT INTO UsedStrings (usedString) VALUES (?)';
                     db.query(sql, [str], (err, result) => {
-                        if (err) reject(err)
+                        if (err) resolve(err)
                         resolve(str)
                     })
                 }
@@ -149,7 +149,7 @@ const createUser = async (user) => {
             const sql = 'INSERT INTO Users (userId, username, email, password) VALUES (?, ?, ?, ?)'
 
             db.query(sql, [userId, username, email, hash], (err, result) => {
-                if (err) reject(err)
+                if (err) resolve(err)
                 resolve({
                     userId,
                     username,
@@ -216,7 +216,7 @@ const loginUser = (username, password) => {
         let value = username
 
         db.query(sql, [value], (err, result) => {
-            if (err) reject(err)
+            if (err) resolve(err)
 
             if (result === undefined) {
                 resolve(null)
@@ -224,12 +224,12 @@ const loginUser = (username, password) => {
                 resolve(null)
             } else {
                 bcrypt.compare(password, result[0].password, (err, res) => {
-                    if (err) reject(err)
+                    if (err) resolve(err)
 
                     if (res) {
                         let sql = 'UPDATE Users SET lastLogin = CURRENT_TIMESTAMP WHERE username = ?'
                         db.query(sql, [result[0].username], (err, result) => {
-                            if (err) reject(err)
+                            if (err) resolve(err)
                         })
                         resolve(result[0])
                     } else {

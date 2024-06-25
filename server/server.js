@@ -59,7 +59,7 @@ app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
 
-dbInit()
+try{dbInit()} catch (err) {console.error(err)}
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
@@ -157,39 +157,45 @@ app.get('/register', (req, res) => {
 })
 
 app.post('/login', function(req, res, next) {
-    console.log(req.body)
     if (process.env.LOCAL === 'true'){
         establishConnection(req, res).catch((err) => {
-            console.error(err)
+            return res.redirect(`/login?error=${encodeURIComponent(err)}`)
         })
     }
+    try{
     passport.authenticate('local', function(err, user, info) {
         if (err) { 
-            return next(err) 
+            return res.redirect(`/login?error=${encodeURIComponent(err)}`)
         }
         if (!user) { 
             return res.redirect(`/login?error=${encodeURIComponent('User not found')}`)
         }
         req.logIn(user, async function(err) {
             if (err) { 
-                return next(err)
+                console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
             }
             try{
             let loginresult = await loginUser(req.body.username, req.body.password).catch((err) => {
                 console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
             })
             if (!loginresult) {
                 return res.redirect(`/login?error=${encodeURIComponent('Login failed')}`)
             }
             establishConnection(req, res).catch((err) => {
-                console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
             })
             loggedInUsers.push(req.user)
             return res.redirect('/')} catch (err) {
                 console.error(err)
             }
         })
-    })(req, res, next)
+    
+    })(req, res, next) } catch (err) {
+        console.error(err)
+        return res.redirect(`/login?error=${encodeURIComponent(err)}`)
+    }
 })
 
 app.post('/register', async (req, res) => {
