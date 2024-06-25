@@ -79,8 +79,8 @@
     }, 120000)
 
     document.addEventListener('keydown', function(event) {
-        event.preventDefault()
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {
+            event.preventDefault()
             window.sendQueue()
         }
     })

@@ -20,7 +20,15 @@ const autoSavingIcon = '<div style="margin-top:-.5rem; margin-right:.25rem;"><sv
 
 let startTime, currentTime
 const sendQueue = async () => {
+    let savedTime = window.editsQueue.saved_at
     startTime = Date.now()
+    if (startTime - savedTime < 60000) {
+        window.window.EditorWindowStatusBar.set('status-bar-autosave-status', { icon: autoSavingIcon, text: 'Saving changes' })
+        setTimeout(() => {
+            window.window.EditorWindowStatusBar.set('status-bar-autosave-status', { icon: autosavedIcon, text: 'Changes saved' })
+        }, 500)
+        return
+    }
     window.window.EditorWindowStatusBar.set('status-bar-autosave-status', { icon: autoSavingIcon, text: 'Saving changes' })
     let url = '/queue'
     let body = {
