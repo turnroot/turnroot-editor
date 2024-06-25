@@ -44,6 +44,9 @@ const sendQueue = async () => {
     let response = await fetch(url, options).catch(err => console.error(err))
     try {
         let data = await response.json()
+        if (!data) {
+            console.error('Error: invalid response, not JSON')
+        }
         if (data.status === 'success') {
             window.editsQueue.saved_at = Date.now()
             window.editsQueue.queue = []
@@ -55,11 +58,11 @@ const sendQueue = async () => {
                 }, 500 - timeDiff)
             }
         }
+        console.log('Data saved to schema server')
         return data
     } catch (err) {
         return 'Error: invalid response ' + err
     }
-    
 }
 
 export { initQueue, updateQueue, sendQueue}

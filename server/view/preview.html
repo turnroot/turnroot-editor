@@ -14,10 +14,12 @@
 
     <div id="main" class="turnroot" style="width: 100%;height:100vh;min-width:1100px;"></div>
     <div id="css-support" style="display: none">
-        <p>This browser is not supported. Please upgrade to a modern browser that can support the :has CSS selector. See: <a style = 'text-decoration: none; color: var(--accent); font-weight:bold;' href = "https://caniuse.com/?search=%3Ahas()">Can I Use</a></p>
+        <p>This browser is not supported. Please upgrade to a modern browser that can support the :has CSS selector.
+            See: <a style='text-decoration: none; color: var(--accent); font-weight:bold;'
+                href="https://caniuse.com/?search=%3Ahas()">Can I Use</a></p>
     </div>
 
-    <div id = "mobile-support" style="display: none">
+    <div id="mobile-support" style="display: none">
         <p>Turnroot Editor does not work well on phones- you'll need to use a desktop computer, laptop, or tablet.</p>
     </div>
 
@@ -37,7 +39,7 @@
         }
     </script>
     <script type="module">
-    import './bundle.js'
+        import './bundle.js'
 
     let config = {
         layout: {
@@ -58,13 +60,11 @@
     let statusbar = EditorWindowStatusBar
     let mainwindow = EditorWindow
     
-
     window.EditorWindowSidebar = EditorWindowSidebar
     window.MainEditorWindow = layout
     window.EditorWindow = mainwindow
     window.EditorWindowTopMenu = topmenu
     window.EditorWindowStatusBar = statusbar
-
 
     layout.render('#main')
 
@@ -72,7 +72,6 @@
     layout.html('left', sidebar)
     layout.html('top', topmenu)
     layout.html('bottom', statusbar)
-
 
     setInterval(function() {
         window.sendQueue()
@@ -82,7 +81,12 @@
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {
             event.preventDefault()
             window.sendQueue()
+            console.log('Save scheduled')
+        } else if ((event.ctrlKey || event.metaKey) && event.key === 'r') {
+            event.preventDefault()
+            w2alert('Refreshing is disabled to prevent data loss. The Turnroot Editor refreshes automatically, you don\'t need to refresh the page.', 'Refresh Disabled')
         }
+        
     })
     
 </script>

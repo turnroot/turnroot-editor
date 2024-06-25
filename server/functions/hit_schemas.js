@@ -26,12 +26,16 @@ const establishConnection = async (req, res) => {
         body: JSON.stringify(body)
     }
     console.log(url, options)
-    let response = await fetch(url, options).catch(err => console.error(err))
-    try {
+    let response = await fetch(url, options).catch(err => {
+        console.error(err)
+        return res.status(500).send('Error: invalid response from schemas server' )
+    })
     let data = await response.json()
     console.log(data)
-    return res.send(data)} catch (err) {
-        return res.status(500).send('Error: invalid response from schemas server' + err)
+    if (data){
+        return data
+    } else {
+        return res.status(500).send('Error: invalid response from schemas server')
     }
 }
 
