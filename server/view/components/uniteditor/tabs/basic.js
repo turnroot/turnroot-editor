@@ -10,6 +10,10 @@ import statGrowthPopup from '../functions/modals/statGrowth.js'
 
 import baseStatRandomizerPopup from '../functions/modals/randomizeBaseStats.js'
 
+import balanceMeter from '../../utils/balanceMeter.js'
+
+let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>If the needle is no longer visible, your base stats are probably too small or too large to be fun and fair. Please see the docs for details.<br/><br/>Mov is not included in the total</small>')
+
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
@@ -182,11 +186,13 @@ let config = {
 }
 
 globalStats.forEach((stat, index) => {
-    config.fields.push({
+    if (stat.field === 'hp') {
+        config.fields.push({
             field: stat.field,
             type: 'int',
             options: {
-                min: 0
+                min: 1,
+                value: 20
             },
             html: {
                 label: stat.html.label,
@@ -194,7 +200,33 @@ globalStats.forEach((stat, index) => {
                 column: 1,
             }
         }),
-        config.record[stat.field] = 0
+        config.record[stat.field] = 20
+    } else {
+    config.fields.push({
+            field: stat.field,
+            type: 'int',
+            options: {
+                min: 0,
+                value: 5
+            },
+            html: {
+                label: stat.html.label,
+                attr: 'style="width:2rem"',
+                column: 1,
+            }
+        }),
+        config.record[stat.field] = 5}
+})
+
+config.fields.push({
+    type: 'html',
+    field: 'base-stats-balance',
+    html: {
+        class: 'no-label',
+        html: baseStatsBalance.innerHTML,
+        column: 1,
+        attr: 'style="width:100%;margin-top:.5rem"'
+    }
 })
 
 const handleStatGrowthPopup = (event) => {

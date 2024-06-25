@@ -4,7 +4,14 @@ import {
 
 import globalStats from './globals/getGlobalStats.js'
 
+let globalStatsArray = []
+globalStats.forEach((stat) => {globalStatsArray.push(stat.field)})
+
 let numAvatars = 0 //get from database
+
+const mapRange = function (value, in_min, in_max, out_min, out_max) {
+    return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
+}
 
 const handleEvent = (form, event) => {
     let field = event.detail.field
@@ -20,6 +27,22 @@ const handleEvent = (form, event) => {
             form.hide('unit-accent-color-1')
             form.hide('unit-accent-color-2')
         }
+    }
+
+    else if (globalStatsArray.includes(field) && field !== 'mov'){
+        let meter = w2ui['unit-editor-basic-fields'].get('base-stats-balance').el
+        let statFields = globalStatsArray
+        let statValueTotal = 0
+        statFields.forEach(stat => {
+            statValueTotal += form.getValue(stat)
+        })
+        let value = statValueTotal
+        let min = globalStatsArray.length * 5.8
+        let max = globalStatsArray.length * 9.1
+        let newValue = mapRange(value, min, max, 0, 180) - 90
+
+        meter.querySelector('.balanceMeterNeedle').style.transform = `rotate(${newValue}deg)`
+        
     }
 
     else if (field === 'canRecruit'){
