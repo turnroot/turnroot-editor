@@ -141,7 +141,7 @@ window.gameEditorGameDetailsFinishInitialAndNext = () => {
     nodes.forEach(element => {
         sidebar.enable(element.id)
     })
-    w2alert('You can now access the other editors in the left sidebar, as well as more advanced game settings. If you feel overwhelmed, please see docs.turnroot.com/your-first-hour for a guided tour on what to do next and where everything is. Check out the docs or the forums for additional resources.<br/><br/> Happy turnrooting!', '<h3>Game details saved</h3>')
+    w2alert('<p>You can now access the other editors in the left sidebar, as well as more advanced game settings. Please see <a href = "https://docs.turnroot.com/getting-started/your-first-hour-in-the-turnroot-editor" style = "display:inline;color:var(--accent)">your first hour</a> for a guided tour on what to do next and where everything is.</p> <div style = "height:2rem;"/>', '<h3>Game details saved</h3>')
 }
 
 let form = new w2form(config)

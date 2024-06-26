@@ -12,7 +12,26 @@ import baseStatRandomizerPopup from '../functions/modals/randomizeBaseStats.js'
 
 import balanceMeter from '../../utils/balanceMeter.js'
 
-let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>If the needle is visible, your base stats probably are fun and fair. Please see the docs for details.<br/><br/>Mov is not included in the total</small>')
+let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>The left side is a bit lower than the avatar\'s base stats in <em>Fire Emblem: Awakening</em>, and the right side is a bit higher than the avatar\'s base stats in <em>Fire Emblem: Three Houses</em>. Most units should probably fall somewhere in between.<br/><br/>Mov is not included in the total</small>')
+
+const handleStatGrowthPopup = (event) => {
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = 0
+        return obj
+    }, {})
+    statGrowthPopup(stats)
+}
+
+const handleBaseStatRandomizerPopup = (event) => {
+    let stats = globalStats.reduce((obj, stat) => {
+        obj[stat.field] = form.record[stat.field]
+        return obj
+    }, {})
+    baseStatRandomizerPopup(stats) 
+}
+
+window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
+
 
 let config = {
     name: 'unit-editor-basic-fields',
@@ -65,7 +84,7 @@ let config = {
             type: 'radio',
             html: {
                 label: 'Subtype',
-                attr: '',
+                attr: 'style="max-width:200px;"',
                 column: 0,
             },
             options: {
@@ -127,7 +146,6 @@ let config = {
                 column: 0,
             }
         },
-        {type: 'html', field: 'uniqueBaseStatsRandomizer', hidden:true, html: {html: '<button class="w2ui-btn">Randomize base stats</button>', column: 0, class: 'no-label'}},
         {
             field: 'canRecruit',
             type: 'checkbox',
@@ -229,24 +247,6 @@ config.fields.push({
     }
 })
 
-const handleStatGrowthPopup = (event) => {
-    let stats = globalStats.reduce((obj, stat) => {
-        obj[stat.field] = 0
-        return obj
-    }, {})
-    statGrowthPopup(stats)
-}
-
-const handleBaseStatRandomizerPopup = (event) => {
-    let stats = globalStats.reduce((obj, stat) => {
-        obj[stat.field] = 0
-        return obj
-    }, {})
-    baseStatRandomizerPopup(stats) 
-}
-
-window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
-
 config.fields.push({
     type: 'html',
     field: 'growth-rates',
@@ -258,6 +258,19 @@ config.fields.push({
         attr: 'style="width:100%;margin-top:.5rem"'
     }
 })
+
+config.fields.push({
+    type: 'html',
+    field: 'randomize-base-stats',
+    class: 'no-label',
+    hidden: true,
+    html: {
+        class: 'no-label',
+        html: "<button id='randomize-base-stats-button' onclick='handleBaseStatRandomizerPopup()' class='w2ui-btn'>Randomize Base Stats</button><br/><small>Non-unique units can have randomized base stats.</small>",
+        column: 1,
+        attr: 'style="width:100%;margin-top:.5rem"'
+    }
+}),
 
 config.fields.push({
     type: 'textarea',

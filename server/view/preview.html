@@ -39,7 +39,29 @@
         }
     </script>
     <script type="module">
-        import './bundle.js'
+        let body = document.querySelector('body')
+        let loading = document.createElement('div')
+        loading.style.position = 'fixed'
+        loading.id = 'loading'
+        loading.style.top = '0'
+        loading.style.left = '0'
+        loading.style.width = '100%'
+        loading.style.height = '100%'
+        loading.style.backgroundColor = 'rgba(0,0,0,.5)'
+        loading.style.display = 'flex'
+        loading.style.justifyContent = 'center'
+        loading.style.alignItems = 'center'
+
+        let tip = document.createElement('div')
+        tip.style.backgroundColor = 'white'
+        tip.style.color = 'black'
+        tip.style.padding = '1rem'
+        tip.style.borderRadius = '.5rem'
+        tip.innerHTML = 'Loading...'
+
+        body.appendChild(loading)
+        loading.appendChild(tip)
+        import('./bundle.js').then(() => {
 
     let config = {
         layout: {
@@ -72,10 +94,12 @@
     layout.html('left', sidebar)
     layout.html('top', topmenu)
     layout.html('bottom', statusbar)
+    document.querySelector('#loading').style.display = 'none'
+})
 
     setInterval(function() {
         window.sendQueue()
-    }, 120000)
+    }, 140000)
 
     document.addEventListener('keydown', function(event) {
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {

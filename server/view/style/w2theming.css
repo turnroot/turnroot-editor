@@ -128,11 +128,14 @@
   
   .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand .w2ui-multi-items,.w2ui-field>label,.w2ui-message-buttons,.w2ui-tb-button {
   align-items:center;
-  justify-content:center;
+  justify-content:center
   }
-
-  .w2ui-field > div{
-    justify-content:start;
+  
+  .w2ui-field>div {
+  flex-direction:row;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:start
   }
   
   .w2ui-tb-button .w2ui-tb-icon {
@@ -209,12 +212,6 @@
   background-color:var(--node-background)
   }
   
-  .w2ui-field>div {
-  flex-direction:row;
-  flex-wrap:wrap;
-  gap:10px
-  }
-  
   .w2ui-field>label {
   white-space:nowrap;
   width:max-content!important
@@ -238,7 +235,15 @@
   width:max-content!important
   }
   
-  .w2ui-column-container .w2ui-column:not(:last-child) {
+  .w2ui-column-container:has(.col-2) .w2ui-column {
+  max-width:23rem
+  }
+  
+  .w2ui-box-label:has(input[type=checkbox]) span {
+  width:90%
+  }
+  
+  .w2ui-field:has(input[type=checkbox]) .w2ui-column-container .w2ui-column:not(:last-child) {
   border-right:1px solid var(--window-background-alt)
   }
   
@@ -258,6 +263,7 @@
   
   .w2ui-lock {
   background-color:#000000a0;
+  opacity:1!important;
   z-index:1380
   }
   
@@ -396,7 +402,7 @@
   height:100%
   }
   
-  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div {
+  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div, .w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label {
   width:100%!important
   }
   
@@ -421,6 +427,6 @@
   height:100%
   }
   
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-btn,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
+  .li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border-radius:.25rem
   }
