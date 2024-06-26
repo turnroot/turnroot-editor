@@ -31,6 +31,7 @@ const handleBaseStatRandomizerPopup = (event) => {
 }
 
 window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
+window.handleBaseStatRandomizerPopup = handleBaseStatRandomizerPopup
 
 
 let config = {
@@ -266,7 +267,7 @@ config.fields.push({
     hidden: true,
     html: {
         class: 'no-label',
-        html: "<button id='randomize-base-stats-button' onclick='handleBaseStatRandomizerPopup()' class='w2ui-btn'>Randomize Base Stats</button><br/><small>Non-unique units can have randomized base stats.</small>",
+        html: "<button id='randomize-base-stats-button' onclick='window.handleBaseStatRandomizerPopup(window.globalStats)' class='w2ui-btn'>Randomize Base Stats</button><br/><small>Non-unique units can have randomized base stats.</small>",
         column: 1,
         attr: 'style="width:100%;margin-top:.5rem"'
     }

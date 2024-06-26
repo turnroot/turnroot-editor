@@ -67,8 +67,8 @@ const handleEvent = (form, event) => {
 
     else if (field === 'isUnique'){
         if (value.current === true){
-        form.show('randomize-base-stats')} else {
-        form.hide('randomize-base-stats')
+        form.hide('randomize-base-stats')} else {
+        form.show('randomize-base-stats')
         }
     }
 
@@ -114,6 +114,7 @@ const handleEvent = (form, event) => {
                                     form.show(stat.field)
                                 })
                                 form.show('useAccentColors')
+                                form.hide('randomize-base-stats')
                                 form.show('growth-rates')
                                 form.show('base-stats-header')
                                 form.unlock()
@@ -134,6 +135,7 @@ const handleEvent = (form, event) => {
                                 form.hide('unit-accent-color-1')
                                 form.hide('unit-accent-color-2')
                                 form.hide('base-stats-header')
+                                form.hide('randomize-base-stats')
                                 form.hide('useAccentColors')
                                 form.hide('height')
                                 form.hide('birthdayDay')
@@ -159,6 +161,7 @@ const handleEvent = (form, event) => {
                                 form.show('height')
                                 form.show('birthdayDay')
                                 form.show('birthdayMonth')
+                                form.show('randomize-base-stats')
                                 form.show('age')
                                 form.show('isUnique')
                                 form.unlock()
@@ -178,6 +181,7 @@ const handleEvent = (form, event) => {
                                 form.show('useAccentColors')
                                 form.hide('growth-rates')
                                 form.hide('base-stats-header')
+                                form.show('randomize-base-stats')
                                 form.hide('height')
                                 form.hide('birthdayDay')
                                 form.hide('birthdayMonth')
