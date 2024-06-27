@@ -27,6 +27,7 @@ const defaults = {
     'combatAdjutantHeal': false,
     'combatAdjutantGuard': false,
     'combatAdjutantAttack': false,
+    'aptitudeGoals': false,
     'statsUseExtraStatWeight': false,
     'statsExtraStatWeightAffectsMovement': false,
     'statsUseExtraStatLuck': true,

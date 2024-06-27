@@ -94,7 +94,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: `<div><h3>Hair colors</h3><small>Default: <span style = "width:2rem;height:1rem;background-color:${window.unitEditorAvatarDefaultHairColor};display:inline-block;border-radius:.25rem;"</small></div>`,
+                html: `<div><h3>Hair colors</h3><small>Default: <span style = "width:2remheight:1rembackground-color:${window.unitEditorAvatarDefaultHairColor}display:inline-blockborder-radius:.25rem"</small></div>`,
                 column: 1
             }
         },
@@ -111,7 +111,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: `<div><h3>Eye colors</h3><small>Default: <span style = "width:2rem;height:1rem;background-color:${window.unitEditorAvatarDefaultEyeColor};display:inline-block;border-radius:.25rem;"</small></div>`,
+                html: `<div><h3>Eye colors</h3><small>Default: <span style = "width:2remheight:1rembackground-color:${window.unitEditorAvatarDefaultEyeColor}display:inline-blockborder-radius:.25rem"</small></div>`,
                 column: 1
             }
         },
@@ -144,17 +144,17 @@ globalExperiences.forEach((experience, index) => {
         experience
     )
     config.fields.push({
-        type: 'html',
-        field: experience.field + '-affinity-avatar',
+        type: 'radio',
+        field: experience.field + 'starting-affinity',
+        options: {
+            items: ['None', '-', '+']
+        },
         html: {
-            class: 'no-label',
-            attr: 'style="width:max-content"',
-            column: 0,
-            html: `<div style = "display:flex;align-items:center;flex-wrap:wrap;width:100%;"><p style = "margin-right:.25rem;">Affinity:</p><input type = "radio" name = "${experience.field + '-affinity-radio'}" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">-</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input" checked><label style = "font-size:1rem;margin-right:.5rem;">None</label></input><input name = "${experience.field + '-affinity-radio'}" type = "radio" class="w2ui-input"><label style = "font-size:1.5rem;margin-right:.5rem;">+</label></input></div>`
+            column: 0
         }
     })
-    config.record[experience.field + '-affinity-avatar'] = 'None'
     config.record[experience.field] = 'E'
+    config.record[experience.field + 'starting-affinity'] = 'None'
 })
 
 let form = new w2form(config)

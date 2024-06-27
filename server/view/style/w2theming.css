@@ -3,7 +3,7 @@
   outline:0
   }
   
-  .li-search,.w2ui-field,.w2ui-field:has(.full-width-field) div,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
+  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
   display:flex
   }
   
@@ -20,7 +20,7 @@
   transition:none!important
   }
   
-  .w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,select {
+  .w2ui-btn.accent,.w2ui-form textarea:focus,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,highlight,input:not([type=radio]).w2ui-input:focus,select,select:focus {
   color:var(--node-title)
   }
   
@@ -67,7 +67,6 @@
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-data .w2ui-node-badge.w2ui-node-count {
   background-color:color-mix(in oklab,var(--button-alt-text) 60%,var(--accent));
-  border-radius:99rem;
   cursor:default;
   margin-right:var(--spacing-2);
   margin-top:var(--spacing-2)
@@ -131,6 +130,10 @@
   justify-content:center
   }
   
+  .w2ui-box-label:has(input[type=radio]),.w2ui-field.w2ui-field:has(input[type=checkbox]),.w2ui-field.w2ui-field:has(select) {
+  align-items:center
+  }
+  
   .w2ui-field>div {
   flex-direction:row;
   flex-wrap:wrap;
@@ -139,7 +142,6 @@
   }
   
   .w2ui-tb-button .w2ui-tb-icon {
-  margin:0!important;
   width:unset!important
   }
   
@@ -160,7 +162,7 @@
   width:var(--spacing-3)
   }
   
-  .w2ui-tb-check.radio .w2ui-tb-text::before {
+  .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-data .w2ui-node-badge.w2ui-node-count,.w2ui-tb-check.radio .w2ui-tb-text::before {
   border-radius:99rem
   }
   
@@ -200,11 +202,10 @@
   }
   
   .w2ui-form textarea:focus,input:not([type=radio]).w2ui-input:focus,select:focus {
-  background-color:color-mix(in oklab,var(--list-background) 40%,var(--window-background-alt));
-  color:var(--node-title)
+  background-color:color-mix(in oklab,var(--list-background) 40%,var(--window-background-alt))
   }
   
-  .w2ui-btn,.w2ui-input.w2field,select {
+  .w2ui-btn,.w2ui-input.w2field,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   appearance:none
   }
   
@@ -274,7 +275,6 @@
   }
   
   input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
-  appearance:none;
   height:2rem!important;
   width:4rem!important
   }
@@ -323,10 +323,6 @@
   justify-content:space-around
   }
   
-  .w2ui-group-fields {
-  margin:0!important
-  }
-  
   .w2ui-group-fields label {
   width:min-content!important
   }
@@ -337,7 +333,6 @@
   
   highlight {
   background-color:var(--slider-1);
-  color:var(--node-title);
   padding:1px 2px
   }
   
@@ -357,7 +352,6 @@
   }
   
   .w2ui-field.expand .w2ui-multi-items {
-  display:flex;
   flex-wrap:wrap;
   height:100%!important
   }
@@ -384,8 +378,7 @@
   }
   
   .w2ui-btn.accent {
-  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent));
-  color:var(--node-title)
+  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent))
   }
   
   .w2ui-btn.accent:hover {
@@ -404,11 +397,6 @@
   
   .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-message,.w2ui-overlay,.w2ui-panel,.w2ui-popup *,.w2ui-sidebar {
   color:var(--window-text)
-  }
-  
-  .w2ui-column-container:not(:has(.col-1)) {
-  display:flex;
-  height:100%
   }
   
   .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div,.w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,.w2ui-field:has(textarea) div {
@@ -432,7 +420,7 @@
   flex-grow:2
   }
   
-  .w2ui-field.expand:has(.w2ui-multi-items),.w2ui-tb-button {
+  .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand:has(.w2ui-multi-items),.w2ui-tb-button {
   height:100%
   }
   
@@ -442,4 +430,12 @@
   
   .w2ui-field:has(textarea) {
   display:block
+  }
+  
+  .w2ui-field:has(.w2ui-box-label) label:not(.w2ui-box-label) {
+  display:none
+  }
+  
+  .w2ui-box-label:has(input[type=radio]) input,.w2ui-field .w2ui-box-label input[type=checkbox],.w2ui-group-fields,.w2ui-tb-button .w2ui-tb-icon {
+  margin:0!important
   }
