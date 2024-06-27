@@ -382,15 +382,15 @@
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-grip'%3E%3Ccircle cx='12' cy='5' r='1'/%3E%3Ccircle cx='19' cy='5' r='1'/%3E%3Ccircle cx='5' cy='5' r='1'/%3E%3Ccircle cx='12' cy='12' r='1'/%3E%3Ccircle cx='19' cy='12' r='1'/%3E%3Ccircle cx='5' cy='12' r='1'/%3E%3Ccircle cx='12' cy='19' r='1'/%3E%3Ccircle cx='19' cy='19' r='1'/%3E%3Ccircle cx='5' cy='19' r='1'/%3E%3C/svg%3E")no-repeat center;
   width:24px
   }
-
-.w2ui-btn.accent{
-  background-color:color-mix(in oklab, var(--node-background) 50%, var(--accent));
-  color:var(--node-title);
-}
-
-.w2ui-btn.accent:hover{
-  background-color:color-mix(in oklab, var(--node-background) 70%, var(--accent))
-}
+  
+  .w2ui-btn.accent {
+  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent));
+  color:var(--node-title)
+  }
+  
+  .w2ui-btn.accent:hover {
+  background-color:color-mix(in oklab,var(--node-background) 70%,var(--accent))
+  }
   
   .resize-icon:hover {
   background-color:var(--accent)!important;
@@ -411,7 +411,7 @@
   height:100%
   }
   
-  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div, .w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,  .w2ui-field:has(textarea) div {
+  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div,.w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,.w2ui-field:has(textarea) div {
   width:100%!important
   }
   
@@ -439,7 +439,7 @@
   .li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border-radius:.25rem
   }
-
-  .w2ui-field:has(textarea){
-    display:block;
+  
+  .w2ui-field:has(textarea) {
+  display:block
   }
