@@ -168,7 +168,29 @@ form.updateGlobals = () => {
         toHide = form.fields.filter(field => field.field?.includes('affinity'))
         toHide.forEach(field => field.html.hidden = false)
     }
+    if (!window.useExperienceSublevels){
+        globalExperiences.forEach((experience, index) => {
+            if (experience.options){
+                experience.options.items = ['E', 'D', 'C', 'B', 'A', 'S']
+                let existingFormField = form.fields.filter(field => field.field?.includes(experience.field.toLowerCase()))[0]
+                existingFormField = form.get(existingFormField.field)
+                existingFormField.options.items = ['E', 'D', 'C', 'B', 'A', 'S']
+            }
+        })
+    } else {
+        globalExperiences.forEach((experience, index) => {
+            if (experience.options){
+                experience.options.items = ['E', 'E+', 'D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+', 'S']
+                let existingFormField = form.fields.filter(field => field.field?.includes(experience.field.toLowerCase()))[0]
+                existingFormField = form.get(existingFormField.field)
+                existingFormField.options.items = ['E', 'E+', 'D', 'D+', 'C', 'C+', 'B', 'B+', 'A', 'A+', 'S']
+            }
+        })
+    }
+    form.refresh()
 }
+
+window.UnitEditorAvatarFields = form
 
 form.updateGlobals()
 

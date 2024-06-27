@@ -65,9 +65,33 @@ let config = {
             field: 'name',
             type: 'text',
             html: {
-                label: 'Unit name',
+                label: 'Familiar name',
                 attr: '',
                 column: 0,
+            }
+        },
+        {
+            field: 'fullName',
+            type: 'text',
+            html: {
+                label: 'Full name',
+                attr: '',
+                column: 0,
+            }
+        },
+        {
+            field: 'Title',
+            type: 'text',
+            html: {
+                label: 'Title',
+                attr: '',
+                column: 0,
+            }
+        },
+        {
+            type:'html',
+            html:{
+                html: '<small>A unit can have a title, familiar name, and full name. The familiar name is the only required field; it appears above dialogue boxes. A unit could have "sir" as the title, "Fernand" as the familiar name, and "Sir Fernand van Ageer" as the full name. Some units, like "Rogue" or "Thief", may only need a familiar name.</small>'
             }
         },
         {
@@ -360,6 +384,7 @@ form.updateGlobals = () => {
     } else {
         form.fields.find(field => field.field === 'canHaveChildren').hidden = false
     }
+    form.refresh()
 }
 
 window.unitEditorBasicFields = form

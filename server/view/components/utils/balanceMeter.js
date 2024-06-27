@@ -17,6 +17,7 @@ let style = `
     z-index:1492;
     left:calc(50% - 3px);
     transform-origin:bottom;
+    transition:all .25s ease-out;
 }
 `
 
@@ -35,6 +36,7 @@ const balanceMeter = (initialValue, statCount, h3text, pHtml) => {
     styleTag.innerHTML = style
     meter.appendChild(styleTag)
     meter.querySelector('.balanceMeterNeedle').style.transform = `rotate(${initialValue}deg)`
+    meter.querySelector('.balanceMeterNeedle').style.opacity = '0'
     let h3 = document.createElement('h3')
     h3.innerText = h3text
     let p = document.createElement('p')

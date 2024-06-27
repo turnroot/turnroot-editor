@@ -14,6 +14,7 @@ let form = new w2form(config)
 
 form.updateGlobals = () => {
     window.turnrootEditorLogs.push(`${new Date()}||info||Updating NPC form globals`)
+    form.refresh()
 }
 
 form.updateGlobals()

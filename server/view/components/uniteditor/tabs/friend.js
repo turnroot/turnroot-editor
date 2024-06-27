@@ -126,6 +126,7 @@ form.updateGlobals = () => {
         toHide = form.fields.filter(field => field.field?.includes('affinity'))
         toHide.forEach(field => field.html.hidden = false)
     }
+    form.refresh()
 }
 
 form.updateGlobals()
