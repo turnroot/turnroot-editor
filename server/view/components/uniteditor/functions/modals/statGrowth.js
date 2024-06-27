@@ -1,132 +1,69 @@
 import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 
-let currentLevel = 1
-let testStats = {}
+window.w2popup = w2popup
 
-const resetTestGrowths = (unchanged) => {
-    Object.keys(unchanged).forEach((stat) => {
-        testStats[stat] = unchanged[stat]
+let original = {}
+let growths = {}
+
+const resetGrowths = (form) => {
+    Object.keys(original).forEach((stat) => {
+        growths[stat] = 0
+        form.record['baseStatsGrowthAmount'+stat] = growths[stat]
     })
-    currentLevel = 1
+    document.querySelectorAll('.baseStatGrowthNumberInput').forEach((input) => {
+        input.value = 0
+    })
 }
 
-window.unitEditorStatGrowthModalReset = (unchanged) => { return resetTestGrowths(unchanged) }
+const changeGrowth = (stat, value, form) => {
+    growths[stat] = parseInt(value)
+    form.record['baseStatsGrowthAmount'+stat] = growths[stat]
+}
 
-window.unitEditorStatGrowthModalReset = (stats) => { return resetTestGrowths(stats) }
-
-let testGrowth = (stats, currentLevel) => {
-    let html = ''
+const statGrowthPopup = (stats, form) => {
+    original = {...stats}
     Object.keys(stats).forEach((stat) => {
-        let growth = stats[stat]
-        let roll = Math.floor(Math.random() * 100)
-        if (roll < growth) {
-            testStats[stat]++
-        }
-        html += `<tr><td>${stat}</td><td>${testStats[stat]}</td></tr>`
+        if (stat === 'hp') {
+            growths[stat] = 100
+        } else {
+        growths[stat] = 0}
+        form.record['baseStatsGrowthAmount'+stat] = growths[stat]
     })
-    currentLevel++
-    return html
-}
 
-const build = (stats) => {
-    testStats = {...stats}
-    let levelUpTable = window.unitEditorStatGrowthModalTestGrowth(stats, currentLevel)
+window.UnitEditorBaseStatGrowthChange = changeGrowth
+window.UnitEditorBaseStatGrowthReset = resetGrowths
+window.UnitEditorBaseStatGrowthPopup = statGrowthPopup
+
     let innerHtml = `
-    <p>Each time a unit levels up, they have a 0-100% chance of any given stat increasing. You can set those here.</p>
+    <h2>Set Stat Growths</h2>
+    <p>Set the growths for each stat. Each growth is the % chance that the stat will increase on level up- for example, a growth of 50 on a base stat Strength would mean a 50% chance that Strength will increase on level up.</p>
     <table>
         <tr>
             <th>Stat</th>
+            <th>Original</th>
             <th>Growth</th>
         </tr>
-        ${Object.entries(stats).map(([stat, growth]) => `<tr><td>${stat}</td><td><input type="number" class="w2ui-input w2field" value="${growth}" id="growth-rate-modal-${stat}"></td></tr>`).join('')}
-    </table>
-    <div class = "flex"><button class="w2ui-btn" id ='test-growth-btn'>Test Growth</button><button class="w2ui-btn" id ='reset-growth-btn'>Reset </button></div>
-    
-    <p>This will take the base stats and the current growth rates and "level up" your unit. Each click increases the level by 1.<br/>Note that this isn't a prediction of what <em>will</em> happen- just an example of what <em>might</em> happen.</p>
-    <p id="current-level">Current Level: Level ${currentLevel}</p>
-    <table id ='level-up-table'>
-        <tr>
-            <th>Stat</th>
-            <th>Value</th>
-        </tr>
-    </table>
-    </div>`
-    return innerHtml
-}
+        ${Object.keys(stats).map((stat) => {
+            return `
+            <tr>
+                <td>${stat}</td>
+                <td>${stats[stat]}</td>
+                <td><input type="number" class="w2ui-input baseStatGrowthNumberInput" min="0" max="100" value="${growths[stat]}" onchange="window.UnitEditorBaseStatGrowthChange('${stat}', this.value, window.unitEditorBasicFields)"></td>
+            </tr>
+            `
+        }).join('')}
+        </table>
+        <button class="w2ui-btn" onclick="window.UnitEditorBaseStatGrowthReset(window.unitEditorBasicFields)">Reset</button>
+        <button class="w2ui-btn accent" onclick="window.w2popup.close()">Ok</button>
+    `
 
-window.unitEditorStatGrowthModalTestGrowth = (stats, currentLevel) => { return testGrowth(stats, currentLevel) }
-
-window.unitEditorStatGrowthModalBuild = (stats) => { return build(stats) }
-
-const statGrowthPopup = (stats) => {
-    let div = document.createElement('div')
-    let unchanged = {...stats} 
-    div.style.width = '100%'
-    div.style.height = '100%'
-    div.style.padding = '1rem'
-    div.style.overflowY = 'auto'
-    div.id = 'unit-editor-stat-growth-popup-inner'
-
-    let innerHtml = window.unitEditorStatGrowthModalBuild(stats)
-
-    div.innerHTML = innerHtml
     w2popup.open({
-        title: 'Stat Growth',
-        body: div,
-        resizable: true,
-        actions: {
-            save: {
-                text: 'Save',
-                class: 'w2ui-btn',
-                onClick(event) {
-                    window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates changed`)
-                    w2popup.close()
-                }
-            },
-            Cancel() {
-                window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates unchanged`)
-                stats = unchanged
-                w2popup.close()
-            }
-        }
-    }).then(() => {
-        let popup = document.querySelector('#unit-editor-stat-growth-popup-inner').parentElement.parentElement.parentElement
-        popup.style.height = '60vh'
-        popup.style.width = '50vw'
-        popup.style.minHeight = '400px'
-        popup.style.top = '20vh'
-        popup.style.left = '25vw'
-        window.turnrootEditorLogs.push(`${new Date()}||info||Stat growth rates modal opened`)
-        document.getElementById('test-growth-btn').addEventListener('click', () => {
-            let levelUpTable = testGrowth(stats, currentLevel)
-            document.getElementById('level-up-table').innerHTML = `
-                <tr>
-                    <th>Stat</th>
-                    <th>Value</th>
-                </tr>
-                ${levelUpTable}
-            `
-            currentLevel++
-            document.getElementById('current-level').innerHTML = `Current Level: Level ${currentLevel}`
-        })
-        document.getElementById('reset-growth-btn').addEventListener('click', () => {
-            resetTestGrowths(unchanged)
-            document.getElementById('level-up-table').innerHTML = `
-                <tr>
-                    <th>Stat</th>
-                    <th>Value</th>
-                </tr>
-            `
-            currentLevel = 1
-            document.getElementById('current-level').innerHTML = `Current Level: Level ${currentLevel}`
-        })
-    })
-
-    Object.keys(stats).forEach((stat) => {
-        let input = document.getElementById(`growth-rate-modal-${stat}`)
-        input.addEventListener('change', (event) => {
-            stats[stat] = Number(event.target.value)
-        })
+        body: innerHtml,
+        width: 800,
+        height: 700,
+        showMax: false,
+        showClose: false,
+        modal: false,
     })
 }
 

@@ -14,20 +14,22 @@ import balanceMeter from '../../utils/balanceMeter.js'
 
 let baseStatsBalance = balanceMeter(0, globalStats.length, 'Edit base stats to see balance', '<small>Compares your base stat total against two existing-game examples.<br/>The left side is a bit lower than the avatar\'s base stats in <em>Fire Emblem: Awakening</em>, and the right side is a bit higher than the avatar\'s base stats in <em>Fire Emblem: Three Houses</em>. Most units should probably fall somewhere in between.<br/><br/>Mov is not included in the total</small>')
 
-const handleStatGrowthPopup = (event) => {
-    let stats = globalStats.reduce((obj, stat) => {
-        obj[stat.field] = 0
-        return obj
-    }, {})
-    statGrowthPopup(stats)
+window.UnitEditorGlobalStats = globalStats
+
+const handleStatGrowthPopup = (allStats, form) => {
+    let stats = {}
+    allStats.forEach((stat) => {
+        stats[stat.field] = form.record[stat.field]
+    })
+    statGrowthPopup(stats, form)
 }
 
-const handleBaseStatRandomizerPopup = (event) => {
-    let stats = globalStats.reduce((obj, stat) => {
-        obj[stat.field] = form.record[stat.field]
-        return obj
-    }, {})
-    baseStatRandomizerPopup(stats) 
+const handleBaseStatRandomizerPopup = (allStats, form) => {
+    let stats = {}
+    allStats.forEach((stat) => {
+        stats[stat.field] = form.record[stat.field]
+    })
+    baseStatRandomizerPopup(stats, form) 
 }
 
 window.unitEditorHandleStatsGrowthPopup = handleStatGrowthPopup
@@ -254,7 +256,7 @@ config.fields.push({
     class: 'no-label',
     html: {
         class: 'no-label',
-        html: "<button id='growth-rates-button' onclick='window.unitEditorHandleStatsGrowthPopup()' class='w2ui-btn'>Growth Rates</button>",
+        html: "<button id='growth-rates-button' onclick='window.unitEditorHandleStatsGrowthPopup(window.UnitEditorGlobalStats, window.unitEditorBasicFields)' class='w2ui-btn'>Growth Rates</button>",
         column: 1,
         attr: 'style="width:100%;margin-top:.5rem"'
     }
@@ -267,7 +269,7 @@ config.fields.push({
     hidden: true,
     html: {
         class: 'no-label',
-        html: "<button id='randomize-base-stats-button' onclick='window.handleBaseStatRandomizerPopup(window.globalStats)' class='w2ui-btn'>Randomize Base Stats</button><br/><small>Non-unique units can have randomized base stats.</small>",
+        html: "<button id='randomize-base-stats-button' onclick='window.handleBaseStatRandomizerPopup(window.UnitEditorGlobalStats, window.unitEditorBasicFields)' class='w2ui-btn'>Randomize Base Stats</button><br/><small>Non-unique units can have randomized base stats.</small>",
         column: 1,
         attr: 'style="width:100%;margin-top:.5rem"'
     }
@@ -359,6 +361,8 @@ form.updateGlobals = () => {
         form.fields.find(field => field.field === 'canHaveChildren').hidden = false
     }
 }
+
+window.unitEditorBasicFields = form
 
 form.updateGlobals()
 

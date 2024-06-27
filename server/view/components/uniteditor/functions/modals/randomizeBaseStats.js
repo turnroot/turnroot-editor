@@ -1,39 +1,73 @@
 import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 
-let original
-let variances
+window.w2popup = w2popup
 
-const resetVariances = (unchanged) => {
-    Object.keys(unchanged).forEach((stat) => {
+let original = {}
+let variances = {}
+
+const resetVariances = (form) => {
+    Object.keys(original).forEach((stat) => {
         variances[stat] = 0
+        form.record['baseStatsRandomizedAmount'+stat] = variances[stat]
+    })
+    document.querySelectorAll('.baseStatRandomizerNumberInput').forEach((input) => {
+        input.value = 0
     })
 }
 
-const baseStatRandomizerPopup = (stats) => {
+const changeVariance = (stat, value, form) => {
+    variances[stat] = parseInt(value)
+    form.record['baseStatsRandomizedAmount'+stat] = variances[stat]
+}
+
+const disableStatRandomization = (stat, form) => {
+    form.record['baseStatsRandomizedEnabled'+stat] = !form.record['baseStatsRandomizedEnabled'+stat]
+}
+
+window.UnitEditorBaseStatRandomizerChangeVariance = changeVariance
+window.UnitEditorBaseStatRandomizerDisableStatRandomization = disableStatRandomization
+window.UnitEditorBaseStatRandomizerResetVariances = resetVariances
+
+const baseStatRandomizerPopup = (stats, form) => {
     original = {...stats}
     Object.keys(stats).forEach((stat) => {
         variances[stat] = 0
+        form.record['baseStatsRandomizedEnabled'+stat] = true
+        form.record['baseStatsRandomizedAmount'+stat] = variances[stat]
     })
 
     let innerHtml = `
-    <p>Each time a unit is created, their base stats are randomized within a range. You can set those ranges here.</p>
+    <h2>Randomize Base Stats</h2>
+    <p>When a non-unique unit is spawned, set the random variance for the base stats. Each variance is the min/max the stat could be increased by- for example, a variance of 3 on a base stat HP at 25 would mean a random spawn could have between 22-28 HP.</p>
     <table>
         <tr>
             <th>Stat</th>
-            <th>Min</th>
-            <th>Max</th>
+            <th>Original</th>
+            <th>Randomized</th>
+            <th>Enabled</th>
         </tr>
-        ${Object.entries(variances).map(([stat, variance]) => `<tr><td>${stat}</td><td><input type="number" class="w2ui-input w2field" value="${variance}" id="variance-modal-${stat}"></td><td>+/-<input type="number" class="w2ui-input" value="${variance}" id="variance-modal-${stat}"></td></tr>`).join('')}
-    </table>
-    <div class = "flex"><button class="w2ui-btn" id ='randomize-stats-btn'>Randomize Stats</button><button class="w2ui-btn" id ='reset-stats-btn'>Reset </button></div>`
+        ${Object.keys(stats).map((stat) => {
+            return `
+            <tr>
+                <td>${stat}</td>
+                <td>${stats[stat]}</td>
+                <td><input type="number" class="w2ui-input baseStatRandomizerNumberInput" min="0" max="${Math.floor(stats[stat]/2)}" value="${variances[stat]}" onchange="UnitEditorBaseStatRandomizerChangeVariance('${stat}', this.value, window.unitEditorBasicFields)"></td>
+                <td><input type="checkbox" checked onchange="UnitEditorBaseStatRandomizerDisableStatRandomization('${stat}', window.unitEditorBasicFields)"></td>
+            </tr>
+            `
+        }).join('')}
+        </table>
+        <button class="w2ui-btn" onclick="UnitEditorBaseStatRandomizerResetVariances(window.unitEditorBasicFields)">Reset</button>
+        <button class="w2ui-btn accent" onclick="window.w2popup.close()">Ok</button>
+    `
 
     w2popup.open({
-        title: 'Randomize Base Stats',
         body: innerHtml,
         width: 800,
-        height: 600,
-        showMax: true,
-        modal: true
+        height: 700,
+        showMax: false,
+        showClose: false,
+        modal: false,
     })
 }
 

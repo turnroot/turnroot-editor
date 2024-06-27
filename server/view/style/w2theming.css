@@ -8,7 +8,7 @@
   }
   
   .w2ui-panel .w2ui-panel .w2ui-sidebar {
-  background-color:color-mix(in srgb,var(--window-background-alt) 85%,var(--window-background))
+  background-color:color-mix(in oklab,var(--window-background-alt) 85%,var(--window-background))
   }
   
   *,::after,::before {
@@ -45,7 +45,7 @@
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-selected,.w2ui-sidebar .w2ui-sidebar-body .w2ui-selected:hover {
-  background-color:color-mix(in srgb,var(--button-alt-text) 80%,var(--accent))
+  background-color:color-mix(in oklab,var(--button-alt-text) 80%,var(--accent))
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-group :nth-child(1) {
@@ -66,7 +66,7 @@
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-data .w2ui-node-badge.w2ui-node-count {
-  background-color:color-mix(in srgb,var(--button-alt-text) 60%,var(--accent));
+  background-color:color-mix(in oklab,var(--button-alt-text) 60%,var(--accent));
   border-radius:99rem;
   cursor:default;
   margin-right:var(--spacing-2);
@@ -74,7 +74,7 @@
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-selected .w2ui-node-badge.w2ui-node-count {
-  background-color:color-mix(in srgb,var(--slider-1) 50%,var(--accent))
+  background-color:color-mix(in oklab,var(--slider-1) 50%,var(--accent))
   }
   
   .w2ui-sidebar-body .w2ui-node-image {
@@ -95,7 +95,7 @@
   }
   
   .w2ui-overlay {
-  background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt));
+  background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt));
   z-index:55
   }
   
@@ -144,11 +144,11 @@
   }
   
   .w2ui-tb-button:hover {
-  background-color:color-mix(in srgb,var(--window-background) 60%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 60%,var(--window-background-alt))
   }
   
   .w2ui-menu-item:hover {
-  background-color:color-mix(in srgb,var(--window-background) 30%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 30%,var(--window-background-alt))
   }
   
   .w2ui-tb-check .w2ui-tb-text::before {
@@ -190,17 +190,17 @@
   }
   
   .w2ui-toolbar-input {
-  background-color:color-mix(in srgb,var(--window-background) 60%,var(--window-background-alt));
+  background-color:color-mix(in oklab,var(--window-background) 60%,var(--window-background-alt));
   border-radius:var(--spacing-01);
   margin-left:var(--spacing-01)!important
   }
   
   .w2ui-toolbar-input:hover {
-  background-color:color-mix(in srgb,var(--window-background) 40%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 40%,var(--window-background-alt))
   }
   
   .w2ui-form textarea:focus,input:not([type=radio]).w2ui-input:focus,select:focus {
-  background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
+  background-color:color-mix(in oklab,var(--list-background) 40%,var(--window-background-alt));
   color:var(--node-title)
   }
   
@@ -222,7 +222,7 @@
   }
   
   .w2ui-btn:hover {
-  background-color:color-mix(in srgb,var(--node-background) 80%,var(--slider-1))
+  background-color:color-mix(in oklab,var(--node-background) 80%,var(--slider-1))
   }
   
   .w2ui-column-container {
@@ -280,11 +280,11 @@
   }
   
   .w2ui-tb-check.checked,.w2ui-toolbar {
-  background-color:color-mix(in srgb,var(--window-background) 80%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 80%,var(--window-background-alt))
   }
   
   .w2ui-panel .w2ui-panel .w2ui-toolbar,.w2ui-tb-button.checked {
-  background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt))
   }
   
   .panel-tabs.checked,.w2ui-tb-check.checked .w2ui-tb-text::before {
@@ -292,11 +292,11 @@
   }
   
   .panel-tabs:hover {
-  background-color:color-mix(in srgb,color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt)) 50%,var(--accent))
+  background-color:color-mix(in oklab,color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt)) 50%,var(--accent))
   }
   
   .panel-tabs:not(.checked) {
-  background-color:color-mix(in srgb,var(--window-background) 10%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 10%,var(--window-background-alt))
   }
   
   .panel-tabs {
@@ -382,6 +382,15 @@
   mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-grip'%3E%3Ccircle cx='12' cy='5' r='1'/%3E%3Ccircle cx='19' cy='5' r='1'/%3E%3Ccircle cx='5' cy='5' r='1'/%3E%3Ccircle cx='12' cy='12' r='1'/%3E%3Ccircle cx='19' cy='12' r='1'/%3E%3Ccircle cx='5' cy='12' r='1'/%3E%3Ccircle cx='12' cy='19' r='1'/%3E%3Ccircle cx='19' cy='19' r='1'/%3E%3Ccircle cx='5' cy='19' r='1'/%3E%3C/svg%3E")no-repeat center;
   width:24px
   }
+
+.w2ui-btn.accent{
+  background-color:color-mix(in oklab, var(--node-background) 50%, var(--accent));
+  color:var(--node-title);
+}
+
+.w2ui-btn.accent:hover{
+  background-color:color-mix(in oklab, var(--node-background) 70%, var(--accent))
+}
   
   .resize-icon:hover {
   background-color:var(--accent)!important;

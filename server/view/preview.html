@@ -32,10 +32,10 @@
         let logs = []
         window.turnrootEditorLogs = logs
         console.log = function (message) {
-            window.turnrootEditorLogs.push(`${new Date()}||info||${message}`)
+            window.turnrootEditorLogs.push(`${new Date()}||info||${JSON.stringify(message)}`)
         }
         console.error = function (message) {
-            window.turnrootEditorLogs.push(`${new Date()}||error||${message}`)
+            window.turnrootEditorLogs.push(`${new Date()}||error||${JSON.stringify(message)}`)
         }
     </script>
     <script type="module">
@@ -61,7 +61,14 @@
 
         body.appendChild(loading)
         loading.appendChild(tip)
-        import('./bundle.js').then(() => {
+        let scriptTag = document.createElement('script')
+        scriptTag.src = './bundle.js'
+        scriptTag.type = 'module'
+        scriptTag.async = true
+        document.body.appendChild(scriptTag)
+        scriptTag.onload = function() {
+            loading.style.display = 'none'
+
 
     let config = {
         layout: {
@@ -94,8 +101,7 @@
     layout.html('left', sidebar)
     layout.html('top', topmenu)
     layout.html('bottom', statusbar)
-    document.querySelector('#loading').style.display = 'none'
-})
+
 
     setInterval(function() {
         window.sendQueue()
@@ -111,7 +117,7 @@
             w2alert('Refreshing is disabled to prevent data loss. The Turnroot Editor refreshes automatically, you don\'t need to refresh the page.', 'Refresh Disabled')
         }
         
-    })
+    })}
     
 </script>
 
