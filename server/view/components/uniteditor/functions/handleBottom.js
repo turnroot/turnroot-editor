@@ -5,6 +5,7 @@ import unitEditorAvatarFields from '../tabs/avatar.js'
 import unitEditorEnemyFields from '../tabs/enemy.js'
 import unitEditorNPCFields from '../tabs/npc.js'
 import unitEditorBehaviorContainer from '../tabs/behavior.js'
+import unitEditorRelationshipContainer from '../tabs/relationship.js'
 
 const handleBottom = (event, toolbar) => {
     window.turnrootEditorLogs.push(`${new Date()}||info||Unit editor bottom toolbar item clicked: ${event.detail.item.id}`)
@@ -25,6 +26,8 @@ const handleBottom = (event, toolbar) => {
         }
     } else if (event.detail.item.id === 'unit-editor-bottom-toolbar-behavior'){
         unitEditor.html('main', unitEditorBehaviorContainer)
+    } else if (event.detail.item.id === 'unit-editor-bottom-toolbar-relationship'){
+        unitEditor.html('main', unitEditorRelationshipContainer)
     }
 }
 

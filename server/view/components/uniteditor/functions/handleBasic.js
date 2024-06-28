@@ -19,28 +19,28 @@ const subtypeConfig = {
         hide: ['canRecruit', 'isUnique', 'randomize-base-stats'],
         disable: ['canSSupport'],
         enable: [],
-        toolbarHidden: true
+        toolbarShow: ['unit-editor-bottom-toolbar-relationship']
     },
     NPC: {
         hide: ['orientation', 'canSSupport', 'canHaveChildren', 'canRecruit', 'growth-rates', 'unit-accent-color-1', 'unit-accent-color-2', 'base-stats-header', 'randomize-base-stats', 'useAccentColors', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
         show: ['isUnique'],
         enable: [],
         disable: [],
-        toolbarHidden: true
+        toolbarShow: []
     },
     Friend: {
         show: ['orientation', 'canSSupport', 'canHaveChildren', 'canRecruit', 'growth-rates', 'useAccentColors', 'base-stats-header', 'height', 'birthdayDay', 'birthdayMonth', 'randomize-base-stats', 'age', 'isUnique'],
         enable: ['canSSupport'],
         hide: [],
         disable: [],
-        toolbarHidden: false
+        toolbarShow: ['unit-editor-bottom-toolbar-relationship', 'unit-editor-bottom-toolbar-behavior']
     },
     Enemy: {
         hide: ['canSSupport', 'orientation', 'canHaveChildren', 'growth-rates', 'base-stats-header', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
         enable: [],
         disable: [],
         show: ['canRecruit', 'useAccentColors', 'randomize-base-stats', 'isUnique'],
-        toolbarHidden: false
+        toolbarShow: ['unit-editor-bottom-toolbar-behavior']
     }
 }
 
@@ -52,7 +52,7 @@ function applySubtypeConfig(form, config) {
         form[config.hide.includes(stat.field) ? 'hide' : 'show'](stat.field)
     })
     let bottomToolbar = w2ui['unit-editor-bottom-toolbar']
-    bottomToolbar.get('unit-editor-bottom-toolbar-behavior').hidden = config.toolbarHidden
+    config.toolbarShow.forEach(tab => bottomToolbar.show(tab))
     bottomToolbar.refresh()
 }
 

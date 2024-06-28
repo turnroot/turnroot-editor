@@ -231,10 +231,10 @@ app.post('/data', async (req, res) => {
     if (!req.user) {
         res.status(401).send('Unauthorized')
         return
-    }}
+    }
     let subscription
     if (!req.user.subscription) {
-        subscription = process.env.LOCAL === 'false' ? await getSubscription(req.user.username) : 'local'
+        subscription = await getSubscription(req.user.username)
         req.user.subscription = subscription
     } else {
         subscription = req.user.subscription
@@ -242,7 +242,7 @@ app.post('/data', async (req, res) => {
     if (!subscription) {
         res.status(401).send('User is not subscribed')
         return
-    }
+    }}
     sendToFromDatabase(req, res).catch((err) => {
         console.error(err)
     })

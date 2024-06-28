@@ -40,7 +40,11 @@ const establishConnection = async (req, res) => {
 }
 
 const sendToFromDatabase = async (req, res) => {
-    if (!req.user){
+    if (process.env.LOCAL === 'true'){
+        req.user = {}
+        req.user.userId = 'local'
+    }
+    if (!req.user && process.env.LOCAL === 'false'){
         return res.status(200).send('No data processed')
     }
     let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://localhost:9194/data'
