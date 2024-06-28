@@ -287,7 +287,7 @@
   background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt))
   }
   
-  .panel-tabs.checked,.w2ui-tb-check.checked .w2ui-tb-text::before {
+  .w2ui-tb-check.checked .w2ui-tb-text::before {
   background-color:var(--accent)
   }
   
@@ -377,12 +377,14 @@
   width:24px
   }
   
-  .w2ui-btn.accent {
-  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent))
+  .w2ui-btn.accent, .panel-tabs.checked {
+  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent));
+  color: var(--node-title)
   }
   
-  .w2ui-btn.accent:hover {
-  background-color:color-mix(in oklab,var(--node-background) 70%,var(--accent))
+  .w2ui-btn.accent:hover, .panel-tabs.checked:hover {
+  background-color:color-mix(in oklab,var(--node-background) 70%,var(--accent));
+  color: var(--node-title)
   }
   
   .resize-icon:hover {

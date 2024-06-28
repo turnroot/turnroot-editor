@@ -3,6 +3,10 @@ import UnitEditor from '../uniteditor/UnitEditor.js'
 import ClassEditor from '../classeditor/ClassEditor.js'
 import GameEditor from '../gameeditor/GameEditor.js'
 
+window.UnitEditor = UnitEditor
+window.ClassEditor = ClassEditor
+window.GameEditor = GameEditor
+
 let sidebar = new w2sidebar({
     name: 'EditorWindowSidebar',
     flatButton: true,
@@ -45,12 +49,15 @@ sidebar.on('click', function(event) {
     if (event.target === 'sidebar-editors-unit-editor') {
         let layout = w2ui.EditorWindowLayout
         layout.html('main', UnitEditor).removed()
+        window.activeEditor = 'unit-editor'
     } else if (event.target === 'sidebar-editors-class-editor') {
         let layout = w2ui.EditorWindowLayout
         layout.html('main', ClassEditor).removed()
+        window.activeEditor = 'class-editor'
     } else if (event.target === 'sidebar-editors-game-editor') {
         let layout = w2ui.EditorWindowLayout
         layout.html('main', GameEditor).removed()
+        window.activeEditor = 'game-editor'
     }
 })
 

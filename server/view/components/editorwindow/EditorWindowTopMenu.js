@@ -55,10 +55,6 @@ let toolbar = new w2toolbar({
                         id: 'pink_dream'
                     },
                     {
-                        text: 'Forest Mist',
-                        id: 'forest_mist'
-                    },
-                    {
                         text: 'Sunset Glow',
                         id: 'sunset_glow'
                     },
