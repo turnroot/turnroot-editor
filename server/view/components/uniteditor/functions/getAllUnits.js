@@ -2,7 +2,7 @@ let lastPull = new Date()
 let pulled = false 
 
 const getAllUnits = async() => {
-    let url = 'https://schemas-server.turnroot.com/data'
+    let url = 'http://127.0.0.1:26068/data'
     let method = 'POST'
     let headers = {
         'Content-Type': 'application/json'
