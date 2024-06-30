@@ -445,7 +445,7 @@ const updateWindow = (v=null) => {
         let row = [rulesRows[i], rulesRows[i + 1], rulesRows[i + 2]]
         let value = row[2].children[0].value
         let select = row[2].children[0]
-        console.log(select)
+
         if (value === 'Team Player' || value === 'Lone Wolf'){
             select.style.backgroundColor = `color-mix(in oklab,var(--slider-0) ${window.unitEditorBehaviorTeamPlayer}%,var(--slider-1))`}
         else if (value === 'Hero' || value === 'Coward'){

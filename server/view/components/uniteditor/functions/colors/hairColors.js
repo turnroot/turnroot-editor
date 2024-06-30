@@ -28,9 +28,8 @@ const hexToRGB = (hex) => {
 const removeColor = (event) => {
     event.preventDefault()
     let color = event.target.style.backgroundColor
-    console.log(color, hairColors)
     hairColors = hairColors.filter(c => c !== color)
-    console.log('Removed color:', color)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Removed hair color: ${color}`)
     let hairColorsHtml = `<div id = "unit-editor-avatar-hair-colors">`
     for (let color of hairColors) {
         hairColorsHtml += `<div class="hidden-until-hover-wrapper" style="background-color:${color};width:2rem;height:2rem;display:inline-block;margin:0.25rem;border-radius:.25rem;" oncontextmenu="setDefaultHairColor(event)" onclick="unitEditorAvatarRemoveHairColor(event)"></div>`
@@ -55,7 +54,7 @@ window.unitEditorAvatarRemoveHairColor = removeColor
 const addHairColor = (e) => {
     let color = hexToRGB(e.target.previousElementSibling.value)
     hairColors.push(color)
-    console.log('Added color:', color)
+    window.turnrootEditorLogs.push(`${new Date()}||info||Added hair color: ${color}`)
     let hairColorsHtml = `<div id = "unit-editor-avatar-hair-colors">`
     for (let color of hairColors) {
         hairColorsHtml += `<div id="unit-editor-avatar-hair-colors" class="hidden-until-hover-wrapper" style="background-color:${color};width:2rem;height:2rem;display:inline-block;margin:0.25rem;border-radius:.25rem;" oncontextmenu="setDefaultHairColor(event)" onclick="unitEditorAvatarRemoveHairColor(event)"></div>`

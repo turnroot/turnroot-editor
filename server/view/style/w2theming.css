@@ -3,12 +3,12 @@
   outline:0
   }
   
-  .li-search,.w2ui-field,.w2ui-field:has(.full-width-field) div,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
+  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
   display:flex
   }
   
   .w2ui-panel .w2ui-panel .w2ui-sidebar {
-  background-color:color-mix(in srgb,var(--window-background-alt) 85%,var(--window-background))
+  background-color:color-mix(in oklab,var(--window-background-alt) 85%,var(--window-background))
   }
   
   *,::after,::before {
@@ -20,7 +20,7 @@
   transition:none!important
   }
   
-  .w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,select {
+  .w2ui-btn.accent,.w2ui-form textarea:focus,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,highlight,input:not([type=radio]).w2ui-input:focus,select,select:focus {
   color:var(--node-title)
   }
   
@@ -45,7 +45,7 @@
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-selected,.w2ui-sidebar .w2ui-sidebar-body .w2ui-selected:hover {
-  background-color:color-mix(in srgb,var(--button-alt-text) 80%,var(--accent))
+  background-color:color-mix(in oklab,var(--button-alt-text) 80%,var(--accent))
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-group :nth-child(1) {
@@ -66,15 +66,14 @@
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-data .w2ui-node-badge.w2ui-node-count {
-  background-color:color-mix(in srgb,var(--button-alt-text) 60%,var(--accent));
-  border-radius:99rem;
+  background-color:color-mix(in oklab,var(--button-alt-text) 60%,var(--accent));
   cursor:default;
   margin-right:var(--spacing-2);
   margin-top:var(--spacing-2)
   }
   
   .w2ui-sidebar .w2ui-sidebar-body .w2ui-selected .w2ui-node-badge.w2ui-node-count {
-  background-color:color-mix(in srgb,var(--slider-1) 50%,var(--accent))
+  background-color:color-mix(in oklab,var(--slider-1) 50%,var(--accent))
   }
   
   .w2ui-sidebar-body .w2ui-node-image {
@@ -95,7 +94,7 @@
   }
   
   .w2ui-overlay {
-  background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt));
+  background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt));
   z-index:55
   }
   
@@ -128,24 +127,30 @@
   
   .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand .w2ui-multi-items,.w2ui-field>label,.w2ui-message-buttons,.w2ui-tb-button {
   align-items:center;
-  justify-content:center;
+  justify-content:center
   }
-
-  .w2ui-field > div{
-    justify-content:start;
+  
+  .w2ui-box-label:has(input[type=radio]),.w2ui-field.w2ui-field:has(input[type=checkbox]),.w2ui-field.w2ui-field:has(select) {
+  align-items:center
+  }
+  
+  .w2ui-field>div {
+  flex-direction:row;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:start
   }
   
   .w2ui-tb-button .w2ui-tb-icon {
-  margin:0!important;
   width:unset!important
   }
   
   .w2ui-tb-button:hover {
-  background-color:color-mix(in srgb,var(--window-background) 60%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 60%,var(--window-background-alt))
   }
   
   .w2ui-menu-item:hover {
-  background-color:color-mix(in srgb,var(--window-background) 30%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 30%,var(--window-background-alt))
   }
   
   .w2ui-tb-check .w2ui-tb-text::before {
@@ -157,7 +162,7 @@
   width:var(--spacing-3)
   }
   
-  .w2ui-tb-check.radio .w2ui-tb-text::before {
+  .w2ui-sidebar .w2ui-sidebar-body .w2ui-node-data .w2ui-node-badge.w2ui-node-count,.w2ui-tb-check.radio .w2ui-tb-text::before {
   border-radius:99rem
   }
   
@@ -187,32 +192,25 @@
   }
   
   .w2ui-toolbar-input {
-  background-color:color-mix(in srgb,var(--window-background) 60%,var(--window-background-alt));
+  background-color:color-mix(in oklab,var(--window-background) 60%,var(--window-background-alt));
   border-radius:var(--spacing-01);
   margin-left:var(--spacing-01)!important
   }
   
   .w2ui-toolbar-input:hover {
-  background-color:color-mix(in srgb,var(--window-background) 40%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 40%,var(--window-background-alt))
   }
   
   .w2ui-form textarea:focus,input:not([type=radio]).w2ui-input:focus,select:focus {
-  background-color:color-mix(in srgb,var(--list-background) 40%,var(--window-background-alt));
-  color:(--node-title)
+  background-color:color-mix(in oklab,var(--list-background) 40%,var(--window-background-alt))
   }
   
-  .w2ui-btn,.w2ui-input.w2field,select {
+  .w2ui-btn,.w2ui-input.w2field,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   appearance:none
   }
   
   .w2ui-btn {
   background-color:var(--node-background)
-  }
-  
-  .w2ui-field>div {
-  flex-direction:row;
-  flex-wrap:wrap;
-  gap:10px
   }
   
   .w2ui-field>label {
@@ -225,7 +223,7 @@
   }
   
   .w2ui-btn:hover {
-  background-color:color-mix(in srgb,var(--node-background) 80%,var(--slider-1))
+  background-color:color-mix(in oklab,var(--node-background) 80%,var(--slider-1))
   }
   
   .w2ui-column-container {
@@ -238,7 +236,15 @@
   width:max-content!important
   }
   
-  .w2ui-column-container .w2ui-column:not(:last-child) {
+  .w2ui-column-container:has(.col-2) .w2ui-column {
+  max-width:23rem
+  }
+  
+  .w2ui-box-label:has(input[type=checkbox]) span {
+  width:90%
+  }
+  
+  .w2ui-field:has(input[type=checkbox]) .w2ui-column-container .w2ui-column:not(:last-child) {
   border-right:1px solid var(--window-background-alt)
   }
   
@@ -258,6 +264,7 @@
   
   .w2ui-lock {
   background-color:#000000a0;
+  opacity:1!important;
   z-index:1380
   }
   
@@ -268,29 +275,28 @@
   }
   
   input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
-  appearance:none;
   height:2rem!important;
   width:4rem!important
   }
   
   .w2ui-tb-check.checked,.w2ui-toolbar {
-  background-color:color-mix(in srgb,var(--window-background) 80%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 80%,var(--window-background-alt))
   }
   
   .w2ui-panel .w2ui-panel .w2ui-toolbar,.w2ui-tb-button.checked {
-  background-color:color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt))
   }
   
-  .panel-tabs.checked,.w2ui-tb-check.checked .w2ui-tb-text::before {
+  .w2ui-tb-check.checked .w2ui-tb-text::before {
   background-color:var(--accent)
   }
   
   .panel-tabs:hover {
-  background-color:color-mix(in srgb,color-mix(in srgb,var(--window-background) 50%,var(--window-background-alt)) 50%,var(--accent))
+  background-color:color-mix(in oklab,color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt)) 50%,var(--accent))
   }
   
   .panel-tabs:not(.checked) {
-  background-color:color-mix(in srgb,var(--window-background) 10%,var(--window-background-alt))
+  background-color:color-mix(in oklab,var(--window-background) 10%,var(--window-background-alt))
   }
   
   .panel-tabs {
@@ -317,10 +323,6 @@
   justify-content:space-around
   }
   
-  .w2ui-group-fields {
-  margin:0!important
-  }
-  
   .w2ui-group-fields label {
   width:min-content!important
   }
@@ -331,7 +333,6 @@
   
   highlight {
   background-color:var(--slider-1);
-  color:(--node-title);
   padding:1px 2px
   }
   
@@ -351,7 +352,6 @@
   }
   
   .w2ui-field.expand .w2ui-multi-items {
-  display:flex;
   flex-wrap:wrap;
   height:100%!important
   }
@@ -377,6 +377,16 @@
   width:24px
   }
   
+  .w2ui-btn.accent, .panel-tabs.checked {
+  background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent));
+  color: var(--node-title)
+  }
+  
+  .w2ui-btn.accent:hover, .panel-tabs.checked:hover {
+  background-color:color-mix(in oklab,var(--node-background) 70%,var(--accent));
+  color: var(--node-title)
+  }
+  
   .resize-icon:hover {
   background-color:var(--accent)!important;
   color:var(--accent)!important
@@ -391,12 +401,7 @@
   color:var(--window-text)
   }
   
-  .w2ui-column-container:not(:has(.col-1)) {
-  display:flex;
-  height:100%
-  }
-  
-  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div {
+  .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div,.w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,.w2ui-field:has(textarea) div {
   width:100%!important
   }
   
@@ -417,10 +422,22 @@
   flex-grow:2
   }
   
-  .w2ui-field.expand:has(.w2ui-multi-items),.w2ui-tb-button {
+  .w2ui-column-container:not(:has(.col-1)),.w2ui-field.expand:has(.w2ui-multi-items),.w2ui-tb-button {
   height:100%
   }
   
-  .li-search input,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-btn,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
+  .li-search input,.w2ui-btn,.w2ui-form input:not([type=radio]).w2ui-input,.w2ui-form textarea,.w2ui-input.w2field,.w2ui-message,.w2ui-multi-items .li-item,.w2ui-popup,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border-radius:.25rem
+  }
+  
+  .w2ui-field:has(textarea) {
+  display:block
+  }
+  
+  .w2ui-field:has(.w2ui-box-label) label:not(.w2ui-box-label) {
+  display:none
+  }
+  
+  .w2ui-box-label:has(input[type=radio]) input,.w2ui-field .w2ui-box-label input[type=checkbox],.w2ui-group-fields,.w2ui-tb-button .w2ui-tb-icon {
+  margin:0!important
   }

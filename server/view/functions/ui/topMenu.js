@@ -1,10 +1,12 @@
 import updateUiTheme from './updateTheme.js'
 import { w2ui } from '../../lib/w2ui.es6.min.js'
+import logsPopup from './logsPopup.js'
 
 let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor"]
-let themes = ["ocean_waves", "turnroot", "charcoal", "charcoal_blue", "charcoal_green", "chocolate", "midnight_spark", "snowdrift", "tokyo_night", "pink_dream", 'forest_mist', 'sunset_glow', 'pine_coast']
 
 const handleEvent = (event, toolbar) => {
+    if (!event.detail.item.id === 'logs'){
+    window.turnrootEditorLogs.push(`${new Date()}||info||Top menu button clicked: ${JSON.stringify(event.target)} with details ${JSON.stringify(event.detail)}`)}
     if (startupViews.includes(event.target)) {
         let startupView = event.target.split(':')[1]
         toolbar.get('settings').get('default-editor').items.forEach(item => {
@@ -15,16 +17,19 @@ const handleEvent = (event, toolbar) => {
             }
         })
     }
-    if (event.detail.item.id === 'collapseSidebar') {
+    else if (event.detail.item.id === 'collapseSidebar') {
         window.goFlat()
     }
-    if (event.detail.item.id === 'forums') {
+    else if (event.detail.item.id === 'logs'){
+        logsPopup()
+    }
+    else if (event.detail.item.id === 'forums') {
         window.open('https://community.turnroot.com', '_blank')
     }
-    if (event.detail.item.id === 'help') {
+    else if (event.detail.item.id === 'help') {
         window.open('https://docs.turnroot.com', '_blank')
     }
-    if (event.detail.item.id === 'show-status-bar') {
+    else if (event.detail.item.id === 'show-status-bar') {
         let statusBar = w2ui.EditorWindowStatusBar
         let layout = w2ui.EditorWindowLayout
         if (event.detail.item.checked) {
@@ -37,7 +42,6 @@ const handleEvent = (event, toolbar) => {
     }
     if (event.detail.subItem) {
         let themeSubitems = toolbar.get('settings').get('themes').items.map(item => item.id)
-        console.log(themeSubitems, event.detail.subItem.id)
         if (themeSubitems.includes(event.detail.subItem.id)) {
             updateUiTheme(event.detail.subItem.id)
             toolbar.get('settings').get('themes').items.forEach(item => {
@@ -49,7 +53,6 @@ const handleEvent = (event, toolbar) => {
             })
         }
     } else {
-        console.log('Click:', event.detail.item.id)
     }
 }
 

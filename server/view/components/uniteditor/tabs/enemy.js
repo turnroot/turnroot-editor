@@ -78,10 +78,10 @@ let config = {
 }
 
 let form = new w2form(config)
-console.log(form, config)
 
 form.updateGlobals = () => {
-    console.log('Updating globals')
+    window.turnrootEditorLogs.push(`${new Date()}||info||Updating Enemy form globals`)
+    form.refresh()
 }
 
 form.updateGlobals()

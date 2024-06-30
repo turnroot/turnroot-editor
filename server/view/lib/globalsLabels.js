@@ -37,7 +37,8 @@ const labels = {
         combatTriangleTypes: 'Combat triangle types',
         combatNeutralTypes: 'Combat neutral types',
         combatMagicTriangleTypes: 'Combat magic triangle types',
-        combatNeutralMagicTypes: 'Combat neutral magic types'
+        combatNeutralMagicTypes: 'Combat neutral magic types',
+        aptitudeGoals: '(Friendly/avatar) units have aptitude goals',
 
 }
 

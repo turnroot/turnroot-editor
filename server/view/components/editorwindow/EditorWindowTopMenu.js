@@ -55,10 +55,6 @@ let toolbar = new w2toolbar({
                         id: 'pink_dream'
                     },
                     {
-                        text: 'Forest Mist',
-                        id: 'forest_mist'
-                    },
-                    {
                         text: 'Sunset Glow',
                         id: 'sunset_glow'
                     },
@@ -77,7 +73,8 @@ let toolbar = new w2toolbar({
             {
                 text: 'Welcome message',
                 id: 'default-editor-welcome-message',
-                style: 'background-color: var(--window-background-alt);'
+                style: 'background-color: var(--window-background-alt);',
+                checked: true
             },
             {
                 text: 'Unit Editor',
@@ -104,6 +101,11 @@ let toolbar = new w2toolbar({
             text: 'Status bar',
             checked: true,
             class: 'w2ui-tb-check'
+        },
+        {
+            type: 'button',
+            id: 'logs',
+            text: 'Logs',
         },
     {
         type: 'spacer'

@@ -10,7 +10,7 @@ let toolbar = new w2toolbar({
         {type: 'button',
         id: 'new-unit',
         text: 'New unit',
-        class: "w2ui-btn",
+        class: "w2ui-btn accent",
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus"><path d="M5 12h14"/><path d="M12 5v14"/></svg>',
         },
         {type: 'button',
@@ -30,7 +30,10 @@ let toolbar = new w2toolbar({
 
 toolbar.on('click', function (event) {
     event.done(() => {
-        console.log(event)
+        window.turnrootEditorLogs.push(`${new Date()}||info||Unit toolbar button clicked: ${JSON.stringify(event.target)}`)
+        if (event.detail.item.id === 'new-unit') {
+            window.UnitEditorCreateNewUnit()
+        }
     })
 
 })

@@ -45,7 +45,7 @@ html :has(#main.midnight_spark) {
     
     html :has(#main.ocean_waves) {
     --accent:#78ffe8;
-    --button-alt-text:#7AA6CD;
+    --button-alt-text:#9fbcd5;
     --list-background:#394159;
     --node-background:#dd273d52;
     --node-text:#b6cfe6;
@@ -60,7 +60,7 @@ html :has(#main.midnight_spark) {
     
     html :has(#main.chocolate) {
     --accent:#F9C27E;
-    --button-alt-text:#694746;
+    --button-alt-text:#a17776;
     --list-background:#733A2D;
     --node-background:#512C2A;
     --node-text:#FBF4EB;
@@ -100,6 +100,7 @@ html :has(#main.midnight_spark) {
     
     html :has(#main.pink_dream) {
     --accent:#FF69B4;
+    --button-alt-text:#594e4f;
     --list-background:#F8BBD0;
     --node-background:#F3E5F5;
     --node-text:#6A1B9A;
@@ -118,7 +119,7 @@ html :has(#main.midnight_spark) {
     --list-background:#F5F5F5;
     --node-background:#E0E0E0;
     --node-text:#333;
-    --node-title:#AEC6CF;
+    --node-title:#171717;
     --node-title-background:#D8D8D8;
     --slider-0:#D3D3D3;
     --slider-1:#B0C4DE;
@@ -133,7 +134,7 @@ html :has(#main.midnight_spark) {
     --list-background:#2D2A4A;
     --node-background:#1F1B3A;
     --node-text:#76EEC6;
-    --node-title:#FFBF00;
+    --node-title:#fff;
     --node-title-background:#342D61;
     --slider-0:#76EEC6;
     --slider-1:#FF8C00;
@@ -142,28 +143,13 @@ html :has(#main.midnight_spark) {
     --window-text:#76EEC6
     }
     
-    html :has(#main.forest_mist) {
-    --accent:#556B2F;
-    --button-alt-text:#8FBC8F;
-    --list-background:#98FB98;
-    --node-background:#2E8B57;
-    --node-text:#2F4F4F;
-    --node-title:#556B2F;
-    --node-title-background:#3CB371;
-    --slider-0:#66CDAA;
-    --slider-1:#8FBC8F;
-    --window-background:#F5FFFA;
-    --window-background-alt:#F0FFF0;
-    --window-text:#2F4F4F
-    }
-    
     html :has(#main.sunset_glow) {
     --accent:#FF4500;
     --button-alt-text:#FF6347;
     --list-background:#FFDAB9;
     --node-background:#FFB6C1;
     --node-text:#8B0000;
-    --node-title:#FF4500;
+    --node-title:#843E24;
     --node-title-background:#FF69B4;
     --slider-0:#FFA07A;
     --slider-1:#FF8C00;
@@ -178,7 +164,7 @@ html :has(#main.midnight_spark) {
     --list-background:#2F4F4F;
     --node-background:#2E8B57;
     --node-text:#B0C4DE;
-    --node-title:#5F9EA0;
+    --node-title:#B2DEDF;
     --node-title-background:#3B5323;
     --slider-0:#4682B4;
     --slider-1:#8B4513;

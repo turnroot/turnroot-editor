@@ -26,4 +26,6 @@ if (window.statsUseExtraStatAuthority) {
     globalStats.push({ field: 'authority', type: 'int', html: { label: 'Authority', attr: '', column: 1 } })
 }
 
+window.turnrootEditorLogs.push(`${new Date()}||info||Global stats loaded`)
+
 export default globalStats

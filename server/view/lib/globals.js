@@ -2,7 +2,7 @@ import defaults from './defaults.js'
 
 import {w2ui} from './w2ui.es6.min.js'
 
-const booleans = ['unitsCanHaveChildren', 'useExperienceSublevels', 'useExperienceAptitudes', 'combatCombatArts', 'combatWeaponTriangle', 'combatExpandedWeaponTriangle', 'combatMagicTriangle', 'combatBattalions', 'combatBattalionEndurance', 'combatPairUp', 'combatAdjutants', 'combatAdjutantHeal', 'combatAdjutantGuard', 'combatAdjutantAttack', 'statsUseExtraStatWeight', 'statsExtraStatWeightAffectsMovement', 'statsUseExtraStatLuck', 'combatSeparateCritAvoid', 'statsUseExtraStatAuthority', 'statsUseExtraStatCharm', 'statsAptitudesUseRiding', 'statsAptitudesUseFlying', 'statsAptitudesUseAuthority', 'statsAptitudesUseArmor']
+const booleans = ['unitsCanHaveChildren', 'useExperienceSublevels', 'useExperienceAptitudes', 'combatCombatArts', 'combatWeaponTriangle', 'combatExpandedWeaponTriangle', 'combatMagicTriangle', 'combatBattalions', 'combatBattalionEndurance', 'combatPairUp', 'combatAdjutants', 'combatAdjutantHeal', 'combatAdjutantGuard', 'combatAdjutantAttack', 'aptitudeGoals', 'statsUseExtraStatWeight', 'statsExtraStatWeightAffectsMovement', 'statsUseExtraStatLuck', 'combatSeparateCritAvoid', 'statsUseExtraStatAuthority', 'statsUseExtraStatCharm', 'statsAptitudesUseRiding', 'statsAptitudesUseFlying', 'statsAptitudesUseAuthority', 'statsAptitudesUseArmor']
 
 const integers = ['combatCombatArtLimit', 'combatWeaponTriangleAdvantage', 'combatWeaponTriangleDisadvantage', 'combatMagicTriangleAdvantage', 'combatMagicTriangleDisadvantage', 'combatBattalionLimit']
 
@@ -95,7 +95,7 @@ const updateFormGlobals = () => {
         if (w2ui[formName]) {
             w2ui[formName].updateGlobals()
         } else {
-            console.log(`Form ${formName} not found`)
+            window.turnrootEditorLogs.push(`${new Date()}||error||Form ${formName} not found`)
         }
     })
 }

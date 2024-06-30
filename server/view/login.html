@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+    <form action="/login" method="post" style="display:block;" id = "login">
+        <input type="text" name="username" placeholder="Username or email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+        <a href="/login?register=true">Register</a>
+    </form>
+    
+    
+    <form action="/register" method="post" style = "display:none;" id = "register">
+        <input type="text" name="username" placeholder="Username" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Register</button>
+        <a href="/login">Login</a>
+    </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function getQueryParam(param) {
+                const urlParams = new URLSearchParams(window.location.search)
+                return urlParams.get(param)
+            }
+            const errorMessage = getQueryParam('error')
+            if (errorMessage) {
+                const errorDiv = document.createElement('div')
+                errorDiv.textContent = decodeURIComponent(errorMessage)
+                errorDiv.style.color = 'red'; // Style the error message
+                document.body.insertBefore(errorDiv, document.body.firstChild)
+            }
+            const register = getQueryParam('register')
+            if (register) {
+                document.getElementById('login').style.display = 'none'
+                document.getElementById('register').style.display = 'block'
+            }
+        })
+        </script>
+</body>
+</html>
+

@@ -8,28 +8,49 @@ const db = mysql.createConnection({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
+    port: process.env.DB_PORT
 })
 
-if (process.env.local === 'false') {
-db.connect((err) => {
-    if (err) {
-        console.log(err)
-    } else {
-        console.log('Database connected')
-    }
-})
 
-let sql = `SELECT EXISTS (
-    SELECT FROM information_schema.tables 
+const dbInit = () => {
+    if (process.env.local === 'false') {
+        db.connect((err) => {
+            if (err) {
+                console.log(err)
+                return err
+            } else {
+                console.log('Database connected')
+            }
+        })
+
+        db.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`, (err, result) => {
+            if (err) {
+                console.log(err)
+                return err
+            }
+            console.log('Database exists: ' + process.env.DB_NAME)
+        })
+
+        db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+            if (err) {
+                console.log(err)
+                return err
+            }
+            console.log('Using database: ' + process.env.DB_NAME)
+        })
+
+        let sql = `SELECT EXISTS (
+    SELECT 1 FROM information_schema.tables 
     WHERE table_schema = ?
     AND table_name = 'Users')`
 
-db.query(sql,[process.env.DB_NAME], (err, result) => {
-    if (err) throw err
+        db.query(sql, [process.env.DB_NAME], (err, result) => {
+            if (err) {
+                throw err
+            }
 
-    if (!result[0][Object.keys(result[0])[0]]) {
-        sql = `CREATE TABLE Users(
+            if (!result[0][Object.keys(result[0])[0]]) {
+                sql = `CREATE TABLE Users(
     userId VARCHAR(255) UNIQUE,
     username VARCHAR(255) UNIQUE,
     email VARCHAR(255) UNIQUE,
@@ -40,31 +61,35 @@ db.query(sql,[process.env.DB_NAME], (err, result) => {
     paymentMethodId VARCHAR(255),
     password VARCHAR(255))`
 
-        db.query(sql, (err, result) => {
-            if (err) throw err
-            console.log("Users table created")
+                db.query(sql, (err, result) => {
+                    if (err) throw err
+                    console.log("Users table created")
+                })
+            }
         })
-    }
-})
 
-sql = `SELECT EXISTS (
-    SELECT FROM information_schema.tables 
+        sql = `SELECT EXISTS (
+    SELECT 1 FROM information_schema.tables 
     WHERE table_schema = ? 
     AND table_name = 'UsedStrings')`
 
-db.query(sql, [process.env.DB_NAME], (err, result) => {
-    if (err) throw err
+        db.query(sql, [process.env.DB_NAME], (err, result) => {
+            if (err) {
+                throw err
+            }
 
 
-    if (!result[0][Object.keys(result[0])[0]]) {
-        sql = `CREATE TABLE UsedStrings(
+            if (!result[0][Object.keys(result[0])[0]]) {
+                sql = `CREATE TABLE UsedStrings(
     usedString VARCHAR(255))`
-        db.query(sql, (err, result) => {
-            if (err) throw err
-            console.log("UsedStrings table created")
+                db.query(sql, (err, result) => {
+                    if (err) throw err
+                    console.log("UsedStrings table created")
+                })
+            }
         })
     }
-})}
+}
 
 const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-"
 const length = 18
@@ -83,7 +108,7 @@ const randomStringUnique = () => {
 
         const checkAndInsertString = () => {
             db.query(sql, [str], (err, result) => {
-                if (err) reject(err)
+                if (err) resolve(err)
 
                 if (result[0][Object.keys(result[0])[0]]) {
                     str = randomString()
@@ -91,7 +116,7 @@ const randomStringUnique = () => {
                 } else {
                     sql = 'INSERT INTO UsedStrings (usedString) VALUES (?)';
                     db.query(sql, [str], (err, result) => {
-                        if (err) reject(err)
+                        if (err) resolve(err)
                         resolve(str)
                     })
                 }
@@ -106,7 +131,16 @@ const generateDbName = async () => {
     return "_trdb_" + uniqueString
 }
 
-const createUser = async (username, email, password) => {
+const createUser = async (user) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
+    let username = user.username
+    let email = user.email
+    let password = user.password
     return new Promise((resolve, reject) => {
         bcrypt.hash(password, 10, async (err, hash) => {
             if (err) reject(err)
@@ -115,14 +149,24 @@ const createUser = async (username, email, password) => {
             const sql = 'INSERT INTO Users (userId, username, email, password) VALUES (?, ?, ?, ?)'
 
             db.query(sql, [userId, username, email, hash], (err, result) => {
-                if (err) reject(err)
-                resolve({userId, username, email})
+                if (err) resolve(err)
+                resolve({
+                    userId,
+                    username,
+                    email
+                })
             })
         })
     })
 }
 
 const getUser = (username) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users WHERE username = ?'
 
@@ -139,6 +183,12 @@ const getUser = (username) => {
 }
 
 const getUserByEmail = (email) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         const sql = 'SELECT * FROM Users WHERE email = ?'
 
@@ -154,25 +204,32 @@ const getUserByEmail = (email) => {
     })
 }
 
-const loginUser = (req, res) => {
-    const {username, password} = req.body
+const loginUser = (username, password) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
         let sql = 'SELECT * FROM Users WHERE username = ?'
         let value = username
 
         db.query(sql, [value], (err, result) => {
-            if (err) reject(err)
+            if (err) resolve(err)
 
-            if (result.length === 0) {
+            if (result === undefined) {
+                resolve(null)
+            } else if (result && result.length === 0){
                 resolve(null)
             } else {
                 bcrypt.compare(password, result[0].password, (err, res) => {
-                    if (err) reject(err)
+                    if (err) resolve(err)
 
                     if (res) {
                         let sql = 'UPDATE Users SET lastLogin = CURRENT_TIMESTAMP WHERE username = ?'
                         db.query(sql, [result[0].username], (err, result) => {
-                            if (err) reject(err)
+                            if (err) resolve(err)
                         })
                         resolve(result[0])
                     } else {
@@ -185,8 +242,14 @@ const loginUser = (req, res) => {
 }
 
 const getUserUserId = (userId, thisUser) => {
+    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
+        if (err) {
+            console.log(err)
+            return err
+        }
+    })
     return new Promise((resolve, reject) => {
-        const sql = `SELECT * FROM Users WHERE userId = ?` 
+        const sql = `SELECT * FROM Users WHERE userId = ?`
         db.query(sql, [userId], (err, result) => {
             if (err) reject(err)
             if (result[0].username === thisUser.username && result[0].email === thisUser.email) {
@@ -198,4 +261,12 @@ const getUserUserId = (userId, thisUser) => {
     })
 }
 
-export {createUser, getUser, getUserUserId, getUserByEmail, loginUser, db}
+export {
+    createUser,
+    getUser,
+    getUserUserId,
+    getUserByEmail,
+    loginUser,
+    db,
+    dbInit
+}

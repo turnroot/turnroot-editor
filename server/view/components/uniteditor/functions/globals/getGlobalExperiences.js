@@ -45,4 +45,6 @@ for (let weaponType of globalWeaponTypes) {
     )
 }
 
+window.turnrootEditorLogs.push(`${new Date()}||info||Global experiences loaded`)
+
 export default globalExperiences

@@ -8,18 +8,18 @@ import { Strategy as LocalStrategy } from 'passport-local'
 import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
-import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { loginUser, getUser, createUser, getUserByEmail, getUserUserId } from './functions/db.js'
+import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbInit } from './functions/db.js'
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
 const app = express()
-app.use(bodyParser.raw({type: 'application/json'}))
+app.use(express.urlencoded({ extended: true }))
+app.use(express.json())
 app.use(cookieParser())
 dotenv.config()
 
@@ -50,11 +50,16 @@ if (process.env.LOCAL === 'false') {
     }))
 }
 
+const loggedInUsers = []
+const workQueues = {}
+
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false, cookie: { secure:'httpOnly' }}))
 
 app.use(csrf({
     key: process.env.CSRF_KEY,
 }))
+
+try{dbInit()} catch (err) {console.error(err)}
 
 app.use(passport.initialize())
 passport.use(new LocalStrategy(
@@ -87,9 +92,6 @@ app.use(limiter)
 
 app.use(morgan(process.env.LOCAL === 'true' ? 'dev' : 'common'))
 
-app.use(express.json())
-app.use(express.urlencoded({extended: true}))
-
 const __dirname = path.join(path.dirname(fileURLToPath(import.meta.url)), 'view')
 
 app.use('/components', express.static(path.join(__dirname, 'components')))
@@ -98,76 +100,141 @@ app.use('/style', express.static(path.join(__dirname, 'style')))
 app.use('/lib', express.static(path.join(__dirname, 'lib')))
 app.use('/bundle.js', express.static(path.join(__dirname, 'bundle.js')))
 
-app.get('/', (req, res) => {
+function ensureAuthenticated(req, res, next) {
+    console.log("Checking authentication")
+    if (process.env.LOCAL === 'true'){
+        req.user = {}
+        req.user.userId = 'local'
+
+        establishConnection(req, res).catch((err) => {
+            console.error(err)
+        })
+
+        if (req.isAuthenticated()) {
+            return next()
+    }
+    res.sendFile(path.join(__dirname, './preview.html'))} else {
+        res.sendFile(path.join(__dirname, './login.html'))
+    }
+}
+
+app.get('/', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))
+})
+
+app.post('/queue', ensureAuthenticated, async(req, res) => {
+    console.log(req.body)
+    workQueues[req.user.userId] = req.body
+    let thisQueue = workQueues[req.user.userId]
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://127.0.0.1:9194/data' 
+    let body = {
+        userId: req.user.userId,
+        key: process.env.SCHEMAS_SERVER_KEY,
+        actions: thisQueue
+    }
+    let options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(body)
+    }
+    let response = await fetch(url, options).catch(err => console.error(err))
+    if (response && response.status === 200) {
+    res.send({status: 'success'})} else {
+        console.error('Error: invalid response from schemas server')
+        res.send({status: 'failure'})
+    }
+})
+
+app.get('/login', (req, res) => {
+    res.sendFile(path.join(__dirname, './login.html'))
+})
+
+app.get('/register', (req, res) => {
+    res.redirect('/login?register=true')
 })
 
 app.post('/login', function(req, res, next) {
     if (process.env.LOCAL === 'true'){
         establishConnection(req, res).catch((err) => {
-            console.error(err)
+            return res.redirect(`/login?error=${encodeURIComponent(err)}`)
         })
     }
+    try{
     passport.authenticate('local', function(err, user, info) {
         if (err) { 
-            return next(err) 
+            return res.redirect(`/login?error=${encodeURIComponent(err)}`)
         }
         if (!user) { 
-            return res.status(418).send('User not found')
+            return res.redirect(`/login?error=${encodeURIComponent('User not found')}`)
         }
         req.logIn(user, async function(err) {
             if (err) { 
-                return next(err)
-            }
-            let loginresult = await loginUser(req, res).catch((err) => {
                 console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
+            }
+            try{
+            let loginresult = await loginUser(req.body.username, req.body.password).catch((err) => {
+                console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
             })
             if (!loginresult) {
-                return res.status(500).send('Login failure')
+                return res.redirect(`/login?error=${encodeURIComponent('Login failed')}`)
             }
             establishConnection(req, res).catch((err) => {
-                console.error(err)
+                return res.redirect(`/login?error=${encodeURIComponent(err)}`)
             })
+            loggedInUsers.push(req.user)
+            return res.redirect('/')} catch (err) {
+                console.error(err)
+            }
         })
-    })(req, res, next)
+    
+    })(req, res, next) } catch (err) {
+        console.error(err)
+        return res.redirect(`/login?error=${encodeURIComponent(err)}`)
+    }
 })
 
 app.post('/register', async (req, res) => {
     const user = req.body
     const newUser = await createUser(user)
     if (!newUser) {
-        res.status(400).send('User creation failed')
-        return
+        return res.redirect(`/login?error=${encodeURIComponent('Registration failed')}`)
     }
 
     req.logIn(newUser, async function(err) {
         if (err) {
             console.error(err)
-            return res.status(500).send('Login after registration failed')
+            return res.redirect(`/login?error=${encodeURIComponent('Login after registration failed')}`)
         }
 
         try {
-            await loginUser(req, res)
+            await loginUser(req.body.username, req.body.password).catch((err) => {
+                console.error(err)
+            })
             establishConnection(req, res).catch((err) => {
                 console.error(err)
             })
+            loggedInUsers.push(req.user)
+            return res.redirect('/')
         } catch (err) {
             console.error(err)
-            return res.status(500).send('Login after registration failed')
+            return res.redirect(`/login?error=${encodeURIComponent('Login after registration failed')}`)
         }
     })
 })
 
 app.post('/data', async (req, res) => {
-    req.body.queue = window.editsQueue.queue
     if (process.env.LOCAL === 'false'){
     if (!req.user) {
         res.status(401).send('Unauthorized')
         return
-    }}
+    }
     let subscription
     if (!req.user.subscription) {
-        subscription = process.env.LOCAL === 'false' ? await getSubscription(req.user.username) : 'local'
+        subscription = await getSubscription(req.user.username)
         req.user.subscription = subscription
     } else {
         subscription = req.user.subscription
@@ -175,15 +242,16 @@ app.post('/data', async (req, res) => {
     if (!subscription) {
         res.status(401).send('User is not subscribed')
         return
-    }
+    }}
     sendToFromDatabase(req, res).catch((err) => {
         console.error(err)
     })
 })
 
 app.get('/logout', (req, res) => {
+    loggedInUsers.splice(loggedInUsers.indexOf(req.user), 1)
     req.logout()
-    res.status(200).send('Logged out')
+    res.redirect('/login')
 })
 
 app.get('/user/:username', async (req, res) => {
