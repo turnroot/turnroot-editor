@@ -47,7 +47,7 @@ const sendToFromDatabase = async (req, res) => {
     if (!req.user && process.env.LOCAL === 'false'){
         return res.status(200).send('No data processed')
     }
-    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://localhost:9194/data'
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'https://schemas-server.turnroot.com:9194/data'
     let body = {
         userId: req.user.userId,
         key: process.env.SCHEMAS_SERVER_KEY,
