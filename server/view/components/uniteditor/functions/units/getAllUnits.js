@@ -26,7 +26,7 @@ const getAllUnits = async() => {
     if (now - lastPull < 10000 && pulled === true){
         if (window.allUnits){return window.allUnits} else {return []}
     } 
-    console.log(url, options)
+
     let response = await fetch(url, options).catch(err => {
         console.error(err)
         return w2alert('Error: invalid response from schemas server')

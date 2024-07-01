@@ -36,7 +36,7 @@ const subtypeConfig = {
         toolbarShow: ['unit-editor-bottom-toolbar-relationship', 'unit-editor-bottom-toolbar-behavior']
     },
     Enemy: {
-        hide: ['canSSupport', 'orientation', 'canHaveChildren', 'growth-rates', 'base-stats-header', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
+        hide: ['canSSupport', 'orientation', 'canHaveChildren', 'growth-rates', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
         enable: [],
         disable: [],
         show: ['canRecruit', 'useAccentColors', 'randomize-base-stats', 'isUnique'],

@@ -1,8 +1,7 @@
-const createNewUnit = async (
-    subtype, familiarName
+const deleteUnit = async (
+    id
 ) => {
-    console.log('creating new unit')
-    console.log(subtype)
+    console.log('deleting unit')
     let url = 'http://localhost:26068/data'
     let method = 'POST'
     let headers = {
@@ -14,7 +13,7 @@ const createNewUnit = async (
     body.queue = [
         {
             model: 'Person',
-            method: 'createPerson',
+            method: 'deletePerson',
         }
     ]
     console.log(body)
@@ -23,7 +22,7 @@ const createNewUnit = async (
         headers: headers,
         body: JSON.stringify(body)
     }
-    console.log(url, options)
+
     let response  = await fetch(url, options).catch(err => {
         console.error(err)
         return w2alert('Error: invalid response from schemas server')
@@ -37,4 +36,4 @@ const createNewUnit = async (
     }
 }
 
-export default createNewUnit
+export default deleteUnit

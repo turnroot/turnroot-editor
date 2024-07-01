@@ -35,7 +35,7 @@
             window.turnrootEditorLogs.push(`${new Date()}||info||${JSON.stringify(message)}`)
         }
         console.error = function (message) {
-            window.turnrootEditorLogs.push(`${new Date()}||error||${JSON.stringify(message)}`)
+            window.turnrootEditorLogs.push(`${new Date()}||error||${message? JSON.stringify(message) : 'No error message'}`)
         }
     </script>
     <script type="module">

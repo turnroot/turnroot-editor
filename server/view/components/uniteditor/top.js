@@ -1,11 +1,15 @@
 import {
     w2toolbar,
-    w2prompt
+    w2prompt,
+    w2alert,
+    w2confirm
 } from '../../lib/w2ui.es6.min.js'
 
-import createNewUnit from './functions/createNewUnit.js'
-import getAllUnits from './functions/getAllUnits.js'
+import createNewUnit from './functions/units/createNewUnit.js'
+import deleteUnit from './functions/units/deleteUnit.js'
+import getAllUnits from './functions/units/getAllUnits.js'
 window.UnitEditorCreateNewUnit = createNewUnit
+window.UnitEditorDeleteUnit = deleteUnit
 
 import updateCurrentUnitRecord from './functions/utils/updateCurrentUnitRecord.js'
 
@@ -75,11 +79,36 @@ toolbar.on('click', function async(event) {
                         window.UnitEditorLeftSidebar.refresh()
                         
                         return w2alert('New unit created')
+                    }).catch(e => {
+                        console.error(e)
                     })
-
-                    
-
                 }
+            })
+        }
+        else if (event.detail.item.id === 'delete-unit'){
+            if (window.allUnits.length === 0){
+                return w2alert('No units to delete')
+            }
+            let unit = window.currentUnit
+            w2confirm({
+                title: 'Delete unit',
+                body: `Are you sure you want to delete ${unit.name}?`,
+                width: 300,
+                height:200,
+            }).yes(async() => {
+                updateCurrentUnitRecord(window.currentUnit)
+                await window.UnitEditorDeleteUnit(unit.id).then(() => {
+                    let index = window.allUnits.findIndex(u => u.id === unit.id)
+                    window.allUnits.splice(index, 1)
+                    window.UnitEditorLeftSidebar.remove()
+                    window.UnitEditorLeftSidebar.nodes = window.allUnits.map(unit => ({id: unit.id, text: unit.name + ' ' + unit.id}))
+                    window.UnitEditorLeftSidebar.refresh()
+                    window.currentUnit = window.allUnits[0]
+                    window.UnitEditor.html('main', window.unitEditorBasicFields)
+                    return w2alert('Unit deleted')
+                }).catch(e => {
+                    return w2alert('Error deleting unit')
+                })
             })
         }
     })
