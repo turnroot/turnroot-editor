@@ -16,17 +16,17 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
-    window.allUnits = await getAllUnits()
-    try{
-            window.UnitEditorLeftSidebar.remove()
-            window.UnitEditorLeftSidebar.add(window.allUnits.map(unit => { return { id: unit, familiar_name: unit } }))
-    } catch (e){
-        console.log(e)
-    }
+    layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading units...</h2></div>')
+
+        window.allUnits = await getAllUnits()
+        console.log(window.allUnits)
+        
 
     if (window.allUnits.length > 0){
         window.currentUnit = window.allUnits[0]
         layout.html('main', unitEditorBasicFields)
+        unitEditorLeft.nodes = window.allUnits.map(unit => ({id: unit.id, text: unit.name}))
+        unitEditorLeft.refresh()
     } else {
         layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>No units</h2><p>Create a new unit to get started</p><img src = "http://localhost:26068/style/img/nu.png" style="position: fixed;width: 256px;left: 17%;top: 33%;"></div>')
     }

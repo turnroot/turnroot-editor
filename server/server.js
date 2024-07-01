@@ -126,7 +126,7 @@ app.post('/queue', ensureAuthenticated, async(req, res) => {
     console.log(req.body)
     workQueues[req.user.userId] = req.body
     let thisQueue = workQueues[req.user.userId]
-    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://127.0.0.1:9194/data' 
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://localhost:9194/data' 
     let body = {
         userId: req.user.userId,
         key: process.env.SCHEMAS_SERVER_KEY,

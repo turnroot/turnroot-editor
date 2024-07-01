@@ -39,7 +39,10 @@ window.handleBaseStatRandomizerPopup = handleBaseStatRandomizerPopup
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
+        id: '',
         name: 'New Unit',
+        fullName: 'New Unit',
+        title: '',
         pronouns: 'they/them/their/theirs',
         subtype: 'Avatar',
         notes: '',
@@ -62,6 +65,16 @@ let config = {
             }
         },
         {
+            field: 'id',
+            type: 'text',
+            html: {
+                label: 'ID',
+                attr: 'readonly',
+                column: 0,
+            },
+            hidden: true
+        },
+        {
             field: 'name',
             type: 'text',
             html: {
@@ -80,7 +93,7 @@ let config = {
             }
         },
         {
-            field: 'Title',
+            field: 'title',
             type: 'text',
             html: {
                 label: 'Title',

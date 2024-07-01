@@ -1,7 +1,15 @@
 import {
     w2toolbar,
-    w2ui
+    w2prompt
 } from '../../lib/w2ui.es6.min.js'
+
+import createNewUnit from './functions/createNewUnit.js'
+import getAllUnits from './functions/getAllUnits.js'
+window.UnitEditorCreateNewUnit = createNewUnit
+
+import updateCurrentUnitRecord from './functions/utils/updateCurrentUnitRecord.js'
+
+let nodes = []
 
 let toolbar = new w2toolbar({
     name: 'UnitEditorTopMenu',
@@ -28,11 +36,51 @@ let toolbar = new w2toolbar({
     ]
 })
 
-toolbar.on('click', function (event) {
-    event.done(() => {
+toolbar.on('click', function async(event) {
+    event.done(async() => {
         window.turnrootEditorLogs.push(`${new Date()}||info||Unit toolbar button clicked: ${JSON.stringify(event.target)}`)
         if (event.detail.item.id === 'new-unit') {
-            window.UnitEditorCreateNewUnit()
+            w2prompt({
+                title: 'Create new unit',
+                label: 'Enter the familiar name of the new unit',
+            }).ok(async(event) => {
+                
+                if (event.detail.value === ''){
+                    event.preventDefault()
+                } else {
+                    window.allUnits = await getAllUnits()
+                    let subtype = 'avatar'
+                    if (window.allUnits.length > 0){
+                        subtype = 'enemy'
+                    }
+                    await window.UnitEditorCreateNewUnit(subtype, event.detail.value).then(n => {
+                        window.UnitEditor.html('main', window.unitEditorBasicFields)
+                        window.allUnits.push(n)
+                        window.currentUnit = n
+                        
+                        updateCurrentUnitRecord(n)
+
+                        window.allUnits.forEach(unit => {
+                            nodes.push({id:  unit.id, text: unit.name})
+                        })
+                        nodes.forEach(node => {
+                            if (node.id === n.id){
+                                node.selected = true
+                            }
+                        })
+                        window.allUnitsNodes = nodes
+                        window.UnitEditorLeftSidebar.remove()
+                        window.UnitEditorLeftSidebar.nodes = window.allUnitsNodes
+                        window.UnitEditor.refresh()
+                        window.UnitEditorLeftSidebar.refresh()
+                        
+                        return w2alert('New unit created')
+                    })
+
+                    
+
+                }
+            })
         }
     })
 
