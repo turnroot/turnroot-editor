@@ -2,8 +2,10 @@ let lastPull = new Date()
 let pulled = false 
 
 const getAllUnits = async() => {
+
     console.log('getting all units')
     let url = 'http://localhost:26068/data'
+
     let method = 'POST'
     let headers = {
         'Content-Type': 'application/json'
