@@ -122,6 +122,10 @@ app.get('/', ensureAuthenticated, (req, res) => {
     res.sendFile(path.join(__dirname, './preview.html'))
 })
 
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'favicon.ico'))
+})
+
 app.post('/queue', ensureAuthenticated, async(req, res) => {
     console.log(req.body)
     workQueues[req.user.userId] = req.body
