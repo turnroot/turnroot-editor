@@ -52,11 +52,14 @@ function applySubtypeConfig(form, config) {
         form[config.hide.includes(stat.field) ? 'hide' : 'show'](stat.field)
     })
     let bottomToolbar = w2ui['unit-editor-bottom-toolbar']
+    bottomToolbar.hide('unit-editor-bottom-toolbar-relationship')
+    bottomToolbar.hide('unit-editor-bottom-toolbar-behavior')
+    bottomToolbar.show('unit-editor-bottom-toolbar-basic')
     config.toolbarShow.forEach(tab => bottomToolbar.show(tab))
     bottomToolbar.refresh()
 }
 
-const handleEvent = (form, event) => {
+const handleEvent = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value
 
@@ -118,6 +121,11 @@ const handleEvent = (form, event) => {
 
     else if (field === 'subtype') {
         form.lock('', true)
+        if (automated){
+            applySubtypeConfig(form, subtypeConfig[value.current])
+            form.unlock()
+            return
+        }
         if (value.current === 'Avatar' && numAvatars > 0) {
             form.message({
                 body: '<div class="w2ui-centered">You already have an Avatar unit. You cannot create another.</div>',

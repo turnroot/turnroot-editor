@@ -61,7 +61,7 @@ toolbar.on('click', function async(event) {
                         updateCurrentUnitRecord(n)
 
                         window.allUnits.forEach(unit => {
-                            nodes.push({id:  unit.id, text: unit.name})
+                            nodes.push({id:  unit.id, text: unit.name + ' ' + unit.id})
                         })
                         nodes.forEach(node => {
                             if (node.id === n.id){
