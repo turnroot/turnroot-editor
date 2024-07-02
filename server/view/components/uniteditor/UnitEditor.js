@@ -28,6 +28,7 @@ layout.on('render', async function(event){
         unitEditorLeft.nodes = window.allUnits.map(unit => ({id: unit.id, text: unit.name + ' ' + unit.id}))
         unitEditorLeft.nodes[0].selected = true
         unitEditorLeft.refresh()
+        window.UnitEditorActiveTab = 'basic'
     } else {
         layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>No units</h2><p>Create a new unit to get started</p><img src = "http://localhost:26068/style/img/nu.png" style="position: fixed;width: 256px;left: 17%;top: 33%;"></div>')
     }

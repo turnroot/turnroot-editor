@@ -3,7 +3,7 @@
   outline:0
   }
   
-  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
+  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button, .w2ui-group-fields {
   display:flex
   }
   
@@ -327,7 +327,7 @@
   width:min-content!important
   }
   
-  .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span {
+  .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span, .w2ui-group-title {
   display:none!important
   }
   

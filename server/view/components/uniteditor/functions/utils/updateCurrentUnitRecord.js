@@ -4,8 +4,13 @@ const capitalizeFirstLetter = (string) => {
 let c = capitalizeFirstLetter
 
 import handleEvent from '../handleBasic.js'
+import {populateSupportableUnits} from '../../../uniteditor/tabs/relationship.js'
 
-const updateCurrentUnitRecord = (n) => {
+const updateCurrentUnitRecord = async(n) => {
+    window.currentUnit = n
+    console.log('updating current unit record')
+
+    populateSupportableUnits(window.allUnits, n.id)
     window.unitEditorBasicFields.record['fullName'] = n.fullName
     window.unitEditorBasicFields.record['title'] = n.title
     window.unitEditorBasicFields.record['name'] = n.name
@@ -33,7 +38,6 @@ const updateCurrentUnitRecord = (n) => {
 
     window.unitEditorBasicFields.record['unit-accent-color-1'] = n.accentColor1
     window.unitEditorBasicFields.record['unit-accent-color-2'] = n.accentColor2
-
     
     window.unitEditorBasicFields.refresh()
 }

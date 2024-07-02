@@ -13,6 +13,14 @@ sidebar.on('click', function(event) {
     event.done(() => {
         let node = sidebar.get(event.target)
         window.currentUnit = window.allUnits.find(unit => unit.id === node.id)
+        
+        if (window.UnitEditorActiveTab){
+            if (window.UnitEditorActiveTab === 'behavior' && (window.currentUnit.which === 'avatar' || window.currentUnit.which === 'npc')){
+                w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
+            } else if (window.UnitEditorActiveTab === 'relationship' && (window.currentUnit.which === 'npc' || (window.currentUnit.which === 'enemy' && window.currentUnit.isRecruitable === false))){
+                w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
+            } 
+        }
         updateCurrentUnitRecord(window.currentUnit)
         node.selected = true
         sidebar.nodes.forEach(n => {
