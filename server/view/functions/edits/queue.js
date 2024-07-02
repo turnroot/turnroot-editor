@@ -62,6 +62,7 @@ const sendQueue = async () => {
             console.error('Error: invalid response ' + data)
         }
         console.log('Data saved to schema server')
+        window.UnitEditor.refresh()
         return data
     } catch (err) {
         return 'Error: invalid response ' + err

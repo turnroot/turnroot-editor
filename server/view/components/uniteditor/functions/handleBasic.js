@@ -64,10 +64,25 @@ function applySubtypeConfig(form, config) {
 const handleEvent = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value
-
     window.turnrootEditorLogs.push(`${new Date()}||info||Unit field ${field} requested change to ${value.current}`)
 
-    if (field === 'useAccentColors') {
+    if (field === 'name') {
+        if (value.current.length === 0) {
+            value.current = value.previous
+            window.unitEditorBasicFields.record.name = value.previous
+            window.unitEditorBasicFields.refresh()
+            return w2alert('Name cannot be empty')
+        }
+        if (window.UnitEditorLeftSidebar){
+        window.UnitEditorLeftSidebar.nodes.forEach(node => {
+            if (node.id === form.record.id) {
+                node.text = value.current + ' ' + form.record.id
+            }
+            window.UnitEditorLeftSidebar.refresh()
+        })}
+    }
+
+    else if (field === 'useAccentColors') {
         if (value.current === true) {
             form.show('unit-accent-color-1')
             form.show('unit-accent-color-2')
