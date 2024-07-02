@@ -10,7 +10,12 @@ const createNewUnit = async (
     }
     let body = {}
     body.which = subtype
+    if (subtype === 'avatar'){
+    body.canSSupport = true
+    body.canHaveChildren = true
+    }
     body.name = familiarName
+    
     body.queue = [
         {
             model: 'Person',

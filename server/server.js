@@ -17,6 +17,8 @@ import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbIn
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
+import fetch from 'node-fetch'
+
 const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())

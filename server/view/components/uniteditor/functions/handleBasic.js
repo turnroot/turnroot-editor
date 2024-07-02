@@ -2,6 +2,8 @@ import {
     w2alert, w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
+import {updateQueue} from '../../../functions/edits/queue.js'
+
 import globalStats from './globals/getGlobalStats.js'
 
 let globalStatsArray = []
@@ -162,6 +164,7 @@ const handleEvent = (form, event, automated=false) => {
             })
         }
     }
+    updateQueue('Person', 'updatePerson', form.record)
 }
 
 export default handleEvent

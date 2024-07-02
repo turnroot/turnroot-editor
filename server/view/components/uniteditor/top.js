@@ -46,7 +46,7 @@ toolbar.on('click', function async(event) {
         if (event.detail.item.id === 'new-unit') {
             w2prompt({
                 title: 'Create new unit',
-                label: 'Enter the familiar name of the new unit',
+                label: window.allUnits.length === 0 ?'Enter the familiar name for your first unit. This unit will be the "avatar", or customizable player character. The player will be allowed to change this name if they want- this is just a default.' : 'Enter the familiar name of the new unit',
             }).ok(async(event) => {
                 
                 if (event.detail.value === ''){

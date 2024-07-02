@@ -47,7 +47,6 @@ let config = {
         subtype: 'Avatar',
         notes: '',
         age: 18,
-        orientation: 'straight',
         canSSupport: true,
         canHaveChildren: true,
         height: 168,
@@ -140,24 +139,6 @@ let config = {
             html: {
                 label: 'Age',
                 column: 0,
-            }
-        },
-        {
-            field: 'orientation',
-            type: 'select',
-            html: {
-                label: 'Orientation',
-                attr: '',
-                column: 0,
-            },
-            options: {
-                items: [
-                    'straight',
-                    'gay/lesbian',
-                    'bisexual',
-                    'pansexual',
-                    'asexual',
-                ]
             }
         },
         {
@@ -320,15 +301,6 @@ config.fields.push({
         attr: '',
         column: 2,
     },
-})
-
-config.fields.push({
-    type: 'html',
-    html: {
-        html: "<em><small>Notes are just for you, they're not added to your game</small></em>",
-        column: 2,
-        attr: 'style="width:100%;margin-top:.5rem"'
-    }
 })
 
 config.fields.push({
