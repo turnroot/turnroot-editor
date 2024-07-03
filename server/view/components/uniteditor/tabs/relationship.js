@@ -166,14 +166,17 @@ let relationship = new w2form({
             column: 0
         }
     },
-    ],
-    record: {
-        "unit-editor-relationship-fields-parenting-inheritances":[
-            "Eye color",
-            "Hair color",
-            "Skin color"
-        ],
+    {
+        type: 'html',
+        field: 'unit-editor-relationship-fields-pairup-header',
+        html: {
+            html: '<h2 style="margin-top:2.8rem;">Pair-up</h2>',
+            column: 1,
+            class: 'no-label'
+        }
     }
+    ],
+    record: {}
 })
 
 window.unitEditorRelationshipFields = relationship

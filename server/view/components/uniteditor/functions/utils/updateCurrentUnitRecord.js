@@ -106,6 +106,12 @@ const updateCurrentUnitRecord = async(n) => {
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-s-level-support').hidden = false
     }
 
+    if (!window.combatPairUp){
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-pairup-header').hidden = true
+    } else {
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-pairup-header').hidden = false
+    }
+
 
     window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-does').options.items = [
         window.combatAdjutantAttack? 'Attack' : null,
