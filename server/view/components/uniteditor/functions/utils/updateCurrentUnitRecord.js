@@ -46,15 +46,31 @@ const updateCurrentUnitRecord = async(n) => {
     supportableUnits = supportableUnits.filter(unit => {return unit.id !== window.currentUnit.id && !(unit.which === 'enemy' && !unit.isRecruitable) && unit.which !== 'npc'})
     supportableUnits.forEach(unit => {
         let iterative = {}
-        iterative.fieldLabel = 'Max support with ' + unit.name + ' ' + unit.id
+        iterative.fieldLabel = unit.name + ' ' + unit.id
         iterative.fieldOptions = unit.canSSupport? ['D', 'C', 'B', 'A', 'S'] : ['D', 'C', 'B', 'A']
         iterative.fieldValue =  'D'
         iteratives.push(iterative)
     })
 
-    let radios = dynamicRadios(iteratives, window.unitEditorRelationshipFields.record).innerHTML
-    window.unitEditorRelationshipFields.fields[0].html.html = radios
-    window.unitEditorRelationshipFields.fields[0].field = 'dynamicRadios-Max-support' 
+    let radios = dynamicRadios(iteratives,'Max-support').innerHTML
+    window.unitEditorRelationshipFields.fields[2].html.html = radios
+    window.unitEditorRelationshipFields.fields[2].field = 'dynamicRadios-Max-support' 
+    window.unitEditorRelationshipFields.on('change', (event) => {
+        window.unitEditorRelationshipFields.record[event.detail.originalEvent.target.name] = event.detail.originalEvent.target.getAttribute('data-value')
+    })
+
+    let speedIteratives = []
+    supportableUnits.forEach(unit => {
+        let iterative = {}
+        iterative.fieldLabel = unit.name + ' ' + unit.id
+        iterative.fieldOptions = ['Slow', 'Neutral', 'Fast']
+        iterative.fieldValue =  'Neutral'
+        speedIteratives.push(iterative)
+    })
+
+    let speedRadios = dynamicRadios(speedIteratives,'Support-speed').innerHTML
+    window.unitEditorRelationshipFields.fields[4].html.html = speedRadios
+    window.unitEditorRelationshipFields.fields[4].field = 'dynamicRadios-Support-speed'
     window.unitEditorRelationshipFields.formHTML = window.unitEditorRelationshipFields.generateHTML()
     window.unitEditorRelationshipFields.render()
     window.unitEditorRelationshipFields.on('change', (event) => {

@@ -109,16 +109,12 @@ let toolbar = new w2toolbar({
             type: 'menu',
             id: 'import-menu',
             text: 'Import assets',
-            tooltip: 'Import graphics, models, music, sound effects, tilesets, or other assets from the market or your computer.',
-            items: [{
-                    text: 'Import from Turnroot Market',
-                    id: 'import-marketplace'
-                },
+            tooltip: 'Import graphics, models, music, sound effects, tilesets, or other assets',
+            items: [
                 {
                     text: 'Import from file',
                     id: 'import-file'
                 },
-                
             ]
         },
         {type: 'button',

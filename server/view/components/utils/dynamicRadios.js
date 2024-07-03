@@ -1,4 +1,4 @@
-const dynamicRadios = (iteratives, record) => {
+const dynamicRadios = (iteratives, name) => {
     let outer = document.createElement('div')
     iteratives.forEach((iterative, i) => {
         let div = document.createElement('div')
@@ -21,12 +21,15 @@ const dynamicRadios = (iteratives, record) => {
 
             let input = document.createElement('input')
             input.type = 'radio'
-            input.name = iterative.fieldLabel
+            input.name = iterative.fieldLabel + name
             input.id = option
             input.setAttribute('data-value', option)
             input.setAttribute('data-index', j)
             input.style.maxWidth = '12.5rem'
-            input.checked = iterative.fieldValue === option
+
+            if (option === iterative.fieldValue) {
+                input.checked = true
+            }
 
             label.appendChild(input)
 

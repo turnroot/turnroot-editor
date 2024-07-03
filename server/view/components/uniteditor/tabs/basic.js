@@ -103,7 +103,7 @@ let config = {
         {
             type:'html',
             html:{
-                html: '<small>A unit can have a title, familiar name, and full name. The familiar name is the only required field; it appears above dialogue boxes. A unit could have "sir" as the title, "Fernand" as the familiar name, and "Sir Fernand van Ageer" as the full name. Some units, like "Rogue" or "Thief", may only need a familiar name.</small>'
+                html: '<small>A unit can have a title, familiar name, and full name. A unit could have "sir" as the title, "Fernand" as the familiar name, and "Sir Fernand van Ageer" as the full name. <strong>Many units, like "Rogue" or "Thief", will only need a familiar name.</strong></small>'
             }
         },
         {
@@ -304,7 +304,7 @@ config.fields.push({
 })
 
 config.fields.push({
-    type: 'textarea',
+    type: 'text',
     field: 'shortBio',
     html: {
         label: 'Short Bio',
