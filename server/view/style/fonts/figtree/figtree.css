@@ -1,0 +1,20 @@
+@font-face{
+    font-family: 'Figtree';
+    src: local('Figtree Regular'), url('Figtree-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Figtree';
+    src: local('Figtree Medium'), url('Figtree-Medium.ttf') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Figtree';
+    src: local('Figtree Italic'), url('Figtree-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}

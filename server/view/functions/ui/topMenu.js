@@ -4,8 +4,7 @@ import { w2ui } from '../../lib/w2ui.es6.min.js'
 let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor"]
 
 const handleEvent = (event, toolbar) => {
-    if (!event.detail.item.id === 'logs'){
-    window.turnrootEditorLogs.push(`${new Date()}||info||Top menu button clicked: ${JSON.stringify(event.target)} with details ${JSON.stringify(event.detail)}`)}
+
     if (startupViews.includes(event.target)) {
         let startupView = event.target.split(':')[1]
         toolbar.get('settings').get('default-editor').items.forEach(item => {
@@ -37,6 +36,43 @@ const handleEvent = (event, toolbar) => {
         }
     }
     if (event.detail.subItem) {
+        if (event.detail.subItem.id === 'font-family-fira-sans') {
+            document.documentElement.style.setProperty('--font-family', 'Fira Sans')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-fira-sans') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
+            })
+        } else if (event.detail.subItem.id === 'font-family-lexend') {
+            document.documentElement.style.setProperty('--font-family', 'Lexend')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-lexend') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
+            })
+        } else if (event.detail.subItem.id === 'font-family-clean-sans') {
+            document.documentElement.style.setProperty('--font-family', 'Clear Sans')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-clean-sans') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
+            })
+        } else if (event.detail.subItem.id === 'font-family-figtree') {
+            document.documentElement.style.setProperty('--font-family', 'Figtree')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-figtree') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
+            })
+        } else {
         let themeSubitems = toolbar.get('settings').get('themes').items.map(item => item.id)
         if (themeSubitems.includes(event.detail.subItem.id)) {
             updateUiTheme(event.detail.subItem.id)
@@ -48,8 +84,8 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         }
-    } else {
-    }
+    } 
+}
 }
 
 export default handleEvent

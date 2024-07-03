@@ -86,6 +86,31 @@ let toolbar = new w2toolbar({
             }
         ]
     },
+    {
+        type: 'menu-radio',
+        id: 'font-family',
+        text: 'Font',
+        items: [
+            {
+                text: 'Fira Sans',
+                id: 'font-family-fira-sans',
+                style: 'background-color: var(--window-background-alt);',
+                checked: true
+            },
+            {
+                text: 'Lexend',
+                id: 'font-family-lexend',
+            },
+            {
+                text: 'Clean Sans',
+                id: 'font-family-clean-sans',
+            },
+            {
+                text: 'Figtree',
+                id: 'font-family-figtree',
+            }
+        ]
+    }
         ]
     }
         ,
