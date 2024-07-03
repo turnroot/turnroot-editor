@@ -217,14 +217,21 @@
   background-color:var(--node-background)
   }
 
-  .w2ui-box-label:has(.check-row) span, .w2ui-field>label{
-    white-space:nowrap
-  }
-  
   .w2ui-field>label {
-  width:max-content!important
+    width:max-content!important;
+    min-width:7rem;
+    }
+
+  .w2ui-field:has(input[type=checkbox]) label {
+    min-width:unset;
+  }
+    
+
+  .w2ui-box-label:has(.check-row) span, .w2ui-field>label{
+    white-space:nowrap;
   }
   
+ 
   .w2ui-btn.slider1 {
   background-color:var(--slider-1)!important
   }
@@ -284,6 +291,10 @@
   input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover {
   height:2rem!important;
   width:4rem!important
+  }
+
+  input[type=radio]{
+    scale:1.2
   }
   
   .w2ui-tb-check.checked,.w2ui-toolbar {
