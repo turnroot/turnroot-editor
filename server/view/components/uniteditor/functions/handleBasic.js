@@ -9,7 +9,7 @@ import globalStats from './globals/getGlobalStats.js'
 let globalStatsArray = []
 globalStats.forEach((stat) => {globalStatsArray.push(stat.field)})
 
-let numAvatars = 0 //get from database
+let numAvatars = 0
 
 const mapRange = function (value, in_min, in_max, out_min, out_max) {
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
@@ -64,7 +64,14 @@ function applySubtypeConfig(form, config) {
 const handleEvent = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value
-    window.turnrootEditorLogs.push(`${new Date()}||info||Unit field ${field} requested change to ${value.current}`)
+    
+    if (window.allUnits){
+        window.allUnits.forEach(unit => {
+            if (unit.which === 'avatar'){
+                numAvatars++
+            }
+        })
+    }
 
     if (field === 'name') {
         if (value.current.length === 0) {
@@ -114,6 +121,7 @@ const handleEvent = (form, event, automated=false) => {
             let isUnique = form.get('isUnique')
             if (isUnique.el.checked === false){
                 form.setValue('isUnique', true)
+                form.record.isUnique = true
                 w2alert('A recruitable unit must be unique. The "isUnique" checkbox has been checked.')
                 form.show('randomize-base-stats')
             }
@@ -124,6 +132,7 @@ const handleEvent = (form, event, automated=false) => {
         let canRecruit = form.get('canRecruit')
         if (canRecruit.el.checked === true){
             form.setValue('canRecruit', false)
+            form.record.canRecruit = false
             w2alert('A recruitable unit must be unique. The "canRecruit" checkbox has been unchecked.')
             form.hide('randomize-base-stats')
         }

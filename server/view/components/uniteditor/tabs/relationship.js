@@ -47,7 +47,7 @@ let relationship = new w2form({
             field: 'unit-editor-relationship-fields-parenting-header',
             type: 'html',
             html: {
-                html: '<h2 style="margin-top:3.4rem;">Parenting</h2><br/><h3>Passed-down traits</h3></br><p>Child units can inherit traits from their parents. If both parents have a traits checked, the child will have either one or the other or a mix<sup>*</sup>. If just one parent has a trait checked. the child will have their trait. If neither has a trait checked, the child will use their default trait.</br></br><small><sup>*</sup>There\'s a 40% chance of getting the trait from parent 1, 40% from parent 2, and 20% chance of a 50/50 mix. Yes, we know that\'s not how genetics work.</small></p>',
+                html: '<h2 style="margin-top:3.4rem;">Parenting</h2><br/><h3>Passed-down traits</h3></br><p>Child units can inherit traits from their parents. If both parents have a traits checked, the child will have either one or the other or a mix<sup aria-label="There\'s a 40% chance of getting the trait from parent 1, 40% from parent 2, and 20% chance of a 50/50 mix. Yes, we know that\'s not how genetics work." data-balloon-pos="up" data-balloon-length="large"><highlight>*</highlight></sup>. If just one parent has a trait checked. the child will have their trait. If neither has a trait checked, the child will use their default trait.</br></br></p>',
                 column: 0,
                 class: 'no-label'
             }
@@ -90,7 +90,7 @@ let relationship = new w2form({
             type: 'html',
             field: 'unit-editor-relationship-fields-parenting-child-below',
             html: {
-                html: '<p><highlight>Important!</highlight> If two units with a set child unit S support and have a child, their child will be one of the two selected randomly. In traditional TTRPG games the child unit is always set on the mother. Turnroot allows same-sex couples to have children, which makes guaranteed child units impossible.<br/><br/>You should set a unique child unit on each parent and not worry about it. Just be aware that not all child units may be spawned in-game. Alternatively, you can have two children per couple so all child units are spawned.</p>',
+                html: '<p><highlight>Important!</highlight> If two units with a set child unit S support and have a child, their child will be one of the two selected randomly.<sup aria-label="In traditional TTRPG games the child unit is always set on the mother. Turnroot allows same-sex couples to have children, which makes guaranteed child units impossible. " data-balloon-length="large" data-balloon-pos="up"><highlight>why?</highlight></sup> You should set a unique child unit on each parent and not worry about it. Just be aware that not all child units may be spawned in-game. Alternatively, you can have two children per couple so all child units are spawned.</p>',
                 column: 1,
                 class: 'no-label'
         }

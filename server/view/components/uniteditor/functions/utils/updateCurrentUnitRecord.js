@@ -76,12 +76,14 @@ const updateCurrentUnitRecord = async(n) => {
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-header').hidden = true
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-inheritances').hidden = true
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-header').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-below').hidden = true
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child').hidden = true
     } else {
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-header').hidden = false
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-inheritances').hidden = false
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-header').hidden = false
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-below').hidden = false
     }
 
     if (!window.combatAdjutants){
