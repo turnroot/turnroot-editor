@@ -140,7 +140,6 @@ const handleEvent = (form, event, automated=false) => {
         form.lock('', true)
         if (automated){
             applySubtypeConfig(form, subtypeConfig[value.current])
-            console.log(value.current, form.record.canRecruit)
             if (value.current === 'Enemy' && form.record.canRecruit === true) {
                 w2ui['unit-editor-bottom-toolbar'].show('unit-editor-bottom-toolbar-relationship')
             }
