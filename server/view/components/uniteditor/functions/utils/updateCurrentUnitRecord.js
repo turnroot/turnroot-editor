@@ -56,9 +56,7 @@ const updateCurrentUnitRecord = async(n) => {
     let radios = dynamicRadios(iteratives,'Max-support').innerHTML
     window.unitEditorRelationshipFields.fields[2].html.html = radios
     window.unitEditorRelationshipFields.fields[2].field = 'dynamicRadios-Max-support' 
-    window.unitEditorRelationshipFields.on('change', (event) => {
-        window.unitEditorRelationshipFields.record[event.detail.originalEvent.target.name] = event.detail.originalEvent.target.getAttribute('data-value')
-    })
+
 
     let speedIteratives = []
     supportableUnits.forEach(unit => {
@@ -127,12 +125,12 @@ const updateCurrentUnitRecord = async(n) => {
     })
 
     window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-does"] = "Attack"
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-none-level-support"] = 1
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-d-level-support"] = 3
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-c-level-support"] = 5
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-b-level-support"] = 7
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-a-level-support"] = 9
-    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-s-level-support"] = 11
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-none-level-support"] = 2
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-d-level-support"] = 4
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-c-level-support"] = 6
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-b-level-support"] = 8
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-a-level-support"] = 10
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-s-level-support"] = 12
 
     window.unitEditorRelationshipFields.formHTML = window.unitEditorRelationshipFields.generateHTML()
     window.unitEditorRelationshipFields.render()

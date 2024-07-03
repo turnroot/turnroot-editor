@@ -27,11 +27,12 @@ const dynamicRadios = (iteratives, name) => {
             input.setAttribute('data-index', j)
             input.style.maxWidth = '12.5rem'
 
+            label.appendChild(input)
+
             if (option === iterative.fieldValue) {
                 input.checked = true
+                input.setAttribute('checked', '')
             }
-
-            label.appendChild(input)
 
             let span = document.createElement('span')
             span.innerText = option
