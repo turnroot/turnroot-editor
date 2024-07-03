@@ -37,6 +37,7 @@ const handleEvent = (event, toolbar) => {
     }
     if (event.detail.subItem) {
         if (event.detail.subItem.id === 'font-family-fira-sans') {
+            window.localStorage.setItem('font-family', 'Fira Sans')
             document.documentElement.style.setProperty('--font-family', 'Fira Sans')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-fira-sans') {
@@ -46,6 +47,7 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-lexend') {
+            window.localStorage.setItem('font-family', 'Lexend')
             document.documentElement.style.setProperty('--font-family', 'Lexend')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-lexend') {
@@ -55,6 +57,7 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-clean-sans') {
+            window.localStorage.setItem('font-family', 'Clear Sans')
             document.documentElement.style.setProperty('--font-family', 'Clear Sans')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-clean-sans') {
@@ -64,6 +67,7 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-figtree') {
+            window.localStorage.setItem('font-family', 'Figtree')
             document.documentElement.style.setProperty('--font-family', 'Figtree')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-figtree') {

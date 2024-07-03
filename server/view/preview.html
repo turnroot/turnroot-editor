@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Component Preview</title>
+    <title>Turnroot Editor</title>
     <link rel="stylesheet" href="./style/fonts/fira-sans/fira.css">
     <link rel="stylesheet" href="./style/fonts/lexend/lexend.css">
     <link rel="stylesheet" href="./style/fonts/clearsans/clear-sans.css">
@@ -22,6 +22,25 @@
     <meta name="application-name" content="Turnroot Editor">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Turnroot Editor">
+    <meta name="description" content="Turnroot Editor - create the tactical turn-based RPG of your dreams in the powerful no-code editor.">
+    <meta name="keywords" content="turnroot, editor, rpg, game, tactical, turn-based, no-code, game development, game design, game maker, game creator, game engine, game editor, game builder, game development software, game design software, game maker software, game creator software, game engine software, game editor software, game builder software, ttrpg, tactical turn-based RPG creator, ttrpg maker, ttrpg creator">
+    <meta name="author" content="Turnroot">
+    <meta property="og:title" content="Turnroot Editor">
+    <meta property="og:description" content="Turnroot Editor - create the tactical turn-based RPG of your dreams in the powerful no-code editor.">
+    <meta property="og:image" content="/logo.png">
+    <meta property="og:url" content="https://editor.turnroot.com">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Turnroot Editor">
+    <meta property="og:locale" content="en_US">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Turnroot Editor">
+    <meta name="twitter:description" content="Turnroot Editor - create the tactical turn-based RPG of your dreams in the powerful no-code editor.">
+    <meta name="twitter:image" content="/logo.png">
+    <meta name="twitter:image:alt" content="Turnroot Editor Logo">
+
 </head>
 
 <body>
@@ -45,13 +64,12 @@
     <script>
         let logs = []
         window.turnrootEditorLogs = logs
-        /*
-        console.log = function (message) {
-            window.turnrootEditorLogs.push(`${new Date()}||info||${JSON.stringify(message)}`)
+        let font = localStorage.getItem('font-family')
+        if (font) {
+            document.documentElement.style.setProperty('--font-family', font)
+        } else {
+            document.documentElement.style.setProperty('--font-family', 'Fira Sans')
         }
-        console.error = function (message) {
-            window.turnrootEditorLogs.push(`${new Date()}||error||${message? JSON.stringify(message) : 'No error message'}`)
-        } */
     </script>
     <script type="module">
         let body = document.querySelector('body')

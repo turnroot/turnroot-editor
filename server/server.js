@@ -340,6 +340,10 @@ app.post('/webhook', async (req, res) => {
     res.json({received: true})
 })
 
+app.get('/logo.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'logo.png'))
+})
+
 app.get('/favicon.ico', (req, res) => {
     res.sendFile(path.join(__dirname, 'style', 'img', 'favicon.ico'))
 })
