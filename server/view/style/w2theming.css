@@ -1,13 +1,13 @@
-:root{
+:root {
   --balloon-font-size:1rem!important
-}
-
-.li-search input,.w2ui-btn,.w2ui-form textarea,.w2ui-toolbar-input,input:not([type=radio]).w2ui-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
+  }
+  
+  .li-search input,.w2ui-btn,.w2ui-form textarea,.w2ui-toolbar-input,input:not([type=radio]).w2ui-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border:0;
   outline:0
   }
   
-  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button, .w2ui-group-fields {
+  .li-search,.w2ui-box-label:has(input[type=radio]),.w2ui-column-container:not(:has(.col-1)),.w2ui-field,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field) div,.w2ui-field:has(.w2ui-box-label).w2ui-field:has(input[type=checkbox]) label,.w2ui-field>div,.w2ui-field>label,.w2ui-group-fields,.w2ui-group:has(.group-flex) .w2ui-group-fields,.w2ui-message-buttons,.w2ui-tb-button {
   display:flex
   }
   
@@ -171,6 +171,7 @@
   }
   
   .w2ui-tb-check.checked .w2ui-tb-text::before {
+  background-color:var(--accent);
   border:2px solid var(--accent)
   }
   
@@ -216,22 +217,20 @@
   .w2ui-btn {
   background-color:var(--node-background)
   }
-
+  
   .w2ui-field>label {
-    width:max-content!important;
-    min-width:7rem;
-    }
-
-  .w2ui-field:has(input[type=checkbox]) label {
-    min-width:unset;
-  }
-    
-
-  .w2ui-box-label:has(.check-row) span, .w2ui-field>label{
-    white-space:nowrap;
+  min-width:7rem;
+  width:max-content!important
   }
   
- 
+  .w2ui-field:has(input[type=checkbox]) label {
+  min-width:unset
+  }
+  
+  .w2ui-box-label:has(.check-row) span,.w2ui-field>label {
+  white-space:nowrap
+  }
+  
   .w2ui-btn.slider1 {
   background-color:var(--slider-1)!important
   }
@@ -292,9 +291,9 @@
   height:2rem!important;
   width:4rem!important
   }
-
-  input[type=radio]{
-    scale:1.2
+  
+  input[type=radio] {
+  scale:1.2
   }
   
   .w2ui-tb-check.checked,.w2ui-toolbar {
@@ -303,10 +302,6 @@
   
   .w2ui-panel .w2ui-panel .w2ui-toolbar,.w2ui-tb-button.checked {
   background-color:color-mix(in oklab,var(--window-background) 50%,var(--window-background-alt))
-  }
-  
-  .w2ui-tb-check.checked .w2ui-tb-text::before {
-  background-color:var(--accent)
   }
   
   .panel-tabs:hover {
@@ -340,8 +335,8 @@
   .w2ui-group:has(.group-flex) .w2ui-group-fields {
   justify-content:space-around
   }
-
-  .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span, .w2ui-group-title {
+  
+  .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group-title,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span {
   display:none!important
   }
   
@@ -378,9 +373,9 @@
   max-height:12rem;
   overflow-x:hidden
   }
-
-  .w2ui-menu, .w2ui-sidebar-body{
-    overflow-y:auto
+  
+  .w2ui-menu,.w2ui-sidebar-body {
+  overflow-y:auto
   }
   
   .resize-icon {
@@ -394,14 +389,14 @@
   width:24px
   }
   
-  .w2ui-btn.accent, .panel-tabs.checked {
+  .panel-tabs.checked,.w2ui-btn.accent {
   background-color:color-mix(in oklab,var(--node-background) 50%,var(--accent));
-  color: var(--node-title)
+  color:var(--node-title)
   }
   
-  .w2ui-btn.accent:hover, .panel-tabs.checked:hover {
+  .panel-tabs.checked:hover,.w2ui-btn.accent:hover {
   background-color:color-mix(in oklab,var(--node-background) 70%,var(--accent));
-  color: var(--node-title)
+  color:var(--node-title)
   }
   
   .resize-icon:hover {
@@ -421,9 +416,9 @@
   .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div,.w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,.w2ui-field:has(textarea) div {
   width:100%
   }
-
-  .w2ui-group-fields label, label:has(.check-row) {
-    width:min-content!important
+  
+  .w2ui-group-fields label,label:has(.check-row) {
+  width:min-content!important
   }
   
   .w2ui-enum-placeholder {
