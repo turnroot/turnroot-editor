@@ -1,11 +1,20 @@
 import handleEvent from '../functions/handleRelationship.js'
+import {w2form} from '../../../lib/w2ui.es6.min.js'
 
-const populateSupportableUnits = (allUnits, currentUnitId) => {
+let relationship = new w2form({
+    name: 'unit-editor-relationship-fields',
+    fields: [
+        {
+            field: 'html',
+            type: 'html',
+            html: {
+                html: ''
+            }
+        }
+    ],
+    record: {}
+})
 
+window.unitEditorRelationshipFields = relationship
 
-}
-
-let html = ''
-
-export default html
-export {populateSupportableUnits}
+export default relationship

@@ -102,11 +102,6 @@ let toolbar = new w2toolbar({
             checked: true,
             class: 'w2ui-tb-check'
         },
-        {
-            type: 'button',
-            id: 'logs',
-            text: 'Logs',
-        },
     {
         type: 'spacer'
     },

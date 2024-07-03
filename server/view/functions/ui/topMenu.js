@@ -1,6 +1,5 @@
 import updateUiTheme from './updateTheme.js'
 import { w2ui } from '../../lib/w2ui.es6.min.js'
-import logsPopup from './logsPopup.js'
 
 let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor"]
 
@@ -19,9 +18,6 @@ const handleEvent = (event, toolbar) => {
     }
     else if (event.detail.item.id === 'collapseSidebar') {
         window.goFlat()
-    }
-    else if (event.detail.item.id === 'logs'){
-        logsPopup()
     }
     else if (event.detail.item.id === 'forums') {
         window.open('https://community.turnroot.com', '_blank')

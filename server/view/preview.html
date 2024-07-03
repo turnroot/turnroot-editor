@@ -41,12 +41,13 @@
     <script>
         let logs = []
         window.turnrootEditorLogs = logs
+        /*
         console.log = function (message) {
             window.turnrootEditorLogs.push(`${new Date()}||info||${JSON.stringify(message)}`)
         }
         console.error = function (message) {
             window.turnrootEditorLogs.push(`${new Date()}||error||${message? JSON.stringify(message) : 'No error message'}`)
-        }
+        } */
     </script>
     <script type="module">
         let body = document.querySelector('body')
