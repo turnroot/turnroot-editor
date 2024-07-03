@@ -212,9 +212,12 @@
   .w2ui-btn {
   background-color:var(--node-background)
   }
+
+  .w2ui-box-label:has(.check-row) span, .w2ui-field>label{
+    white-space:nowrap
+  }
   
   .w2ui-field>label {
-  white-space:nowrap;
   width:max-content!important
   }
   
@@ -232,7 +235,7 @@
   }
   
   .w2ui-column-container .w2ui-column {
-  padding:2rem!important;
+  padding:1rem!important;
   width:max-content!important
   }
   
@@ -322,11 +325,7 @@
   .w2ui-group:has(.group-flex) .w2ui-group-fields {
   justify-content:space-around
   }
-  
-  .w2ui-group-fields label {
-  width:min-content!important
-  }
-  
+
   .w2ui-field:has(:not([type=checkbox]).no-label)>label,.w2ui-group:has(.group-flex) .w2ui-group-title,label:has(input.no-label) span, .w2ui-group-title {
   display:none!important
   }
@@ -405,7 +404,11 @@
   }
   
   .w2ui-field-helper.w2ui-list,.w2ui-field.expand .w2ui-multi-items,.w2ui-field:has(.full-width-field),.w2ui-field:has(.full-width-field) div,.w2ui-field:has(input[type=checkbox]) div,.w2ui-field:has(input[type=checkbox]) label.w2ui-box-label,.w2ui-field:has(textarea) div {
-  width:100%!important
+  width:100%
+  }
+
+  .w2ui-group-fields label, label:has(.check-row) {
+    width:min-content!important
   }
   
   .w2ui-enum-placeholder {

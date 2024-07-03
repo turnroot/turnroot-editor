@@ -49,6 +49,7 @@ const updateCurrentUnitRecord = async(n) => {
         iterative.fieldLabel = unit.name + ' ' + unit.id
         iterative.fieldOptions = unit.canSSupport? ['D', 'C', 'B', 'A', 'S'] : ['D', 'C', 'B', 'A']
         iterative.fieldValue =  'D'
+        window.unitEditorRelationshipFields.record['max-Support-'+unit.id] = 'D'
         iteratives.push(iterative)
     })
 
@@ -65,14 +66,76 @@ const updateCurrentUnitRecord = async(n) => {
         iterative.fieldLabel = unit.name + ' ' + unit.id
         iterative.fieldOptions = ['Slow', 'Neutral', 'Fast']
         iterative.fieldValue =  'Neutral'
+        window.unitEditorRelationshipFields.record['support-Speed-'+unit.id] = 'Neutral'
         speedIteratives.push(iterative)
     })
 
     let speedRadios = dynamicRadios(speedIteratives,'Support-speed').innerHTML
     window.unitEditorRelationshipFields.fields[4].html.html = speedRadios
     window.unitEditorRelationshipFields.fields[4].field = 'dynamicRadios-Support-speed'
+
+    if (!window.currentUnit.canHaveChildren || !window.unitsCanHaveChildren){
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-header').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-inheritances').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-header').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child').hidden = true
+    } else {
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-header').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-inheritances').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child-header').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child').hidden = false
+    }
+
+    if (!window.combatAdjutants){
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-header').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-does').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-none-level-support').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-d-level-support').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-c-level-support').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-b-level-support').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-a-level-support').hidden = true
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-s-level-support').hidden = true
+    } else {
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-header').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-does').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-none-level-support').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-d-level-support').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-c-level-support').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-b-level-support').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-a-level-support').hidden = false
+        window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-chance-s-level-support').hidden = false
+    }
+
+
+    window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-adjutant-does').options.items = [
+        window.combatAdjutantAttack? 'Attack' : null,
+        window.combatAdjutantGuard? 'Guard' : null,
+        window.combatAdjutantHeal? 'Heal' : null,
+    ].filter(item => item !== null)
+
+    window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-child').options.items = supportableUnits.map(unit => {
+        return {
+            id: unit.id,
+            text: unit.name + ' ' + unit.id
+        }
+    })
+
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-does"] = "Attack"
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-none-level-support"] = 1
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-d-level-support"] = 3
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-c-level-support"] = 5
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-b-level-support"] = 7
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-a-level-support"] = 9
+    window.unitEditorRelationshipFields.record["unit-editor-relationship-fields-adjutant-chance-s-level-support"] = 11
+
     window.unitEditorRelationshipFields.formHTML = window.unitEditorRelationshipFields.generateHTML()
     window.unitEditorRelationshipFields.render()
+    window.unitEditorRelationshipFields.record['unit-editor-relationship-fields-parenting-inheritances'] = [
+        'Eye color',
+        'Hair color',
+        'Skin color',
+        'Height'
+    ]
     window.unitEditorRelationshipFields.on('change', (event) => {
         window.unitEditorRelationshipFields.record[event.detail.originalEvent.target.name] = event.detail.originalEvent.target.getAttribute('data-value')
     })

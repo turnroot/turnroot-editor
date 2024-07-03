@@ -51,10 +51,12 @@ sidebar.on('click', function(event) {
         layout.html('main', UnitEditor).removed()
         window.activeEditor = 'unit-editor'
     } else if (event.target === 'sidebar-editors-class-editor') {
+        w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
         let layout = w2ui.EditorWindowLayout
         layout.html('main', ClassEditor).removed()
         window.activeEditor = 'class-editor'
     } else if (event.target === 'sidebar-editors-game-editor') {
+        w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
         let layout = w2ui.EditorWindowLayout
         layout.html('main', GameEditor).removed()
         window.activeEditor = 'game-editor'
