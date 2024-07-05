@@ -86,6 +86,31 @@ let toolbar = new w2toolbar({
             }
         ]
     },
+    {
+        type: 'menu-radio',
+        id: 'font-family',
+        text: 'Font',
+        items: [
+            {
+                text: 'Fira Sans',
+                id: 'font-family-fira-sans',
+                style: 'background-color: var(--window-background-alt);',
+                checked: true
+            },
+            {
+                text: 'Lexend',
+                id: 'font-family-lexend',
+            },
+            {
+                text: 'Clean Sans',
+                id: 'font-family-clean-sans',
+            },
+            {
+                text: 'Figtree',
+                id: 'font-family-figtree',
+            }
+        ]
+    }
         ]
     }
         ,
@@ -102,11 +127,6 @@ let toolbar = new w2toolbar({
             checked: true,
             class: 'w2ui-tb-check'
         },
-        {
-            type: 'button',
-            id: 'logs',
-            text: 'Logs',
-        },
     {
         type: 'spacer'
     },
@@ -114,16 +134,12 @@ let toolbar = new w2toolbar({
             type: 'menu',
             id: 'import-menu',
             text: 'Import assets',
-            tooltip: 'Import graphics, models, music, sound effects, tilesets, or other assets from the market or your computer.',
-            items: [{
-                    text: 'Import from Turnroot Market',
-                    id: 'import-marketplace'
-                },
+            tooltip: 'Import graphics, models, music, sound effects, tilesets, or other assets',
+            items: [
                 {
                     text: 'Import from file',
                     id: 'import-file'
                 },
-                
             ]
         },
         {type: 'button',

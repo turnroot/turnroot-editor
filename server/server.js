@@ -17,7 +17,10 @@ import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbIn
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
+import fetch from 'node-fetch'
+
 const app = express()
+
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
@@ -126,7 +129,7 @@ app.post('/queue', ensureAuthenticated, async(req, res) => {
     console.log(req.body)
     workQueues[req.user.userId] = req.body
     let thisQueue = workQueues[req.user.userId]
-    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://127.0.0.1:9194/data' 
+    let url = process.env.LOCAL === 'false' ? process.env.SCHEMAS_SERVER_URL + '/data' : 'http://localhost:9194/data' 
     let body = {
         userId: req.user.userId,
         key: process.env.SCHEMAS_SERVER_KEY,
@@ -335,6 +338,50 @@ app.post('/webhook', async (req, res) => {
             return res.status(400).end()
     }
     res.json({received: true})
+})
+
+app.get('/logo.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'logo.png'))
+})
+
+app.get('/favicon.ico', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'favicon.ico'))
+})
+
+app.get('/apple-touch-icon.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'apple-touch-icon.png'))
+})
+
+app.get('/site.webmanifest', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'site.webmanifest'))
+})
+
+app.get('/safari-pinned-tab.svg', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'safari-pinned-tab.svg'))
+})
+
+app.get('/favicon-32x32.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'favicon-32x32.png'))
+})
+
+app.get('/favicon-16x16.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'style', 'img', 'favicon-16x16.png'))
+})
+
+app.get('/mstile-150x150.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', 'mstile-150x150.png'))
+})
+
+app.get('/android-chrome-192x192.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', 'android-chrome-192x192.png'))
+})
+
+app.get('/android-chrome-512x512.png', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', 'android-chrome-512x512.png'))
+})
+
+app.get('/browserconfig.xml', (req, res) => {
+    res.sendFile(path.join(__dirname, 'img', 'browserconfig.xml'))
 })
 
 app.use((err, req, res, next) => {

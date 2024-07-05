@@ -39,12 +39,14 @@ window.handleBaseStatRandomizerPopup = handleBaseStatRandomizerPopup
 let config = {
     name: 'unit-editor-basic-fields',
     record: {
+        id: '',
         name: 'New Unit',
+        fullName: 'New Unit',
+        title: '',
         pronouns: 'they/them/their/theirs',
         subtype: 'Avatar',
         notes: '',
         age: 18,
-        orientation: 'straight',
         canSSupport: true,
         canHaveChildren: true,
         height: 168,
@@ -60,6 +62,16 @@ let config = {
                 html: '<h2>Basic Info</h2>',
                 column: 0,
             }
+        },
+        {
+            field: 'id',
+            type: 'text',
+            html: {
+                label: 'ID',
+                attr: 'readonly',
+                column: 0,
+            },
+            hidden: true
         },
         {
             field: 'name',
@@ -80,7 +92,7 @@ let config = {
             }
         },
         {
-            field: 'Title',
+            field: 'title',
             type: 'text',
             html: {
                 label: 'Title',
@@ -91,7 +103,7 @@ let config = {
         {
             type:'html',
             html:{
-                html: '<small>A unit can have a title, familiar name, and full name. The familiar name is the only required field; it appears above dialogue boxes. A unit could have "sir" as the title, "Fernand" as the familiar name, and "Sir Fernand van Ageer" as the full name. Some units, like "Rogue" or "Thief", may only need a familiar name.</small>'
+                html: '<small>A unit can have a title, familiar name, and full name. A unit could have "sir" as the title, "Fernand" as the familiar name, and "Sir Fernand van Ageer" as the full name. <strong>Many units, like "Rogue" or "Thief", will only need a familiar name.</strong></small>'
             }
         },
         {
@@ -127,24 +139,6 @@ let config = {
             html: {
                 label: 'Age',
                 column: 0,
-            }
-        },
-        {
-            field: 'orientation',
-            type: 'select',
-            html: {
-                label: 'Orientation',
-                attr: '',
-                column: 0,
-            },
-            options: {
-                items: [
-                    'straight',
-                    'gay/lesbian',
-                    'bisexual',
-                    'pansexual',
-                    'asexual',
-                ]
             }
         },
         {
@@ -310,16 +304,7 @@ config.fields.push({
 })
 
 config.fields.push({
-    type: 'html',
-    html: {
-        html: "<em><small>Notes are just for you, they're not added to your game</small></em>",
-        column: 2,
-        attr: 'style="width:100%;margin-top:.5rem"'
-    }
-})
-
-config.fields.push({
-    type: 'textarea',
+    type: 'text',
     field: 'shortBio',
     html: {
         label: 'Short Bio',

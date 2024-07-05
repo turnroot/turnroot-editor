@@ -2,12 +2,14 @@ import {
     w2alert, w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
+import {updateQueue} from '../../../functions/edits/queue.js'
+
 import globalStats from './globals/getGlobalStats.js'
 
 let globalStatsArray = []
 globalStats.forEach((stat) => {globalStatsArray.push(stat.field)})
 
-let numAvatars = 0 //get from database
+let numAvatars = 0
 
 const mapRange = function (value, in_min, in_max, out_min, out_max) {
     return (value - in_min) * (out_max - out_min) / (in_max - in_min) + out_min
@@ -36,7 +38,7 @@ const subtypeConfig = {
         toolbarShow: ['unit-editor-bottom-toolbar-relationship', 'unit-editor-bottom-toolbar-behavior']
     },
     Enemy: {
-        hide: ['canSSupport', 'orientation', 'canHaveChildren', 'growth-rates', 'base-stats-header', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
+        hide: ['canSSupport', 'orientation', 'canHaveChildren', 'growth-rates', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
         enable: [],
         disable: [],
         show: ['canRecruit', 'useAccentColors', 'randomize-base-stats', 'isUnique'],
@@ -52,17 +54,42 @@ function applySubtypeConfig(form, config) {
         form[config.hide.includes(stat.field) ? 'hide' : 'show'](stat.field)
     })
     let bottomToolbar = w2ui['unit-editor-bottom-toolbar']
+    bottomToolbar.hide('unit-editor-bottom-toolbar-relationship')
+    bottomToolbar.hide('unit-editor-bottom-toolbar-behavior')
+    bottomToolbar.show('unit-editor-bottom-toolbar-basic')
     config.toolbarShow.forEach(tab => bottomToolbar.show(tab))
     bottomToolbar.refresh()
 }
 
-const handleEvent = (form, event) => {
+const handleEvent = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value
+    
+    if (window.allUnits){
+        window.allUnits.forEach(unit => {
+            if (unit.which === 'avatar'){
+                numAvatars++
+            }
+        })
+    }
 
-    window.turnrootEditorLogs.push(`${new Date()}||info||Unit field ${field} requested change to ${value.current}`)
+    if (field === 'name') {
+        if (value.current.length === 0) {
+            value.current = value.previous
+            window.unitEditorBasicFields.record.name = value.previous
+            window.unitEditorBasicFields.refresh()
+            return w2alert('Name cannot be empty')
+        }
+        if (window.UnitEditorLeftSidebar){
+        window.UnitEditorLeftSidebar.nodes.forEach(node => {
+            if (node.id === form.record.id) {
+                node.text = value.current + ' ' + form.record.id
+            }
+            window.UnitEditorLeftSidebar.refresh()
+        })}
+    }
 
-    if (field === 'useAccentColors') {
+    else if (field === 'useAccentColors') {
         if (value.current === true) {
             form.show('unit-accent-color-1')
             form.show('unit-accent-color-2')
@@ -94,6 +121,7 @@ const handleEvent = (form, event) => {
             let isUnique = form.get('isUnique')
             if (isUnique.el.checked === false){
                 form.setValue('isUnique', true)
+                form.record.isUnique = true
                 w2alert('A recruitable unit must be unique. The "isUnique" checkbox has been checked.')
                 form.show('randomize-base-stats')
             }
@@ -104,6 +132,7 @@ const handleEvent = (form, event) => {
         let canRecruit = form.get('canRecruit')
         if (canRecruit.el.checked === true){
             form.setValue('canRecruit', false)
+            form.record.canRecruit = false
             w2alert('A recruitable unit must be unique. The "canRecruit" checkbox has been unchecked.')
             form.hide('randomize-base-stats')
         }
@@ -118,6 +147,15 @@ const handleEvent = (form, event) => {
 
     else if (field === 'subtype') {
         form.lock('', true)
+        if (automated){
+            applySubtypeConfig(form, subtypeConfig[value.current])
+            if (value.current === 'Enemy' && form.record.canRecruit === true) {
+                w2ui['unit-editor-bottom-toolbar'].show('unit-editor-bottom-toolbar-relationship')
+            }
+            
+            form.unlock()
+            return
+        }
         if (value.current === 'Avatar' && numAvatars > 0) {
             form.message({
                 body: '<div class="w2ui-centered">You already have an Avatar unit. You cannot create another.</div>',
@@ -154,6 +192,7 @@ const handleEvent = (form, event) => {
             })
         }
     }
+    updateQueue('Person', 'updatePerson', form.record)
 }
 
 export default handleEvent

@@ -32,7 +32,6 @@ let config = {
                 column: 0,
             },
             options: {
-                openOnFocus: true,
                 max: 3,
                 items: ['Skill 1', 'Skill 2', 'Skill 3', 'Skill 4', 'Skill 5']
             }
@@ -52,7 +51,6 @@ let config = {
                 column: 0,
             },
             options: {
-                openOnFocus: true,
                 max: 3,
                 items: ['Class 1', 'Class 2', 'Class 3', 'Class 4', 'Class 5']
             }
@@ -72,7 +70,6 @@ let config = {
                 column: 0,
             },
             options: {
-                openOnFocus: true,
                 max: 3,
                 items: ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5']
             }

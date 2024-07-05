@@ -139,7 +139,7 @@ const build = (preset) => {
 
         selectContainer.appendChild(select)
 
-        new w2field('enum', {items: allRights, selected: row.right, el: select, renderDrop: false, renderMulti: true, renderInline: true, renderItems: true, openOnFocus: true})
+        new w2field('enum', {items: allRights, selected: row.right, el: select, renderDrop: false, renderMulti: true, renderInline: true, renderItems: true})
 
 
         right.appendChild(selectContainer)

@@ -6,7 +6,8 @@ const initQueue = () => {
 }
 
 const updateQueue = (model, method, body) => {
-    let existing = window.editsQueue.queue.find(item => item.model === model && item.method === method)
+    const id = body.id
+    let existing = window.editsQueue.queue.find(item => item.body.id === id)
     if (existing) {
         existing.body = body
     } else {
@@ -61,6 +62,7 @@ const sendQueue = async () => {
             console.error('Error: invalid response ' + data)
         }
         console.log('Data saved to schema server')
+        window.UnitEditor.refresh()
         return data
     } catch (err) {
         return 'Error: invalid response ' + err
