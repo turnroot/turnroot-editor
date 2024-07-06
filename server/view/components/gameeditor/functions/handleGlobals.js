@@ -5,10 +5,16 @@ const handleGlobals = (event, form) => {
     if (event.detail.field === 'combatAdjutants' && event.detail.value.current === true && form.record.combatPairUp === true){
         w2alert('You cannot have combat adjutants and pair up. Pair up has been disabled.')
         form.record.combatPairUp = false
+        form.record.combatAdjutantHeal = true
+        form.record.combatAdjutantAttack = true
+        form.record.combatAdjutantGuard = true
         form.refresh()
     } else if (event.detail.field === 'combatPairUp' && event.detail.value.current === true && form.record.combatAdjutants === true){
         w2alert('You cannot have combat adjutants and pair up. Combat adjutants have been disabled.')
         form.record.combatAdjutants = false
+        form.record.combatAdjutantHeal = false
+        form.record.combatAdjutantAttack = false
+        form.record.combatAdjutantGuard = false
         form.refresh()
     }
     window[event.detail.field] = event.detail.value.current
