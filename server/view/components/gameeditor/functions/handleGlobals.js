@@ -16,6 +16,16 @@ const handleGlobals = (event, form) => {
         form.record.combatAdjutantAttack = false
         form.record.combatAdjutantGuard = false
         form.refresh()
+    } else if (event.detail.field === 'combatWeaponTriangle'){
+        if (event.detail.value.current === true){
+            form.show('combatExpandedWeaponTriangle')
+            form.show('combatMagicTriangle')
+            form.show('weaponTrianglesButton')
+        } else {
+            form.hide('combatExpandedWeaponTriangle')
+            form.hide('combatMagicTriangle')
+            form.hide('weaponTrianglesButton')
+        }
     }
     window[event.detail.field] = event.detail.value.current
     updateFormGlobals()

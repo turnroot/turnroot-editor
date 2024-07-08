@@ -7,7 +7,7 @@ const defaults = {
     'combatCombatArts': false,
     'combatCombatArtLimit': 3,
     'combatWeaponTriangle': true,
-    'combatTriangleTypes': [],
+    'combatTriangleTypes': ["Sword", "Lance", "Axe", "Bow", "Gauntlet", "Dagger"],
     'combatNeutralTypes': [],
     'combatTriangleMapping': {},
     'combatExpandedWeaponTriangle': false,

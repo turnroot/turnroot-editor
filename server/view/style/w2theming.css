@@ -1,6 +1,8 @@
 :root {
   --balloon-font-size:1rem!important
   }
+
+  label sup{margin-top:-.75rem!important;scale:.75}
   
   .li-search input,.w2ui-btn,.w2ui-form textarea,.w2ui-toolbar-input,input:not([type=radio]).w2ui-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
   border:0;
@@ -342,7 +344,12 @@
   
   highlight {
   background-color:var(--slider-1);
-  padding:1px 2px
+  padding:1px 2px;
+  border-radius:3px
+  }
+
+  .big{
+    font-size:120%
   }
   
   .w2ui-multi-items .li-item {
