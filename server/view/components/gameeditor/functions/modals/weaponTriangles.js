@@ -2,10 +2,10 @@ import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 
 window.w2popup = w2popup
 
-const weaponTypesPopup = () => {
+const weaponTrianglesPopup = () => {
     let innerHtml = ``
     w2popup.open({
-        title: 'Weapon Types',
+        title: 'Weapon/magic triangles',
         body: innerHtml,
         actions: ['Ok']
     }).ok((e) => {
@@ -13,6 +13,6 @@ const weaponTypesPopup = () => {
     })
 }
 
-window.GameEditorWeaponTypesPopup = weaponTypesPopup
+window.GameEditorWeaponTrianglesPopup = weaponTrianglesPopup
 
-export default weaponTypesPopup
+export default weaponTrianglesPopup

@@ -57,17 +57,20 @@ const baseStatRandomizerPopup = (stats, form) => {
             `
         }).join('')}
         </table>
-        <button class="w2ui-btn" onclick="UnitEditorBaseStatRandomizerResetVariances(window.unitEditorBasicFields)">Reset</button>
-        <button class="w2ui-btn accent" onclick="window.w2popup.close()">Ok</button>
     `
 
     w2popup.open({
         body: innerHtml,
-        width: 800,
-        height: 700,
+        width: 700,
+        height: 550,
         showMax: false,
         showClose: false,
         modal: false,
+        actions: ['Ok', 'Reset']
+    }).ok((e) => {
+        w2popup.close()
+    }).reset((e) => {
+        resetVariances(form)
     })
 }
 
