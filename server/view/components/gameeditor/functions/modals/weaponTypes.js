@@ -21,7 +21,10 @@ const updateWeaponType = (i) => {
         }
     }
     let defaultRange = document.getElementById(`global-weapon-type-${id}-default-range`).value
-    let weaponTypes = globalWeaponsTypes
+    if (!window.globalWeaponTypes){
+        return
+    }
+    let weaponTypes = window.globalWeaponsTypes[0]
     weaponTypes.types = weaponTypes.types.map(w => {
         if (w.id === oldId) {
             w.id = newId
@@ -32,14 +35,17 @@ const updateWeaponType = (i) => {
         }
         return w
     })
-    globalWeaponsTypes = weaponTypes
+    window.globalWeaponsTypes = weaponTypes
     localStorage.setItem('globalWeaponsTypes', JSON.stringify(weaponTypes))
 }
 
 const deleteWeaponType = (id) => {
-    let weaponTypes = globalWeaponsTypes
+    if (!window.globalWeaponTypes){
+        return
+    }
+    let weaponTypes = window.globalWeaponsTypes[0]
     weaponTypes.types = weaponTypes.types.filter(w => w.id !== id)
-    globalWeaponsTypes = weaponTypes
+    globalWeaponsTypes = window.weaponTypes
     localStorage.setItem('globalWeaponsTypes', JSON.stringify(weaponTypes))
     document.getElementById(id).remove()
 }
@@ -87,11 +93,8 @@ window.GameEditorWeaponTypesDeleteType = deleteWeaponType
 window.GameEditorWeaponTypesUpdateType = updateWeaponType
 
 const weaponTypesPopup = () => {
-    let weaponTypes = globalWeaponsTypes
-    unedited = {...weaponTypes}
-    if (!globalWeaponsTypes.id){
-        // get the default weapon types object from the schema server and use that id
-    }
+    let weaponTypes = window.globalWeaponsTypes[0]
+
     let innerHtml = '<div style = "overflow-y:auto;height:350px;"><table id = "weapon-types-table">'
     let tableHead = '<thead style = "font-weight:bold;margin-bottom:.5rem;text-align:center;"><tr><td>Name</td><td>Icon</td><td>Ranges</td><td>Default</td><td>Delete</td></tr>'
     let tableBody = '<tbody>'

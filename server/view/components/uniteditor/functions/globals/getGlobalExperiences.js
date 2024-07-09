@@ -1,7 +1,5 @@
 let globalExperiences = []
 
-import globalWeaponTypes from './getGlobalWeaponTypes.js'
-
 let useExperienceSublevels = window.useExperienceSublevels || false
 let options
 if (useExperienceSublevels) {
@@ -34,15 +32,17 @@ if (window.statsAptitudesUseArmor){
     )
 }
 
-for (let weaponType of globalWeaponTypes) {
-    globalExperiences.push(
-        {
-            field: weaponType.type,
-            type: 'select',
-            options: options,
-            html: { label: weaponType.html.label, attr: '', column: 0}
-        }
-    )
+if (window.globalWeaponTypes){
+    for (let weaponType of globalWeaponTypes) {
+        globalExperiences.push(
+            {
+                field: weaponType.type,
+                type: 'select',
+                options: options,
+                html: { label: weaponType.html.label, attr: '', column: 0}
+            }
+        )
+    }
 }
 
 window.turnrootEditorLogs.push(`${new Date()}||info||Global experiences loaded`)
