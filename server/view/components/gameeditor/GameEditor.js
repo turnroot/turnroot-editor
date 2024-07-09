@@ -3,7 +3,8 @@ import gameEditorBottom from './bottom.js'
 
 import gameDetails from './tabs/gameDetails.js'
 
-import getAllWeaponTypes from './functions/weaponTypes/getAllWeaponTypes.js'
+import getAllWeaponTypes from './functions/globalDefaults/getAllWeaponTypes.js'
+import getAllMagicTypes from './functions/globalDefaults/getAllMagicTypes.js'
 
 let layout = new w2layout({
     name: 'GameEditor',
@@ -14,8 +15,11 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
-    if (!window.globalWeaponsTypes){
+    if (!window.globalWeaponsTypes || window.globalWeaponsTypes.length === 0){
         window.globalWeaponsTypes = await getAllWeaponTypes()
+    }
+    if (!window.globalMagicTypes || window.globalMagicTypes.length === 0){
+        window.globalMagicTypes = await getAllMagicTypes()
     }
 })
 

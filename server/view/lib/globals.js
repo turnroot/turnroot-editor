@@ -8,7 +8,7 @@ const integers = ['combatCombatArtLimit', 'combatWeaponTriangleAdvantage', 'comb
 
 const strings = ['unitEditorAvatarDefaultHairColor', 'unitEditorAvatarDefaultEyeColor']
 
-const json = ['combatTriangleMapping', 'combatMagicTriangleMapping', 'globalWeaponsTypes']
+const json = ['combatTriangleMapping', 'combatMagicTriangleMapping', 'globalWeaponsTypes', 'globalMagicTypes']
 
 const lists = ['combatTriangleTypes', 'combatNeutralTypes', 'combatMagicTriangleTypes', 'combatNeutralMagicTypes']
 

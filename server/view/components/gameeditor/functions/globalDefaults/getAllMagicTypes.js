@@ -1,9 +1,6 @@
-let lastPull = new Date()
-let pulled = false 
+const getAllMagicTypes = async() => {
 
-const getAllWeaponTypes = async() => {
-
-    console.log('getting all weapon types')
+    console.log('getting all magic types')
     let url = 'http://localhost:26068/data'
 
     let method = 'POST'
@@ -13,7 +10,7 @@ const getAllWeaponTypes = async() => {
     let body = {}
     body.queue = [
         {
-            model: 'globalWeaponsTypes',
+            model: 'globalMagicTypes',
             method: 'get'
         }
     ]
@@ -22,23 +19,17 @@ const getAllWeaponTypes = async() => {
         headers: headers,
         body: JSON.stringify(body)
     }
-    let now = new Date()
-    if (now - lastPull < 10000 && pulled === true){
-        if (window.globalWeaponsTypes){return window.globalWeaponsTypes} else {return []}
-    } 
 
     let response = await fetch(url, options).catch(err => {
         console.error(err)
         return w2alert('Error: invalid response from schemas server')
     })
-    if (response.ok){
-        lastPull = now
-        pulled = true        
+    if (response.ok){     
         return response.json()
     } else {
         return []
     }
 }
 
-export default getAllWeaponTypes
+export default getAllMagicTypes
 
