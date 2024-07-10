@@ -14,6 +14,8 @@ const lists = ['combatTriangleTypes', 'combatNeutralTypes', 'combatMagicTriangle
 
 const formNames = ['unit-editor-basic-fields', 'unit-editor-friend-fields', 'unit-editor-avatar-fields', 'unit-editor-enemy-fields', 'unit-editor-npc-fields']
 
+const misc = ['GameEditorWeaponTriangleFieldsTopCorner']
+
 booleans.forEach(property => {
     Object.defineProperty(window, property, {
         get: function() {
@@ -58,6 +60,17 @@ strings.forEach(property => {
     if (!localStorage.getItem(property)) {
         window[property] = defaults[property]
     }
+})
+
+misc.forEach(property => {
+    Object.defineProperty(window, property, {
+        get: function() {
+            return localStorage.getItem(property)
+        },
+        set: function(value) {
+            localStorage.setItem(property, value)
+        }
+    })
 })
 
 json.forEach(property => {

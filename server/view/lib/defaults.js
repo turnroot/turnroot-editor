@@ -40,6 +40,7 @@ const defaults = {
     'statsAptitudesUseArmor': false,
     'globalMagicTypes': [],
     'globalWeaponsTypes': [],
+    'GameEditorWeaponTriangleFieldsTopCorner': [],
 }
 
 export default defaults
