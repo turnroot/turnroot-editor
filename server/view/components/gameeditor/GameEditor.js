@@ -15,10 +15,10 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
-    if (!window.globalWeaponsTypes || window.globalWeaponsTypes.length === 0){
+    if (!window.globalWeaponsTypes || window.globalWeaponsTypes.length === 0 || !window.globalWeaponsTypes[0].types){
         window.globalWeaponsTypes = await getAllWeaponTypes()
     }
-    if (!window.globalMagicTypes || window.globalMagicTypes.length === 0){
+    if (!window.globalMagicTypes || window.globalMagicTypes.length === 0 || !window.globalMagicTypes[0].types){
         window.globalMagicTypes = await getAllMagicTypes()
     }
 })

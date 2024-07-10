@@ -94,6 +94,7 @@ window.GameEditorWeaponTypesUpdateType = updateWeaponType
 
 const weaponTypesPopup = () => {
     let weaponTypes = window.globalWeaponsTypes[0]
+    unedited = [JSON.parse(JSON.stringify(weaponTypes))]
 
     let innerHtml = '<div style = "overflow-y:auto;height:350px;"><table id = "weapon-types-table">'
     let tableHead = '<thead style = "font-weight:bold;margin-bottom:.5rem;text-align:center;"><tr><td>Name</td><td>Icon</td><td>Ranges</td><td>Default</td><td>Delete</td></tr>'
@@ -151,7 +152,9 @@ const weaponTypesPopup = () => {
             else if (!tr.id) return
             else GameEditorWeaponTypesUpdateType(tr)
         })
-        updateQueue('globalWeaponsTypes', 'update', globalWeaponsTypes)
+        let body = {...globalWeaponsTypes[0]}
+        body.id = globalWeaponsTypes[0].id
+        updateQueue('globalWeaponsTypes', 'update', body)
         w2popup.close()
     }).cancel((e) => {
         globalWeaponsTypes = unedited
