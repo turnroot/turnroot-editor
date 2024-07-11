@@ -41,6 +41,8 @@ const defaults = {
     'globalMagicTypes': [],
     'globalWeaponsTypes': [],
     'GameEditorWeaponTriangleFieldsTopCorner': [],
+    'GameEditorWeaponTriangleFieldsLeftCorner': [],
+    'GameEditorWeaponTriangleFieldsRightCorner': [],
 }
 
 export default defaults

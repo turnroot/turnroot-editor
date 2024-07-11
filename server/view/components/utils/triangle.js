@@ -17,46 +17,55 @@ const Triangle = (unitSize, backgroundColor, borderColor, fields) => {
     let box3 = document.createElement('select')
     box3.className = 'Triangle-box3'
     box3.multiple = true
-    let box4 = document.createElement('select')
+    let box4 = document.createElement('div')
     box4.className = 'Triangle-box4'
-    box4.multiple = true
-    let box5 = document.createElement('select')
+    let box5 = document.createElement('div')
     box5.className = 'Triangle-box5'
-    box5.multiple = true
-    let box6 = document.createElement('select')
+    let box6 = document.createElement('div')
     box6.className = 'Triangle-box6'
-    box6.multiple = true
+
+    box4.innerHTML = '<svg style = "transform:rotate(58deg)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>'
+
+    box5.innerHTML = '<svg style = "transform:rotate(-238deg)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-left"><path d="M6 8L2 12L6 16"/><path d="M2 12H22"/></svg>'
+
+    box6.innerHTML = '<svg style = "transform:rotate(180deg)" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-right"><path d="M18 8L22 12L18 16"/><path d="M2 12H22"/></svg>'
 
     let boxes = {
         topCorner: box1,
         leftCorner: box2,
         rightCorner: box3,
-        rightEdge: box4,
-        bottomEdge: box5,
-        leftEdge: box6
     }
 
     Object.keys(boxes).forEach(box => {
-        console.log("Box: ", box, "Field: ", fields.find(f => f.el === box))
-        boxes[box].id = fields.find(f => f.el === box).id
-        let options = fields.find(f => f.el === box).options
+        let f = fields.find(f => f.el === box)
+        if (!f) return
+    
+        boxes[box].id = f.id
+        let options = f.options
         options.forEach(option => {
             let optionElement = document.createElement('option')
             optionElement.value = option.id
             optionElement.innerText = option.text
             optionElement.selected = f.selected.includes(option.id)
-            box.appendChild(optionElement)
+            boxes[box].appendChild(optionElement)
         })
-        box.onchange = () => {
-            fields.find(f => f.el === box).options = Array.from(box.children).map(o => {
+
+        let updateSelected = () => {
+            f.options = Array.from(boxes[box].children).map(o => {
                 return {id: o.value, text: o.innerText, selected: o.selected}
             })
+            f.selected = f.options.filter(o => o.selected).map(o => o.id)
+        }
+
+        updateSelected()
+        boxes[box].onclick = () => {
+            updateSelected()
         }
     })
 
     let styleTag = document.createElement('style')
     let style = `
-    .Triangle-innerTriangle,.Triangle-outerTriangle{width:0;height:0;border-style:solid;transform:rotate(0deg)}.Triangle-outerTriangle{border-width:0 calc(50px*${unit}) calc(75px*${unit});border-color:transparent transparent ${borderColor}}.Triangle-innerTriangle{position:relative;margin-left:calc(-46px*${unit});top:calc(3px*${unit});border-width:0 calc(46px*${unit}) calc(70px*${unit});border-color:transparent transparent ${backgroundColor}}.Triangle-box1,.Triangle-box2,.Triangle-box3,.Triangle-box4,.Triangle-box5,.Triangle-box6{position:absolute;background-color:${backgroundColor};width:min-content;padding:1rem}.Triangle-box1{top:0;left:calc(50%);transform:translateX(-50%)}.Triangle-box2,.Triangle-box3{top:calc(75px*${unit});transform:translateY(-50%)}.Triangle-box2{left:calc(${unit}*-50px)}.Triangle-box3{right:calc(${unit}*-50px)}.Triangle-box4{right:calc(${unit}*-27px);top:calc(37.5px*${unit});transform:translateY(-50%) translateX(50%)}.Triangle-box5,.Triangle-box6{transform:translateY(-50%) translateX(-50%)}.Triangle-box5{left:calc(${unit}*-27px);top:calc(37.5px*${unit})}.Triangle-box6{top:calc(75px*${unit})}`
+    .Triangle-innerTriangle,.Triangle-outerTriangle{width:0;height:0;border-style:solid;transform:rotate(0deg)}.Triangle-outerTriangle{border-width:0 calc(50px*${unit}) calc(75px*${unit});border-color:transparent transparent ${borderColor}}.Triangle-innerTriangle{position:relative;margin-left:calc(-46px*${unit});top:calc(3px*${unit});border-width:0 calc(46px*${unit}) calc(70px*${unit});border-color:transparent transparent ${backgroundColor}}.Triangle-box1,.Triangle-box2,.Triangle-box3,.Triangle-box4,.Triangle-box5,.Triangle-box6{position:absolute;width:min-content;padding:1rem}.Triangle-box1{top:0;left:calc(50%);transform:translateX(-50%)}.Triangle-box2,.Triangle-box3{top:calc(75px*${unit});transform:translateY(-50%)}.Triangle-box2{left:calc(${unit}*-50px)}.Triangle-box3{right:calc(${unit}*-50px)}.Triangle-box4{right:calc(${unit}*-27px);top:calc(37.5px*${unit});transform:translateY(-50%) translateX(50%)}.Triangle-box5,.Triangle-box6{transform:translateY(-50%) translateX(-50%)}.Triangle-box5{left:calc(${unit}*-27px);top:calc(37.5px*${unit})}.Triangle-box6{top:calc(75px*${unit})}`
     styleTag.innerText = style
     div.appendChild(styleTag)
 
