@@ -43,6 +43,9 @@ const defaults = {
     'GameEditorWeaponTriangleFieldsTopCorner': [],
     'GameEditorWeaponTriangleFieldsLeftCorner': [],
     'GameEditorWeaponTriangleFieldsRightCorner': [],
+    'GameEditorMagicTriangleFieldsTopCorner': [],
+    'GameEditorMagicTriangleFieldsLeftCorner': [],
+    'GameEditorMagicTriangleFieldsRightCorner': []
 }
 
 export default defaults

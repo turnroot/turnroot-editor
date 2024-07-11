@@ -62,7 +62,38 @@ const weaponTrianglesPopup = () => {
         },
     ]
 
+    let magicFields = [
+        {
+            id: 'GameEditorMagicTriangleFieldsTopCorner',
+            el: 'topCorner',
+            type: 'select',
+            options: globalMagicTypes[0].types.map(t => {
+                return {id: t.id, text: t.name}
+            }),
+            selected: GameEditorMagicTriangleFieldsTopCorner && GameEditorMagicTriangleFieldsTopCorner.length > 0 ? GameEditorMagicTriangleFieldsTopCorner : []
+        },
+        {
+            id: 'GameEditorMagicTriangleFieldsLeftCorner',
+            el: 'leftCorner',
+            type: 'select',
+            options: globalMagicTypes[0].types.map(t => {
+                return {id: t.id, text: t.name}
+            }),
+            selected: GameEditorMagicTriangleFieldsLeftCorner  && GameEditorMagicTriangleFieldsLeftCorner? GameEditorMagicTriangleFieldsLeftCorner : []
+        },
+        {
+            id: 'GameEditorMagicTriangleFieldsRightCorner',
+            el: 'rightCorner',
+            type: 'select',
+            options: globalMagicTypes[0].types.map(t => {
+                return {id: t.id, text: t.name}
+            }),
+            selected: GameEditorMagicTriangleFieldsRightCorner && GameEditorMagicTriangleFieldsRightCorner.length > 0 ? GameEditorMagicTriangleFieldsRightCorner : []
+        },
+    ]
+
     let triangle = Triangle(3.5, 'var(--window-background)', 'var(--window-background-alt)', fields)
+    let magicTriangle = Triangle(3.5, 'var(--window-background)', 'var(--window-background-alt)', magicFields)
 
     let innerHtml = triangle.html
 
@@ -71,6 +102,22 @@ const weaponTrianglesPopup = () => {
     window.GameEditorWeaponMagicTrianglesPopupLayout = layout
 
     let record = triangle.fields
+
+    GameEditorWeaponMagicTrianglesPopupLayout.panels[0].toolbar.items[0].onClick = () => {
+        let innerHtml = triangle.html
+        layout.html('main', innerHtml)
+        layout.render(div)
+        record = triangle.fields
+        layout.refresh()
+    }
+
+    GameEditorWeaponMagicTrianglesPopupLayout.panels[0].toolbar.items[1].onClick = () => {
+        let innerHtml = magicTriangle.html
+        layout.html('main', innerHtml)
+        layout.render(div)
+        record = magicTriangle.fields
+        layout.refresh()
+    }
 
     w2popup.open({
         title: 'Weapon/magic triangles',
