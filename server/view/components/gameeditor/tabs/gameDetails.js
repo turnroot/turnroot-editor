@@ -43,7 +43,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: '<p style = "width:100%;max-width:100%!important;">The game subtitle is for long, multi-part titles (say for example you wanted to name your game something like Icy Shield: Lineage of the Evil War - Heirs of Photonic Rays, "Heirs of Photonic Rays" would be your subtitle.) A subtitle is optional.</p>',
+                html: '<p style = "width:100%;max-width:100%!important;">The game subtitle is for long, multi-part titles<sup aria-label="Say you wanted to name your game something like Icy Shield: Lineage of the Evil War - Heirs of Photonic Rays.  \'Heirs of Photonic Rays\' would be your subtitle" data-balloon-length="large" data-balloon-pos="up"><highlight>?</highlight></sup>. A subtitle is optional.</p>',
                 class: 'full-width-field'
 
             }
@@ -96,7 +96,7 @@ let config = {
         {
             type: 'html',
             html: {
-                html: '<p style = "width:100%;max-width:100%!important;"><highlight>Important!</highlight> When working on units or other game components, you will have the option to change things by difficulty (i.e., add reinforcements to a level on Hard or above), but the base stats, growth rates, etc, you will be setting are for Normal difficulty. You can set scalars that impact these stats for different difficulty levels- just bear in mind that if, for example, you\'re using stats on a wiki for an existing game as a guide, you should use the Normal stats.</p>',
+                html: '<p style = "width:100%;max-width:100%!important;"><highlight>Important!</highlight> When working on units or other game components, you will have the option to change things by difficulty (i.e., add reinforcements to a level on Hard or above), but the base stats, growth rates, etc, you will be setting are for Normal difficulty.<sup aria-label="You can set scalars that impact these stats for different difficulty levels- just bear in mind that if, for example, you\'re using stats on a wiki for an existing game as a guide, you should use the Normal stats." data-balloon-length="large" data-balloon-pos="up"><highlight>so...?</highlight></sup></p>',
             },
         },
         {

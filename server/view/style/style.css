@@ -24,6 +24,7 @@ html{filter:grayscale(60%)}
 button,input,option,section,select,textarea{border:1px solid transparent!important}
 svg{fill:Canvas!important;stroke:CanvasText!important}
 }
+sup{vertical-align:super}
 button,input,select,textarea{font-family:inherit;font-style:normal;font-variant:normal;font-weight:400}
 h1,h2,h3,h4,h5,h6,p{overflow-wrap:break-word}
 .square-img-container::after{content:"";display:block;padding-bottom:100%}

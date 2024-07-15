@@ -36,11 +36,11 @@ let rows = [
     {left: 'Can\'t be targeted', right: 'The unit cannot be targeted by enemies.'},
     {left: 'Suicidal', right: 'The unit will seek their own death.'},
     {left: 'Here for the objective', right: 'The unit will only move towards objective tiles, ignoring enemies.'},
-    {left: 'Protect the leader', right: 'The unit will stay adjcaent to the leader.'},
+    {left: 'Protect the leader', right: 'The unit will stay adjacent to the leader.'},
     {left: 'Will not move until attacked', right: 'The unit will not move until attacked.'},
+    {left: 'Will not move until enemy in range', right: 'The unit will not move until an enemy is in range.'},
     {left: 'Ignores terrain', right: 'The unit can move through any terrain.'},
     {left: 'Move through units', right: 'The unit can move through other units.'},
-    {left: 'Murderous', right: 'The unit will always prioritize attacking weak units, disadvantaged units, or units with low health.'},
     {left: 'Kill the avatar', right: 'The unit will always attack the avatar.'},
 ]
 

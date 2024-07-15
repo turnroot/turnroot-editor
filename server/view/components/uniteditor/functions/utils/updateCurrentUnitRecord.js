@@ -8,6 +8,10 @@ import dynamicRadios from '../../../utils/dynamicRadios.js'
 
 const updateCurrentUnitRecord = async(n) => {
     window.currentUnit = n
+    if (!window.currentUnit || window.currentUnit === undefined){
+        console.log('no unit to update')
+        return
+    }
     console.log('updating current unit record ', n.id)
 
     window.unitEditorBasicFields.record['fullName'] = n.fullName

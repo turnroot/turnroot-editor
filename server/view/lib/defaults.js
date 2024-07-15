@@ -7,7 +7,7 @@ const defaults = {
     'combatCombatArts': false,
     'combatCombatArtLimit': 3,
     'combatWeaponTriangle': true,
-    'combatTriangleTypes': [],
+    'combatTriangleTypes': ["Sword", "Lance", "Axe", "Bow", "Gauntlet", "Dagger"],
     'combatNeutralTypes': [],
     'combatTriangleMapping': {},
     'combatExpandedWeaponTriangle': false,
@@ -38,58 +38,14 @@ const defaults = {
     'statsAptitudesUseFlying': true,
     'statsAptitudesUseAuthority': false,
     'statsAptitudesUseArmor': false,
-    'globalWeaponsTypes': {
-        types: [
-            {
-                name: 'Sword',
-                icon: '',
-                id: 'sword',
-                magic: false,
-                ranges: [1, 2],
-                defaultRange: 1
-            },
-            {
-                name: 'Lance',
-                icon: '',
-                id: 'lance',
-                magic: false,
-                ranges: [1, 2],
-                defaultRange: 1
-            },
-            {
-                name: 'Axe',
-                icon: '',
-                id: 'axe',
-                magic: false,
-                ranges: [1, 2],
-                defaultRange: 1
-            },
-            {
-                name: 'Bow',
-                icon: '',
-                id: 'bow',
-                magic: false,
-                ranges: [1, 2, 3, 4],
-                defaultRange: 2
-            },
-            {
-                name: 'Gauntlet',
-                icon: '',
-                id: 'gauntlet',
-                magic: false,
-                ranges: [1],
-                defaultRange: 1
-            },
-            {
-                name: 'Dagger',
-                icon: '',
-                id: 'dagger',
-                magic: false,
-                ranges: [1, 2],
-                defaultRange: 1
-            }
-        ]
-    },
+    'globalMagicTypes': [],
+    'globalWeaponsTypes': [],
+    'GameEditorWeaponTriangleFieldsTopCorner': [],
+    'GameEditorWeaponTriangleFieldsLeftCorner': [],
+    'GameEditorWeaponTriangleFieldsRightCorner': [],
+    'GameEditorMagicTriangleFieldsTopCorner': [],
+    'GameEditorMagicTriangleFieldsLeftCorner': [],
+    'GameEditorMagicTriangleFieldsRightCorner': []
 }
 
 export default defaults
