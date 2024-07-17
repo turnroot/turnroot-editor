@@ -23,7 +23,7 @@ form.updateGlobals = () => {
     form.refresh()
 }
 
-window.unitEditorBasicFields = form
+window.objectEditorBasicFields = form
 
 form.updateGlobals()
 

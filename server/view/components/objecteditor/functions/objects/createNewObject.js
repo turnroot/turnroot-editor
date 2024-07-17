@@ -10,12 +10,39 @@ const createNewObject = async (
     }
     let body = {}
     
-    body.queue = [
-        {
-            model: 'Object',
-            method: 'createObject',
+
+    if (subtype){
+        if (subtype === 'weapon'){
+            body.queue = [
+                {
+                    model: 'objectWeapon',
+                    method: 'create',
+                }
+            ]
+        } else if (subtype === 'gift'){
+            body.queue = [
+                {
+                    model: 'objectGift',
+                    method: 'create',
+                }
+            ]
+        } else if (subtype === 'consumable'){
+            body.queue = [
+                {
+                    model: 'objectConsumable',
+                    method: 'create',
+                }
+            ]
+        } else if (subtype === 'equipable'){
+            body.queue = [
+                {
+                    model: 'objectEquipable',
+                    method: 'create',
+                }
+            ]
         }
-    ]
+    } else {return w2alert('Error: no subtype provided')}
+
     console.log(body)
     let options = {
         method: method,

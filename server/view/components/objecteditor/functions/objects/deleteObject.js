@@ -9,12 +9,42 @@ const deleteObject = async (
     }
     let body = {}
     
-    body.queue = [
-        {
-            model: 'Object',
-            method: 'deleteObject',
+    let subtype = window.currentObject.subtype
+    if (subtype){
+        if (subtype === 'weapon'){
+            body.queue = [
+                {
+                    model: 'objectWeapon',
+                    method: 'delete',
+                    id: id
+                }
+            ]
+        } else if (subtype === 'gift'){
+            body.queue = [
+                {
+                    model: 'objectGift',
+                    method: 'delete',
+                    id: id
+                }
+            ]
+        } else if (subtype === 'consumable'){
+            body.queue = [
+                {
+                    model: 'objectConsumable',
+                    method: 'delete',
+                    id: id
+                }
+            ]
+        } else if (subtype === 'equipable'){
+            body.queue = [
+                {
+                    model: 'objectEquipable',
+                    method: 'delete',
+                    id: id
+                }
+            ]
         }
-    ]
+    } else {return w2alert('Error: no subtype provided')}
     console.log(body)
     let options = {
         method: method,
