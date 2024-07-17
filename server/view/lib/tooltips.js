@@ -22,6 +22,7 @@ const tooltips = {
     combatNeutralTypes: 'Combat neutral types',
     combatMagicTriangleTypes: 'Combat magic triangle types',
     combatNeutralMagicTypes: 'Combat neutral magic types',
+    UseWeatherOnLevels: 'Use weather on levels'
 }
 
 export default tooltips

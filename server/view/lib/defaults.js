@@ -45,7 +45,8 @@ const defaults = {
     'GameEditorWeaponTriangleFieldsRightCorner': [],
     'GameEditorMagicTriangleFieldsTopCorner': [],
     'GameEditorMagicTriangleFieldsLeftCorner': [],
-    'GameEditorMagicTriangleFieldsRightCorner': []
+    'GameEditorMagicTriangleFieldsRightCorner': [],
+    'UseWeatherOnLevels': false,
 }
 
 export default defaults

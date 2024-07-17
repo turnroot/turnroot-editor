@@ -18,9 +18,22 @@ let config = {
 
 import handleGlobals from '../functions/handleGlobals.js'
 
-import { booleans, integers, strings, json, lists } from "../../../lib/globals.js"
+import { booleans, integers, strings, json, lists, misc } from "../../../lib/globals.js"
 import labels from "../../../lib/globalsLabels.js"
 import tooltips from "../../../lib/tooltips.js"
+
+config.fields.push({
+    field: 'UseWeatherOnLevels',
+    type: 'checkbox',
+    attr:'style="width:100%"',
+    html: {
+        text: tooltips['UseWeatherOnLevels'] ? labels["UseWeatherOnLevels"] + '<sup><highlight class="tooltip" aria-label="' + tooltips["UseWeatherOnLevels"] + '" data-balloon-pos="up">?</highlight></sup>' : labels["UseWeatherOnLevels"],
+        class: 'no-label',
+        style: 'width:100%;',
+        column: 0
+    }
+})
+config.record["UseWeatherOnLevels"] = window["UseWeatherOnLevels"]
 
 let booleansHeadingsAfter = {
     useExperienceAptitudes: 'Combat',
