@@ -27,6 +27,10 @@ const buildPopup = () => {
 }
 
 const weaponTrianglesPopup = () => {
+    if (!globalWeaponsTypes || globalWeaponsTypes.length === 0 || !globalWeaponsTypes[0].types){
+        localStorage.clear()
+        window.location.reload()
+    }
     let div = document.createElement('div')
     div.style.height="100%"
     div.style.width="100%"

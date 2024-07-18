@@ -22,7 +22,7 @@ const updateCurrentUnitRecord = async(n) => {
 
     handleEvent(window.unitEditorBasicFields, {detail: {field: 'subtype', value: {current: c(n.which)}}}, true)
 
-    window.unitEditorBasicFields.record['pronouns'] = n.pronouns.singular + '/' + n.pronouns.object + '/' + n.pronouns.possessive + '/' + n.pronouns.possessives
+    window.unitEditorBasicFields.record['pronouns'] = n.pronouns.singular + '/' + n.pronouns.possessive + '/' + n.pronouns.object + '/' + n.pronouns.possessives
 
     window.unitEditorBasicFields.record['age'] = n.age
     window.unitEditorBasicFields.record['height'] = n.height
@@ -31,8 +31,8 @@ const updateCurrentUnitRecord = async(n) => {
     window.unitEditorBasicFields.record['isUnique'] = n.isUnique
     window.unitEditorBasicFields.record['canRecruit'] = n.isRecruitable
 
-    window.unitEditorBasicFields.record['birthdayDay'] = n.birthday.day
-    window.unitEditorBasicFields.record['birthdayMonth'] = n.birthday.month
+    window.unitEditorBasicFields.record['birthdayDay'] = n.birthdayDay
+    window.unitEditorBasicFields.record['birthdayMonth'] = n.birthdayMonth
 
     window.unitEditorBasicFields.record['notes'] = n.Notes
     window.unitEditorBasicFields.record['shortBio'] = n.shortDescription

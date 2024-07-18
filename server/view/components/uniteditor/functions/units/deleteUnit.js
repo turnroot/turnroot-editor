@@ -8,8 +8,7 @@ const deleteUnit = async (
         'Content-Type': 'application/json'
     }
     let body = {}
-    body.which = subtype
-    body.name = familiarName
+    body.id = id
     body.queue = [
         {
             model: 'Person',
