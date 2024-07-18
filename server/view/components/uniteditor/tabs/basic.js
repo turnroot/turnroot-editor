@@ -332,6 +332,15 @@ config.fields.push({
     }
 })
 
+window.UpdateAccentColor1 = (e) => {
+    window.unitEditorBasicFields.record['unit-accent-color-1'] = e.target.value
+}
+
+window.UpdateAccentColor2 = (e) => {
+    window.unitEditorBasicFields.record['unit-accent-color-2'] = e.target.value
+    window.unitEditorBasicFields
+}
+
 config.fields.push({
     type: 'html',
     field: 'unit-accent-color-1',
@@ -340,7 +349,7 @@ config.fields.push({
         label: 'Accent color 1',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#000000">',
+        html: '<input type="color" onchange="window.UpdateAccentColor1(event)">',
     },
 })
 
@@ -349,11 +358,10 @@ config.fields.push({
     field: 'unit-accent-color-2',
     hidden: true,
     html: {
-
         label: 'Accent color 2',
         attr: '',
         column: 2,
-        html: '<input type="color" value="#000000">',
+        html: '<input type="color" onchange="window.UpdateAccentColor2(event)">',
     },
 })
 
