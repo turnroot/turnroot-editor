@@ -24,7 +24,7 @@ const subtypeConfig = {
         toolbarShow: ['unit-editor-bottom-toolbar-relationship']
     },
     NPC: {
-        hide: ['orientation', 'canSSupport', 'canHaveChildren', 'canRecruit', 'growth-rates', 'unit-accent-color-1', 'unit-accent-color-2', 'base-stats-header', 'randomize-base-stats', 'useAccentColors', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
+        hide: ['orientation', 'canSSupport', 'canHaveChildren', 'canRecruit', 'growth-rates', 'accentColor1', 'accentColor2', 'base-stats-header', 'randomize-base-stats', 'useAccentColors', 'height', 'birthdayDay', 'birthdayMonth', 'age'],
         show: ['isUnique'],
         enable: [],
         disable: [],
@@ -91,11 +91,11 @@ const handleEvent = (form, event, automated=false) => {
 
     else if (field === 'useAccentColors') {
         if (value.current === true) {
-            form.show('unit-accent-color-1')
-            form.show('unit-accent-color-2')
+            form.show('accentColor1')
+            form.show('accentColor2')
         } else {
-            form.hide('unit-accent-color-1')
-            form.hide('unit-accent-color-2')
+            form.hide('accentColor1')
+            form.hide('accentColor2')
         }
     }
 

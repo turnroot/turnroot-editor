@@ -14,6 +14,11 @@ const updateCurrentUnitRecord = async(n) => {
     }
     console.log('updating current unit record ', n.id)
 
+    if (n.useAccentColors){
+        window.unitEditorBasicFields.show('accentColor1')
+        window.unitEditorBasicFields.show('accentColor2')
+    }
+
     window.unitEditorBasicFields.record['fullName'] = n.fullName
     window.unitEditorBasicFields.record['title'] = n.title
     window.unitEditorBasicFields.record['name'] = n.name
@@ -39,9 +44,9 @@ const updateCurrentUnitRecord = async(n) => {
 
     window.unitEditorBasicFields.record['useAccentColors'] = n.useAccentColors
 
-    window.unitEditorBasicFields.record['unit-accent-color-1'] = n.accentColor1
-    window.unitEditorBasicFields.record['unit-accent-color-2'] = n.accentColor2
-    
+    window.unitEditorBasicFields.record['accentColor1'] = n.accentColor1
+    window.unitEditorBasicFields.record['accentColor2'] = n.accentColor2
+
     window.unitEditorBasicFields.refresh()
 
     window.unitEditorRelationshipFields.record = n.MaxSupports? n.MaxSupports : {}

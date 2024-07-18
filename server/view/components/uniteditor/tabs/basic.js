@@ -332,36 +332,40 @@ config.fields.push({
     }
 })
 
-window.UpdateAccentColor1 = (e) => {
-    window.unitEditorBasicFields.record['unit-accent-color-1'] = e.target.value
+window.UpdateaccentColor1 = (e) => {
+    window.unitEditorBasicFields.record['accentColor1'] = e.target.value
+    try {
+    window.unitEditorBasicFields.get('accentColor1').el.querySelector('input').value = e.target.value} catch (e) {console.log(e)}
 }
 
-window.UpdateAccentColor2 = (e) => {
-    window.unitEditorBasicFields.record['unit-accent-color-2'] = e.target.value
-    window.unitEditorBasicFields
+window.UpdateaccentColor2 = (e) => {
+    window.unitEditorBasicFields.record['accentColor2'] = e.target.value
+    try {
+    window.unitEditorBasicFields.get('accentColor2').el.querySelector('input').value = e.target.value
+    } catch (e) {console.log(e)}
 }
 
 config.fields.push({
     type: 'html',
-    field: 'unit-accent-color-1',
+    field: 'accentColor1',
     hidden: true,
     html: {
         label: 'Accent color 1',
         attr: '',
         column: 2,
-        html: '<input type="color" onchange="window.UpdateAccentColor1(event)">',
+        html: '<input type="color" onchange="window.UpdateaccentColor1(event)">',
     },
 })
 
 config.fields.push({
     type: 'html',
-    field: 'unit-accent-color-2',
+    field: 'accentColor2',
     hidden: true,
     html: {
         label: 'Accent color 2',
         attr: '',
         column: 2,
-        html: '<input type="color" onchange="window.UpdateAccentColor2(event)">',
+        html: '<input type="color" onchange="window.UpdateaccentColor2(event)">',
     },
 })
 
@@ -369,6 +373,13 @@ let form = new w2form(config)
 
 form.on('change', (event) => {
     handleEvent(form, event)
+})
+
+form.on('refresh', (event) => {
+    try{
+        form.get('accentColor1').el.querySelector('input').value = form.record.accentColor1
+        form.get('accentColor2').el.querySelector('input').value = form.record.accentColor2
+    } catch (e) {console.log(e)}
 })
 
 form.updateGlobals = () => {
