@@ -5,6 +5,7 @@ import gameDetails from './tabs/gameDetails.js'
 
 import getAllWeaponTypes from './functions/globalDefaults/getAllWeaponTypes.js'
 import getAllMagicTypes from './functions/globalDefaults/getAllMagicTypes.js'
+import getGlobalGameDetails from './functions/globalDefaults/getGlobalGameDetails.js'
 
 let layout = new w2layout({
     name: 'GameEditor',
@@ -20,6 +21,14 @@ layout.on('render', async function(event){
     }
     if (!window.globalMagicTypes || window.globalMagicTypes.length === 0 || !window.globalMagicTypes[0].types){
         window.globalMagicTypes = await getAllMagicTypes()
+    }
+    if (!window.globalGameDetails){
+        window.globalGameDetails = await getGlobalGameDetails()
+        window.GameEditorRequiredGameDetails.record = window.globalGameDetails[0]
+        window.GameEditorRequiredGameDetails.refresh()
+    } else {
+        window.GameEditorRequiredGameDetails.record = window.globalGameDetails[0]
+        window.GameEditorRequiredGameDetails.refresh()
     }
 })
 

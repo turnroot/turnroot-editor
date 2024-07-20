@@ -49,6 +49,16 @@ let config = {
             }
         },
         {
+            field: 'gameDescription',
+            type: 'text',
+            required: true,
+            html: {
+                label: 'Description',
+                attr: 'style="width: 100%;"',
+                class: 'emphasized-field full-width-field',
+            }
+        },
+        {
             field: 'gameAuthorDisplayName',
             type: 'textarea',
             required: true,
@@ -156,5 +166,7 @@ let form = new w2form(config)
 form.on('change', function(event) {
     handleGameDetails(event, form)
 })
+
+window.GameEditorRequiredGameDetails = form
 
 export default form

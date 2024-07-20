@@ -1,9 +1,11 @@
-import {w2ui} from "../../../lib/w2ui.es6.min.js"
 import { updateFormGlobals } from "../../../lib/globals.js"
+import { updateQueue } from "../../../functions/edits/queue.js"
 
-const handleGlobals = (event, form) => {
+const handleGameDetails = (event, form) => {
+    console.log(event)
     window[event.detail.field] = event.detail.value.current
     updateFormGlobals()
+    updateQueue('gameDetails', 'update', form.record)
 }
 
-export default handleGlobals
+export default handleGameDetails

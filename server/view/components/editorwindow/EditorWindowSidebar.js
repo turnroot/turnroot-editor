@@ -50,24 +50,20 @@ onFlat(event) {
 
 sidebar.on('click', function(event) {
     if (event.object.disabled) return
-
+    let layout = w2ui.EditorWindowLayout
     if (event.target === 'sidebar-editors-unit-editor') {
-        let layout = w2ui.EditorWindowLayout
         layout.html('main', UnitEditor).removed()
         window.activeEditor = 'unit-editor'
     } else if (event.target === 'sidebar-editors-class-editor') {
         w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
-        let layout = w2ui.EditorWindowLayout
         layout.html('main', ClassEditor).removed()
         window.activeEditor = 'class-editor'
     } else if (event.target === 'sidebar-editors-game-editor') {
         w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
-        let layout = w2ui.EditorWindowLayout
         layout.html('main', GameEditor).removed()
         window.activeEditor = 'game-editor'
     } else if (event.target === 'sidebar-editors-object-editor') {
         w2ui['unit-editor-bottom-toolbar'].click('unit-editor-bottom-toolbar-basic')
-        let layout = w2ui.EditorWindowLayout
         layout.html('main', ObjectEditor).removed()
         window.activeEditor = 'object-editor'
     }
