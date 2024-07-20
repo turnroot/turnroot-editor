@@ -136,7 +136,13 @@
 
 
     setInterval(function() {
-        window.sendQueue()
+        console.log('Auto-saving...')
+        if (editsQueue && editsQueue.queue && editsQueue.queue.length > 0) {
+            window.sendQueue()
+            console.log('Auto-save complete.')
+        } else {
+            console.log('No changes to save.')
+        }
     }, 12000)
 
     document.addEventListener('keydown', function(event) {

@@ -18,6 +18,12 @@ let toolbar = new w2toolbar({
     ]
 })
 
+toolbar.on('render', function(event) {
+    if (window.newUserOnboardingGameDetails === false){
+        toolbar.hide('status-bar-project-status')
+    }
+})
+
 toolbar.on('click', function (event) {
     event.done(() => {
         window.turnrootEditorLogs.push(`${new Date()}||info||Status bar button clicked: ${JSON.stringify(event.target)}`)

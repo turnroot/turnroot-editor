@@ -26,7 +26,7 @@ let sidebar = new w2sidebar({
         }
     },
     nodes: [
-        {id: 'sidebar-editors-list', text: 'Editors', expanded: true, group: true, groupShowHide: false,
+        {id: 'sidebar-editors-list', text: 'Simple Editors', expanded: true, group: true, groupShowHide: true,
         nodes: [
             {id: 'sidebar-editors-game-editor', text: 'Project'},
             {id: 'sidebar-editors-unit-editor', text: 'Units', disabled: true},
@@ -37,7 +37,7 @@ let sidebar = new w2sidebar({
             event.preventDefault()
         }
     },
-    {id: 'sidebar-recent-files', text: 'Recent Files', expanded: true, group: true, groupShowHide: true,
+    {id: 'sidebar-complex-editors-list', text: 'Assembly Editors', expanded: true, group: true, groupShowHide: true,
     nodes: [
     ],
 }
