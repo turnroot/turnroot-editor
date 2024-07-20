@@ -48,6 +48,26 @@ onFlat(event) {
 },
 })
 
+sidebar.on('render', function(event) {
+    if (window.newUserOnboardingGameDetails === false){
+        sidebar.enable('sidebar-editors-unit-editor')
+        sidebar.enable('sidebar-editors-class-editor')
+        sidebar.enable('sidebar-editors-object-editor')
+    }
+    if (sessionStorage.getItem('startupView')){
+        let startupView = sessionStorage.getItem('startupView')
+        if (startupView === 'default-editor-unit-editor'){
+            sidebar.click('sidebar-editors-unit-editor')
+        } else if (startupView === 'default-editor-class-editor'){
+            sidebar.click('sidebar-editors-class-editor')
+        } else if (startupView === 'default-editor-object-editor'){
+            sidebar.click('sidebar-editors-object-editor')
+        } else {
+            sidebar.click('sidebar-editors-game-editor')
+        }
+    }
+})
+
 sidebar.on('click', function(event) {
     if (event.object.disabled) return
     let layout = w2ui.EditorWindowLayout

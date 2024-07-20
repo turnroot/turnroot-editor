@@ -7,6 +7,7 @@ const handleEvent = (event, toolbar) => {
 
     if (startupViews.includes(event.target)) {
         let startupView = event.target.split(':')[1]
+        sessionStorage.setItem('startupView', startupView)
         toolbar.get('settings').get('default-editor').items.forEach(item => {
             if (item.id === startupView) {
                 item.style = 'background-color: var(--window-background-alt);'

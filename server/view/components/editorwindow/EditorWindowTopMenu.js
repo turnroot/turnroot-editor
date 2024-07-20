@@ -4,7 +4,7 @@ import {
 } from '../../lib/w2ui.es6.min.js'
 import topMenu from '../../functions/ui/topMenu.js'
 
-let startupView = 'welcome-message'
+let startupView = sessionStorage.getItem('startupView') ? sessionStorage.getItem('startupView') : 'welcome-message'
 
 let toolbar = new w2toolbar({
     name: 'EditorWindowTopMenu',
@@ -74,14 +74,17 @@ let toolbar = new w2toolbar({
                 text: 'Welcome message',
                 id: 'default-editor-welcome-message',
                 style: 'background-color: var(--window-background-alt);',
-                checked: true
+                checked: startupView === 'welcome-message',
+                hidden: startupView !== 'welcome-message'
             },
             {
                 text: 'Unit Editor',
                 id: 'default-editor-unit-editor',
+                checked: startupView === 'default-editor-unit-editor'
             },
             {
                 text: 'Class Editor',
+                checked: startupView === 'default-editor-class-editor',
                 id: 'default-editor-class-editor',
             }
         ]
@@ -95,19 +98,22 @@ let toolbar = new w2toolbar({
                 text: 'Fira Sans',
                 id: 'font-family-fira-sans',
                 style: 'background-color: var(--window-background-alt);',
-                checked: true
+                checked: localStorage.getItem('font-family') === 'Fira Sans'
             },
             {
                 text: 'Lexend',
                 id: 'font-family-lexend',
+                checked: localStorage.getItem('font-family') === 'Lexend'
             },
             {
                 text: 'Clean Sans',
+                checked: localStorage.getItem('font-family') === 'Clear Sans',
                 id: 'font-family-clean-sans',
             },
             {
                 text: 'Figtree',
                 id: 'font-family-figtree',
+                checked: localStorage.getItem('font-family') === 'Figtree'
             }
         ]
     }

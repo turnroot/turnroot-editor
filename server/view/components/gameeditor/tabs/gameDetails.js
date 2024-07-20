@@ -4,7 +4,11 @@ import {
 import handleGameDetails from '../functions/handleGameDetails.js'
 import Globals from './globals.js'
 
-window.newUserOnboardingGameDetails = true
+window.newUserOnboardingGameDetails = sessionStorage.getItem('newUserOnboardingGameDetails') === 'true' ? true : false
+if (!sessionStorage.getItem('newUserOnboardingGameDetails')){
+    sessionStorage.setItem('newUserOnboardingGameDetails', true)
+    window.newUserOnboardingGameDetails = true
+}
 
 let config = {
     name: 'gameEditorRequiredGameDetails',
@@ -159,6 +163,7 @@ window.gameEditorGameDetailsFinishInitialAndNext = () => {
     if (window.newUserOnboardingGameDetails){
     w2alert('<p>You can now access the other editors in the left sidebar, as well as more advanced game settings. Please see <a href = "https://docs.turnroot.com/getting-started/your-first-hour-in-the-turnroot-editor" style = "display:inline;color:var(--accent)">your first hour</a> for a guided tour on what to do next and where everything is.</p> <div style = "height:2rem;"/>', '<h3>Game details saved</h3>')
     window.newUserOnboardingGameDetails = false
+    sessionStorage.setItem('newUserOnboardingGameDetails', false)
 }
 }
 
