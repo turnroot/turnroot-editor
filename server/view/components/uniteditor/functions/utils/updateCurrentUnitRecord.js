@@ -14,6 +14,11 @@ const updateCurrentUnitRecord = async(n) => {
     }
     console.log('updating current unit record ', n.id)
 
+    if (n.useAccentColors){
+        window.unitEditorBasicFields.show('accentColor1')
+        window.unitEditorBasicFields.show('accentColor2')
+    }
+
     window.unitEditorBasicFields.record['fullName'] = n.fullName
     window.unitEditorBasicFields.record['title'] = n.title
     window.unitEditorBasicFields.record['name'] = n.name
@@ -22,7 +27,7 @@ const updateCurrentUnitRecord = async(n) => {
 
     handleEvent(window.unitEditorBasicFields, {detail: {field: 'subtype', value: {current: c(n.which)}}}, true)
 
-    window.unitEditorBasicFields.record['pronouns'] = n.pronouns.singular + '/' + n.pronouns.object + '/' + n.pronouns.possessive + '/' + n.pronouns.possessives
+    window.unitEditorBasicFields.record['pronouns'] = n.pronouns.singular + '/' + n.pronouns.possessive + '/' + n.pronouns.object + '/' + n.pronouns.possessives
 
     window.unitEditorBasicFields.record['age'] = n.age
     window.unitEditorBasicFields.record['height'] = n.height
@@ -31,17 +36,17 @@ const updateCurrentUnitRecord = async(n) => {
     window.unitEditorBasicFields.record['isUnique'] = n.isUnique
     window.unitEditorBasicFields.record['canRecruit'] = n.isRecruitable
 
-    window.unitEditorBasicFields.record['birthdayDay'] = n.birthday.day
-    window.unitEditorBasicFields.record['birthdayMonth'] = n.birthday.month
+    window.unitEditorBasicFields.record['birthdayDay'] = n.birthdayDay
+    window.unitEditorBasicFields.record['birthdayMonth'] = n.birthdayMonth
 
     window.unitEditorBasicFields.record['notes'] = n.Notes
     window.unitEditorBasicFields.record['shortBio'] = n.shortDescription
 
     window.unitEditorBasicFields.record['useAccentColors'] = n.useAccentColors
 
-    window.unitEditorBasicFields.record['unit-accent-color-1'] = n.accentColor1
-    window.unitEditorBasicFields.record['unit-accent-color-2'] = n.accentColor2
-    
+    window.unitEditorBasicFields.record['accentColor1'] = n.accentColor1
+    window.unitEditorBasicFields.record['accentColor2'] = n.accentColor2
+
     window.unitEditorBasicFields.refresh()
 
     window.unitEditorRelationshipFields.record = n.MaxSupports? n.MaxSupports : {}

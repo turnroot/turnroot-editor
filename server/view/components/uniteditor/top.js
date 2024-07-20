@@ -97,6 +97,7 @@ toolbar.on('click', function async(event) {
                 height:200,
             }).yes(async() => {
                 updateCurrentUnitRecord(window.currentUnit)
+                console.log(unit, unit.id)
                 await window.UnitEditorDeleteUnit(unit.id).then(() => {
                     let index = window.allUnits.findIndex(u => u.id === unit.id)
                     window.allUnits.splice(index, 1)
@@ -107,6 +108,8 @@ toolbar.on('click', function async(event) {
                     window.UnitEditor.html('main', window.unitEditorBasicFields)
                     return w2alert('Unit deleted')
                 }).catch(e => {
+                    console.log(unit)
+                    console.error(e)
                     return w2alert('Error deleting unit')
                 })
             })

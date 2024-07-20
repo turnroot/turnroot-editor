@@ -14,7 +14,7 @@ const lists = ['combatTriangleTypes', 'combatNeutralTypes', 'combatMagicTriangle
 
 const formNames = ['unit-editor-basic-fields', 'unit-editor-friend-fields', 'unit-editor-avatar-fields', 'unit-editor-enemy-fields', 'unit-editor-npc-fields']
 
-const misc = ['GameEditorWeaponTriangleFieldsTopCorner', 'GameEditorWeaponTriangleFieldsLeftCorner', 'GameEditorWeaponTriangleFieldsRightCorner', 'GameEditorMagicTriangleFieldsLeftCorner', 'GameEditorMagicTriangleFieldsRightCorner', 'GameEditorMagicTriangleFieldsTopCorner']
+const misc = ['GameEditorWeaponTriangleFieldsTopCorner', 'GameEditorWeaponTriangleFieldsLeftCorner', 'GameEditorWeaponTriangleFieldsRightCorner', 'GameEditorMagicTriangleFieldsLeftCorner', 'GameEditorMagicTriangleFieldsRightCorner', 'GameEditorMagicTriangleFieldsTopCorner','UseWeatherOnLevels']
 
 booleans.forEach(property => {
     Object.defineProperty(window, property, {
