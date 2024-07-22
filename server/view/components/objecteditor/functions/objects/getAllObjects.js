@@ -36,7 +36,12 @@ const getAllObjects = async() => {
         pulled = true        
         return response.json()
     } else {
-        return []
+        return {
+            objectWeapons: [],
+            objectConsumables: [],
+            objectEquipables: [],
+            objectGifts: []
+        }
     }
 }
 

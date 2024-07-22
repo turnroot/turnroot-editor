@@ -4,10 +4,17 @@ import {
 
 import handleEvent from '../functions/handleBasic.js'
 
+import {
+    subtypeWeaponRecord,
+    subtypeConsumableRecord,
+    subtypeEquipableRecord,
+    subtypeGiftRecord
+} from '../records/subtypeRecords.js'
+
 let config = {
     name: 'object-editor-basic-fields',
     record: {
-        
+        subtype: 'weapon',
     },
     fields: [
     ],

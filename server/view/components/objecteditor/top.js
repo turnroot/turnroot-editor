@@ -41,22 +41,25 @@ toolbar.on('click', function async(event) {
         if (event.detail.item.id === 'new-object') {
             w2prompt({
                 title: 'Create new object',
-                label: 'Enter the name of your  object. This name will be used to identify the object in the editor. It doesn\'t have to be unique.',
+                label: 'Enter the name of your object. This name will be used to identify the object in the editor. It doesn\'t have to be unique.',
             }).ok(async(event) => {
                 
                 if (event.detail.value === ''){
                     event.preventDefault()
                 } else {
-                    window.allObjects = await getAllObjects()
+                    getAllObjects().then(allObjects => {
+                        window.allObjects = allObjects
+                        window.flattenedAllObjects = allObjects.objectWeapons.concat(allObjects.objectConsumables).concat(allObjects.objectEquipables).concat(allObjects.objectGifts)
+                    })
                     
-                    await window.ObjectEditorCreateNewObject(subtype, event.detail.value).then(n => {
+                    await window.ObjectEditorCreateNewObject('weapon', event.detail.value).then(n => {
                         window.ObjectEditor.html('main', window.objectEditorBasicFields)
-                        window.allObjects.push(n)
+                        window.allObjects.objectWeapons.push(n)
                         window.currentObject = n
                         
                         updateCurrentObjectRecord(n)
 
-                        window.allObjects.forEach(object => {
+                        window.flattenedAllObjects.forEach(object => {
                             nodes.push({id:  object.id, text: object.name + ' ' + object.id})
                         })
                         nodes.forEach(node => {
@@ -66,7 +69,7 @@ toolbar.on('click', function async(event) {
                         })
                         window.allObjectsNodes = nodes
                         window.ObjectEditorLeftSidebar.remove()
-                        window.ObjectEditorLeftSidebar.nodes = window.allUnitsNodes
+                        window.ObjectEditorLeftSidebar.nodes = window.allObjectsNodes
                         window.ObjectEditor.refresh()
                         window.ObjectEditorLeftSidebar.refresh()
                         
@@ -93,7 +96,7 @@ toolbar.on('click', function async(event) {
                     let index = window.allObjects.findIndex(u => u.id === object.id)
                     window.allObjects.splice(index, 1)
                     window.ObjectEditorLeftSidebar.remove()
-                    window.ObjectEditorLeftSidebar.nodes = window.allUnits.map(unit => ({id: unit.id, text: unit.name + ' ' + unit.id}))
+                    window.ObjectEditorLeftSidebar.nodes = window.allObjects.map(unit => ({id: unit.id, text: unit.name + ' ' + unit.id}))
                     window.ObjectEditorLeftSidebar.refresh()
                     window.currentObject = window.allObjects[0]
                     window.ObjectEditor.html('main', window.objectEditorBasicFields)

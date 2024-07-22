@@ -4,7 +4,12 @@ import updateCurrentObjectRecord from './functions/utils/updateCurrentObjectReco
 let sidebar = new w2sidebar({
     name: 'ObjectEditorLeft',
     flatButton: false,
-    nodes: []  
+    nodes: [
+        {id: 'weapons', text: 'Weapons', expanded: true, group: true, groupShowHide: true, nodes: []},
+        {id: 'consumables', text: 'Consumables', expanded: true, group: true, groupShowHide: true, nodes: []},
+        {id: 'equipables', text: 'Equipables', expanded: true, group: true, groupShowHide: true, nodes: []},
+        {id: 'gifts', text: 'Gifts', expanded: true, group: true, groupShowHide: true, nodes: []},
+    ]  
 })
 
 window.ObjectEditorLeftSidebar = sidebar
@@ -12,7 +17,7 @@ window.ObjectEditorLeftSidebar = sidebar
 sidebar.on('click', function(event) {
     event.done(() => {
         let node = sidebar.get(event.target)
-        window.currentObject = window.allObjects.find(object => object.id === node.id)
+        window.currentObject = window.flattenedAllObjects.find(object => object.id === node.id)
         w2ui['object-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
         updateCurrentObjectRecord(window.currentObject)
         node.selected = true

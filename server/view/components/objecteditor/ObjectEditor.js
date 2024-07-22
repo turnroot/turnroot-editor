@@ -17,16 +17,32 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
-    layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading units...</h2></div>')
+    layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading objects...</h2></div>')
 
         window.allObjects = await getAllObjects()
+        window.flattenedAllObjects = window.allObjects.objectWeapons.concat(window.allObjects.objectConsumables).concat(window.allObjects.objectEquipables).concat(window.allObjects.objectGifts)
 
-    if (window.allObjects.length > 0){
-        window.currentObject = window.allObjects[0]
+    if (window.flattenedAllObjects.length > 0){
+        window.currentObject = window.flattenedAllObjects[0]
         updateCurrentObjectRecord(window.currentObject)
         layout.html('main', objectEditorBasicFields)
-        objectEditorLeft.nodes = window.allUnits.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
-        objectEditorLeft.nodes[0].selected = true
+
+        if (window.allObjects.objectWeapons.length > 0){
+
+        objectEditorLeft.nodes[0].nodes = window.allObjects.objectWeapons.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
+        objectEditorLeft.nodes[0].nodes[0].selected = true
+        }
+
+        if (window.allObjects.objectConsumables.length > 0){
+        objectEditorLeft.nodes[1].nodes = window.allObjects.objectConsumables.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
+        }
+        if (window.allObjects.objectEquipables.length > 0){
+        objectEditorLeft.nodes[2].nodes = window.allObjects.objectEquipables.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
+        }
+        if (window.allObjects.objectGifts.length > 0){
+        objectEditorLeft.nodes[3].nodes = window.allObjects.objectGifts.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
+        }
+
         objectEditorLeft.refresh()
         window.ObjectEditorActiveTab = 'basic'
     } else {
