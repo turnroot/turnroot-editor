@@ -1,13 +1,9 @@
 let subtypeWeaponRecord = {
-    name: 'New Weapon',
     hasUses: false,
     minAptitude: 'E',
     weaponType: 'sword',
     uses: -1,
     replenishUsesAfterBattleAmount: 'none',
-    flavorText: 'A consumable item',
-    scope: 'both',
-    icon: '',
     sellPrice: 0,
     buyPrice: 0,
     sellable: true,
@@ -33,11 +29,7 @@ let subtypeWeaponRecord = {
 }
 
 let subtypeConsumableRecord = {
-    name: 'New Consumable',
     uses: 1,
-    flavorText: 'A consumable item',
-    scope: 'both',
-    icon: '',
     sellPrice: 0,
     buyPrice: 0,
     sellable: true,
@@ -47,9 +39,6 @@ let subtypeConsumableRecord = {
 }
 
 let subtypeEquipableRecord = {
-    name: 'New Equipable',
-    flavorText: 'An equipable item',
-    icon: '',
     sellPrice: 0,
     buyPrice: 0,
     sellable: true,
@@ -68,9 +57,6 @@ let subtypeEquipableRecord = {
 }
 
 let subtypeGiftRecord = {
-    name: 'New Gift Item',
-    flavorText: 'A gift item',
-    icon: '',
     sellPrice: 0,
     buyPrice: 0,
     sellable: true,

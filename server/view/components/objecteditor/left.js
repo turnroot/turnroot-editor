@@ -20,6 +20,7 @@ sidebar.on('click', function(event) {
         window.currentObject = window.flattenedAllObjects.find(object => object.id === node.id)
         w2ui['object-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
         updateCurrentObjectRecord(window.currentObject)
+        window.objectEditorBasicFields.record.id = window.currentObject.id
         node.selected = true
         sidebar.nodes.forEach(n => {
             if (n.id !== node.id){

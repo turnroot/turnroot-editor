@@ -91,7 +91,7 @@
   margin-left:var(--spacing-01)
   }
   
-  .w2ui-panel {
+  .w2ui-panel,.w2ui-message {
   background-color:var(--window-background)
   }
   
@@ -437,7 +437,7 @@
   z-index:10
   }
   
-  .li-search input,.w2ui-form textarea,.w2ui-message,.w2ui-multi-file,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select {
+  .li-search input,.w2ui-form textarea,.w2ui-multi-file,.w2ui-sidebar,input:not([type=radio]).w2ui-input,select {
   background-color:var(--window-background-alt)
   }
   
