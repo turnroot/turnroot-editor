@@ -145,7 +145,7 @@ app.post('/queue', ensureAuthenticated, async(req, res) => {
     let response = await fetch(url, options).catch(err => console.error(err))
     if (response && response.status === 200) {
     res.send({status: 'success'})} else {
-        console.error('Error: invalid response from schemas server')
+        console.error('Error: invalid response from schemas server ' + JSON.stringify(response))
         res.send({status: 'failure'})
     }
 })

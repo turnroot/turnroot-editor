@@ -39,8 +39,9 @@ const labels = {
         combatMagicTriangleTypes: 'Combat magic triangle types',
         combatNeutralMagicTypes: 'Combat neutral magic types',
         aptitudeGoals: '(Friendly/avatar) units have aptitude goals',
-        UseWeatherOnLevels: 'Use weather on levels'
-
+        UseWeatherOnLevels: 'Use weather on levels',
+        unitEditorAvatarDefaultSkinColor: 'Avatar default skin color',
+        unitEditorAvatarDefaultHairStyle: 'Avatar default hair style',
 }
 
 export default labels

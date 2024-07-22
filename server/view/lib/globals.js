@@ -6,7 +6,7 @@ const booleans = ['unitsCanHaveChildren', 'useExperienceSublevels', 'useExperien
 
 const integers = ['combatCombatArtLimit', 'combatWeaponTriangleAdvantage', 'combatWeaponTriangleDisadvantage', 'combatMagicTriangleAdvantage', 'combatMagicTriangleDisadvantage', 'combatBattalionLimit']
 
-const strings = ['unitEditorAvatarDefaultHairColor', 'unitEditorAvatarDefaultEyeColor']
+const strings = ['unitEditorAvatarDefaultHairColor', 'unitEditorAvatarDefaultEyeColor', 'unitEditorAvatarDefaultSkinColor', 'unitEditorAvatarDefaultHairStyle']
 
 const json = ['combatTriangleMapping', 'combatMagicTriangleMapping', 'globalWeaponsTypes', 'globalMagicTypes']
 

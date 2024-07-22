@@ -46,7 +46,7 @@ let integersHeadingsAfter = {
 }
 
 let stringsHeadingsAfter = {
-    unitEditorAvatarDefaultEyeColor: 'Weapons'
+    unitEditorAvatarDefaultHairStyle: 'Weapons'
 }
 
 booleans.forEach(property => {
@@ -166,6 +166,8 @@ config.fields.push({
 
 
 let form = new w2form(config)
+
+window.GameEditorGlobalFields = form
 
 form.on('change', function(event) {
     handleGlobals(event, form)
