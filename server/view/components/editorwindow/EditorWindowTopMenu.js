@@ -98,22 +98,22 @@ let toolbar = new w2toolbar({
                 text: 'Fira Sans',
                 id: 'font-family-fira-sans',
                 style: 'background-color: var(--window-background-alt);',
-                checked: localStorage.getItem('font-family') === 'Fira Sans'
+                checked: sessionStorage.getItem('font-family') === 'Fira Sans'
             },
             {
                 text: 'Lexend',
                 id: 'font-family-lexend',
-                checked: localStorage.getItem('font-family') === 'Lexend'
+                checked: sessionStorage.getItem('font-family') === 'Lexend'
             },
             {
                 text: 'Clean Sans',
-                checked: localStorage.getItem('font-family') === 'Clear Sans',
+                checked: sessionStorage.getItem('font-family') === 'Clear Sans',
                 id: 'font-family-clean-sans',
             },
             {
                 text: 'Figtree',
                 id: 'font-family-figtree',
-                checked: localStorage.getItem('font-family') === 'Figtree'
+                checked: sessionStorage.getItem('font-family') === 'Figtree'
             }
         ]
     }
@@ -188,7 +188,7 @@ toolbar.on('click', function (event) {
     })
 })
 
-let savedTheme = localStorage.getItem('theme')
+let savedTheme = sessionStorage.getItem('theme')
 if (savedTheme) {
     toolbar.get('settings:themes').items.forEach(item => {
         if (item.id === savedTheme) {

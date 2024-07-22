@@ -241,7 +241,6 @@ const getUserUserId = (userId, thisUser) => {
 
 export {
     createUser,
-    getUser,
     getUserUserId,
     getUserByEmail,
     loginUser,

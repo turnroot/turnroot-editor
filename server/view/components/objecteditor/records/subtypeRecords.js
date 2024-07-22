@@ -1,6 +1,8 @@
 let subtypeWeaponRecord = {
     name: 'New Weapon',
     hasUses: false,
+    minAptitude: 'E',
+    weaponType: 'sword',
     uses: -1,
     replenishUsesAfterBattleAmount: 'none',
     flavorText: 'A consumable item',

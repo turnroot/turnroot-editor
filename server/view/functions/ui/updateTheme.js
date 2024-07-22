@@ -5,7 +5,7 @@ const updateTheme = (theme) => {
     main.dataset.theme = theme
     window.MainEditorWindow.refresh()
     window.EditorWindowSidebar.refresh()
-    localStorage.setItem('theme', theme)
+    sessionStorage.setItem('theme', theme)
 }
 
 export default updateTheme

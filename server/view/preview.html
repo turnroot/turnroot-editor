@@ -64,7 +64,7 @@
     <script>
         let logs = []
         window.turnrootEditorLogs = logs
-        let font = localStorage.getItem('font-family')
+        let font = sessionStorage.getItem('font-family')
         if (font) {
             document.documentElement.style.setProperty('--font-family', font)
         } else {
