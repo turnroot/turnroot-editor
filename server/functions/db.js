@@ -160,28 +160,6 @@ const createUser = async (user) => {
     })
 }
 
-const getUser = (username) => {
-    db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
-        if (err) {
-            console.log(err)
-            return err
-        }
-    })
-    return new Promise((resolve, reject) => {
-        const sql = 'SELECT * FROM Users WHERE username = ?'
-
-        db.query(sql, [username], (err, result) => {
-            if (err) reject(err)
-            let user = result[0]
-            delete user.password
-            delete user.stripeCustomerId
-            delete user.stripeSubscriptionId
-            delete user.paymentMethodId
-            resolve(user)
-        })
-    })
-}
-
 const getUserByEmail = (email) => {
     db.query(`USE ${process.env.DB_NAME}`, (err, result) => {
         if (err) {

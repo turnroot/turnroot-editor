@@ -5,9 +5,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
 const createSubscription = async (username, extraDonation) => {
     try {
-        const customer = await stripe.customers.create({
-            email: username,
-        })
+        let customer = await getCustomerByUsername(username)
+        if (!customer) {
+            customer = await stripe.customers.create({
+                email: username,
+            })
+        }
 
         const subscription = await stripe.subscriptions.create({
             customer: customer.id,
@@ -16,9 +19,13 @@ const createSubscription = async (username, extraDonation) => {
                 {price: process.env.EXTRA_DONATION_PRICE_ID, quantity: extraDonation || 0},
             ],
         })
+
+        if (subscription.status !== 'active') {
+            throw new Error('Subscription creation failed')
+        }
+
         const paymentMethods = await stripe.paymentMethods.list({
             customer: customer.id,
-            type: 'card',
         })
 
         const defaultPaymentMethod = paymentMethods.data[0]
@@ -64,4 +71,52 @@ const getSubscription = async (username) => {
     }
 }
 
-export {createSubscription, cancelSubscription, getSubscription, stripe}
+const getOneTimePayment = async (username) => {
+    try {
+        const sql = 'SELECT paymentMethodId FROM Users WHERE username = ?'
+        const [rows] = await db.query(sql, [username])
+
+        if (rows.length === 0) {
+            return null
+        }
+
+        return await stripe.paymentMethods.retrieve(rows[0].paymentMethodId)
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+const createOneTimePayment = async (username) => {
+    try {
+        let customer = await getCustomerByUsername(username)
+        if (!customer) {
+            customer = await stripe.customers.create({
+                email: username,
+            })
+        }
+
+        const paymentMethods = await stripe.paymentMethods.list({
+            customer: customer.id,
+        })
+
+        const defaultPaymentMethod = paymentMethods.data[0]
+        const payment = await stripe.paymentIntents.create({
+            amount: process.env.ONE_TIME_PAYMENT_AMOUNT,
+            currency: 'usd',
+            customer: customer.id,
+            payment_method: defaultPaymentMethod.id,
+            confirm: true,
+        })
+
+        if (payment.status !== 'succeeded') {
+            throw new Error('Payment failed')
+        }
+
+        const sql = 'UPDATE Users SET stripeCustomerId = ?, paymentId = ?, paymentMethodId = ? WHERE username = ?'
+        await db.query(sql, [customer.id, payment.id, defaultPaymentMethod.id, username])
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+export {createSubscription, cancelSubscription, getSubscription, getOneTimePayment, createOneTimePayment, stripe}
