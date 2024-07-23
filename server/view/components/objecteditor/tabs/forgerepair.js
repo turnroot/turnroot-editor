@@ -2,7 +2,7 @@ import {
     w2form
 } from '../../../lib/w2ui.es6.min.js'
 
-import handleEvent from '../functions/handleForgeRepair.js'
+import handleTab from '../functions/handleTab.js'
 import { subtypeWeaponRecord } from '../records/subtypeRecords.js'
 import commonRecord from '../records/commonRecord.js'
 
@@ -17,7 +17,7 @@ let config = {
 let form = new w2form(config)
 
 form.on('change', (event) => {
-    handleEvent(form, event)
+    handleTab(form, event)
 })
 
 form.updateGlobals = () => {

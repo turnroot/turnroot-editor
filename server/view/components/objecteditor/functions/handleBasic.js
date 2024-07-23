@@ -125,6 +125,30 @@ const handleEvent = (form, event, automated=false) => {
                                 }
                                 window.allObjects.objectWeapons.push(form.record)
                                 break
+                            case 'Magic':
+                                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-usage')
+                                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-forgerepair')
+                                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-gift')
+                                form.record = {
+                                    ...commonRecord,
+                                    ...subtypeWeaponRecord,
+                                    id: form.record.id,
+                                    subtype: 'Magic',
+                                    oldSubtype: event.detail.value.previous
+                                }
+                                if (window.allObjects.objectConsumables.find(object => object.id === form.record.id)) {
+                                    window.allObjects.objectConsumables = window.allObjects.objectConsumables.filter(object => object.id !== form.record.id)
+                                }
+                                if (window.allObjects.objectEquipables.find(object => object.id === form.record.id)) {
+                                    window.allObjects.objectEquipables = window.allObjects.objectEquipables.filter(object => object.id !== form.record.id)
+                                }
+                                if (window.allObjects.objectGifts.find(object => object.id === form.record.id)) {
+                                    window.allObjects.objectGifts = window.allObjects.objectGifts.filter(object => object.id !== form.record.id)
+                                }
+                                window.allObjects.objectWeapons.push(form.record)
+                                break
                         }
                         form.unlock()
                         form.message()

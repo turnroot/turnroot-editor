@@ -21,7 +21,7 @@ let config = {
                 label: 'Subtype',
             },
             options: {
-                items: ['Weapon', 'Consumable', 'Equipable', 'Gift']
+                items: ['Weapon', 'Magic', 'Consumable', 'Equipable', 'Gift']
             }
         },
         {
@@ -30,6 +30,8 @@ let config = {
                 html: `<details style = "max-width:80ch;"><summary>What is each type?</summary>
                 <h4 style = "margin-top:.5rem">Weapon</h4>
                 <p>Weapons are objects units use during combat to Attack. The most self-explanatory item type.</p>
+                <h4 style = "margin-top:.5rem">Magic</h4>
+                <p>Magic objects are used during combat to Heal, Attack, Assist, or Warp. Even if your game has a skill-based magic system, where magic does not have a set number of uses, it's still considered an object.</p>
                 <h4 style = "margin-top:.5rem">Consumable</h4>
                 <p>Consumables are objects that can be Used once or a certain number of times, then disappear. They can be used during combat or outside of combat. This includes objects like healing potions, cooking ingredients, class change seals, edible stat growth items, etc.</p>
                 <h4 style = "margin-top:.5rem">Equipable</h4>
