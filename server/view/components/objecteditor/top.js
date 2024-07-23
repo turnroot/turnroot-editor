@@ -54,6 +54,9 @@ toolbar.on('click', function async(event) {
                     
                     await window.ObjectEditorCreateNewObject('weapon', event.detail.value).then(n => {
                         window.ObjectEditor.html('main', window.objectEditorBasicFields)
+                        if (!window.allObjects.objectWeapons){
+                            window.allObjects.objectWeapons = []
+                        }
                         window.allObjects.objectWeapons.push(n)
                         window.currentObject = n
                         

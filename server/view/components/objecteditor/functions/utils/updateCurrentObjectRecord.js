@@ -11,7 +11,10 @@ const updateCurrentObjectRecord = async(n) => {
     }
     console.log('updating current object record ', n.id)
 
-    
+    window.objectEditorBasicFields.record.name = window.currentObject.name
+    window.objectEditorBasicFields.record.subtype = window.currentObject.subtype
+    window.objectEditorBasicFields.record.flavorText = window.currentObject.flavorText
+    console.log(window.objectEditorBasicFields.record)
     window.objectEditorBasicFields.refresh()
 }
 

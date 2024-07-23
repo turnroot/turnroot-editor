@@ -47,14 +47,14 @@ let config = {
         },
         {
             type: 'text',
-            id: 'name',
+            field: 'name',
             html: {
                 label: 'Name'
             }
         },
         {
             type: 'text',
-            id: 'flavorText',
+            field: 'flavorText',
             html: {
                 label: 'Flavor Text'
             }

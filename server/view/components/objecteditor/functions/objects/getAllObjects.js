@@ -33,7 +33,19 @@ const getAllObjects = async() => {
     })
     if (response.ok){
         lastPull = now
-        pulled = true        
+        pulled = true       
+        if (!response.objectWeapons){
+            response.objectWeapons = []
+        }
+        if (!response.objectConsumables){
+            response.objectConsumables = []
+        }
+        if (!response.objectEquipables){
+            response.objectEquipables = []
+        }
+        if (!response.objectGifts){
+            response.objectGifts = []
+        }
         return response.json()
     } else {
         return {
