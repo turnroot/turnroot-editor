@@ -76,6 +76,16 @@ const handleEvent = (event, toolbar) => {
                 } else {
                     item.style = ''
                 }
+            })}
+        else if (event.detail.subItem.id === 'font-family-hyperlegible'){
+            window.sessionStorage.setItem('font-family', 'Hyperlegible')
+            document.documentElement.style.setProperty('--font-family', 'Hyperlegible')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-hyperlegible') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
             })
         } else {
         let themeSubitems = toolbar.get('settings').get('themes').items.map(item => item.id)

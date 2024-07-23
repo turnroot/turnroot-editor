@@ -114,6 +114,11 @@ let toolbar = new w2toolbar({
                 text: 'Figtree',
                 id: 'font-family-figtree',
                 checked: sessionStorage.getItem('font-family') === 'Figtree'
+            },
+            {
+                text: 'Hyperlegible',
+                id: 'font-family-hyperlegible',
+                checked: sessionStorage.getItem('font-family') === 'Hyperlegible'
             }
         ]
     }
