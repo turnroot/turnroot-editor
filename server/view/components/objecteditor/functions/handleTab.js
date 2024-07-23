@@ -1,5 +1,3 @@
-import {updateQueue} from '../../../functions/edits/queue.js'
-
 const handleTab = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value.current
@@ -12,35 +10,35 @@ const handleTab = (form, event, automated=false) => {
             ...window.objectEditorUsageFields.record,
             ...window.objectEditorForgeRepairFields.record,
         }
-        updateQueue('objectWeapon', 'update', comprehensiveRecord)
+        window.updateQueue('objectWeapon', 'update', comprehensiveRecord)
     } else if (subtype === 'Gift'){
         let comprehensiveRecord = {
             ...window.objectEditorBasicFields.record,
             ...window.objectEditorValueFields.record,
             ...window.objectEditorGiftFields.record,
         }
-        updateQueue('objectGift', 'update', comprehensiveRecord)
+        window.updateQueue('objectGift', 'update', comprehensiveRecord)
     } else if (subtype === 'Consumable'){
         let comprehensiveRecord = {
             ...window.objectEditorBasicFields.record,
             ...window.objectEditorValueFields.record,
             ...window.objectEditorUsageFields.record,
         }
-        updateQueue('objectConsumable', 'update', comprehensiveRecord)
+        window.updateQueue('objectConsumable', 'update', comprehensiveRecord)
     } else if (subtype === 'Equipable'){
         let comprehensiveRecord = {
             ...window.objectEditorBasicFields.record,
             ...window.objectEditorValueFields.record,
             ...window.objectEditorUsageFields.record,
         }
-        updateQueue('objectEquipable', 'update', comprehensiveRecord)
+        window.updateQueue('objectEquipable', 'update', comprehensiveRecord)
     } else if (subtype === 'Magic'){
         let comprehensiveRecord = {
             ...window.objectEditorBasicFields.record,
             ...window.objectEditorValueFields.record,
             ...window.objectEditorUsageFields.record,
         }
-        updateQueue('objectMagic', 'update', comprehensiveRecord)
+        window.updateQueue('objectMagic', 'update', comprehensiveRecord)
     }
 }
 

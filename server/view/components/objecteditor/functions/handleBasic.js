@@ -2,8 +2,6 @@ import {
     w2alert, w2ui
 } from '../../../lib/w2ui.es6.min.js'
 
-import {updateQueue} from '../../../functions/edits/queue.js'
-
 import {
     subtypeWeaponRecord,
     subtypeConsumableRecord,
@@ -151,7 +149,7 @@ const handleEvent = (form, event, automated=false) => {
                         form.unlock()
                         form.message()
                         form.refresh()
-                        updateQueue('Object', 'updateSubtype', form.record)
+                        window.updateQueue('Object', 'updateSubtype', form.record)
                     },
                     No() {
                         form.setValue('subtype', event.detail.value.previous)
