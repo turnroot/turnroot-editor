@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./style/fonts/lexend/lexend.css">
     <link rel="stylesheet" href="./style/fonts/clearsans/clear-sans.css">
     <link rel="stylesheet" href="./style/fonts/figtree/figtree.css">
+    <link rel="stylesheet" href="./style/fonts/atkinson-hyperlegible/atkinson-hyperlegible.css">
     <link rel="stylesheet" type="text/css" href="./style/themes.css">
     <link rel="stylesheet" type="text/css" href="./style/w2ui3.css">
     <link rel="stylesheet" type="text/css" href="./style/style.css">
@@ -64,7 +65,7 @@
     <script>
         let logs = []
         window.turnrootEditorLogs = logs
-        let font = localStorage.getItem('font-family')
+        let font = sessionStorage.getItem('font-family')
         if (font) {
             document.documentElement.style.setProperty('--font-family', font)
         } else {
@@ -136,7 +137,13 @@
 
 
     setInterval(function() {
-        window.sendQueue()
+        console.log('Auto-saving...')
+        if (editsQueue && editsQueue.queue && editsQueue.queue.length > 0) {
+            window.sendQueue()
+            console.log('Auto-save complete.')
+        } else {
+            console.log('No changes to save.')
+        }
     }, 12000)
 
     document.addEventListener('keydown', function(event) {

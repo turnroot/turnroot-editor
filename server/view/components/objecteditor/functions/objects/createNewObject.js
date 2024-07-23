@@ -9,7 +9,7 @@ const createNewObject = async (
         'Content-Type': 'application/json'
     }
     let body = {}
-    
+    body.name = familiarName
 
     if (subtype){
         if (subtype === 'weapon'){

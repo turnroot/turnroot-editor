@@ -185,8 +185,10 @@ const handleEvent = (form, event, automated=false) => {
                     },
                     No() {
                         form.setValue('subtype', value.previous)
+                        form.record['subtype'] = value.previous
                         form.unlock()
                         form.message()
+                        form.refresh()
                     }
                 }
             })

@@ -6,6 +6,7 @@ import gameDetails from './tabs/gameDetails.js'
 import getAllWeaponTypes from './functions/globalDefaults/getAllWeaponTypes.js'
 import getAllMagicTypes from './functions/globalDefaults/getAllMagicTypes.js'
 import getGlobalGameDetails from './functions/globalDefaults/getGlobalGameDetails.js'
+import getGlobalGeneralSettings from './functions/globalDefaults/getGlobalGeneralSettings.js'
 
 let layout = new w2layout({
     name: 'GameEditor',
@@ -29,6 +30,14 @@ layout.on('render', async function(event){
     } else {
         window.GameEditorRequiredGameDetails.record = window.globalGameDetails[0]
         window.GameEditorRequiredGameDetails.refresh()
+    }
+    if (!window.globalGeneralSettings){
+        window.globalGeneralSettings = await getGlobalGeneralSettings()
+        window.globalGeneralSettings.forEach(setting => {
+            window[setting.setting] = setting.value
+            window.GameEditorGlobalFields.record[setting.setting] = setting.value
+        })
+        window.GameEditorGlobalFields.refresh()
     }
 })
 

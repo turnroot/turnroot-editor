@@ -9,11 +9,11 @@ import session from 'express-session'
 import rateLimit from 'express-rate-limit'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import {createSubscription, cancelSubscription, getSubscription, stripe} from './functions/stripe.js'
+import {createSubscription, cancelSubscription, getSubscription, createOneTimePayment, getOneTimePayment, stripe} from './functions/stripe.js'
 import path from 'path'
 import { fileURLToPath } from 'url'
 
-import { loginUser, getUser, createUser, getUserByEmail, getUserUserId, db, dbInit } from './functions/db.js'
+import { loginUser, createUser, getUserByEmail, getUserUserId, db, dbInit } from './functions/db.js'
 
 import { establishConnection, sendToFromDatabase } from './functions/hit_schemas.js'
 
@@ -87,8 +87,8 @@ app.use(passport.session())
 
 if (process.env.LOCAL === 'false') {
 const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 100 
+    windowMs: 15 * 60 * 1000,
+    max: 100 
 })
 app.use(limiter)
 }
@@ -145,7 +145,7 @@ app.post('/queue', ensureAuthenticated, async(req, res) => {
     let response = await fetch(url, options).catch(err => console.error(err))
     if (response && response.status === 200) {
     res.send({status: 'success'})} else {
-        console.error('Error: invalid response from schemas server')
+        console.error('Error: invalid response from schemas server ' + JSON.stringify(response))
         res.send({status: 'failure'})
     }
 })
@@ -231,21 +231,29 @@ app.post('/register', async (req, res) => {
 
 app.post('/data', async (req, res) => {
     if (process.env.LOCAL === 'false'){
-    if (!req.user) {
-        res.status(401).send('Unauthorized')
-        return
+        if (!req.user) {
+            res.status(401).send('Unauthorized')
+            return
+        }
+        let subscription
+        let onetimepayment
+        if (!req.user.subscription) {
+            subscription = await getSubscription(req.user.username)
+            req.user.subscription = subscription
+        } else {
+            subscription = req.user.subscription
+        }
+        if (!req.user.onetimepayment) {
+            onetimepayment = await getOneTimePayment(req.user.username)
+            req.user.onetimepayment = onetimepayment
+        } else {
+            onetimepayment = req.user.onetimepayment
+        }
+        if (!subscription && !onetimepayment) {
+            res.status(401).send('User must have a subscription or a one-time payment')
+            return
+        }
     }
-    let subscription
-    if (!req.user.subscription) {
-        subscription = await getSubscription(req.user.username)
-        req.user.subscription = subscription
-    } else {
-        subscription = req.user.subscription
-    }
-    if (!subscription) {
-        res.status(401).send('User is not subscribed')
-        return
-    }}
     sendToFromDatabase(req, res).catch((err) => {
         console.error(err)
     })
@@ -255,15 +263,6 @@ app.get('/logout', (req, res) => {
     loggedInUsers.splice(loggedInUsers.indexOf(req.user), 1)
     req.logout()
     res.redirect('/login')
-})
-
-app.get('/user/:username', async (req, res) => {
-    const user = await getUser(req.params.username)
-    if (!user) {
-        res.status(404).send('User not found')
-        return
-    }
-    res.send(user)
 })
 
 app.post('/user/:userId', async (req, res) => {
@@ -295,6 +294,15 @@ app.post('/subscription/cancel', async (req, res) => {
     }
     await cancelSubscription(req.user.username)
     res.send('Subscription canceled')
+})
+
+app.post('/onetimepayment/create', async (req, res) => {
+    if (!req.user) {
+        res.status(401).send('Unauthorized')
+        return
+    }
+    const payment = await createOneTimePayment(req.user.username)
+    res.send(payment)
 })
 
 app.post('/webhook', async (req, res) => {

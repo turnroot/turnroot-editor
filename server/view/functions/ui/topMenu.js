@@ -7,6 +7,7 @@ const handleEvent = (event, toolbar) => {
 
     if (startupViews.includes(event.target)) {
         let startupView = event.target.split(':')[1]
+        sessionStorage.setItem('startupView', startupView)
         toolbar.get('settings').get('default-editor').items.forEach(item => {
             if (item.id === startupView) {
                 item.style = 'background-color: var(--window-background-alt);'
@@ -37,7 +38,7 @@ const handleEvent = (event, toolbar) => {
     }
     if (event.detail.subItem) {
         if (event.detail.subItem.id === 'font-family-fira-sans') {
-            window.localStorage.setItem('font-family', 'Fira Sans')
+            window.sessionStorage.setItem('font-family', 'Fira Sans')
             document.documentElement.style.setProperty('--font-family', 'Fira Sans')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-fira-sans') {
@@ -47,7 +48,7 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-lexend') {
-            window.localStorage.setItem('font-family', 'Lexend')
+            window.sessionStorage.setItem('font-family', 'Lexend')
             document.documentElement.style.setProperty('--font-family', 'Lexend')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-lexend') {
@@ -57,7 +58,7 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-clean-sans') {
-            window.localStorage.setItem('font-family', 'Clear Sans')
+            window.sessionStorage.setItem('font-family', 'Clear Sans')
             document.documentElement.style.setProperty('--font-family', 'Clear Sans')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-clean-sans') {
@@ -67,10 +68,20 @@ const handleEvent = (event, toolbar) => {
                 }
             })
         } else if (event.detail.subItem.id === 'font-family-figtree') {
-            window.localStorage.setItem('font-family', 'Figtree')
+            window.sessionStorage.setItem('font-family', 'Figtree')
             document.documentElement.style.setProperty('--font-family', 'Figtree')
             toolbar.get('settings').get('font-family').items.forEach(item => {
                 if (item.id === 'font-family-figtree') {
+                    item.style = 'background-color: var(--window-background-alt);'
+                } else {
+                    item.style = ''
+                }
+            })}
+        else if (event.detail.subItem.id === 'font-family-hyperlegible'){
+            window.sessionStorage.setItem('font-family', 'Hyperlegible')
+            document.documentElement.style.setProperty('--font-family', 'Hyperlegible')
+            toolbar.get('settings').get('font-family').items.forEach(item => {
+                if (item.id === 'font-family-hyperlegible') {
                     item.style = 'background-color: var(--window-background-alt);'
                 } else {
                     item.style = ''

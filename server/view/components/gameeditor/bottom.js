@@ -19,4 +19,12 @@ toolbar.on('click', function (event) {
     })
 })
 
+toolbar.on('render', function(event){
+    if(window.newUserOnboardingGameDetails === false){
+        toolbar.show('game-editor-bottom-toolbar-game-settings')
+        toolbar.show('game-editor-bottom-toolbar-assets')
+        toolbar.show('game-editor-bottom-toolbar-build-and-export')
+    }
+})
+
 export default toolbar

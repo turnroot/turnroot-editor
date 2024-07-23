@@ -1,0 +1,20 @@
+@font-face{
+    font-family: 'Hyperlegible';
+    src: local('Atkinson Hyperlegible Regular'), url('Atkinson-Hyperlegible-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Hyperlegible';
+    src: local('Atkinson Hyperlegible Bold'), url('Atkinson-Hyperlegible-Bold.ttf') format('woff');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face{
+    font-family: 'Hyperlegible';
+    src: local('Atkinson Hyperlegible Italic'), url('Atkinson-Hyperlegible-Italic.ttf') format('truetype');
+    font-weight: 400;
+    font-style: italic;
+}

@@ -61,10 +61,15 @@ const updateCurrentUnitRecord = async(n) => {
         window.unitEditorRelationshipFields.record['max-Support-'+unit.id] = 'D'
         iteratives.push(iterative)
     })
-
+    
+    if (iteratives.length === 0){
+        window.unitEditorRelationshipFields.fields[2].html.html = '<p>This unit cannot support any other units - make sure you\'ve created other supportable units</p>'
+        window.unitEditorRelationshipFields.fields[4].html.html = '<p>This unit cannot support any other units - make sure you\'ve created other supportable units</p>'
+    } else {
     let radios = dynamicRadios(iteratives,'Max-support').innerHTML
     window.unitEditorRelationshipFields.fields[2].html.html = radios
     window.unitEditorRelationshipFields.fields[2].field = 'dynamicRadios-Max-support' 
+    
 
 
     let speedIteratives = []
@@ -80,6 +85,7 @@ const updateCurrentUnitRecord = async(n) => {
     let speedRadios = dynamicRadios(speedIteratives,'Support-speed').innerHTML
     window.unitEditorRelationshipFields.fields[4].html.html = speedRadios
     window.unitEditorRelationshipFields.fields[4].field = 'dynamicRadios-Support-speed'
+}
 
     if (!window.currentUnit.canHaveChildren || !window.unitsCanHaveChildren){
         window.unitEditorRelationshipFields.get('unit-editor-relationship-fields-parenting-header').hidden = true

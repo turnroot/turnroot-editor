@@ -17,18 +17,41 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
-    layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading units...</h2></div>')
+    layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading objects...</h2></div>')
 
         window.allObjects = await getAllObjects()
+        window.flattenedAllObjects = window.allObjects.objectWeapons.concat(window.allObjects.objectConsumables).concat(window.allObjects.objectEquipables).concat(window.allObjects.objectGifts)
 
-    if (window.allObjects.length > 0){
-        window.currentObject = window.allObjects[0]
+    if (window.flattenedAllObjects.length > 0){
+        window.currentObject = window.flattenedAllObjects[0]
         updateCurrentObjectRecord(window.currentObject)
         layout.html('main', objectEditorBasicFields)
-        objectEditorLeft.nodes = window.allUnits.map(object => ({id: object.id, text: object.name + ' ' + object.id}))
-        objectEditorLeft.nodes[0].selected = true
-        objectEditorLeft.refresh()
+        objectEditorBasicFields.record.id = window.currentObject.id
+
+        objectEditorLeft.remove()
+        objectEditorLeft.nodes = [
+            {id: 'weapons', text: 'Weapons', expanded: true, group: true, groupShowHide: true, nodes: window.allObjects.objectWeapons.map(object => {return {id: object.id, text: object.name + ' (' + object.id + ')'}})
+        },
+            {id: 'consumables', text: 'Consumables', expanded: true, group: true, groupShowHide: true, nodes: window.allObjects.objectConsumables.map(object => {return {id: object.id, text: object.name + ' (' + object.id + ')'}})
+        },
+            {id: 'equipables', text: 'Equipables', expanded: true, group: true, groupShowHide: true, nodes: window.allObjects.objectEquipables.map(object => {return {id: object.id, text: object.name + ' (' + object.id + ')'}})
+        },
+            {id: 'gifts', text: 'Gifts', expanded: true, group: true, groupShowHide: true, nodes: window.allObjects.objectGifts.map(object => {return {id: object.id, text: object.name + ' (' + object.id + ')'}})
+        },
+        ]
+
+        let trys = [objectEditorLeft.nodes[0], objectEditorLeft.nodes[1], objectEditorLeft.nodes[2], objectEditorLeft.nodes[3]]
+        let s = false
+        trys.forEach(node => {
+            if (node.nodes[0] && !s){
+                node.nodes[0].selected = true
+                s = true
+            }
+        })
+        
+        try{objectEditorLeft.render()} catch(e){console.log(e)}
         window.ObjectEditorActiveTab = 'basic'
+
     } else {
         layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>No objects</h2><p>Create a new object to get started</p><img src = "http://localhost:26068/style/img/nu.png" style="position: fixed;width: 256px;left: 17%;top: 33%;"></div>')
     }

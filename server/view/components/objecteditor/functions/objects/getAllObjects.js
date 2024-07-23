@@ -24,7 +24,10 @@ const getAllObjects = async() => {
     }
     let now = new Date()
     if (now - lastPull < 10000 && pulled === true){
-        if (window.allUnits){return window.allUnits} else {return []}
+        if (window.allObjects){return window.allObjects} else {return {objectWeapons: [],
+            objectConsumables: [],
+            objectEquipables: [],
+            objectGifts: []}}
     } 
 
     let response = await fetch(url, options).catch(err => {
@@ -33,10 +36,27 @@ const getAllObjects = async() => {
     })
     if (response.ok){
         lastPull = now
-        pulled = true        
+        pulled = true       
+        if (!response.objectWeapons){
+            response.objectWeapons = []
+        }
+        if (!response.objectConsumables){
+            response.objectConsumables = []
+        }
+        if (!response.objectEquipables){
+            response.objectEquipables = []
+        }
+        if (!response.objectGifts){
+            response.objectGifts = []
+        }
         return response.json()
     } else {
-        return []
+        return {
+            objectWeapons: [],
+            objectConsumables: [],
+            objectEquipables: [],
+            objectGifts: []
+        }
     }
 }
 

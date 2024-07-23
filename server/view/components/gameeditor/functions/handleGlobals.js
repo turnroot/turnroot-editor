@@ -1,5 +1,6 @@
 import {w2ui, w2alert} from "../../../lib/w2ui.es6.min.js"
 import { updateFormGlobals } from "../../../lib/globals.js"
+import { updateQueue } from "../../../functions/edits/queue.js"
 
 const handleGlobals = (event, form) => {
     if (event.detail.field === 'combatAdjutants' && event.detail.value.current === true && form.record.combatPairUp === true){
@@ -29,6 +30,8 @@ const handleGlobals = (event, form) => {
     }
     window[event.detail.field] = event.detail.value.current
     updateFormGlobals()
+    updateQueue('generalSettings', 'update', form.record)
+    updateQueue('CombatExtras', 'update', form.record)
 }
 
 export default handleGlobals

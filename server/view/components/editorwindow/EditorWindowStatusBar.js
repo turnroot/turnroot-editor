@@ -12,10 +12,16 @@ let toolbar = new w2toolbar({
         { type: 'break'},
         {type: 'label', id: 'status-bar-autosave-status', class: 'status-bar', icon: autosavedIcon,},
         {type: 'spacer'},
-        {type: 'label', id: 'status-bar-turnroot-version', class: 'status-bar', text: `Turnroot Editor v0.0.7 Weekly`},
+        {type: 'label', id: 'status-bar-turnroot-version', class: 'status-bar', text: `Turnroot Editor v0.0.8 Weekly`},
         {type: 'spacer'},
         {type: 'label', id: 'status-bar-report-issue', class: 'status-bar report-issue', text: 'Report an issue', style:'margin:0!important;padding:0!important;'},
     ]
+})
+
+toolbar.on('render', function(event) {
+    if (window.newUserOnboardingGameDetails === false){
+        toolbar.hide('status-bar-project-status')
+    }
 })
 
 toolbar.on('click', function (event) {

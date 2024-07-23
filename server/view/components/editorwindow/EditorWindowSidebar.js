@@ -26,7 +26,7 @@ let sidebar = new w2sidebar({
         }
     },
     nodes: [
-        {id: 'sidebar-editors-list', text: 'Editors', expanded: true, group: true, groupShowHide: false,
+        {id: 'sidebar-editors-list', text: 'Simple Editors', expanded: true, group: true, groupShowHide: true,
         nodes: [
             {id: 'sidebar-editors-game-editor', text: 'Project'},
             {id: 'sidebar-editors-unit-editor', text: 'Units', disabled: true},
@@ -37,7 +37,7 @@ let sidebar = new w2sidebar({
             event.preventDefault()
         }
     },
-    {id: 'sidebar-recent-files', text: 'Recent Files', expanded: true, group: true, groupShowHide: true,
+    {id: 'sidebar-complex-editors-list', text: 'Assembly Editors', expanded: true, group: true, groupShowHide: true,
     nodes: [
     ],
 }
@@ -46,6 +46,26 @@ onFlat(event) {
     let layout = w2ui.EditorWindowLayout
     layout.sizeTo('left', (event.detail.goFlat ? '24' : '12%'), true)
 },
+})
+
+sidebar.on('render', function(event) {
+    if (window.newUserOnboardingGameDetails === false){
+        sidebar.enable('sidebar-editors-unit-editor')
+        sidebar.enable('sidebar-editors-class-editor')
+        sidebar.enable('sidebar-editors-object-editor')
+    }
+    if (sessionStorage.getItem('startupView')){
+        let startupView = sessionStorage.getItem('startupView')
+        if (startupView === 'default-editor-unit-editor'){
+            sidebar.click('sidebar-editors-unit-editor')
+        } else if (startupView === 'default-editor-class-editor'){
+            sidebar.click('sidebar-editors-class-editor')
+        } else if (startupView === 'default-editor-object-editor'){
+            sidebar.click('sidebar-editors-object-editor')
+        } else {
+            sidebar.click('sidebar-editors-game-editor')
+        }
+    }
 })
 
 sidebar.on('click', function(event) {

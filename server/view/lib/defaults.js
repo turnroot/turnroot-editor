@@ -4,6 +4,8 @@ const defaults = {
     'useExperienceAptitudes': true,
     'unitEditorAvatarDefaultHairColor': 'rgb(39, 31, 86)',
     'unitEditorAvatarDefaultEyeColor': 'rgb(34, 132, 181)',
+    'unitEditorAvatarDefaultSkinColor': 'rgb(255, 232, 207)',
+    'unitEditorAvatarDefaultHairStyle': 0,
     'combatCombatArts': false,
     'combatCombatArtLimit': 3,
     'combatWeaponTriangle': true,
