@@ -1,5 +1,6 @@
 import { w2sidebar, w2ui } from '../../lib/w2ui.es6.min.js'
 import updateCurrentObjectRecord from './functions/utils/updateCurrentObjectRecord.js'
+import getAllObjects from './functions/objects/getAllObjects.js'
 
 let sidebar = new w2sidebar({
     name: 'ObjectEditorLeft',

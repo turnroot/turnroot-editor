@@ -1,7 +1,5 @@
 import {updateQueue} from '../../../functions/edits/queue.js'
 
-import updateNodes from './sidebar/updateNodes.js'
-
 const handleTab = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value.current
@@ -44,7 +42,6 @@ const handleTab = (form, event, automated=false) => {
         }
         updateQueue('objectMagic', 'update', comprehensiveRecord)
     }
-    updateNodes()
 }
 
 export default handleTab

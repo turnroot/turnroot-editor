@@ -13,8 +13,6 @@ import {
 
 import commonRecord from '../records/commonRecord.js'
 
-import updateNodes from './sidebar/updateNodes.js'
-
 const handleEvent = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value.current
@@ -154,7 +152,6 @@ const handleEvent = (form, event, automated=false) => {
                         form.message()
                         form.refresh()
                         updateQueue('Object', 'updateSubtype', form.record)
-                        updateNodes()
                     },
                     No() {
                         form.setValue('subtype', event.detail.value.previous)
