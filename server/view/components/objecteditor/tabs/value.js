@@ -73,9 +73,11 @@ let config = {
             field: 'sellPriceDemo',
             html: {
                 class: 'no-label',
-                html: `<h3>Test the sell price out</h3><div id = "sellPriceDemo"><input type = "range" id = "sellPriceDemoSlider">
+                html: `<h3>Test sell price</h3><div id = "sellPriceDemo">
+                <input type = "range" id = "sellPriceDemoSlider">
                 <p id = "sellPriceDemoUses">Uses remaining: 0</p>
                 <p>Sell price: 0</p>
+                <small><em>You must move the slider to update the above values</em></small>
                 </div>`
             }
         }

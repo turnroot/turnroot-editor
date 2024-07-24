@@ -3,6 +3,8 @@ const handleTab = (form, event, automated=false) => {
     let value = event.detail.value.current
     let subtype = window.objectEditorBasicFields.record.subtype
 
+    window.currentObject[field] = value
+
     if (subtype === 'Weapon'){
         let comprehensiveRecord = {
             ...window.objectEditorBasicFields.record,
