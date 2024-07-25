@@ -29,7 +29,8 @@ let config = {
             checked: true,
             class: 'emphasized-field',
             html: {
-                label: 'Can be bought'
+                label: 'Can be bought',
+                text: '%attach2%'
             }
         },
         {
@@ -38,7 +39,8 @@ let config = {
             checked: true,
             class: 'emphasized-field',
             html: {
-                label: 'Can be sold'
+                label: ' Can be sold ',
+                anchor: '%attach2%'
             }
         },
         {

@@ -23,6 +23,24 @@ const updateCurrentObjectRecord = async(n) => {
     window.objectEditorUsageFields.record.magicType = window.currentObject.magicType
     window.objectEditorUsageFields.record.scope = window.currentObject.scope
     window.objectEditorUsageFields.record.replenishUsesAfterBattleAmount = window.currentObject.replenishUsesAfterBattleAmount
+
+    window.objectEditorUsageFields.record.lowerRange = window.currentObject.lowerRange
+    window.objectEditorUsageFields.record.upperRange = window.currentObject.upperRange
+    window.objectEditorUsageFields.record.rangeAdjustedByStat = window.currentObject.rangeAdjustedByStat
+    window.objectEditorUsageFields.record.rangeAdjustedByStatName = window.currentObject.rangeAdjustedByStatName
+    window.objectEditorUsageFields.record.rangeAdjustedByDivisor = window.currentObject.rangeAdjustedByDivisor
+
+    if (window.currentObject.rangeAdjustedByStat){
+        window.objectEditorUsageFields.show('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.hide('lowerRange')
+        window.objectEditorUsageFields.hide('upperRange')
+    } else {
+        window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.show('lowerRange')
+        window.objectEditorUsageFields.show('upperRange')
+    }
     
     window.objectEditorValueFields.record.buyable = window.currentObject.buyable
     window.objectEditorValueFields.record.sellable = window.currentObject.sellable
