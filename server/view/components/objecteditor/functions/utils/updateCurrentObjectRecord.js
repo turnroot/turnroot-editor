@@ -62,6 +62,11 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
         window.objectEditorUsageFields.hide('scopeDescription')
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')
+        window.objectEditorUsageFields.show('lowerRange')
+        window.objectEditorUsageFields.show('upperRange')
+        window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.show('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.show('rangeAdjustedByStat')
         if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
         window.objectEditorUsageFields.record.minAptitude = window.currentObject.minAptitude
         window.objectEditorUsageFields.record.weaponType = c(window.currentObject.weaponType)
@@ -75,6 +80,11 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
         window.objectEditorUsageFields.hide('scopeDescription')
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')
+        window.objectEditorUsageFields.show('lowerRange')
+        window.objectEditorUsageFields.show('upperRange')
+        window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.show('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.show('rangeAdjustedByStat')
         if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
         window.objectEditorUsageFields.hide('weaponTypeDescription')
         window.objectEditorUsageFields.show('magicTypeDescription')
@@ -89,6 +99,11 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.hide('minAptitude')
         window.objectEditorUsageFields.show('scope')
         window.objectEditorUsageFields.show('scopeDescription')
+        window.objectEditorUsageFields.hide('lowerRange')
+        window.objectEditorUsageFields.hide('upperRange')
+        window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.hide('rangeAdjustedByStat')
         if (window.objectEditorUsageFields.record.hasUses){
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
         window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')}
