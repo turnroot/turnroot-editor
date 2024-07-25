@@ -9,7 +9,7 @@ class IconPicker {
         })
     }
 
-    buildDisplay() {
+    show() {
         let overlay = document.createElement('div')
         overlay.id = 'IconPicker-overlay'
         overlay.style.position = 'fixed'
@@ -23,7 +23,7 @@ class IconPicker {
     
 
         overlay.addEventListener('click', () => {
-            this.closeDisplay()
+            this.close()
         })
         let display = document.createElement('div')
         display.id = 'IconPicker-display'
@@ -60,7 +60,7 @@ class IconPicker {
         addIcon.style.width = '100px'
         addIcon.style.border = 'none'
         addIcon.style.borderRadius = '5px'
-        addIcon.style.fontSize = '2rem'
+        addIcon.style.fontSize = '4rem'
         addIcon.style.fontWeight = 'bold'
         addIcon.style.appearance = 'none'
         addIcon.style.cursor = 'pointer'
@@ -69,6 +69,27 @@ class IconPicker {
         addIcon.style.backgroundColor = 'var(--accent)'
         addIcon.style.color = 'white'
         addIcon.innerText = '+'
+        addIcon.style.transition = 'filter .2s'
+        addIcon.ariaLabel = 'Create new icon'
+        addIcon.setAttribute('data-balloon-pos', 'right')
+
+        addIcon.addEventListener('mouseenter', () => {
+            addIcon.style.filter = 'brightness(.9)'
+        })
+        addIcon.addEventListener('mouseleave', () => {
+            addIcon.style.filter = 'unset'
+        })
+
+        addIcon.addEventListener('click', () => {
+            this.close()
+            if (window.EditorWindowSidebar.get('sidebar-editors-visuals-list').expanded === false){
+                window.EditorWindowSidebar.get('sidebar-editors-visuals-list').expanded = true
+                window.EditorWindowSidebar.refresh()
+            }
+            window.EditorWindowSidebar.click('sidebar-editors-icons-editor')
+            window.iconPickerReturnIconTo = window.currentObject
+        })
+
         gridContainer.appendChild(addIcon)
 
         for (let icon of this.icons) {
@@ -82,7 +103,7 @@ class IconPicker {
     
             image.addEventListener('click', () => {
                 this.selectedIcon = icon
-                this.closeDisplay()
+                this.close()
                 this.resolveIcon(icon)
             })
         }
@@ -107,7 +128,7 @@ class IconPicker {
         document.body.appendChild(display)
     }
 
-    closeDisplay() {
+    close() {
         let display = document.getElementById('IconPicker-display')
         if (display) {
             display.remove()

@@ -159,12 +159,15 @@
             w2alert('Refreshing is disabled to prevent data loss. The Turnroot Editor refreshes automatically, you don\'t need to refresh the page.', 'Refresh Disabled')
         } else if (event.ctrlKey || event.metaKey) {
             if (event.shiftKey){
-                if (event.key === '1' || event.key === 'g'){
+                event.preventDefault()
+                if (event.key === 'g'){
                     window.EditorWindowSidebar.click('sidebar-editors-game-editor')
-                } else if (event.key === '2' || event.key === 'u'){
+                } else if (event.key === 'u'){
                     window.EditorWindowSidebar.click('sidebar-editors-unit-editor')
-                } else if (event.key === '3' || event.key === 'c'){
+                } else if (event.key === 'c'){
                     window.EditorWindowSidebar.click('sidebar-editors-class-editor')
+                } else if (event.key === 'o'){
+                    window.EditorWindowSidebar.click('sidebar-editors-object-editor')
                 }
             } 
         }

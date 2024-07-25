@@ -7,6 +7,10 @@ import EditorWindow from './components/editorwindow/EditorWindow.js'
 import DefaultStart from './components/editorwindow/default.js'
 import { initQueue, sendQueue, updateQueue } from './functions/edits/queue.js'
 
+import IconPicker from './components/utils/iconPicker.js'
+let iconPicker = new IconPicker({y: 0, x: 0}, [])
+window.IconPicker = iconPicker
+
 window.w2layout = w2layout
 window.w2alert = w2alert
 window.w2grid = w2grid
