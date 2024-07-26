@@ -10,7 +10,7 @@ import updateCurrentUnitRecord from '../functions/utils/updateCurrentUnitRecord.
 
 const handleBottom = (event, toolbar) => {
     updateCurrentUnitRecord(window.currentUnit)
-    window.turnrootEditorLogs.push(`${new Date()}||info||Unit editor bottom toolbar item clicked: ${event.detail.item.id}`)
+    
     let unitEditor = w2ui['UnitEditor']
     if (event.detail.item.id === 'unit-editor-bottom-toolbar-basic'){
         unitEditor.html('main', unitEditorBasicFields)

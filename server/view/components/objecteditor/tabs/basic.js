@@ -60,6 +60,24 @@ let config = {
             html: {
                 label: 'Flavor Text'
             }
+        },
+        {
+            type: 'html',
+            html: {
+                html: `<button id = "IconPicker-button" onclick = "window.showObjectEditorBasicFieldsIconPicker(event)" class = "w2ui-btn" style = "width:100%;margin-top:1rem;">Select Icon</button>
+                <script>
+                    window.showObjectEditorBasicFieldsIconPicker = async (event) => {
+                        window.IconPicker.coords = {x: event.clientX, y: event.clientY - 200}
+                        window.IconPicker.show()
+                        let result = await window.IconPicker.icon()
+                        window.objectEditorBasicFields.record.icon = result
+                        let iconButton = document.getElementById('IconPicker-button')
+                        iconButton.innerText = 'Icon Selected: ' + result.name
+                        return result
+                    }
+                </script>
+                `
+            }
         }
     ]
 }

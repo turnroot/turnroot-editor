@@ -6,6 +6,11 @@ import EditorWindowStatusBar from './components/editorwindow/EditorWindowStatusB
 import EditorWindow from './components/editorwindow/EditorWindow.js'
 import DefaultStart from './components/editorwindow/default.js'
 import { initQueue, sendQueue, updateQueue } from './functions/edits/queue.js'
+import getAllIcons from './functions/gets/getAllIcons.js'
+
+import IconPicker from './components/utils/iconPicker.js'
+let iconPicker = new IconPicker({y: 0, x: 0}, [])
+window.IconPicker = iconPicker
 
 window.w2layout = w2layout
 window.w2alert = w2alert
@@ -19,3 +24,6 @@ window.DefaultStart = DefaultStart
 initQueue()
 window.updateQueue = updateQueue
 window.sendQueue = sendQueue
+
+window.allIcons = await getAllIcons()
+window.IconPicker.icons = window.allIcons

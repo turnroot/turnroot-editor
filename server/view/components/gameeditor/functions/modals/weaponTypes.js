@@ -3,8 +3,6 @@ import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 window.w2popup = w2popup
 let unedited = {}
 
-import {updateQueue} from '../../../../functions/edits/queue.js'
-
 const updateWeaponType = (i) => {
     let id = i.id
 
@@ -154,7 +152,7 @@ const weaponTypesPopup = () => {
         })
         let body = {...globalWeaponsTypes[0]}
         body.id = globalWeaponsTypes[0].id
-        updateQueue('globalWeaponsTypes', 'update', body)
+        window.updateQueue('globalWeaponsTypes', 'update', body)
         w2popup.close()
     }).cancel((e) => {
         globalWeaponsTypes = unedited

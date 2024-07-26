@@ -1,5 +1,5 @@
 :root {
-  --balloon-font-size:1rem!important
+  --balloon-font-size:1rem!important;
   }
 
   label sup{margin-top:-.75rem!important;scale:.75}
@@ -19,7 +19,9 @@
   
   *,::after,::before {
   accent-color:var(--accent);
-  transition:background-color,color,background .25s
+  transition:background-color,color,background .25s;
+  scrollbar-color: var(--accent) transparent;
+  scrollbar-width: thin
   }
   
   .no-transition {

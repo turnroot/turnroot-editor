@@ -45,8 +45,14 @@
 </head>
 
 <body>
+    <div style="visibility:hidden;font-size:0px">Turnroot Editor - create the tactical turn-based RPG of your dreams in the powerful no-code editor</div>
 
-    <div id="main" class="turnroot" style="width: 100%;height:100vh;min-width:1100px;"></div>
+    <noscript>
+        <div id="js-support">
+            <p>This page needs JavaScript to run. Please turn on JavaScript and refresh the page.</p>
+        </div>
+    </noscript>
+    
     <div id="css-support" style="display: none">
         <p>This browser is not supported. Please upgrade to a modern browser that can support the :has CSS selector.
             See: <a style='text-decoration: none; color: var(--accent); font-weight:bold;'
@@ -57,11 +63,8 @@
         <p>Turnroot Editor does not work well on phones- you'll need to use a desktop computer, laptop, or tablet.</p>
     </div>
 
-    <noscript>
-        <div id="js-support">
-            <p>This page needs JavaScript to run. Please turn on JavaScript and refresh the page.</p>
-        </div>
-    </noscript>
+    <div id="main" class="turnroot" style="width: 100%;height:100vh;min-width:1100px;"></div>
+
     <script>
         let logs = []
         window.turnrootEditorLogs = logs
@@ -156,12 +159,15 @@
             w2alert('Refreshing is disabled to prevent data loss. The Turnroot Editor refreshes automatically, you don\'t need to refresh the page.', 'Refresh Disabled')
         } else if (event.ctrlKey || event.metaKey) {
             if (event.shiftKey){
-                if (event.key === '1' || event.key === 'g'){
+                event.preventDefault()
+                if (event.key === 'g'){
                     window.EditorWindowSidebar.click('sidebar-editors-game-editor')
-                } else if (event.key === '2' || event.key === 'u'){
+                } else if (event.key === 'u'){
                     window.EditorWindowSidebar.click('sidebar-editors-unit-editor')
-                } else if (event.key === '3' || event.key === 'c'){
+                } else if (event.key === 'c'){
                     window.EditorWindowSidebar.click('sidebar-editors-class-editor')
+                } else if (event.key === 'o'){
+                    window.EditorWindowSidebar.click('sidebar-editors-object-editor')
                 }
             } 
         }

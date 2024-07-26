@@ -3,8 +3,6 @@ import {w2popup} from '../../../../lib/w2ui.es6.min.js'
 window.w2popup = w2popup
 let unedited = {}
 
-import {updateQueue} from '../../../../functions/edits/queue.js'
-
 const updateMagicType = (i) => {
     let id = i.id
 
@@ -95,7 +93,7 @@ const magicTypesPopup = () => {
         })
         let body = {...globalMagicTypes[0]}
         body.id = globalMagicTypes[0].id
-        updateQueue('globalMagicTypes', 'update', body)
+        window.updateQueue('globalMagicTypes', 'update', body)
         w2popup.close()
     }).cancel((e) => {
         globalMagicTypes = unedited
