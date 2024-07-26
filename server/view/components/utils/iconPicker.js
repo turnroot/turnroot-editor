@@ -87,7 +87,6 @@ class IconPicker {
                 window.EditorWindowSidebar.refresh()
             }
             window.EditorWindowSidebar.click('sidebar-editors-icons-editor')
-            window.iconPickerReturnIconTo = window.currentObject
         })
 
         gridContainer.appendChild(addIcon)
