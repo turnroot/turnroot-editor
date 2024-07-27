@@ -49,20 +49,16 @@ toolbar.on('click', function async(event) {
                 } else {
                     getAllObjects().then(allObjects => {
                         window.allObjects = allObjects
-                        window.flattenedAllObjects = allObjects.objectWeapons.concat(allObjects.objectConsumables).concat(allObjects.objectEquipables).concat(allObjects.objectGifts)
                     })
                     
                     await window.ObjectEditorCreateNewObject('weapon', event.detail.value).then(n => {
                         window.ObjectEditor.html('main', window.objectEditorBasicFields)
-                        if (!window.allObjects.objectWeapons){
-                            window.allObjects.objectWeapons = []
-                        }
                         window.allObjects.objectWeapons.push(n)
                         window.currentObject = n
                         
                         updateCurrentObjectRecord(n)
 
-                        window.flattenedAllObjects.forEach(object => {
+                        window.allObjects.all.forEach(object => {
                             nodes.push({id:  object.id, text: object.name + ' ' + object.id})
                         })
                         nodes.forEach(node => {
@@ -95,16 +91,17 @@ toolbar.on('click', function async(event) {
                 height:200,
             }).yes(async() => {
                 updateCurrentObjectRecord(window.currentObject)
-                await window.ObjectEditorDeleteObject(object.id).then(() => {
-                    let index = window.allObjects.findIndex(u => u.id === object.id)
-                    window.allObjects.splice(index, 1)
-                    window.ObjectEditorLeftSidebar.remove()
-                    window.ObjectEditorLeftSidebar.nodes = window.allObjects.map(unit => ({id: unit.id, text: unit.name + ' ' + unit.id}))
-                    window.ObjectEditorLeftSidebar.refresh()
-                    window.currentObject = window.allObjects[0]
-                    window.ObjectEditor.html('main', window.objectEditorBasicFields)
-                    return w2alert('Object deleted')
-                }).catch(e => {
+                if (window.currentObject.subtype === 'Weapon'){
+                    window.allObjects.objectWeapons = window.allObjects.objectWeapons.filter(o => o.id !== object.id)
+                } else if (window.currentObject.subtype === 'Consumable'){
+                    window.allObjects.objectConsumables = window.allObjects.objectConsumables.filter(o => o.id !== object.id)
+                } else if (window.currentObject.subtype === 'Equipable'){
+                    window.allObjects.objectEquipables = window.allObjects.objectEquipables.filter(o => o.id !== object.id)
+                } else if (window.currentObject.subtype === 'Gift'){
+                    window.allObjects.objectGifts = window.allObjects.objectGifts.filter(o => o.id !== object.id)
+                }
+                window.allObjects.all = window.allObjects.all.filter(o => o.id !== object.id)
+                await window.ObjectEditorDeleteObject(object.id).catch(e => {
                     return w2alert('Error deleting object')
                 })
             })

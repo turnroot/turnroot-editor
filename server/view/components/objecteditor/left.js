@@ -18,7 +18,7 @@ window.ObjectEditorLeftSidebar = sidebar
 sidebar.on('click', function(event) {
     event.done(() => {
         let node = sidebar.get(event.target)
-        window.currentObject = window.flattenedAllObjects.find(object => object.id === node.id)
+        window.currentObject = window.allObjects.all.find(object => object.id === node.id)
         w2ui['object-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
         updateCurrentObjectRecord(window.currentObject)
         window.objectEditorBasicFields.record.id = window.currentObject.id

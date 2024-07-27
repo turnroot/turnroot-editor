@@ -3,9 +3,9 @@ const capitalizeFirstLetter = (string) => {
 }
 let c = capitalizeFirstLetter
 
-const updateCurrentObjectRecord = async(n) => {
+const updateCurrentObjectRecord = async (n) => {
     window.currentObject = n
-    if (!window.currentObject || window.currentObject === undefined){
+    if (!window.currentObject || window.currentObject === undefined) {
         console.log('no object to update')
         return
     }
@@ -30,7 +30,7 @@ const updateCurrentObjectRecord = async(n) => {
     window.objectEditorUsageFields.record.rangeAdjustedByStatName = window.currentObject.rangeAdjustedByStatName
     window.objectEditorUsageFields.record.rangeAdjustedByDivisor = window.currentObject.rangeAdjustedByDivisor
 
-    if (window.currentObject.rangeAdjustedByStat){
+    if (window.currentObject.rangeAdjustedByStat) {
         window.objectEditorUsageFields.show('rangeAdjustedByStatName')
         window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.hide('lowerRange')
@@ -41,7 +41,7 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('lowerRange')
         window.objectEditorUsageFields.show('upperRange')
     }
-    
+
     window.objectEditorValueFields.record.buyable = window.currentObject.buyable
     window.objectEditorValueFields.record.sellable = window.currentObject.sellable
     window.objectEditorValueFields.record.buyPrice = window.currentObject.buyPrice
@@ -49,9 +49,13 @@ const updateCurrentObjectRecord = async(n) => {
 
     window.objectEditorValueFields.record.sellPriceDeductedPerUse = window.currentObject.sellPriceDeductedPerUse
 
-    if (window.currentObject.subtype === 'Gift') {window.objectEditorValueFields.hide('sellPriceDeductedPerUse')} else {window.objectEditorValueFields.show('sellPriceDeductedPerUse')}
+    if (window.currentObject.subtype === 'Gift') {
+        window.objectEditorValueFields.hide('sellPriceDeductedPerUse')
+    } else {
+        window.objectEditorValueFields.show('sellPriceDeductedPerUse')
+    }
 
-    if (window.currentObject.subtype === 'Weapon'){
+    if (window.currentObject.subtype === 'Weapon') {
         window.objectEditorUsageFields.hide('magicType')
         window.objectEditorUsageFields.hide('magicTypeDescription')
         window.objectEditorUsageFields.show('weaponType')
@@ -67,11 +71,15 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.show('rangeAdjustedByStatName')
         window.objectEditorUsageFields.show('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('maxUses')
+        } else {
+            window.objectEditorUsageFields.hide('maxUses')
+        }
         window.objectEditorUsageFields.record.minAptitude = window.currentObject.minAptitude
         window.objectEditorUsageFields.record.weaponType = c(window.currentObject.weaponType)
         window.objectEditorUsageFields.get('weaponType').options.items = window.globalWeaponsTypes[0].types.map(type => type.name)
-    } else if (window.currentObject.subtype === 'Magic'){
+    } else if (window.currentObject.subtype === 'Magic') {
         window.objectEditorUsageFields.hide('weaponType')
         window.objectEditorUsageFields.show('magicType')
         window.objectEditorUsageFields.show('hasUses')
@@ -85,7 +93,11 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.show('rangeAdjustedByStatName')
         window.objectEditorUsageFields.show('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('maxUses')
+        } else {
+            window.objectEditorUsageFields.hide('maxUses')
+        }
         window.objectEditorUsageFields.hide('weaponTypeDescription')
         window.objectEditorUsageFields.show('magicTypeDescription')
         window.objectEditorUsageFields.record.minAptitude = window.currentObject.minAptitude
@@ -104,16 +116,16 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
         window.objectEditorUsageFields.hide('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses){
-        window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
-        window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')}
-        else {
-        window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmount')
-        window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmountDescription')
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
+            window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')
+        } else {
+            window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmount')
+            window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmountDescription')
         }
     }
 
-    if (window.currentObject.subtype === 'Consumable'){
+    if (window.currentObject.subtype === 'Consumable') {
         window.objectEditorUsageFields.hide('hasUses')
         window.objectEditorUsageFields.record['hasUses'] = true
         window.objectEditorUsageFields.show('maxUses')

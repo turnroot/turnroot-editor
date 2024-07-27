@@ -3,16 +3,12 @@ import {
 } from '../../../lib/w2ui.es6.min.js'
 
 import handleEvent from '../functions/handleBasic.js'
-import { subtypeWeaponRecord } from '../records/subtypeRecords.js'
-import commonRecord from '../records/commonRecord.js'
 
 let config = {
     name: 'object-editor-basic-fields',
     record: {
         subtype: 'Weapon',
         id: '',
-        ...commonRecord,
-        ...subtypeWeaponRecord
     },
     fields: [{
             type: 'radio',

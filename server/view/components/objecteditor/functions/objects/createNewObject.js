@@ -11,37 +11,13 @@ const createNewObject = async (
     let body = {}
     body.name = familiarName
 
-    if (subtype){
-        if (subtype === 'weapon'){
-            body.queue = [
-                {
-                    model: 'objectWeapon',
-                    method: 'create',
-                }
-            ]
-        } else if (subtype === 'gift'){
-            body.queue = [
-                {
-                    model: 'objectGift',
-                    method: 'create',
-                }
-            ]
-        } else if (subtype === 'consumable'){
-            body.queue = [
-                {
-                    model: 'objectConsumable',
-                    method: 'create',
-                }
-            ]
-        } else if (subtype === 'equipable'){
-            body.queue = [
-                {
-                    model: 'objectEquipable',
-                    method: 'create',
-                }
-            ]
-        }
-    } else {return w2alert('Error: no subtype provided')}
+
+    body.queue = [{
+        model: 'Object',
+        method: 'create',
+    }]
+
+
 
     console.log(body)
     let options = {
@@ -50,11 +26,11 @@ const createNewObject = async (
         body: JSON.stringify(body)
     }
 
-    let response  = await fetch(url, options).catch(err => {
+    let response = await fetch(url, options).catch(err => {
         console.error(err)
         return w2alert('Error: invalid response from schemas server')
     })
-    if (response.ok){
+    if (response.ok) {
         let data = await response.json()
         console.log(data)
         return data

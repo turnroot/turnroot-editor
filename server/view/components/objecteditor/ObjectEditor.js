@@ -20,10 +20,9 @@ layout.on('render', async function(event){
     layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading objects...</h2></div>')
 
         window.allObjects = await getAllObjects()
-        window.flattenedAllObjects = window.allObjects.objectWeapons.concat(window.allObjects.objectConsumables).concat(window.allObjects.objectEquipables).concat(window.allObjects.objectGifts)
 
-    if (window.flattenedAllObjects.length > 0){
-        window.currentObject = window.flattenedAllObjects[0]
+    if (window.allObjects.all.length > 0){
+        window.currentObject = window.allObjects.all[0]
         updateCurrentObjectRecord(window.currentObject)
         layout.html('main', objectEditorBasicFields)
         objectEditorBasicFields.record.id = window.currentObject.id

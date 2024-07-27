@@ -27,7 +27,8 @@ const getAllObjects = async() => {
         if (window.allObjects){return window.allObjects} else {return {objectWeapons: [],
             objectConsumables: [],
             objectEquipables: [],
-            objectGifts: []}}
+            objectGifts: [],
+            all: []}}
     } 
 
     let response = await fetch(url, options).catch(err => {
@@ -49,13 +50,41 @@ const getAllObjects = async() => {
         if (!response.objectGifts){
             response.objectGifts = []
         }
+        if (!response.json){
+            response.json = []
+        }
+        try {
+            
+        response.json.forEach(object => {
+            if (object.subtype === 'Weapon'){
+                response.objectWeapons.push(object)
+            } else if (object.subtype === 'Consumable'){
+                response.objectConsumables.push(object)
+            } else if (object.subtype === 'Equipable'){
+                response.objectEquipables.push(object)
+            } else if (object.subtype === 'Gift'){
+                response.objectGifts.push(object)
+            }
+        })
+        response.json.all = response.json.objectWeapons.concat(response.json.objectConsumables, response.json.objectEquipables, response.json.objectGifts)
         return response.json()
+    } catch(e){
+        console.error(e)
+        return {
+            objectWeapons: [],
+            objectConsumables: [],
+            objectEquipables: [],
+            objectGifts: [],
+            all: []
+        }
+    }
     } else {
         return {
             objectWeapons: [],
             objectConsumables: [],
             objectEquipables: [],
-            objectGifts: []
+            objectGifts: [],
+            all: []
         }
     }
 }
