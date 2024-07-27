@@ -19,8 +19,50 @@ sidebar.on('click', function(event) {
     event.done(() => {
         let node = sidebar.get(event.target)
         window.currentObject = window.allObjects.all.find(object => object.id === node.id)
+        console.log('current object', window.currentObject, window.allObjects)
         w2ui['object-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
         updateCurrentObjectRecord(window.currentObject)
+        switch (window.currentObject.subtype) {
+            case 'Consumable':
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-usage')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-forgerepair')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-gift')
+                break
+
+            case 'Equipable':
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-usage')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-forgerepair')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-gift')
+                break
+
+            case 'Gift':
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-usage')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-forgerepair')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-gift')
+                break
+
+            case 'Weapon':
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-usage')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-forgerepair')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-gift')
+                break
+
+            case 'Magic':
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-basic')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-usage')
+                window.ObjectEditorBottomToolbar.show('object-editor-bottom-toolbar-value')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-forgerepair')
+                window.ObjectEditorBottomToolbar.hide('object-editor-bottom-toolbar-gift')
+        }
+    
         window.objectEditorBasicFields.record.id = window.currentObject.id
         node.selected = true
         sidebar.nodes.forEach(n => {
