@@ -2,6 +2,11 @@
   --balloon-font-size:1rem!important;
   }
 
+  ::selection{
+    background-color: var(--accent);
+    color: white;
+  }
+
   label sup{margin-top:-.75rem!important;scale:.75}
   
   .li-search input,.w2ui-btn,.w2ui-form textarea,.w2ui-toolbar-input,input:not([type=radio]).w2ui-input,input[type=color],input[type=color]:active,input[type=color]:focus,input[type=color]:hover,select {
