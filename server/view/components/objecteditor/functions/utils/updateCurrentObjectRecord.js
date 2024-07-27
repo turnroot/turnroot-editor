@@ -3,6 +3,8 @@ const capitalizeFirstLetter = (string) => {
 }
 let c = capitalizeFirstLetter
 
+import getAllUnits from '../../../uniteditor/functions/units/getAllUnits.js'
+
 const updateCurrentObjectRecord = async (n) => {
     window.currentObject = n
     if (!window.currentObject || window.currentObject === undefined) {
@@ -39,6 +41,9 @@ const updateCurrentObjectRecord = async (n) => {
 
     if (window.currentObject.subtype === 'Gift') {
         window.objectEditorValueFields.hide('sellPriceDeductedPerUse')
+        let allUnits = window.allUnits ? window.allUnits : await getAllUnits().then(units => {window.allUnits = units; return units})
+        window.objectEditorGiftFields.get('belongsTo').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+
     } else {
         window.objectEditorValueFields.show('sellPriceDeductedPerUse')
     }

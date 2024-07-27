@@ -7,7 +7,7 @@ import handleEvent from '../functions/handleBasic.js'
 let config = {
     name: 'object-editor-basic-fields',
     record: {
-        subtype: 'Weapon',
+        subtype: '',
         id: '',
     },
     fields: [

@@ -7,8 +7,45 @@ import handleTab from '../functions/handleTab.js'
 let config = {
     name: 'object-editor-gift-fields',
     record: {
+        giftRank: '',
+        lostItem: false,
+        belongsTo: '',
     },
     fields: [
+        {
+            type: 'html',
+            html: {
+                html: '<h2>Gift</h2><br/><p>How valuable is this as a gift?</p>'
+            }
+        },
+        {
+            type: 'radio',
+            field: 'giftRank',
+            options: {
+                items: ['★', '★★', '★★★', '★★★★', '★★★★★']
+            },
+            html: {
+                label: 'Gift Rank',
+                attr: 'style="width: 100%;"'
+            }
+        },
+        {
+            type: 'checkbox',
+            field: 'lostItem',
+            checked: false,
+            html: {
+                label: 'Lost item'
+            }
+        },
+        {
+            type: 'select',
+            options: {items: []},
+            field: 'belongsTo',
+            hidden: true,
+            html: {
+                label: 'Belongs to'
+            }
+        }
     ]
 }
 

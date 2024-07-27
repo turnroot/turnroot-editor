@@ -13,6 +13,12 @@ const handleTab = (form, event, automated=false) => {
             window.objectEditorUsageFields.record.upperRange = window.currentObject.lowerRange
             window.objectEditorUsageFields.refresh()
         }
+    } else if (field === 'lostItem'){
+        if (value){
+            window.objectEditorGiftFields.show('belongsTo')
+        } else {
+            window.objectEditorGiftields.hide('belongsTo')
+        }
     } else if (field === 'lowerRange'){
         if (value > window.currentObject.upperRange){
             w2alert('Lower range must be less than upper range')
