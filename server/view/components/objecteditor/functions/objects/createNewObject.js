@@ -1,5 +1,5 @@
 const createNewObject = async (
-    familiarName
+    familiarName, subtype
 ) => {
     console.log('creating new object')
     let url = 'http://localhost:26068/data'
@@ -10,6 +10,7 @@ const createNewObject = async (
     let body = {}
 
     body.name = familiarName
+    body.subtype = subtype
 
     body.queue = [{
         model: 'Object',
