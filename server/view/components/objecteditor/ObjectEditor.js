@@ -8,6 +8,8 @@ import objectEditorBottom from './bottom.js'
 import getAllObjects from './functions/objects/getAllObjects.js'
 import updateCurrentObjectRecord from './functions/utils/updateCurrentObjectRecord.js'
 
+import setNodes from './functions/sidebar/setNodes.js'
+
 let layout = new w2layout({
     name: 'ObjectEditor',
     panels: [{
@@ -52,73 +54,7 @@ layout.on('render', async function (event) {
         layout.html('main', objectEditorBasicFields)
         objectEditorBasicFields.record.id = window.currentObject.id
 
-        objectEditorLeft.remove()
-        objectEditorLeft.nodes = [{
-                id: 'weapons',
-                text: 'Weapons',
-                expanded: true,
-                group: true,
-                groupShowHide: true,
-                nodes: window.allObjects.objectWeapons.map(object => {
-                    return {
-                        id: object.id,
-                        text: object.name + ' (' + object.id + ')'
-                    }
-                })
-            },
-            {
-                id: 'magic',
-                text: 'Magic',
-                expanded: true,
-                group: true,
-                groupShowHide: true,
-                nodes: window.allObjects.objectMagic.map(object => {
-                    return {
-                        id: object.id,
-                        text: object.name + ' (' + object.id + ')'
-                    }
-                })
-            },
-            {
-                id: 'consumables',
-                text: 'Consumables',
-                expanded: true,
-                group: true,
-                groupShowHide: true,
-                nodes: window.allObjects.objectConsumables.map(object => {
-                    return {
-                        id: object.id,
-                        text: object.name + ' (' + object.id + ')'
-                    }
-                })
-            },
-            {
-                id: 'equipables',
-                text: 'Equipables',
-                expanded: true,
-                group: true,
-                groupShowHide: true,
-                nodes: window.allObjects.objectEquipables.map(object => {
-                    return {
-                        id: object.id,
-                        text: object.name + ' (' + object.id + ')'
-                    }
-                })
-            },
-            {
-                id: 'gifts',
-                text: 'Gifts',
-                expanded: true,
-                group: true,
-                groupShowHide: true,
-                nodes: window.allObjects.objectGifts.map(object => {
-                    return {
-                        id: object.id,
-                        text: object.name + ' (' + object.id + ')'
-                    }
-                })
-            },
-        ]
+        setNodes(objectEditorLeft)
 
         let trys = [objectEditorLeft.nodes[0], objectEditorLeft.nodes[1], objectEditorLeft.nodes[2], objectEditorLeft.nodes[3]]
         let s = false

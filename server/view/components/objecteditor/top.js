@@ -14,7 +14,14 @@ window.ObjectEditorDeleteObject = deleteObject
 
 import updateCurrentObjectRecord from './functions/utils/updateCurrentObjectRecord.js'
 
+import setNodes from './functions/sidebar/setNodes.js'
+
 let nodes = []
+
+const capitalizeFirstLetter = (string) => {
+    return string.charAt(0).toUpperCase() + string.slice(1)
+}
+let c = capitalizeFirstLetter
 
 let toolbar = new w2toolbar({
     name: 'ObjectEditorTopMenu',
@@ -102,51 +109,6 @@ toolbar.on('click', function async (event) {
             }).ok(() => {
                 w2popup.close()
             })
-        }
-
-        if (event.detail.item.id === 'new-object') {
-            w2prompt({
-                title: 'Create new object',
-                label: 'Enter the name of your object. This name will be used to identify the object in the editor. It doesn\'t have to be unique.',
-            }).ok(async (event) => {
-
-                if (event.detail.value === '') {
-                    event.preventDefault()
-                } else {
-                    getAllObjects().then(allObjects => {
-                        window.allObjects = allObjects
-                    })
-
-                    await window.ObjectEditorCreateNewObject(event.detail.value).then(n => {
-                        window.ObjectEditor.html('main', window.objectEditorBasicFields)
-                        window.allObjects.objectWeapons.push(n)
-                        window.currentObject = n
-
-                        updateCurrentObjectRecord(n)
-
-                        window.allObjects.all.forEach(object => {
-                            nodes.push({
-                                id: object.id,
-                                text: object.name + ' ' + object.id
-                            })
-                        })
-                        nodes.forEach(node => {
-                            if (node.id === n.id) {
-                                node.selected = true
-                            }
-                        })
-                        window.allObjectsNodes = nodes
-                        window.ObjectEditorLeftSidebar.remove()
-                        window.ObjectEditorLeftSidebar.nodes = window.allObjectsNodes
-                        window.ObjectEditor.refresh()
-                        window.ObjectEditorLeftSidebar.refresh()
-
-                        return w2alert('New object created')
-                    }).catch(e => {
-                        console.error(e)
-                    })
-                }
-            })
         } else if (event.detail.item.id === 'delete-object') {
             if (window.allObjects.length === 0) {
                 return w2alert('No objects to delete')
@@ -169,9 +131,58 @@ toolbar.on('click', function async (event) {
                     window.allObjects.objectGifts = window.allObjects.objectGifts.filter(o => o.id !== object.id)
                 }
                 window.allObjects.all = window.allObjects.all.filter(o => o.id !== object.id)
+
+                setNodes(window.ObjectEditorLeftSidebar)
+                window.ObjectEditor.refresh()
+                window.ObjectEditorLeftSidebar.refresh()
+
                 await window.ObjectEditorDeleteObject(object.id).catch(e => {
                     return w2alert('Error deleting object')
                 })
+            })
+        } else {
+            let s = c(event.detail.item.id.split('-')[2])
+            console.log(s)
+            w2prompt({
+                title: 'Create new object',
+                label: 'Enter the name of your object. This name will be used to identify the object in the editor. It doesn\'t have to be unique.',
+            }).ok(async (event) => {
+
+                if (event.detail.value === '') {
+                    event.preventDefault()
+                } else {
+                    getAllObjects().then(allObjects => {
+                        window.allObjects = allObjects
+                    })
+
+                    await window.ObjectEditorCreateNewObject(event.detail.value, s).then(n => {
+                        window.ObjectEditor.html('main', window.objectEditorBasicFields)
+                        if (n.subtype === 'Weapon') {
+                            window.allObjects.objectWeapons.push(n)
+                        } else if (n.subtype === 'Consumable') {
+                            window.allObjects.objectConsumables.push(n)
+                        } else if (n.subtype === 'Equipable') {
+                            window.allObjects.objectEquipables.push(n)
+                        } else if (n.subtype === 'Gift') {
+                            window.allObjects.objectGifts.push(n)
+                        } else if (n.subtype === 'Magic') {
+                            window.allObjects.objectMagic.push(n)
+                        }
+                        window.allObjects.all.push(n)
+                        window.currentObject = n
+
+                        updateCurrentObjectRecord(n)
+
+                        setNodes(window.ObjectEditorLeftSidebar)
+
+                        window.ObjectEditor.refresh()
+                        window.ObjectEditorLeftSidebar.refresh()
+
+                        return w2alert('New object created')
+                    }).catch(e => {
+                        console.error(e)
+                    })
+                }
             })
         }
     })
