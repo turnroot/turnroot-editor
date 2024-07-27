@@ -36,38 +36,28 @@ const getAllObjects = async() => {
         return w2alert('Error: invalid response from schemas server')
     })
     if (response.ok){
+        let data = await response.json()
+        let dataObject = {all: data, objectWeapons: [], objectConsumables: [], objectEquipables: [], objectGifts: [], objectMagic: []}
         lastPull = now
         pulled = true       
-        if (!response.objectWeapons){
-            response.objectWeapons = []
-        }
-        if (!response.objectConsumables){
-            response.objectConsumables = []
-        }
-        if (!response.objectEquipables){
-            response.objectEquipables = []
-        }
-        if (!response.objectGifts){
-            response.objectGifts = []
-        }
-        if (!response.json){
-            response.json = []
-        }
+        
+        console.log(dataObject)
         try {
             
-        response.json.forEach(object => {
+        data.forEach(object => {
             if (object.subtype === 'Weapon'){
-                response.objectWeapons.push(object)
+                dataObject.objectWeapons.push(object)
             } else if (object.subtype === 'Consumable'){
-                response.objectConsumables.push(object)
+                dataObject.objectConsumables.push(object)
             } else if (object.subtype === 'Equipable'){
-                response.objectEquipables.push(object)
+                dataObject.objectEquipables.push(object)
             } else if (object.subtype === 'Gift'){
-                response.objectGifts.push(object)
+                dataObject.objectGifts.push(object)
+            } else if (object.subtype === 'Magic'){
+                dataObject.objectMagic.push(object)
             }
         })
-        response.json.all = response.json.objectWeapons.concat(response.json.objectConsumables, response.json.objectEquipables, response.json.objectGifts)
-        return response.json()
+        return dataObject
     } catch(e){
         console.error(e)
         return {
@@ -75,6 +65,7 @@ const getAllObjects = async() => {
             objectConsumables: [],
             objectEquipables: [],
             objectGifts: [],
+            objectMagic: [],
             all: []
         }
     }
@@ -84,6 +75,7 @@ const getAllObjects = async() => {
             objectConsumables: [],
             objectEquipables: [],
             objectGifts: [],
+            objectMagic: [],
             all: []
         }
     }

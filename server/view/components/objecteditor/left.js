@@ -1,12 +1,12 @@
 import { w2sidebar, w2ui } from '../../lib/w2ui.es6.min.js'
 import updateCurrentObjectRecord from './functions/utils/updateCurrentObjectRecord.js'
-import getAllObjects from './functions/objects/getAllObjects.js'
 
 let sidebar = new w2sidebar({
     name: 'ObjectEditorLeft',
     flatButton: false,
     nodes: [
         {id: 'weapons', text: 'Weapons', expanded: true, group: true, groupShowHide: true, nodes: []},
+        {id: 'magic', text: 'Magic', expanded: true, group: true, groupShowHide: true, nodes: []},
         {id: 'consumables', text: 'Consumables', expanded: true, group: true, groupShowHide: true, nodes: []},
         {id: 'equipables', text: 'Equipables', expanded: true, group: true, groupShowHide: true, nodes: []},
         {id: 'gifts', text: 'Gifts', expanded: true, group: true, groupShowHide: true, nodes: []},

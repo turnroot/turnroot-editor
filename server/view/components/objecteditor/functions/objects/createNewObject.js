@@ -1,23 +1,20 @@
 const createNewObject = async (
-    subtype, familiarName
+    familiarName
 ) => {
     console.log('creating new object')
-    console.log(subtype)
     let url = 'http://localhost:26068/data'
     let method = 'POST'
     let headers = {
         'Content-Type': 'application/json'
     }
     let body = {}
-    body.name = familiarName
 
+    body.name = familiarName
 
     body.queue = [{
         model: 'Object',
         method: 'create',
     }]
-
-
 
     console.log(body)
     let options = {
