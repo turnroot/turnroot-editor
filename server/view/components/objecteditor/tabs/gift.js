@@ -45,7 +45,23 @@ let config = {
             html: {
                 label: 'Belongs to'
             }
-        }
+        },
+        {
+            type: 'select',
+            options: {items: [], multiple: true}, 
+            field: 'unitsHate',
+            html: {
+                label: 'Units that hate this gift'
+            }
+        },
+        {
+            type: 'select',
+            options: {items: [], multiple: true},
+            field: 'unitsLove',
+            html: {
+                label: 'Units that love this gift'
+            }
+        },
     ]
 }
 

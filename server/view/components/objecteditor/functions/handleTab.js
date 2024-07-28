@@ -1,7 +1,6 @@
 const handleTab = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value.current
-    let subtype = window.objectEditorBasicFields.record.subtype
 
     window.currentObject[field] = value
     form.record[field] = value

@@ -26,6 +26,9 @@ const handleGlobals = (event, form) => {
             form.hide('combatMagicTriangle')
             form.hide('weaponTrianglesButton')
         }
+    } else if (event.detail.field === 'weaponsCanBeForged' || event.detail.field === 'weaponsCanBeRepaired'){
+        if (window.objectEditorBottomToolbar){
+        window.objectEditorBottomToolbar.refresh()}
     }
     window[event.detail.field] = event.detail.value.current
     updateFormGlobals()

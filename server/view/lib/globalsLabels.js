@@ -1,4 +1,6 @@
 const labels = {
+        weaponsCanBeForged: 'Weapons can be forged',
+        weaponsCanBeRepaired: 'Weapons can be repaired',
         unitsCanHaveChildren: 'Units can have children',
         useExperienceSublevels: 'Use experience sublevels',
         useExperienceAptitudes: 'Use experience aptitudes',

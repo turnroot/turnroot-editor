@@ -67,6 +67,7 @@ layout.on('render', async function (event) {
 
         try {
             objectEditorLeft.render()
+            objectEditorLeft.nodes[0].nodes[0].click()
         } catch (e) {
             console.log(e)
         }

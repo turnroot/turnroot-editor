@@ -39,16 +39,27 @@ const updateCurrentObjectRecord = async (n) => {
 
     window.objectEditorValueFields.record.sellPriceDeductedPerUse = window.currentObject.sellPriceDeductedPerUse
 
+    window.objectEditorForgeRepairFields.record.forgeable = window.currentObject.forgeable
+    window.objectEditorForgeRepairFields.record.repairable = window.currentObject.repairable
+    window.objectEditorForgeRepairFields.record.repairPricePerUse = window.currentObject.repairPricePerUse
+    window.objectEditorForgeRepairFields.record.repairNeedsItems = window.currentObject.repairNeedsItems
+    window.objectEditorForgeRepairFields.record.repairItem = window.currentObject.repairItem
+    window.objectEditorForgeRepairFields.record.repairItemAmountPerUse = window.currentObject.repairItemAmountPerUse
+
     if (window.currentObject.subtype === 'Gift') {
         window.objectEditorValueFields.hide('sellPriceDeductedPerUse')
         let allUnits = window.allUnits ? window.allUnits : await getAllUnits().then(units => {window.allUnits = units; return units})
         window.objectEditorGiftFields.get('belongsTo').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+        window.objectEditorGiftFields.get('unitsHate').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+        window.objectEditorGiftFields.get('unitsLove').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+
 
     } else {
         window.objectEditorValueFields.show('sellPriceDeductedPerUse')
     }
 
     if (window.currentObject.subtype === 'Weapon') {
+        window.objectEditorForgeRepairFields.get('repairItem').options.items = window.allObjects.objectConsumables.map(consumable => consumable.name + ' (' + consumable.id + ')')
         window.objectEditorUsageFields.hide('magicType')
         window.objectEditorUsageFields.hide('magicTypeDescription')
         window.objectEditorUsageFields.show('weaponType')
@@ -136,6 +147,17 @@ const updateCurrentObjectRecord = async (n) => {
         window.objectEditorUsageFields.show('upperRange')
     }
 
+    if (!window.weaponsCanBeForged){
+        window.objectEditorForgeRepairFields.hide('forgeable')
+    }
+
+    if (!window.consumablesCanBeRepaired){
+        window.objectEditorForgeRepairFields.hide('repairable')
+        window.objectEditorForgeRepairFields.hide('repairPricePerUse')
+        window.objectEditorForgeRepairFields.hide('repairNeedsItems')
+        window.objectEditorForgeRepairFields.hide('repairItem')
+        window.objectEditorForgeRepairFields.hide('repairItemAmountPerUse')
+    }
 
     window.objectEditorBasicFields.refresh()
 }

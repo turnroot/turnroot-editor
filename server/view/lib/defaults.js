@@ -1,4 +1,6 @@
 const defaults = {
+    'weaponsCanBeForged': true,
+    'weaponsCanBeRepaired': true,
     'unitsCanHaveChildren': true,
     'useExperienceSublevels': false,
     'useExperienceAptitudes': true,
