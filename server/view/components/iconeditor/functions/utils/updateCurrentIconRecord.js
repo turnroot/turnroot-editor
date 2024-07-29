@@ -5,7 +5,6 @@ const updateCurrentIconRecord = async(n) => {
         return
     }
     console.log('updating current icon record ', n.id)
-    window.iconEditorEditor.refresh()
 }
 
 export default updateCurrentIconRecord
