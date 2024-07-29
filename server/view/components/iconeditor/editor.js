@@ -1,16 +1,6 @@
 import { w2layout, w2form } from '../../lib/w2ui.es6.min.js'
+import {IconEditorControls, layers} from './controls.js'
 import graphicStacks from '../utils/graphicStacks/graphicStacks.js'
-
-let layers = [
-    {
-        x:0,
-        y:0,
-        width:200,
-        height:200,
-        url:"/style/img/placeholder-circle.png",
-        transform:"",
-    }
-]
 
 let iconEditorEditor = new w2layout({
     name: 'iconEditorEditor',
@@ -19,7 +9,7 @@ let iconEditorEditor = new w2layout({
             type: 'right',
             content: 'right',
             size:'250',
-            style: 'overflow-y: hidden;',
+            style: 'overflow: hidden;',
             html: 'icon editor left'
         },
         {
@@ -27,11 +17,12 @@ let iconEditorEditor = new w2layout({
             content: 'main',
             resizable: true,
             style: 'padding:1rem;',
-            html: 'icon editor main'
 
         }
     ]
 })
+
+iconEditorEditor.html('main', IconEditorControls())
 
 iconEditorEditor.on('render', async function(event){
     let div = document.createElement('div')
@@ -46,6 +37,34 @@ iconEditorEditor.on('render', async function(event){
     let tiny = new graphicStacks(div)
     window.IconEditorGraphicStack = graphicStack
     window.IconEditorGraphicStackTiny = tiny
+
+    window.IconEditorStacksAddLayer = (layer) => {
+        graphicStack.addLayer(layer)
+        let tmp = JSON.parse(JSON.stringify(layer))
+        tmp.width = 40
+        tmp.height = 40
+        tiny.addLayer(tmp)
+    }
+    window.IconEditorStacksUpdateLayer = (index, layer) => {
+        graphicStack.updateLayer(index, layer)
+        let tmp = JSON.parse(JSON.stringify(layer))
+        tmp.width = 40
+        tmp.height = 40
+        tiny.updateLayer(index, tmp)
+    }
+    window.IconEditorStacksRemoveLayer = (index) => {
+        graphicStack.removeLayer(index)
+        tiny.removeLayer(index)
+    }
+    window.IconEditorStacksClear = () => {
+        graphicStack.clear()
+        tiny.clear()
+    }
+    window.IconEditorStacksTransform = (index, transform) => {
+        graphicStack.transform(index, transform)
+        tiny.transform(index, transform)
+    }
+
     layers.forEach(layer => {
         graphicStack.addLayer(layer)
         let tmp = JSON.parse(JSON.stringify(layer))
