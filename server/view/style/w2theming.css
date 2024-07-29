@@ -32,6 +32,13 @@
   .no-transition {
   transition:none!important
   }
+
+  #layout_IconEditor_panel_main .w2ui-column{
+    width:100%;
+    min-width:100%;
+    height:100%;
+    min-height:100%;
+  }
   
   .w2ui-btn.accent,.w2ui-form textarea:focus,.w2ui-sidebar .w2ui-sidebar-body .w2ui-node .w2ui-node-text,highlight,input:not([type=radio]).w2ui-input:focus,select,select:focus {
   color:var(--node-title)

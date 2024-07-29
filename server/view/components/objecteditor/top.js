@@ -96,7 +96,7 @@ toolbar.on('click', function async (event) {
                 <h4 style = "margin-top:.5rem">Magic</h4>
                 <p>Magic objects are used during combat to Heal, Attack, Assist, or Warp. Even if your game has a skill-based magic system, where magic does not have a set number of uses, it's still considered an object.</p>
                 <h4 style = "margin-top:.5rem">Consumable</h4>
-                <p>Consumables are objects that can be Used once or a certain number of times, then disappear. They can be used during combat or outside of combat. This includes objects like healing potions, cooking ingredients, class change seals, edible stat growth items, etc.</p>
+                <p>Consumables are objects that can be Used once or a certain number of times, then disappear. They can be used during combat or outside of combat. This includes objects like healing potions, cooking ingredients, forging items, class change seals, edible stat growth items, etc.</p>
                 <h4 style = "margin-top:.5rem">Equipable</h4>
                 <p>Equipables are objects that can be Equipped to a unit to provide stat boosts, skills, or other effects. This includes objects like shields, magic staffs, rings, etc. Equipables do not have uses and are not actively Used- they provide passive benefits.</p>
                 <h4 style = "margin-top:.5rem">Gift</h4>
