@@ -143,11 +143,10 @@ const IconEditorControls = () => {
     keyboardShortcutNotes.innerHTML = `<small style = "width:100%"><h3>Keyboard shortcuts</h3>
     <ul>
     <li>Arrow keys (Left, Right, Up, down): move the layer</li>
-    <li>Shift + Arrow keys move the layer faster</li>
     <li>Q and E rotate the layer</li>
     <li>W increases the size of the layer</li>
-    <li>S decreases the size of the layer</li>
-    <li>A, Shift + Spacebar, or Shift + Enter choose an image for the layer</li></ul>
+    <li>D decreases the size of the layer</li>
+    <li>A or S select an image for the layer</li></ul>
     </small>`
 
     const buttonsTitle = document.createElement('div')
