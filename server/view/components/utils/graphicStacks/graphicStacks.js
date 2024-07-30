@@ -19,9 +19,10 @@ class graphicStacks {
         layerHtml.style.width = layerData.width + "px"
         layerHtml.style.height = layerData.height + "px"
         layerHtml.style.backgroundSize = "cover"
-        layerHtml.style.top = layerData.y + "px"
-        layerHtml.style.left = layerData.x + "px"
+        layerHtml.style.top = (layerData.y + 8) + "px"
+        layerHtml.style.left = (layerData.x + 8) + "px"
         layerHtml.style.zIndex = 8000 + this.layers.length
+        
         if (!layerData.transparent){
             layerHtml.style.backgroundImage = "url(" + layerData.url + ")"
         }
