@@ -69,14 +69,78 @@ let svgs = {
     bottom: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-move-down"><path d="M8 18L12 22L16 18"/><path d="M12 2V22"/></svg>`,
 
     bottomRight: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-maximize-2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" x2="14" y1="3" y2="10"/><line x1="3" x2="10" y1="21" y2="14"/></svg>`,
-
 }
 
 const createButton = (svg) => {
-    const button = document.createElement('button');
-    button.innerHTML = svg
+    const button = document.createElement('button')
+    button.innerHTML = svg.svg
     button.className = 'w2ui-btn'
     button.style.cssText = 'width: 2rem; height: 4rem; padding: 0'
+    button.setAttribute('button-is-held-down', 'false')
+
+    const Do = () => {
+        let transform = window.IconEditorGraphicStacksCurrentLayer.transform
+        if (transform === "") {
+            transform = "rotate(0deg) translateY(0px) translateX(0px) scale(1)"
+        }
+        if (svg.key === 'topLeft') {
+            let rotateMatch = transform.match(/rotate\(([^)]+)\)/)
+            let rotate = rotateMatch ? parseFloat(rotateMatch[1]) : 0
+            let transformRotate = `rotate(${rotate - 1}deg)`
+            transform = transform.replace(/rotate\(([^)]+)\)/, transformRotate)
+        } else if (svg.key === 'topCenter') {
+            let translateYMatch = transform.match(/translateY\(([^)]+)\)/)
+            let translateY = translateYMatch ? parseFloat(translateYMatch[1]) : 0
+            let transformTranslate = `translateY(${translateY - 1}px)`
+            transform = transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
+        } else if (svg.key === 'topRight') {
+            let rotateMatch = transform.match(/rotate\(([^)]+)\)/)
+            let rotate = rotateMatch ? parseFloat(rotateMatch[1]) : 0
+            let transformRotate = `rotate(${rotate + 1}deg)`
+            transform = transform.replace(/rotate\(([^)]+)\)/, transformRotate)
+        } else if (svg.key === 'centerLeft') {
+            let translateXMatch = transform.match(/translateX\(([^)]+)\)/)
+            let translateX = translateXMatch ? parseFloat(translateXMatch[1]) : 0
+            let transformTranslate = `translateX(${translateX - 1}px)`
+            transform = transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
+        } else if (svg.key === 'center') {
+            // select image
+        } 
+        else if (svg.key === 'centerRight') {
+            let translateXMatch = transform.match(/translateX\(([^)]+)\)/)
+            let translateX = translateXMatch ? parseFloat(translateXMatch[1]) : 0
+            let transformTranslate = `translateX(${translateX + 1}px)`
+            transform = transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
+        } else if (svg.key === 'bottomLeft') {
+            let scaleMatch = transform.match(/scale\(([^)]+)\)/)
+            let scale = scaleMatch ? parseFloat(scaleMatch[1]) : 1
+            let transformScale = `scale(${scale - 0.01})`
+            transform = transform.replace(/scale\(([^)]+)\)/, transformScale)
+        } else if (svg.key === 'bottom') {
+            let translateYMatch = transform.match(/translateY\(([^)]+)\)/)
+            let translateY = translateYMatch ? parseFloat(translateYMatch[1]) : 0
+            let transformTranslate = `translateY(${translateY + 1}px)`
+            transform = transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
+        } else if (svg.key === 'bottomRight') {
+            let scaleMatch = transform.match(/scale\(([^)]+)\)/)
+            let scale = scaleMatch ? parseFloat(scaleMatch[1]) : 1
+            let transformScale = `scale(${scale + 0.01})`
+            transform = transform.replace(/scale\(([^)]+)\)/, transformScale)
+        }
+        window.IconEditorGraphicStacksCurrentLayer.transform = transform
+    }
+
+    button.addEventListener('mousedown', () => {
+        button.setAttribute('button-is-held-down', 'true')
+        if (button.getAttribute('button-is-held-down') === 'true') {
+            setInterval(Do, 200)
+        }
+    }) 
+    button.addEventListener('mouseup', () => {
+        button.setAttribute('button-is-held-down', 'false')
+        console.log(svg.key, window.IconEditorGraphicStacksCurrentLayer, window.IconEditorGraphicStacksCurrentLayer.transform)
+    })
+
     return button
 }
 
@@ -107,10 +171,11 @@ const createLayerRow = (layer, layersContainer) => {
     layerRow.appendChild(checkboxDiv)
 
     layerRow.addEventListener("click", () => {
-        if (!layer.transparent)
-        {layerRow.style.backgroundColor = "var(--slider-1)"}
+        if (!layer.transparent) {
+            layerRow.style.backgroundColor = "var(--slider-1)"
+        }
         Array.from(layersContainer.childNodes).forEach((row, index) => {
-            if (layers[index].name !== layer.name ) {
+            if (layers[index].name !== layer.name) {
                 row.style.backgroundColor = "var(--window-background-alt)"
             }
         })
@@ -138,7 +203,10 @@ const IconEditorControls = () => {
     const layersTitle = document.createElement('h2')
     layersTitle.innerHTML = 'Layers'
 
-    Object.values(svgs).forEach(svg => buttonContainer.appendChild(createButton(svg)))
+    Object.entries(svgs).forEach(([key, svg]) => {
+        buttonContainer.appendChild(createButton({ key, svg }))
+    })
+
     let keyboardShortcutNotes = document.createElement('div')
     keyboardShortcutNotes.innerHTML = `<small style = "width:100%"><h3>Keyboard shortcuts</h3>
     <ul>
