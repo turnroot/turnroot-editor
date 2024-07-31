@@ -1,8 +1,8 @@
 class ImageIconComponentPicker {
     constructor(coords, icons) {
         this.coords = coords
-        this.image = icons
-        this.images = []
+        this.images = icons
+        this.icons = []
         this.selectedImage = null
         this.imagePromise = new Promise((resolve) => {
             this.resolveImage = resolve
@@ -64,7 +64,7 @@ class ImageIconComponentPicker {
             image.style.height = "100px"
             image.style.width = "auto"
             image.style.maxHeight = "100px"
-            this.images.push(image)
+            this.icons.push(image)
             gridContainer.appendChild(image)
     
             image.addEventListener('click', () => {
@@ -77,13 +77,13 @@ class ImageIconComponentPicker {
         searchInput.addEventListener('input', () => {
             let searchValue = searchInput.value.toLowerCase()
             if (searchValue === '') {
-                for (let image of this.images) {
+                for (let image of this.icons) {
                     if (!gridContainer.contains(image)) {
                         gridContainer.appendChild(image)
                     }
                 }
             }
-            for (let image of this.images) {
+            for (let image of this.icons) {
                 if (!image.alt.replace(/\s+/g, '').toLowerCase().includes(searchValue.replace(/\s+/g, ''))) {
                     gridContainer.removeChild(image)
                 } else if (!gridContainer.contains(image)) {
@@ -105,7 +105,7 @@ class ImageIconComponentPicker {
         }
     }
 
-    icon() {
+    image() {
         return this.iconPromise
     }
 }

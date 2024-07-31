@@ -79,6 +79,13 @@ const createButton = (svg) => {
     button.style.cssText = 'width: 2rem; height: 4rem; padding: 0'
     if (svg.key === 'image') {
         button.style.cssText = 'width: 99.5%; height: 4rem; padding: 0'
+        button.addEventListener('click', async (event) => {
+            window.ImageIconComponentPicker.coords = {x: event.clientX, y: event.clientY - 200}
+            window.ImageIconComponentPicker.show()
+            let result = await window.ImageIconComponentPicker.image()
+            window.IconEditorGraphicStacksCurrentLayer .url = result
+            return result
+        })
     }
     button.setAttribute('button-is-held-down', 'false')
 
@@ -136,10 +143,11 @@ const createButton = (svg) => {
     }
 
     button.addEventListener('mousedown', () => {
+        if (svg.key !== 'image') {
         button.setAttribute('button-is-held-down', 'true')
         if (button.getAttribute('button-is-held-down') === 'true') {
             intervalId = setInterval(Do, 25)
-        }
+        }}
     }) 
     button.addEventListener('mouseup', () => {
         button.setAttribute('button-is-held-down', 'false')
