@@ -4,6 +4,7 @@ class graphicStacks {
         this.htmlObjects = []
         this.box = box
         this.box.style.position = "relative"
+        this.box.style.overflow = "hidden"
     }
 
     addLayer(layerData) {
@@ -49,6 +50,7 @@ class graphicStacks {
     }
 
     transform(layerIndex, transform) {
+        console.log(layerIndex, transform)
         let layerHtml = this.htmlObjects[layerIndex]
         layerHtml.style.transform = transform
         let layer = this.layers[layerIndex]

@@ -4,7 +4,7 @@ let layers = [{
         y: 0,
         width: 200,
         height: 200,
-        url: "",
+        url: "/style/img/placeholder-circle.png",
         transform: "",
         transparent: false,
     },
@@ -50,6 +50,7 @@ let layers = [{
     },
 ]
 
+let intervalId
 
 let svgs = {
     topLeft: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-rotate-ccw"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>`,
@@ -79,66 +80,69 @@ const createButton = (svg) => {
     button.setAttribute('button-is-held-down', 'false')
 
     const Do = () => {
-        let transform = window.IconEditorGraphicStacksCurrentLayer.transform
-        if (transform === "") {
-            transform = "rotate(0deg) translateY(0px) translateX(0px) scale(1)"
+
+        if (window.IconEditorGraphicStacksCurrentLayer.transform === "") {
+            window.IconEditorGraphicStacksCurrentLayer.transform = "rotate(0deg) translateY(0px) translateX(0px) scale(1)"
         }
+        console.log(window.IconEditorGraphicStacksCurrentLayer.transform)
         if (svg.key === 'topLeft') {
-            let rotateMatch = transform.match(/rotate\(([^)]+)\)/)
+            let rotateMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/rotate\(([^)]+)\)/)
             let rotate = rotateMatch ? parseFloat(rotateMatch[1]) : 0
             let transformRotate = `rotate(${rotate - 1}deg)`
-            transform = transform.replace(/rotate\(([^)]+)\)/, transformRotate)
+            window.IconEditorGraphicStacksCurrentLayer.transform = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/rotate\(([^)]+)\)/, transformRotate)
         } else if (svg.key === 'topCenter') {
-            let translateYMatch = transform.match(/translateY\(([^)]+)\)/)
+            let translateYMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/translateY\(([^)]+)\)/)
             let translateY = translateYMatch ? parseFloat(translateYMatch[1]) : 0
-            let transformTranslate = `translateY(${translateY - 1}px)`
-            transform = transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
+            let transformTranslate = `translateY(${translateY - 1}%)`
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
         } else if (svg.key === 'topRight') {
-            let rotateMatch = transform.match(/rotate\(([^)]+)\)/)
+            let rotateMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/rotate\(([^)]+)\)/)
             let rotate = rotateMatch ? parseFloat(rotateMatch[1]) : 0
             let transformRotate = `rotate(${rotate + 1}deg)`
-            transform = transform.replace(/rotate\(([^)]+)\)/, transformRotate)
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/rotate\(([^)]+)\)/, transformRotate)
         } else if (svg.key === 'centerLeft') {
-            let translateXMatch = transform.match(/translateX\(([^)]+)\)/)
+            let translateXMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/translateX\(([^)]+)\)/)
             let translateX = translateXMatch ? parseFloat(translateXMatch[1]) : 0
-            let transformTranslate = `translateX(${translateX - 1}px)`
-            transform = transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
+            let transformTranslate = `translateX(${translateX - 1}%)`
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
         } else if (svg.key === 'center') {
             // select image
         } 
         else if (svg.key === 'centerRight') {
-            let translateXMatch = transform.match(/translateX\(([^)]+)\)/)
+            let translateXMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/translateX\(([^)]+)\)/)
             let translateX = translateXMatch ? parseFloat(translateXMatch[1]) : 0
-            let transformTranslate = `translateX(${translateX + 1}px)`
-            transform = transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
+            let transformTranslate = `translateX(${translateX + 1}%)`
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/translateX\(([^)]+)\)/, transformTranslate)
         } else if (svg.key === 'bottomLeft') {
-            let scaleMatch = transform.match(/scale\(([^)]+)\)/)
+            let scaleMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/scale\(([^)]+)\)/)
             let scale = scaleMatch ? parseFloat(scaleMatch[1]) : 1
             let transformScale = `scale(${scale - 0.01})`
-            transform = transform.replace(/scale\(([^)]+)\)/, transformScale)
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/scale\(([^)]+)\)/, transformScale)
         } else if (svg.key === 'bottom') {
-            let translateYMatch = transform.match(/translateY\(([^)]+)\)/)
+            let translateYMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/translateY\(([^)]+)\)/)
             let translateY = translateYMatch ? parseFloat(translateYMatch[1]) : 0
-            let transformTranslate = `translateY(${translateY + 1}px)`
-            transform = transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
+            let transformTranslate = `translateY(${translateY + 1}%)`
+            window.IconEditorGraphicStacksCurrentLayer.transform  = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/translateY\(([^)]+)\)/, transformTranslate)
         } else if (svg.key === 'bottomRight') {
-            let scaleMatch = transform.match(/scale\(([^)]+)\)/)
+            let scaleMatch = window.IconEditorGraphicStacksCurrentLayer.transform.match(/scale\(([^)]+)\)/)
             let scale = scaleMatch ? parseFloat(scaleMatch[1]) : 1
             let transformScale = `scale(${scale + 0.01})`
-            transform = transform.replace(/scale\(([^)]+)\)/, transformScale)
+            window.IconEditorGraphicStacksCurrentLayer.transform = window.IconEditorGraphicStacksCurrentLayer.transform.replace(/scale\(([^)]+)\)/, transformScale)
         }
-        window.IconEditorGraphicStacksCurrentLayer.transform = transform
+        console.log(window.IconEditorGraphicStacksCurrentLayer.transform)
+        window.IconEditorStacksTransform(layers.indexOf(window.IconEditorGraphicStacksCurrentLayer), window.IconEditorGraphicStacksCurrentLayer.transform)
     }
 
     button.addEventListener('mousedown', () => {
         button.setAttribute('button-is-held-down', 'true')
         if (button.getAttribute('button-is-held-down') === 'true') {
-            setInterval(Do, 200)
+            intervalId = setInterval(Do, 25)
         }
     }) 
     button.addEventListener('mouseup', () => {
         button.setAttribute('button-is-held-down', 'false')
-        console.log(svg.key, window.IconEditorGraphicStacksCurrentLayer, window.IconEditorGraphicStacksCurrentLayer.transform)
+        clearInterval(intervalId)
+        console.log(svg.key)
     })
 
     return button
