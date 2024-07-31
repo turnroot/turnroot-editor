@@ -22,6 +22,20 @@ let iconEditorEditor = new w2layout({
     ]
 })
 
+const cookSmall = (el, div) => {
+    el.innerHTML = div.innerHTML
+    el.style.transform = 'scale(0.25)'
+    el.style.backgroundColor = 'var(--window-background-alt)'
+    el.style.borderRadius = '99rem'
+    el.style.marginTop = '1rem'
+    el.style.width = '216px'
+    el.style.height = '216px'
+    el.style.overflow = 'hidden'
+    el.style.position = 'relative'
+    el.style.left = "-80px"
+    el.style.top = "-92px"
+}
+
 iconEditorEditor.html('main', IconEditorControls())
 
 iconEditorEditor.on('render', async function(event){
@@ -31,53 +45,46 @@ iconEditorEditor.on('render', async function(event){
     h2.innerHTML = 'Icon Preview'
     container.appendChild(h2)
     
-    let sizes = [{width: '216px', height: '216px'}, {width: '56px', height: '56px'}]
-    let graphicStacksArray = sizes.map(size => {
-        let div = document.createElement('div')
-        div.style = `padding:1rem; width:${size.width}; height:${size.height};`
-        div.style.backgroundColor = 'var(--window-background-alt)'
-        div.style.borderRadius = '0.5rem'
-        if (size.width === '56px') div.style.marginTop = '1rem';
-        container.appendChild(div)
-        return new graphicStacks(div)
-    })
 
-    window.IconEditorGraphicStack = graphicStacksArray[0]
-    window.IconEditorGraphicStackTiny = graphicStacksArray[1]
+    let div = document.createElement('div')
+    div.style = `padding:1rem; width:216px; height:216px;`
+    div.style.backgroundColor = 'var(--window-background-alt)'
+    div.style.borderRadius = '99rem'
+
+    container.appendChild(div)
+    let graphicStack =  new graphicStacks(div)
+
+    let smallGraphicStack = document.createElement('div')
+    cookSmall(smallGraphicStack, div)
+
+    container.appendChild(smallGraphicStack)
+
+    window.IconEditorGraphicStack = graphicStack
 
     window.IconEditorStacksAddLayer = (layer) => {
         window.IconEditorGraphicStack.addLayer(layer)
-        let tmp = JSON.parse(JSON.stringify(layer))
-        tmp.width = 40
-        tmp.height = 40
-        window.IconEditorGraphicStackTiny.addLayer(tmp)
+        smallGraphicStack.innerHTML = div.innerHTML
     }
     window.IconEditorStacksUpdateLayer = (index, layer) => {
         window.IconEditorGraphicStack.updateLayer(index, layer)
-        let tmp = JSON.parse(JSON.stringify(layer))
-        tmp.width = 40
-        tmp.height = 40
-        window.IconEditorGraphicStackTiny.updateLayer(index, tmp)
+        cookSmall(smallGraphicStack, div)
     }
     window.IconEditorStacksRemoveLayer = (index) => {
         window.IconEditorGraphicStack.removeLayer(index)
-        window.IconEditorGraphicStackTiny.removeLayer(index)
+        cookSmall(smallGraphicStack, div)
     }
     window.IconEditorStacksClear = () => {
         window.IconEditorGraphicStack.clear()
-        window.IconEditorGraphicStackTiny.clear()
+        cookSmall(smallGraphicStack, div)
     }
     window.IconEditorStacksTransform = (index, transform) => {
         window.IconEditorGraphicStack.transform(index, transform)
-        window.IconEditorGraphicStackTiny.transform(index, transform)
+        cookSmall(smallGraphicStack, div)
     }
 
     layers.forEach(layer => {
         window.IconEditorGraphicStack.addLayer(layer)
-        let tmp = JSON.parse(JSON.stringify(layer))
-        tmp.width = 40
-        tmp.height = 40
-        window.IconEditorGraphicStackTiny.addLayer(tmp)
+        cookSmall(smallGraphicStack, div)
     })
     iconEditorEditor.html('right', container)
 })

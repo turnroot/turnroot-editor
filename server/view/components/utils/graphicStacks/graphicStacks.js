@@ -16,24 +16,31 @@ class graphicStacks {
         }
         this.layers.push(layerData)
         let layerHtml = document.createElement("div")
+        let rotateHtml = document.createElement("div")
         layerHtml.style.position = "absolute"
+        rotateHtml.style.position = "absolute"
         layerHtml.style.width = layerData.width + "px"
         layerHtml.style.height = layerData.height + "px"
+        rotateHtml.style.width = layerData.width + "px"
+        rotateHtml.style.height = layerData.height + "px"
+        rotateHtml.style.backgroundSize = "cover"
         layerHtml.style.backgroundSize = "cover"
         layerHtml.style.top = (layerData.y + 8) + "px"
         layerHtml.style.left = (layerData.x + 8) + "px"
         layerHtml.style.zIndex = 8000 + this.layers.length
         
         if (!layerData.transparent){
-            layerHtml.style.backgroundImage = "url(" + layerData.url + ")"
+            rotateHtml.style.backgroundImage = "url(" + layerData.url + ")"
         }
+        layerHtml.appendChild(rotateHtml)
         this.box.appendChild(layerHtml)
         this.htmlObjects.push(layerHtml)
     }
 
     updateLayer(layerIndex, layerData) {
         let layerHtml = this.htmlObjects[layerIndex]
-        layerHtml.style.backgroundImage = "url(" + layerData.url + ")"
+        let rotateHtml = layerHtml.childNodes[0]
+        rotateHtml.style.backgroundImage = "url(" + layerData.url + ")"
         let layer = this.layers[layerIndex]
         layer.url = layerData.url
     }
@@ -50,9 +57,19 @@ class graphicStacks {
     }
 
     transform(layerIndex, transform) {
-        console.log(layerIndex, transform)
         let layerHtml = this.htmlObjects[layerIndex]
-        layerHtml.style.transform = transform
+        let rotateHtml = layerHtml.childNodes[0]
+        let transformArray = transform.split(" ")
+        let transformWithoutRotate = ""
+        transformArray.forEach((t) => {
+            if (t.includes("rotate")){
+                let rotate = t.replace("rotate(", "").replace("deg)", "")
+                rotateHtml.style.transform = "rotate(" + rotate + "deg)"
+            } else {
+                transformWithoutRotate += t + " "
+            }
+        })
+        layerHtml.style.transform = transformWithoutRotate
         let layer = this.layers[layerIndex]
         layer.transform = transform
     }
