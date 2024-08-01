@@ -4,7 +4,8 @@ const getDefaultImagesIconComponents = async () => {
         console.error(err)
     })
     let imagesJson = await response.json()
-    return imagesJson
+    
+    return imagesJson['images']['iconComponent']
 }
 
 export default getDefaultImagesIconComponents

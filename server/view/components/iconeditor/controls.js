@@ -1,5 +1,5 @@
 let layers = [{
-        name: 'background',
+        name: 'backgroundRim',
         x: 0,
         y: 0,
         width: 200,
@@ -9,7 +9,7 @@ let layers = [{
         transparent: false,
     },
     {
-        name: 'rim',
+        name: 'backgroundColor',
         x: 0,
         y: 0,
         width: 200,
@@ -77,20 +77,9 @@ const createButton = (svg) => {
     button.innerHTML = svg.svg
     button.className = 'w2ui-btn'
     button.style.cssText = 'width: 2rem; height: 4rem; padding: 0'
-    if (svg.key === 'image') {
-        button.style.cssText = 'width: 99.5%; height: 4rem; padding: 0'
-        button.addEventListener('click', async (event) => {
-            window.ImageIconComponentPicker.coords = {x: event.clientX, y: event.clientY - 200}
-            window.ImageIconComponentPicker.show()
-            let result = await window.ImageIconComponentPicker.image()
-            window.IconEditorGraphicStacksCurrentLayer .url = result
-            return result
-        })
-    }
     button.setAttribute('button-is-held-down', 'false')
 
     const Do = () => {
-
         if (window.IconEditorGraphicStacksCurrentLayer.transform === "") {
             window.IconEditorGraphicStacksCurrentLayer.transform = "rotate(0deg) translateY(0px) translateX(0px) scale(1)"
         }
@@ -143,13 +132,14 @@ const createButton = (svg) => {
     }
 
     button.addEventListener('mousedown', () => {
-        if (svg.key !== 'image') {
+
         button.setAttribute('button-is-held-down', 'true')
         if (button.getAttribute('button-is-held-down') === 'true') {
             intervalId = setInterval(Do, 25)
-        }}
+        }
     }) 
     button.addEventListener('mouseup', () => {
+
         button.setAttribute('button-is-held-down', 'false')
         clearInterval(intervalId)
         console.log(svg.key)
@@ -224,7 +214,21 @@ const IconEditorControls = () => {
     const lastRowSpanAllColumns = document.createElement('div')
     lastRowSpanAllColumns.style.cssText = 'grid-column: 1 / span 3'
     buttonContainer.appendChild(lastRowSpanAllColumns)
-    lastRowSpanAllColumns.appendChild(createButton({ key: 'image', svg: '<div style = "display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-image"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg><p>Set layer image</p></div>' }))
+    let lastRowSpanAllColumnsButton = document.createElement('button')
+    lastRowSpanAllColumnsButton.innerHTML = '<div style = "display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-image"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg><p>Set layer image</p></div>'
+    lastRowSpanAllColumnsButton.className = 'w2ui-btn'
+    lastRowSpanAllColumnsButton.style.cssText = 'width: 99.5%; height: 4rem; padding: 0'
+    lastRowSpanAllColumnsButton.addEventListener('click', async (event) => {
+        if (window.IconEditorGraphicStacksCurrentLayer === undefined) {
+            return window.w2alert('Please select an icon layer')
+        }
+        window.ImageIconComponentPicker.coords = {x: event.clientX, y: event.clientY - 200}
+        window.ImageIconComponentPicker.show()
+        let result = await window.ImageIconComponentPicker.icon()
+        window.IconEditorGraphicStacksCurrentLayer.url = result.url
+        window.IconEditorStacksUpdateLayer(layers.indexOf(window.IconEditorGraphicStacksCurrentLayer), window.IconEditorGraphicStacksCurrentLayer)
+    })
+    lastRowSpanAllColumns.appendChild(lastRowSpanAllColumnsButton)
 
     let keyboardShortcutNotes = document.createElement('div')
     keyboardShortcutNotes.innerHTML = `<small style = "width:100%"><h3>Keyboard shortcuts</h3>

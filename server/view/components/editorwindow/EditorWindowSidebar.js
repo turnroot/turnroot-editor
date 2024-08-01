@@ -120,7 +120,7 @@ onFlat(event) {
 },
 })
 
-sidebar.on('render', function(event) {
+sidebar.on('render:after', function(event) {
     if (window.newUserOnboardingGameDetails === false){
         sidebar.enable('sidebar-editors-unit-editor')
         sidebar.enable('sidebar-editors-class-editor')

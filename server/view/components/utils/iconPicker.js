@@ -1,15 +1,17 @@
 class IconPicker {
-    constructor(coords, icons) {
+    constructor(coords, icons, add=true) {
         this.coords = coords
         this.icons = icons
         this.images = []
         this.selectedIcon = null
-        this.iconPromise = new Promise((resolve) => {
-            this.resolveIcon = resolve
-        })
+        this.add = add
+
     }
 
     show() {
+        this.iconPromise = new Promise((resolve) => {
+            this.resolveIcon = resolve
+        })
         let overlay = document.createElement('div')
         overlay.id = 'IconPicker-overlay'
         overlay.style.position = 'fixed'
@@ -89,11 +91,12 @@ class IconPicker {
             window.EditorWindowSidebar.click('sidebar-editors-icons-editor')
         })
 
-        gridContainer.appendChild(addIcon)
+        if (this.add){
+        gridContainer.appendChild(addIcon)}
 
         for (let icon of this.icons) {
             let image = document.createElement('img')
-            image.src = icon.src
+            image.src = icon.src ? icon.src : icon.url
             image.alt = icon.name
             image.style.width = '100px'
             image.style.height = '100px'
@@ -128,6 +131,8 @@ class IconPicker {
     }
 
     close() {
+        this.selectedIcon = null
+        
         let display = document.getElementById('IconPicker-display')
         if (display) {
             display.remove()

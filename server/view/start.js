@@ -9,9 +9,8 @@ import { initQueue, sendQueue, updateQueue } from './functions/edits/queue.js'
 import getAllIcons from './functions/gets/getAllIcons.js'
 
 import IconPicker from './components/utils/iconPicker.js'
-import ImageIconComponentPicker from './components/utils/graphicStacks/imageIconComponentPicker.js'
 let iconPicker = new IconPicker({y: 0, x: 0}, [])
-let imageIconComponentPicker = new ImageIconComponentPicker({y: 0, x: 0}, [])
+let imageIconComponentPicker = new IconPicker({y: 0, x: 0}, [], false)
 window.IconPicker = iconPicker
 window.ImageIconComponentPicker = imageIconComponentPicker
 
