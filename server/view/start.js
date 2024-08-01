@@ -7,7 +7,6 @@ import EditorWindow from './components/editorwindow/EditorWindow.js'
 import DefaultStart from './components/editorwindow/default.js'
 import { initQueue, sendQueue, updateQueue } from './functions/edits/queue.js'
 import getAllIcons from './functions/gets/getAllIcons.js'
-import getAllImages from './functions/gets/getAllImages.js'
 
 import IconPicker from './components/utils/iconPicker.js'
 import ImageIconComponentPicker from './components/utils/graphicStacks/imageIconComponentPicker.js'
@@ -30,6 +29,4 @@ window.updateQueue = updateQueue
 window.sendQueue = sendQueue
 
 window.allIcons = await getAllIcons()
-window.allImages = await getAllImages()
 window.IconPicker.icons = window.allIcons
-window.ImageIconComponentPicker.icons = window.allImages

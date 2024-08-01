@@ -3,6 +3,8 @@ import iconEditorEditor from './editor.js'
 import iconEditorTop from './top.js'
 import updateCurrentIconRecord from './functions/utils/updateCurrentIconRecord.js'
 import getAllIcons from '../../functions/gets/getAllIcons.js'
+import getImagesIconComponents from '../../functions/gets/getImagesIconComponents.js'
+import getDefaultImagesIconComponents from '../../functions/gets/getDefaultImagesIconComponents.js'
 
 let layout = new w2layout({
     name: 'IconEditor',
@@ -13,6 +15,9 @@ let layout = new w2layout({
 })
 
 layout.on('render', async function(event){
+    window.ImagesIconComponents = await getImagesIconComponents()
+    window.DefaultImagesIconComponents = await getDefaultImagesIconComponents()
+    window.ImageIconComponentPicker.icons = window.ImagesIconComponents.concat(window.DefaultImagesIconComponents)
     layout.html('main', '<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;font-size:150%"><h2>Loading icons...</h2></div>')
 
         window.allIcons = await getAllIcons()

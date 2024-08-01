@@ -1,9 +1,9 @@
 let lastPull = new Date()
 let pulled = false 
 
-const getAllImages = async() => {
+const getImagesIconComponents = async() => {
 
-    console.log('getting all images')
+    console.log('getting all images:iconComponents')
     let url = 'http://localhost:26068/data'
 
     let method = 'POST'
@@ -13,10 +13,11 @@ const getAllImages = async() => {
     let body = {}
     body.queue = [
         {
-            model: 'Image',
-            method: 'get'
+            model: 'Images',
+            method: 'getImagesByType'
         }
     ]
+    body.type = 'iconComponents'
     let options = {
         method: method,
         headers: headers,
@@ -41,5 +42,5 @@ const getAllImages = async() => {
     }
 }
 
-export default getAllImages
+export default getImagesIconComponents
 
