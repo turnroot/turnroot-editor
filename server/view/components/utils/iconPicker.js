@@ -1,15 +1,17 @@
 class IconPicker {
-    constructor(coords, icons) {
+    constructor(coords, icons, add=true) {
         this.coords = coords
         this.icons = icons
         this.images = []
         this.selectedIcon = null
-        this.iconPromise = new Promise((resolve) => {
-            this.resolveIcon = resolve
-        })
+        this.add = add
+
     }
 
     show() {
+        this.iconPromise = new Promise((resolve) => {
+            this.resolveIcon = resolve
+        })
         let overlay = document.createElement('div')
         overlay.id = 'IconPicker-overlay'
         overlay.style.position = 'fixed'
@@ -27,7 +29,7 @@ class IconPicker {
         })
         let display = document.createElement('div')
         display.id = 'IconPicker-display'
-        display.style.width = '340px'
+        display.style.width = '450px'
         display.style.height = '500px'
         display.style.position = 'fixed'
         display.style.zIndex = '9999'
@@ -51,7 +53,7 @@ class IconPicker {
 
         let gridContainer = document.createElement('div')
         gridContainer.style.display = 'grid'
-        gridContainer.style.gridTemplateColumns = 'repeat(3, 1fr)'
+        gridContainer.style.gridTemplateColumns = 'repeat(4, 1fr)'
         gridContainer.style.gap = '10px'
         gridContainer.style.padding = '10px'
         display.appendChild(gridContainer)
@@ -89,11 +91,12 @@ class IconPicker {
             window.EditorWindowSidebar.click('sidebar-editors-icons-editor')
         })
 
-        gridContainer.appendChild(addIcon)
+        if (this.add){
+        gridContainer.appendChild(addIcon)}
 
         for (let icon of this.icons) {
             let image = document.createElement('img')
-            image.src = icon.src
+            image.src = icon.src ? icon.src : icon.url
             image.alt = icon.name
             image.style.width = '100px'
             image.style.height = '100px'
@@ -128,6 +131,8 @@ class IconPicker {
     }
 
     close() {
+        this.selectedIcon = null
+        
         let display = document.getElementById('IconPicker-display')
         if (display) {
             display.remove()

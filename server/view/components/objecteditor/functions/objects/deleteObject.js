@@ -8,43 +8,13 @@ const deleteObject = async (
         'Content-Type': 'application/json'
     }
     let body = {}
-    
-    let subtype = window.currentObject.subtype
-    if (subtype){
-        if (subtype === 'weapon'){
-            body.queue = [
-                {
-                    model: 'objectWeapon',
-                    method: 'delete',
-                    id: id
-                }
-            ]
-        } else if (subtype === 'gift'){
-            body.queue = [
-                {
-                    model: 'objectGift',
-                    method: 'delete',
-                    id: id
-                }
-            ]
-        } else if (subtype === 'consumable'){
-            body.queue = [
-                {
-                    model: 'objectConsumable',
-                    method: 'delete',
-                    id: id
-                }
-            ]
-        } else if (subtype === 'equipable'){
-            body.queue = [
-                {
-                    model: 'objectEquipable',
-                    method: 'delete',
-                    id: id
-                }
-            ]
-        }
-    } else {return w2alert('Error: no subtype provided')}
+
+    body.queue = [{
+        model: 'Object',
+        method: 'delete',
+        id: id
+    }]
+
     console.log(body)
     let options = {
         method: method,
@@ -52,11 +22,11 @@ const deleteObject = async (
         body: JSON.stringify(body)
     }
 
-    let response  = await fetch(url, options).catch(err => {
+    let response = await fetch(url, options).catch(err => {
         console.error(err)
         return w2alert('Error: invalid response from schemas server')
     })
-    if (response.ok){
+    if (response.ok) {
         let data = await response.json()
         console.log(data)
         return data

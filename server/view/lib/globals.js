@@ -2,7 +2,7 @@ import defaults from './defaults.js'
 
 import {w2ui} from './w2ui.es6.min.js'
 
-const booleans = ['unitsCanHaveChildren', 'useExperienceSublevels', 'useExperienceAptitudes', 'combatCombatArts', 'combatWeaponTriangle', 'combatExpandedWeaponTriangle', 'combatMagicTriangle', 'combatBattalions', 'combatBattalionEndurance', 'combatPairUp', 'combatAdjutants', 'combatAdjutantHeal', 'combatAdjutantGuard', 'combatAdjutantAttack', 'aptitudeGoals', 'statsUseExtraStatWeight', 'statsExtraStatWeightAffectsMovement', 'statsUseExtraStatLuck', 'combatSeparateCritAvoid', 'statsUseExtraStatAuthority', 'statsUseExtraStatCharm', 'statsAptitudesUseRiding', 'statsAptitudesUseFlying', 'statsAptitudesUseAuthority', 'statsAptitudesUseArmor']
+const booleans = ['weaponsCanBeForged', 'weaponsCanBeRepaired', 'unitsCanHaveChildren', 'useExperienceSublevels', 'useExperienceAptitudes', 'combatCombatArts', 'combatWeaponTriangle', 'combatExpandedWeaponTriangle', 'combatMagicTriangle', 'combatBattalions', 'combatBattalionEndurance', 'combatPairUp', 'combatAdjutants', 'combatAdjutantHeal', 'combatAdjutantGuard', 'combatAdjutantAttack', 'aptitudeGoals', 'statsUseExtraStatWeight', 'statsExtraStatWeightAffectsMovement', 'statsUseExtraStatLuck', 'combatSeparateCritAvoid', 'statsUseExtraStatAuthority', 'statsUseExtraStatCharm', 'statsAptitudesUseRiding', 'statsAptitudesUseFlying', 'statsAptitudesUseAuthority', 'statsAptitudesUseArmor']
 
 const integers = ['combatCombatArtLimit', 'combatWeaponTriangleAdvantage', 'combatWeaponTriangleDisadvantage', 'combatMagicTriangleAdvantage', 'combatMagicTriangleDisadvantage', 'combatBattalionLimit']
 

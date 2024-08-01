@@ -14,6 +14,14 @@ let toolbar = new w2toolbar({
     items:  config,
 })
 
+toolbar.on('render', function (event) {
+    event.done(() => {
+        if(!window.weaponsCanBeForged && !window.weaponsCanBeRepaired){
+            toolbar.hide('object-editor-bottom-toolbar-forgerepair')
+        }
+    })
+})
+
 toolbar.on('click', function (event) {
     event.done(() => {
         handleBottom(event, toolbar)

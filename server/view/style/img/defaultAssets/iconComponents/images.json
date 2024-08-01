@@ -1,0 +1,55 @@
+{
+    "name": "Default Icon Components",
+    "creator": "Joseph Hansen",
+    "images": {
+        "iconComponent": [{
+                "name": "inner-light-blue-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_blue.p-1721952941685.webp"
+            },
+            {
+                "name": "inner-dark-blue-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_dark_b-1721952941736.webp"
+            },
+            {
+                "name": "inner-dark-purple-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_dark_p-1721952941722.webp"
+            },
+            {
+                "name": "inner-green-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_green.-1721952941518.webp"
+            },
+            {
+                "name": "inner-light-green-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941133.webp"
+            },
+            {
+                "name": "inner-light-red-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941166.webp"
+            },
+            {
+                "name": "inner-light-yellow-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941170.webp"
+            },
+            {
+                "name": "inner-muted-purple-grey-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_purple-1721952941398.webp"
+            },
+            {
+                "name": "inner-red-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileinner_red.pn-1721952941569.webp"
+            },
+            {
+                "name": "blue-rim-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileouter_blue.p-1721952941544.webp"
+            },
+            {
+                "name": "gold-rim-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileouter_gold.p-1721952941638.webp"
+            },
+            {
+                "name": "silver-rim-circle-background",
+                "url": "https://images.josephhansen.dev/uploads/fileouter_silver-1721952941663.webp"
+            }
+        ]
+    }
+}

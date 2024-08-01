@@ -10,7 +10,9 @@ import getAllIcons from './functions/gets/getAllIcons.js'
 
 import IconPicker from './components/utils/iconPicker.js'
 let iconPicker = new IconPicker({y: 0, x: 0}, [])
+let imageIconComponentPicker = new IconPicker({y: 0, x: 0}, [], false)
 window.IconPicker = iconPicker
+window.ImageIconComponentPicker = imageIconComponentPicker
 
 window.w2layout = w2layout
 window.w2alert = w2alert

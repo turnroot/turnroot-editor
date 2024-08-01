@@ -1,47 +1,9 @@
 const handleTab = (form, event, automated=false) => {
     let field = event.detail.field
     let value = event.detail.value.current
-    let subtype = window.objectEditorBasicFields.record.subtype
 
     window.currentObject[field] = value
-
-    if (subtype === 'Weapon'){
-        let comprehensiveRecord = {
-            ...window.objectEditorBasicFields.record,
-            ...window.objectEditorValueFields.record,
-            ...window.objectEditorUsageFields.record,
-            ...window.objectEditorForgeRepairFields.record,
-        }
-        window.updateQueue('objectWeapon', 'update', comprehensiveRecord)
-    } else if (subtype === 'Gift'){
-        let comprehensiveRecord = {
-            ...window.objectEditorBasicFields.record,
-            ...window.objectEditorValueFields.record,
-            ...window.objectEditorGiftFields.record,
-        }
-        window.updateQueue('objectGift', 'update', comprehensiveRecord)
-    } else if (subtype === 'Consumable'){
-        let comprehensiveRecord = {
-            ...window.objectEditorBasicFields.record,
-            ...window.objectEditorValueFields.record,
-            ...window.objectEditorUsageFields.record,
-        }
-        window.updateQueue('objectConsumable', 'update', comprehensiveRecord)
-    } else if (subtype === 'Equipable'){
-        let comprehensiveRecord = {
-            ...window.objectEditorBasicFields.record,
-            ...window.objectEditorValueFields.record,
-            ...window.objectEditorUsageFields.record,
-        }
-        window.updateQueue('objectEquipable', 'update', comprehensiveRecord)
-    } else if (subtype === 'Magic'){
-        let comprehensiveRecord = {
-            ...window.objectEditorBasicFields.record,
-            ...window.objectEditorValueFields.record,
-            ...window.objectEditorUsageFields.record,
-        }
-        window.updateQueue('objectMagic', 'update', comprehensiveRecord)
-    }
+    form.record[field] = value
 
     if (field === 'upperRange'){
         if (value < window.currentObject.lowerRange){
@@ -49,6 +11,12 @@ const handleTab = (form, event, automated=false) => {
             window.currentObject.upperRange = window.currentObject.lowerRange
             window.objectEditorUsageFields.record.upperRange = window.currentObject.lowerRange
             window.objectEditorUsageFields.refresh()
+        }
+    } else if (field === 'lostItem'){
+        if (value){
+            window.objectEditorGiftFields.show('belongsTo')
+        } else {
+            window.objectEditorGiftields.hide('belongsTo')
         }
     } else if (field === 'lowerRange'){
         if (value > window.currentObject.upperRange){
@@ -70,6 +38,8 @@ const handleTab = (form, event, automated=false) => {
             window.objectEditorUsageFields.show('upperRange')
         }
     }
+
+    window.updateQueue('Object', 'updateObject', window.currentObject)
 }
 
 export default handleTab

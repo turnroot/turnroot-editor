@@ -3,9 +3,11 @@ const capitalizeFirstLetter = (string) => {
 }
 let c = capitalizeFirstLetter
 
-const updateCurrentObjectRecord = async(n) => {
+import getAllUnits from '../../../uniteditor/functions/units/getAllUnits.js'
+
+const updateCurrentObjectRecord = async (n) => {
     window.currentObject = n
-    if (!window.currentObject || window.currentObject === undefined){
+    if (!window.currentObject || window.currentObject === undefined) {
         console.log('no object to update')
         return
     }
@@ -30,18 +32,6 @@ const updateCurrentObjectRecord = async(n) => {
     window.objectEditorUsageFields.record.rangeAdjustedByStatName = window.currentObject.rangeAdjustedByStatName
     window.objectEditorUsageFields.record.rangeAdjustedByDivisor = window.currentObject.rangeAdjustedByDivisor
 
-    if (window.currentObject.rangeAdjustedByStat){
-        window.objectEditorUsageFields.show('rangeAdjustedByStatName')
-        window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
-        window.objectEditorUsageFields.hide('lowerRange')
-        window.objectEditorUsageFields.hide('upperRange')
-    } else {
-        window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
-        window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
-        window.objectEditorUsageFields.show('lowerRange')
-        window.objectEditorUsageFields.show('upperRange')
-    }
-    
     window.objectEditorValueFields.record.buyable = window.currentObject.buyable
     window.objectEditorValueFields.record.sellable = window.currentObject.sellable
     window.objectEditorValueFields.record.buyPrice = window.currentObject.buyPrice
@@ -49,9 +39,27 @@ const updateCurrentObjectRecord = async(n) => {
 
     window.objectEditorValueFields.record.sellPriceDeductedPerUse = window.currentObject.sellPriceDeductedPerUse
 
-    if (window.currentObject.subtype === 'Gift') {window.objectEditorValueFields.hide('sellPriceDeductedPerUse')} else {window.objectEditorValueFields.show('sellPriceDeductedPerUse')}
+    window.objectEditorForgeRepairFields.record.forgeable = window.currentObject.forgeable
+    window.objectEditorForgeRepairFields.record.repairable = window.currentObject.repairable
+    window.objectEditorForgeRepairFields.record.repairPricePerUse = window.currentObject.repairPricePerUse
+    window.objectEditorForgeRepairFields.record.repairNeedsItems = window.currentObject.repairNeedsItems
+    window.objectEditorForgeRepairFields.record.repairItem = window.currentObject.repairItem
+    window.objectEditorForgeRepairFields.record.repairItemAmountPerUse = window.currentObject.repairItemAmountPerUse
 
-    if (window.currentObject.subtype === 'Weapon'){
+    if (window.currentObject.subtype === 'Gift') {
+        window.objectEditorValueFields.hide('sellPriceDeductedPerUse')
+        let allUnits = window.allUnits ? window.allUnits : await getAllUnits().then(units => {window.allUnits = units; return units})
+        window.objectEditorGiftFields.get('belongsTo').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+        window.objectEditorGiftFields.get('unitsHate').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+        window.objectEditorGiftFields.get('unitsLove').options.items = allUnits.map(unit => unit.name + ' (' + unit.id + ')')
+
+
+    } else {
+        window.objectEditorValueFields.show('sellPriceDeductedPerUse')
+    }
+
+    if (window.currentObject.subtype === 'Weapon') {
+        window.objectEditorForgeRepairFields.get('repairItem').options.items = window.allObjects.objectConsumables.map(consumable => consumable.name + ' (' + consumable.id + ')')
         window.objectEditorUsageFields.hide('magicType')
         window.objectEditorUsageFields.hide('magicTypeDescription')
         window.objectEditorUsageFields.show('weaponType')
@@ -67,11 +75,15 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.show('rangeAdjustedByStatName')
         window.objectEditorUsageFields.show('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('maxUses')
+        } else {
+            window.objectEditorUsageFields.hide('maxUses')
+        }
         window.objectEditorUsageFields.record.minAptitude = window.currentObject.minAptitude
         window.objectEditorUsageFields.record.weaponType = c(window.currentObject.weaponType)
         window.objectEditorUsageFields.get('weaponType').options.items = window.globalWeaponsTypes[0].types.map(type => type.name)
-    } else if (window.currentObject.subtype === 'Magic'){
+    } else if (window.currentObject.subtype === 'Magic') {
         window.objectEditorUsageFields.hide('weaponType')
         window.objectEditorUsageFields.show('magicType')
         window.objectEditorUsageFields.show('hasUses')
@@ -85,7 +97,11 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.show('rangeAdjustedByStatName')
         window.objectEditorUsageFields.show('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses) {window.objectEditorUsageFields.show('maxUses')} else {window.objectEditorUsageFields.hide('maxUses')}
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('maxUses')
+        } else {
+            window.objectEditorUsageFields.hide('maxUses')
+        }
         window.objectEditorUsageFields.hide('weaponTypeDescription')
         window.objectEditorUsageFields.show('magicTypeDescription')
         window.objectEditorUsageFields.record.minAptitude = window.currentObject.minAptitude
@@ -104,21 +120,44 @@ const updateCurrentObjectRecord = async(n) => {
         window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
         window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
         window.objectEditorUsageFields.hide('rangeAdjustedByStat')
-        if (window.objectEditorUsageFields.record.hasUses){
-        window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
-        window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')}
-        else {
-        window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmount')
-        window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmountDescription')
+        if (window.objectEditorUsageFields.record.hasUses) {
+            window.objectEditorUsageFields.show('replenishUsesAfterBattleAmount')
+            window.objectEditorUsageFields.show('replenishUsesAfterBattleAmountDescription')
+        } else {
+            window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmount')
+            window.objectEditorUsageFields.hide('replenishUsesAfterBattleAmountDescription')
         }
     }
 
-    if (window.currentObject.subtype === 'Consumable'){
+    if (window.currentObject.subtype === 'Consumable') {
         window.objectEditorUsageFields.hide('hasUses')
         window.objectEditorUsageFields.record['hasUses'] = true
         window.objectEditorUsageFields.show('maxUses')
     }
 
+    if (window.currentObject.rangeAdjustedByStat) {
+        window.objectEditorUsageFields.show('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.show('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.hide('lowerRange')
+        window.objectEditorUsageFields.hide('upperRange')
+    } else {
+        window.objectEditorUsageFields.hide('rangeAdjustedByStatName')
+        window.objectEditorUsageFields.hide('rangeAdjustedByDivisor')
+        window.objectEditorUsageFields.show('lowerRange')
+        window.objectEditorUsageFields.show('upperRange')
+    }
+
+    if (!window.weaponsCanBeForged){
+        window.objectEditorForgeRepairFields.hide('forgeable')
+    }
+
+    if (!window.consumablesCanBeRepaired){
+        window.objectEditorForgeRepairFields.hide('repairable')
+        window.objectEditorForgeRepairFields.hide('repairPricePerUse')
+        window.objectEditorForgeRepairFields.hide('repairNeedsItems')
+        window.objectEditorForgeRepairFields.hide('repairItem')
+        window.objectEditorForgeRepairFields.hide('repairItemAmountPerUse')
+    }
 
     window.objectEditorBasicFields.refresh()
 }

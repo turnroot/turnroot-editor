@@ -7,7 +7,6 @@ import {
 
 import createNewIcon from './functions/icons/createNewIcon.js'
 import deleteIcon from './functions/icons/deleteIcon.js'
-import getAllIcons from '../../functions/gets/getAllIcons.js'
 window.IconEditorCreateNewIcon = createNewIcon
 window.IconEditorDeleteIcon = deleteIcon
 
@@ -43,10 +42,7 @@ toolbar.on('click', function async (event) {
 
             await window.IconEditorCreateNewIcon(event.detail.value).then(n => {
                 window.IconEditor.html('main', window.iconEditorEditor)
-                if (!window.allIcons.iconWeapons) {
-                    window.allIcons.iconWeapons = []
-                }
-                window.allIcons.iconWeapons.push(n)
+
                 window.currentIcon = n
 
                 updateCurrentIconRecord(n)

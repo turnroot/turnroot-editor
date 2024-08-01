@@ -27,7 +27,8 @@ const getAllObjects = async() => {
         if (window.allObjects){return window.allObjects} else {return {objectWeapons: [],
             objectConsumables: [],
             objectEquipables: [],
-            objectGifts: []}}
+            objectGifts: [],
+            all: []}}
     } 
 
     let response = await fetch(url, options).catch(err => {
@@ -35,27 +36,47 @@ const getAllObjects = async() => {
         return w2alert('Error: invalid response from schemas server')
     })
     if (response.ok){
+        let data = await response.json()
+        let dataObject = {all: data, objectWeapons: [], objectConsumables: [], objectEquipables: [], objectGifts: [], objectMagic: []}
         lastPull = now
         pulled = true       
-        if (!response.objectWeapons){
-            response.objectWeapons = []
+        
+        console.log(dataObject)
+        try {
+            
+        data.forEach(object => {
+            if (object.subtype === 'Weapon'){
+                dataObject.objectWeapons.push(object)
+            } else if (object.subtype === 'Consumable'){
+                dataObject.objectConsumables.push(object)
+            } else if (object.subtype === 'Equipable'){
+                dataObject.objectEquipables.push(object)
+            } else if (object.subtype === 'Gift'){
+                dataObject.objectGifts.push(object)
+            } else if (object.subtype === 'Magic'){
+                dataObject.objectMagic.push(object)
+            }
+        })
+        return dataObject
+    } catch(e){
+        console.error(e)
+        return {
+            objectWeapons: [],
+            objectConsumables: [],
+            objectEquipables: [],
+            objectGifts: [],
+            objectMagic: [],
+            all: []
         }
-        if (!response.objectConsumables){
-            response.objectConsumables = []
-        }
-        if (!response.objectEquipables){
-            response.objectEquipables = []
-        }
-        if (!response.objectGifts){
-            response.objectGifts = []
-        }
-        return response.json()
+    }
     } else {
         return {
             objectWeapons: [],
             objectConsumables: [],
             objectEquipables: [],
-            objectGifts: []
+            objectGifts: [],
+            objectMagic: [],
+            all: []
         }
     }
 }
