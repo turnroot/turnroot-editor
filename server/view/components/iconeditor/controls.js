@@ -48,6 +48,16 @@ let layers = [{
         transform: "",
         transparent: true,
     },
+    {
+        name: 'graphic4',
+        x: 0,
+        y: 0,
+        width: 200,
+        height: 200,
+        url: "",
+        transform: "",
+        transparent: true,
+    },
 ]
 
 let intervalId

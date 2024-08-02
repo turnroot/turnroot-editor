@@ -59,3 +59,4 @@ dist
 .pnp.*
 *DS_Store*
 stats.json
+server/view/bundle.js.LICENSE.txt

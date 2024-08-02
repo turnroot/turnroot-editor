@@ -2,8 +2,7 @@
     "name": "Default Icon Components",
     "creator": "Joseph Hansen",
     "images": {
-        "iconComponent": [
-            {
+        "iconComponent": [{
                 "name": "horse-head-gray-silver-flat-riding",
                 "url": "https://i.postimg.cc/fTvbg871/icon-horse-head-white.png"
             },
@@ -18,6 +17,82 @@
             {
                 "name": "horse-head-blue-flat-riding",
                 "url": "https://i.postimg.cc/90df2p6R/icon-horse-head-blue.png"
+            },
+            {
+                "url": "https://i.postimg.cc/DwjMvb3B/icon-five-point-star-gold-yellow-gradient.png",
+                "name": "five-point-star-gold-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/q7WDnVRK/icon-five-point-star-silver-gray-gradient.png",
+                "name": "five-point-star-silver-gray-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Ss8TfT2v/icon-five-point-star-white-flat.png",
+                "name": "five-point-star-white-flat"
+            },
+            {
+                "url": "https://i.postimg.cc/6Q81y59w/icon-four-point-star-gold-yellow-gradient.png",
+                "name": "four-point-star-gold-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Fz4PWy0s/icon-four-point-star-silver-gray-gradient.png",
+                "name": "four-point-star-silver-gray-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Znxw1WLP/icon-four-point-star-white-flat.png",
+                "name": "four-point-star-white-flat"
+            },
+            {
+                "url": "https://i.postimg.cc/RC2fBSYK/icon-person-arms-raised-gold-orange-red-yellow-gradient.png",
+                "name": "person-arms-raised-gold-orange-red-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/WtRsffXq/icon-person-arms-raised-green-flat-solid.png",
+                "name": "person-arms-raised-green-flat-solid"
+            },
+            {
+                "url": "https://i.postimg.cc/KvLTvXXV/icon-person-arms-raised-outline-blue.png",
+                "name": "person-arms-raised-outline-blue"
+            },
+            {
+                "url": "https://i.postimg.cc/mZPMJzmT/icon-person-arms-raised-white-flat-solid.png",
+                "name": "person-arms-raised-white-flat-solid"
+            },
+            {
+                "url": "https://i.postimg.cc/P5jwC6Tq/icon-person-arms-raised-yellow-gold-outline.png",
+                "name": "person-arms-raised-yellow-gold-outline"
+            },
+            {
+                "url": "https://i.postimg.cc/bw5dQ3jb/Artboard-1-1.png",
+                "name": "icon-starburst-seven-point-impact-white-gray-silver-transparent-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/nLQrTBHW/Artboard-1-2.png",
+                "name": "icon-starburst-seven-point-impact-fire-yellow-red-orange-gradient"
+            }, 
+            {
+                "url": "https://i.postimg.cc/fWPFQdZC/icon-cross-x-plus-flat-white.png",
+                "name": "cross-x-plus-flat-white"
+            },
+            {
+                "url": "https://i.postimg.cc/Nfrns0jc/icon-cross-x-plus-gradient-purple-dark-purple.png",
+                "name": "cross-x-plus-gradient-purple-dark-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/Gmw5H14s/icon-cross-x-plus-gradient-yellow-orange.png",
+                "name": "cross-x-plus-gradient-yellow-orange"
+            },
+            {
+                "url": "https://i.postimg.cc/VNzZWBBf/icon-horse-head-riding-gradient-purple.png",
+                "name": "horse-head-riding-gradient-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/GmFSDSDg/icon-starburst-seven-point-impact-gradient-purple.png",
+                "name": "starburst-seven-point-impact-gradient-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/1zMCCnJp/icon-x-plus-cross-gray-silver-gradient.png",
+                "name": "x-plus-cross-gray-silver-gradient"
             }
         ]
     }
