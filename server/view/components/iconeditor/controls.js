@@ -138,12 +138,13 @@ const createButton = (svg) => {
             intervalId = setInterval(Do, 25)
         }
     }) 
-    button.addEventListener('mouseup', () => {
+    button.addEventListener('mouseup', async() => {
         window.currentIcon.components = window.IconEditorGraphicStack.layers
-        window.updateQueue('Icon', 'update', window.currentIcon)
         button.setAttribute('button-is-held-down', 'false')
         clearInterval(intervalId)
-        console.log(svg.key)
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
+        console.log(window.currentIcon)
+        window.updateQueue('Icon', 'update', window.currentIcon)
     })
 
     return button
@@ -166,11 +167,12 @@ const createLayerRow = (layer, layersContainer) => {
     const transparentCheckbox = document.createElement('input')
     transparentCheckbox.type = 'checkbox'
     transparentCheckbox.checked = !layer.transparent
-    transparentCheckbox.addEventListener('change', () => {
+    transparentCheckbox.addEventListener('change', async() => {
         layer.transparent = !transparentCheckbox.checked
         layerName.style.color = !layer.transparent ? "unset" : "var(--button-alt-text)"
         layerName.style.cursor = !layer.transparent ? "pointer" : "default"
         window.currentIcon.components = window.IconEditorGraphicStack.layers
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
         window.updateQueue('Icon', 'update', window.currentIcon)
     })
 
@@ -227,12 +229,13 @@ const IconEditorControls = () => {
             return window.w2alert('Please select an icon layer')
         }
         window.currentIcon.components = window.IconEditorGraphicStack.layers
-        window.updateQueue('Icon', 'update', window.currentIcon)
         window.ImageIconComponentPicker.coords = {x: event.clientX, y: event.clientY - 200}
         window.ImageIconComponentPicker.show()
         let result = await window.ImageIconComponentPicker.icon()
         window.IconEditorGraphicStacksCurrentLayer.url = result.url
         window.IconEditorStacksUpdateLayer(layers.indexOf(window.IconEditorGraphicStacksCurrentLayer), window.IconEditorGraphicStacksCurrentLayer)
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
+        window.updateQueue('Icon', 'update', window.currentIcon)
     })
     lastRowSpanAllColumns.appendChild(lastRowSpanAllColumnsButton)
 

@@ -1,3 +1,10 @@
+import html2canvas from 'html2canvas'
+
+const takeScreenshot = async (node) => {
+    const canvas = await html2canvas(node, {backgroundColor: null, allowTaint: true})
+    const img = canvas.toDataURL("image/png")
+    return img
+}
 class graphicStacks {
     constructor(box, type="icon") {
         this.layers = []
@@ -76,6 +83,11 @@ class graphicStacks {
 
     render(){
         return this.box
+    }
+
+    async flatten(){
+        let r =  takeScreenshot(this.box)
+        return r
     }
 }
 
