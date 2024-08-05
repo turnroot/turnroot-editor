@@ -48,6 +48,16 @@ let layers = [{
         transform: "",
         transparent: true,
     },
+    {
+        name: 'graphic4',
+        x: 0,
+        y: 0,
+        width: 200,
+        height: 200,
+        url: "",
+        transform: "",
+        transparent: true,
+    },
 ]
 
 let intervalId
@@ -138,11 +148,13 @@ const createButton = (svg) => {
             intervalId = setInterval(Do, 25)
         }
     }) 
-    button.addEventListener('mouseup', () => {
-
+    button.addEventListener('mouseup', async() => {
+        window.currentIcon.components = window.IconEditorGraphicStack.layers
         button.setAttribute('button-is-held-down', 'false')
         clearInterval(intervalId)
-        console.log(svg.key)
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
+        console.log(window.currentIcon)
+        window.updateQueue('Icon', 'update', window.currentIcon)
     })
 
     return button
@@ -165,10 +177,13 @@ const createLayerRow = (layer, layersContainer) => {
     const transparentCheckbox = document.createElement('input')
     transparentCheckbox.type = 'checkbox'
     transparentCheckbox.checked = !layer.transparent
-    transparentCheckbox.addEventListener('change', () => {
+    transparentCheckbox.addEventListener('change', async() => {
         layer.transparent = !transparentCheckbox.checked
         layerName.style.color = !layer.transparent ? "unset" : "var(--button-alt-text)"
         layerName.style.cursor = !layer.transparent ? "pointer" : "default"
+        window.currentIcon.components = window.IconEditorGraphicStack.layers
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
+        window.updateQueue('Icon', 'update', window.currentIcon)
     })
 
     checkboxDiv.appendChild(transparentCheckbox)
@@ -218,15 +233,19 @@ const IconEditorControls = () => {
     lastRowSpanAllColumnsButton.innerHTML = '<div style = "display:flex;align-items:center;justify-content:center;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-image"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><circle cx="10" cy="12" r="2"/><path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22"/></svg><p>Set layer image</p></div>'
     lastRowSpanAllColumnsButton.className = 'w2ui-btn'
     lastRowSpanAllColumnsButton.style.cssText = 'width: 99.5%; height: 4rem; padding: 0'
+
     lastRowSpanAllColumnsButton.addEventListener('click', async (event) => {
         if (window.IconEditorGraphicStacksCurrentLayer === undefined) {
             return window.w2alert('Please select an icon layer')
         }
+        window.currentIcon.components = window.IconEditorGraphicStack.layers
         window.ImageIconComponentPicker.coords = {x: event.clientX, y: event.clientY - 200}
         window.ImageIconComponentPicker.show()
         let result = await window.ImageIconComponentPicker.icon()
         window.IconEditorGraphicStacksCurrentLayer.url = result.url
         window.IconEditorStacksUpdateLayer(layers.indexOf(window.IconEditorGraphicStacksCurrentLayer), window.IconEditorGraphicStacksCurrentLayer)
+        window.currentIcon.compositeImage = await window.IconEditorGraphicStack.flatten()
+        window.updateQueue('Icon', 'update', window.currentIcon)
     })
     lastRowSpanAllColumns.appendChild(lastRowSpanAllColumnsButton)
 

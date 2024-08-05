@@ -2,53 +2,158 @@
     "name": "Default Icon Components",
     "creator": "Joseph Hansen",
     "images": {
-        "iconComponent": [{
-                "name": "inner-light-blue-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_blue.p-1721952941685.webp"
+        "iconComponent": [
+            {
+                "url": "https://i.postimg.cc/G2FtCzGD/inner-blue.png",
+                "name": "inner-blue-gradient-background"
             },
             {
-                "name": "inner-dark-blue-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_dark_b-1721952941736.webp"
+                "url": "https://i.postimg.cc/x89CTH34/inner-dark-blue.png",
+                "name": "inner-dark-blue-gradient-background"
             },
             {
-                "name": "inner-dark-purple-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_dark_p-1721952941722.webp"
+                "url": "https://i.postimg.cc/901f4MxF/inner-dark-purple.png",
+                "name": "inner-dark-purple-gradient-background"
             },
             {
-                "name": "inner-green-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_green.-1721952941518.webp"
+                "url": "https://i.postimg.cc/Wp7zYW2L/inner-dark-teal.png",
+                "name": "inner-dark-teal-gradient-background"
             },
             {
-                "name": "inner-light-green-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941133.webp"
+                "url": "https://i.postimg.cc/ncczy4zs/inner-gold.png",
+                "name": "inner-gold-gradient-background"
             },
             {
-                "name": "inner-light-red-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941166.webp"
+                "url": "https://i.postimg.cc/9F8MCDRL/inner-green.png",
+                "name": "inner-green-gradient-background"
             },
             {
-                "name": "inner-light-yellow-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_light_-1721952941170.webp"
+                "url": "https://i.postimg.cc/rwDpmq5M/inner-light-green.png",
+                "name": "inner-light-green-gradient-background"
             },
             {
-                "name": "inner-muted-purple-grey-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_purple-1721952941398.webp"
+                "url": "https://i.postimg.cc/5tvNBpPr/inner-light-red.png",
+                "name": "inner-light-red-gradient-background"
             },
             {
-                "name": "inner-red-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileinner_red.pn-1721952941569.webp"
+                "url": "https://i.postimg.cc/wjnjRnkJ/inner-light-yellow.png",
+                "name": "inner-light-yellow-gradient-background"
             },
             {
-                "name": "blue-rim-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileouter_blue.p-1721952941544.webp"
+                "url": "https://i.postimg.cc/Kz2cJLw8/inner-purple.png",
+                "name": "inner-purple-gradient-background"
             },
             {
-                "name": "gold-rim-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileouter_gold.p-1721952941638.webp"
+                "url": "https://i.postimg.cc/W3wNKzc6/inner-red.png",
+                "name": "inner-red-gradient-background"
             },
             {
-                "name": "silver-rim-circle-background",
-                "url": "https://images.josephhansen.dev/uploads/fileouter_silver-1721952941663.webp"
+                "url": "https://i.postimg.cc/BbZSG3qW/lance.png",
+                "name": "gold-outline-lance"
+            },
+            {
+                "url": "https://i.postimg.cc/G257bJRc/outer-blue.png",
+                "name": "outer-blue-gradient-background-rim"
+            },
+            {
+                "url": "https://i.postimg.cc/tJnrJZRF/outer-gold.png",
+                "name": "outer-gold-gradient-background-rim"
+            },
+            {
+                "url": "https://i.postimg.cc/Y99DcDJn/outer-silver.png",
+                "name": "outer-silver-gradient-background-rim"
+            },
+            {
+                "name": "horse-head-gray-silver-flat-riding",
+                "url": "https://i.postimg.cc/fTvbg871/icon-horse-head-white.png"
+            },
+            {
+                "name": "horse-head-gray-silver-gradient-riding",
+                "url": "https://i.postimg.cc/28Y6wsW-4/icon-horse-head-silver-gradient.png"
+            },
+            {
+                "name": "horse-head-gold-yellow-gradient-riding",
+                "url": "https://i.postimg.cc/L4L5j9J9/icon-horse-head-gold-gradient.png"
+            },
+            {
+                "name": "horse-head-blue-flat-riding",
+                "url": "https://i.postimg.cc/90df2p6R/icon-horse-head-blue.png"
+            },
+            {
+                "url": "https://i.postimg.cc/DwjMvb3B/icon-five-point-star-gold-yellow-gradient.png",
+                "name": "five-point-star-gold-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/q7WDnVRK/icon-five-point-star-silver-gray-gradient.png",
+                "name": "five-point-star-silver-gray-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Ss8TfT2v/icon-five-point-star-white-flat.png",
+                "name": "five-point-star-white-flat"
+            },
+            {
+                "url": "https://i.postimg.cc/6Q81y59w/icon-four-point-star-gold-yellow-gradient.png",
+                "name": "four-point-star-gold-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Fz4PWy0s/icon-four-point-star-silver-gray-gradient.png",
+                "name": "four-point-star-silver-gray-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/Znxw1WLP/icon-four-point-star-white-flat.png",
+                "name": "four-point-star-white-flat"
+            },
+            {
+                "url": "https://i.postimg.cc/RC2fBSYK/icon-person-arms-raised-gold-orange-red-yellow-gradient.png",
+                "name": "person-arms-raised-gold-orange-red-yellow-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/WtRsffXq/icon-person-arms-raised-green-flat-solid.png",
+                "name": "person-arms-raised-green-flat-solid"
+            },
+            {
+                "url": "https://i.postimg.cc/KvLTvXXV/icon-person-arms-raised-outline-blue.png",
+                "name": "person-arms-raised-outline-blue"
+            },
+            {
+                "url": "https://i.postimg.cc/mZPMJzmT/icon-person-arms-raised-white-flat-solid.png",
+                "name": "person-arms-raised-white-flat-solid"
+            },
+            {
+                "url": "https://i.postimg.cc/P5jwC6Tq/icon-person-arms-raised-yellow-gold-outline.png",
+                "name": "person-arms-raised-yellow-gold-outline"
+            },
+            {
+                "url": "https://i.postimg.cc/bw5dQ3jb/Artboard-1-1.png",
+                "name": "icon-starburst-seven-point-impact-white-gray-silver-transparent-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/nLQrTBHW/Artboard-1-2.png",
+                "name": "icon-starburst-seven-point-impact-fire-yellow-red-orange-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/fWPFQdZC/icon-cross-x-plus-flat-white.png",
+                "name": "cross-x-plus-flat-white"
+            },
+            {
+                "url": "https://i.postimg.cc/Nfrns0jc/icon-cross-x-plus-gradient-purple-dark-purple.png",
+                "name": "cross-x-plus-gradient-purple-dark-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/Gmw5H14s/icon-cross-x-plus-gradient-yellow-orange.png",
+                "name": "cross-x-plus-gradient-yellow-orange"
+            },
+            {
+                "url": "https://i.postimg.cc/VNzZWBBf/icon-horse-head-riding-gradient-purple.png",
+                "name": "horse-head-riding-gradient-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/GmFSDSDg/icon-starburst-seven-point-impact-gradient-purple.png",
+                "name": "starburst-seven-point-impact-gradient-purple"
+            },
+            {
+                "url": "https://i.postimg.cc/1zMCCnJp/icon-x-plus-cross-gray-silver-gradient.png",
+                "name": "x-plus-cross-gray-silver-gradient"
             }
         ]
     }
