@@ -2,8 +2,7 @@
     "name": "Default Icon Components",
     "creator": "Joseph Hansen",
     "images": {
-        "iconComponent": [
-            {
+        "iconComponent": [{
                 "url": "https://i.postimg.cc/G2FtCzGD/inner-blue.png",
                 "name": "inner-blue-gradient-background"
             },
@@ -154,6 +153,26 @@
             {
                 "url": "https://i.postimg.cc/1zMCCnJp/icon-x-plus-cross-gray-silver-gradient.png",
                 "name": "x-plus-cross-gray-silver-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/s2vvDP0c/icon-arrow-pointer-indent-triangledark-purple-gradient.png",
+                "name": "icon-arrow-pointer-indent-triangle-dark-purple-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/bvWdGG7j/icon-arrow-pointer-indent-trianglegreen-teal-gradient.png",
+                "name": "icon-arrow-pointer-indent-triangle-green-teal-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/gJhj3zpL/icon-arrow-pointer-indent-trianglewhite-silver-gradient.png",
+                "name": "icon-arrow-pointer-indent-triangle-white-silver-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/yxzdPM6Q/icon-arrow-pointer-indent-triangleyellow-orange-gold-gradient.png",
+                "name": "icon-arrow-pointer-indent-triangle-yellow-orange-gold-gradient"
+            },
+            {
+                "url": "https://i.postimg.cc/pL1L7hXn/icon-arrow-pointer-indent-trianglered-gradient.png",
+                "name": "icon-arrow-pointer-indent-triangle-red-gradient"
             }
         ]
     }
