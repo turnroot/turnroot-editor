@@ -12,7 +12,7 @@ let toolbar = new w2toolbar({
         { type: 'break'},
         {type: 'label', id: 'status-bar-autosave-status', class: 'status-bar', icon: autosavedIcon,},
         {type: 'spacer'},
-        {type: 'label', id: 'status-bar-turnroot-version', class: 'status-bar', text: `Turnroot Editor v0.0.9 Weekly`},
+        {type: 'label', id: 'status-bar-turnroot-version', class: 'status-bar', text: `Turnroot Editor v0.0.10 Weekly`},
         {type: 'spacer'},
         {type: 'label', id: 'status-bar-report-issue', class: 'status-bar report-issue', text: 'Report an issue', style:'margin:0!important;padding:0!important;'},
     ]
