@@ -52,7 +52,7 @@ let config = {
             type: 'number',
             field: 'sellPrice',
             html: {
-                label: 'Sell price (un-used)'
+                label: 'Sell price'
             }
         },
         {
@@ -64,8 +64,9 @@ let config = {
         },
         {
             type: 'html',
+            field: 'sellPriceUseExplanation',
             html: {
-                html: '<small>When a player sells this item, it will sell for: <code> un-used sell price - (sell price deducted per use X uses)</code>, or, if that value is less than 1, it will sell for 1.</small>'
+                html: '<small>When a player sells this item, it will sell for: <code>sell price - (sell price deducted per use X uses)</code>, or, if that value is less than 1, it will sell for 1.</small>'
             }
         },
         {
@@ -92,6 +93,10 @@ form.on('change', (event) => {
 
 form.on('render:after', (event) => {
     if (window.currentObject.subtype !== 'Gift' && window.currentObject.subtype !== 'Equipable'){
+        form.show('sellPriceDemo')
+        form.show('sellPriceDeductedPerUse')
+        form.show('sellPriceUseExplanation')
+
         if (!window.currentObject.maxUses) {window.currentObject.maxUses = 25}
         let sellPriceDemo = document.getElementById('sellPriceDemo')
         console.log(sellPriceDemo)
@@ -105,6 +110,10 @@ form.on('render:after', (event) => {
             let sellPrice = (window.currentObject.sellPrice - (window.currentObject.sellPriceDeductedPerUse * (window.currentObject.maxUses - sellPriceDemoSlider.value))) < 1 ? 1 : (window.currentObject.sellPrice - (window.currentObject.sellPriceDeductedPerUse * (window.currentObject.maxUses - sellPriceDemoSlider.value)))
             sellPriceDemo.querySelector('p:last-of-type').innerText = 'Sell price: ' + sellPrice
         }
+    } else {
+        form.hide('sellPriceDemo')
+        form.hide('sellPriceDeductedPerUse')
+        form.hide('sellPriceUseExplanation')
     }
 })
 

@@ -165,6 +165,7 @@ sidebar.on('render:after', function(event) {
             sidebar.click('sidebar-editors-game-editor')
         }
     }
+    sidebar.refresh()
 })
 
 sidebar.on('click', function(event) {
