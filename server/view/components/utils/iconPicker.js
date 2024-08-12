@@ -96,8 +96,8 @@ class IconPicker {
 
         for (let icon of this.icons) {
             let image = document.createElement('img')
-            image.src = icon.src ? icon.src : icon.url
-            image.alt = icon.name
+            image.src = icon.src ? icon.src : (icon.url ? icon.url : icon.compositeImage)
+            image.alt = icon.name ? icon.name : icon._id.slice(0,8)
             image.style.width = '100px'
             image.style.height = '100px'
             this.images.push(image)

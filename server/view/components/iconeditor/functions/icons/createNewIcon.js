@@ -1,6 +1,5 @@
 
 const createNewObject = async (
-    name
 ) => {
     console.log('creating new icon')
     let url = 'http://localhost:26068/data'
@@ -9,7 +8,6 @@ const createNewObject = async (
         'Content-Type': 'application/json'
     }
     let body = {}
-    body.name = name
     body.queue = [
         {
             model: 'Icon',

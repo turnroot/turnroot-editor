@@ -168,6 +168,38 @@ sidebar.on('render:after', function(event) {
 })
 
 sidebar.on('click', function(event) {
+    if (window.newUserOnboardingGameDetails === false){
+        sidebar.enable('sidebar-editors-unit-editor')
+        sidebar.enable('sidebar-editors-class-editor')
+        sidebar.enable('sidebar-editors-object-editor')
+        sidebar.enable('sidebar-editors-level-editor')
+        sidebar.enable('sidebar-editors-map-editor')
+        sidebar.enable('sidebar-editors-skill-editor')
+        sidebar.enable('sidebar-editors-cutscenes-editor')
+        sidebar.enable('sidebar-editors-gameflow-editor')
+        sidebar.enable('sidebar-editors-dialogue-editor')
+        sidebar.enable('sidebar-editors-shop-editor')
+        sidebar.enable('sidebar-editors-menus-editor')
+        sidebar.enable('sidebar-editors-activities-editor')
+        sidebar.enable('sidebar-editors-sound-effects-editor')
+        sidebar.enable('sidebar-editors-music-editor')
+        sidebar.enable('sidebar-editors-portraits-editor')
+        sidebar.enable('sidebar-editors-icons-editor')
+        sidebar.enable('sidebar-editors-visual-effects-editor')
+        sidebar.enable('sidebar-editors-filters-editor')
+        sidebar.enable('sidebar-editors-animations-editor')
+        sidebar.enable('sidebar-editors-sprites-editor')
+        sidebar.enable('sidebar-editors-tiles-editor')
+        sidebar.enable('sidebar-editors-models-editor')
+        sidebar.enable('sidebar-editors-battalion-editor')
+        sidebar.enable('sidebar-editors-combatarts-editor')
+    }
+    if (!combatCombatArts){
+        sidebar.disable('sidebar-editors-combatarts-editor')
+    }
+    if (!combatBattalions){
+        sidebar.disable('sidebar-editors-battalion-editor')
+    }
     if (event.object.disabled) return
     let layout = w2ui.EditorWindowLayout
     if (event.target === 'sidebar-editors-unit-editor') {
