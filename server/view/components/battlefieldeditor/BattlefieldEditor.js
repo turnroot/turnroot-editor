@@ -1,7 +1,9 @@
 import { w2layout } from '../../lib/w2ui.es6.min.js'
 import Layers from './canvas/layers.js'
 import tileInfoDiv from './hovering/tileInfo.js'
-let defaultLayers = new Layers(60, 60)
+
+let defaultLayers = new Layers(40, 30, 32)
+defaultLayers.addLayer('default')
 defaultLayers.setTileInfoDiv(tileInfoDiv)
 
 let layout = new w2layout({

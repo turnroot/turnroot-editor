@@ -1,7 +1,7 @@
 import Tile from './tile.js'
 
 class Layer {
-    constructor(name, x, y) {
+    constructor(name, x, y, resolution) {
         this.name = name
         this.x = x
         this.y = y
@@ -12,6 +12,7 @@ class Layer {
         this.currentTile = null
         this.locked = false
         this.container = null
+        this.resolution = resolution
 
         this.container = document.createElement('div')
 
@@ -19,9 +20,10 @@ class Layer {
         for (let x = 0; x < this.x; x++) {
             this.tiles[x] = []
             for (let y = 0; y < this.y; y++) {
-                this.tiles[x][y] = new Tile(x, y, 32, 32)
-                this.tiles[x][y].initializeTile(x, y, 32, 32)
+                this.tiles[x][y] = new Tile(x, y, this.resolution, this.resolution)
+                this.tiles[x][y].initializeTile(x, y, this.resolution, this.resolution)
                 this.tiles[x][y].tileInfoDiv = this.tileInfoDiv
+                this.tiles[x][y].layer = this.name
                 this.container.appendChild(this.tiles[x][y].div)
                 document.addEventListener('mouseover', (event) => {
                     if (!this.locked){

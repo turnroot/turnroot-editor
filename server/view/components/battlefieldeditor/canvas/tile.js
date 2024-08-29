@@ -9,6 +9,7 @@ class Tile {
         this.active = false
         this.opacity = 1
         this.div = null
+        this.layer = null
     }
 
     initializeTile(x,y,width,height){

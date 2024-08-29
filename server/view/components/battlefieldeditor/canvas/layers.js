@@ -1,12 +1,12 @@
 import Layer from './layer.js'
 
 class Layers {
-    constructor(x, y) {
+    constructor(x, y, resolution) {
         this.layers = []
         this.x = x
         this.y = y
         this.container = document.createElement('div')
-        this.addLayer('default', x, y)
+        this.resolution = resolution
     }
 
     setTileInfoDiv(tileInfoDiv) {
@@ -23,8 +23,8 @@ class Layers {
 
     }
 
-    addLayer(name, x, y) {
-        let layer = new Layer(name, x, y)
+    addLayer(name) {
+        let layer = new Layer(name, this.x, this.y, this.resolution)
         this.layers.push(layer)
         this.container.appendChild(layer.container)
         return layer
