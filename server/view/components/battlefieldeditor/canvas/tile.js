@@ -21,7 +21,7 @@ class Tile {
         div.style.height = `${height}px`
         if (x % 2 === 0){
             if (y % 2 === 0){
-                div.style.backgroundColor = 'var(--window-background-alt)'
+                div.style.backgroundColor = '#222'
             } else {
                 div.style.backgroundColor = 'black'
             }
@@ -29,7 +29,7 @@ class Tile {
             if (y % 2 === 0){
                 div.style.backgroundColor = 'black'
             } else {
-                div.style.backgroundColor = 'var(--window-background-alt)'
+                div.style.backgroundColor = '#222'
             }
         }
         this.div = div
@@ -37,19 +37,21 @@ class Tile {
 
     hover(){
         this.div.style.border = '2px solid var(--accent)'
-        this.tileInfoDiv.innerText = `${this.x}, ${this.y}`
+        this.tileInfoDiv.innerHTML = `<div style = "display:flex;align-items:center">${this.tileInfoDiv.permanentContent} <p>${this.x}, ${this.y}</p></div>`
     }
 
     click(tileInfo, brush){
         this.active = true
-
-        if (brush !== 'erase'){
+        
+        if (brush === 'brush'){
+            this.div.style.border = '2px solid var(--accent)'
             this.tileGlyph = tileInfo.glyph
             this.filled = true
-        } else {
+        }
+        else if (brush === 'erase'){
             this.tileGlyph = null
             this.filled = false
-        }
+        }  else {}
     }
 
     unhover(){

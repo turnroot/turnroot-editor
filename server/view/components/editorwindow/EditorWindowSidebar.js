@@ -150,10 +150,14 @@ sidebar.on('render:after', function(event) {
         sidebar.enable('sidebar-editors-combatarts-editor')
     }
     if (!combatCombatArts){
-        sidebar.disable('sidebar-editors-combatarts-editor')
+        sidebar.hide('sidebar-editors-combatarts-editor')
+    } else {
+        sidebar.show('sidebar-editors-combatarts-editor')
     }
     if (!combatBattalions){
-        sidebar.disable('sidebar-editors-battalion-editor')
+        sidebar.hide('sidebar-editors-battalion-editor')
+    } else {
+        sidebar.show('sidebar-editors-battalion-editor')
     }
     if (sessionStorage.getItem('startupView')){
         let startupView = sessionStorage.getItem('startupView')

@@ -1,18 +1,26 @@
 import { w2layout } from '../../lib/w2ui.es6.min.js'
 import Layers from './canvas/layers.js'
 import tileInfoDiv from './hovering/tileInfo.js'
+import layersDiv from './hovering/layers.js'
+import sidebar from './BattlefieldEditorToolbar.js'
 
-let defaultLayers = new Layers(40, 30, 32)
-defaultLayers.addLayer('default')
-defaultLayers.setTileInfoDiv(tileInfoDiv)
+let layers = new Layers(35, 40, 80)
+layers.setLayersDiv(layersDiv)
+layers.addLayer('terrain')
+layers.addLayer('details')
+layers.addLayer('special tiles')
+layers.addLayer('decorations')
+layers.setTileInfoDiv(tileInfoDiv)
 
 let layout = new w2layout({
     name: 'BattlefieldEditor',
     panels: [
-        { type: 'left', size: 30, resizable: true, content: 'top', html: '<div style="padding: 10px;">Left</div>'},
-        { type: 'top', size: 30, resizable: false, content: 'top', html: '<div style="padding: 10px;">Top</div>'},
-        { type: 'main', content: 'main', html: defaultLayers.container},
+        { type: 'left', size: 32, content: 'left', html: sidebar},
+        { type: 'top', size: 32, content: 'top'},
+        { type: 'main', content: 'main', html: layers.container},
     ]
 })
+
+window.BattlefieldEditorLayers = layers 
 
 export default layout

@@ -26,24 +26,31 @@ class Layer {
                 this.tiles[x][y].layer = this.name
                 this.container.appendChild(this.tiles[x][y].div)
                 document.addEventListener('mouseover', (event) => {
+
+                    if (event.target === this.tiles[x][y].div){
+                        this.tiles[x][y].hover()
+                    }
+
+                })
+                document.addEventListener('mouseout', (event) => {
+
+                    if (event.target === this.tiles[x][y].div){
+                        this.tiles[x][y].unhover()
+                    }
+
+                })
+                document.addEventListener('mousedown', (event) => {
                     if (!this.locked){
                         if (event.target === this.tiles[x][y].div){
                             this.tiles[x][y].hover()
-                        }
-                    }
-                })
-                document.addEventListener('mouseout', (event) => {
-                    if (!this.locked){
-                        if (event.target === this.tiles[x][y].div){
-                            this.tiles[x][y].unhover()
-                        }
-                    }
-                })
-                document.addEventListener('click', (event) => {
-                    if (!this.locked){
-                        if (event.target === this.tiles[x][y].div){
                             console.log(this.tiles[x][y])
                         }
+                    }
+                })
+                document.addEventListener('mouseup', (event) => {
+
+                    if (event.target === this.tiles[x][y].div){
+                        this.tiles[x][y].unhover()
                     }
                 })
             }
