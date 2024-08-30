@@ -33,6 +33,7 @@ class Layers {
     addLayer(name) {
         let layer = new Layer(name, this.x, this.y, this.resolution)
         this.layers.push(layer)
+        layer.setLayers(this.layers)
         if (this.layers.length === 1){
             layer.active = true
             console.log(layer)

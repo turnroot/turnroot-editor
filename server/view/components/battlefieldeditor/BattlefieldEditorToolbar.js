@@ -8,8 +8,6 @@ let sidebar = new w2sidebar({
         text(node) {
             if (node.id === 'battlefield-editor-sidebar-brush') {
                 return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-brush"><path d="m9.06 11.9 8.07-8.06a2.85 2.85 0 1 1 4.03 4.03l-8.06 8.08"/><path d="M7.07 14.94c-1.66 0-3 1.35-3 3.02 0 1.33-2.5 1.52-2 2.02 1.08 1.1 2.49 2.02 4 2.02 2.2 0 4-1.8 4-4.04a3.01 3.01 0 0 0-3-3.02z"/></svg>`
-            } else if (node.id === 'battlefield-editor-sidebar-eraser') {
-                return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-eraser"><path d="m7 21-4.3-4.3c-1-1-1-2.5 0-3.4l9.6-9.6c1-1 2.5-1 3.4 0l5.6 5.6c1 1 1 2.5 0 3.4L13 21"/><path d="M22 21H7"/><path d="m5 11 9 9"/></svg>`
             } else if (node.id === 'battlefield-editor-sidebar-select') {
                 return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box-select"><path d="M5 3a2 2 0 0 0-2 2"/><path d="M19 3a2 2 0 0 1 2 2"/><path d="M21 19a2 2 0 0 1-2 2"/><path d="M5 21a2 2 0 0 1-2-2"/><path d="M9 3h1"/><path d="M9 21h1"/><path d="M14 3h1"/><path d="M14 21h1"/><path d="M3 9v1"/><path d="M21 9v1"/><path d="M3 14v1"/><path d="M21 14v1"/></svg>`
             } else if (node.id === 'battlefield-editor-sidebar-fill') {
@@ -26,15 +24,7 @@ let sidebar = new w2sidebar({
     nodes: [{
                 id: 'battlefield-editor-sidebar-brush',
                 style: 'height:2rem;',
-            },
-            {
-                id: 'battlefield-editor-sidebar-eraser',
-                style: 'height:2rem;',
-            },
-            {
-                id: "battlefield-editor-sidebar-spacer-1",
-                disabled:true,
-                style: 'margin:0;margin-top:1rem;margin-bottom:.25rem;height:1px;pointer-events:none!important;border-top:solid 1px var(--list-background);width:100%;',
+                selected: true,
             },
             {
                 id: 'battlefield-editor-sidebar-select',

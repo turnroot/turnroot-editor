@@ -2,14 +2,14 @@ import { w2sidebar, w2ui } from '../../lib/w2ui.es6.min.js'
 import UnitEditor from '../uniteditor/UnitEditor.js'
 import ClassEditor from '../classeditor/ClassEditor.js'
 import GameEditor from '../gameeditor/GameEditor.js'
-import ObjectEditor from '../objecteditor/ObjectEditor.js'
+// import ObjectEditor from '../objecteditor/ObjectEditor.js'
 import IconEditor from '../iconeditor/IconEditor.js'
 import BattlefieldEditor from '../battlefieldeditor/BattlefieldEditor.js'
 
 window.UnitEditor = UnitEditor
 window.ClassEditor = ClassEditor
 window.GameEditor = GameEditor
-window.ObjectEditor = ObjectEditor
+// window.ObjectEditor = ObjectEditor
 window.IconEditor = IconEditor
 window.BattlefieldEditor = BattlefieldEditor
 
@@ -221,10 +221,6 @@ sidebar.on('click', function(event) {
         w2ui['unit-editor-bottom-toolbar'].click('game-editor-bottom-toolbar-game-settings')
         layout.html('main', GameEditor).removed()
         window.activeEditor = 'game-editor'
-    } else if (event.target === 'sidebar-editors-object-editor') {
-        w2ui['unit-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
-        layout.html('main', ObjectEditor).removed()
-        window.activeEditor = 'object-editor'
     } else if (event.target === 'sidebar-editors-icons-editor'){
         layout.html('main', IconEditor).removed()
         window.activeEditor = 'icon-editor'

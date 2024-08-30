@@ -1,3 +1,6 @@
+import floodFill from './algorithims/floodFill.js'
+
+
 class Tile {
     constructor(x, y, width, height){
         this.x = x
@@ -47,11 +50,67 @@ class Tile {
             this.div.style.border = '2px solid var(--accent)'
             this.tileGlyph = tileInfo.glyph
             this.filled = true
-        }
-        else if (brush === 'erase'){
+
+        } else if (brush === 'erase'){
             this.tileGlyph = null
             this.filled = false
-        }  else {}
+            
+        } else if (brush === 'fill'){
+            let {pre, post} = floodFill(this.x, this.y, this.layer, tileInfo)
+            let div = document.createElement('div')
+            div.style.position = 'absolute'
+            div.style.left = '50%'
+            div.style.bottom = '2rem'
+            div.style.zIndex = 98
+            div.id = 'battlefieldEditor-applyFill'
+            div.style.backgroundColor = 'var(--node-title)'
+            div.style.paddingLeft = '.25rem'
+            div.style.paddingRight = '.25rem'
+            div.style.borderRadius = '5px'
+            div.style.color = 'var(--node-title-background)'
+            div.innerHTML = `<button class = "w2ui-btn" id = "battlefieldEditor-applyFill-buttonApply">Apply</button><button class = "w2ui-btn slider1" id = "battlefieldEditor-applyFill-buttonCancel">Cancel</button>`
+            this.layer.container.appendChild(div)
+
+            document.getElementById('battlefieldEditor-applyFill-buttonApply').addEventListener('click', () => {
+                this.layer.container.removeChild(div)
+                this.layer.tiles = post
+                this.layer.tiles.forEach(row => {
+                    row.forEach(tile => {
+                        if (tile.filled){
+                            tile.fill(tileInfo)
+                        } else {
+                            tile.clear()
+                        }
+                    })
+                })
+            })
+
+            document.getElementById('battlefieldEditor-applyFill-buttonCancel').addEventListener('click', () => {
+                this.layer.container.removeChild(div)
+                this.layer.tiles = pre
+                this.layer.tiles.forEach(row => {
+                    row.forEach(tile => {
+                        if (tile.filled){
+                            tile.fill(tileInfo)
+                        } else {
+                            tile.clear()
+                        }
+                    })
+                })
+            })
+        }
+
+        else {}
+    }
+
+    fill(tileInfo){
+        this.tileGlyph = tileInfo.glyph
+        this.filled = true
+    }
+
+    clear(){
+        this.tileGlyph = null
+        this.filled = false
     }
 
     unhover(){

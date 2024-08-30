@@ -13,9 +13,9 @@ class Layer {
         this.locked = false
         this.container = null
         this.resolution = resolution
+        this.layers = [] 
 
         this.container = document.createElement('div')
-
 
         for (let x = 0; x < this.x; x++) {
             this.tiles[x] = []
@@ -25,36 +25,61 @@ class Layer {
                 this.tiles[x][y].tileInfoDiv = this.tileInfoDiv
                 this.tiles[x][y].layer = this.name
                 this.container.appendChild(this.tiles[x][y].div)
-                document.addEventListener('mouseover', (event) => {
 
+                document.addEventListener('mouseover', (event) => {
+                    if (window.activeEditor !== 'battlefield-editor') return
                     if (event.target === this.tiles[x][y].div){
                         this.tiles[x][y].hover()
                     }
 
                 })
                 document.addEventListener('mouseout', (event) => {
-
+                    if (window.activeEditor !== 'battlefield-editor') return
                     if (event.target === this.tiles[x][y].div){
                         this.tiles[x][y].unhover()
                     }
 
                 })
+
+                document.addEventListener('contextmenu', (event) => {
+                    if (window.activeEditor !== 'battlefield-editor') return
+                    if (event.target === this.tiles[x][y].div){
+                    event.preventDefault()}
+                })
+
                 document.addEventListener('mousedown', (event) => {
+                    if (window.activeEditor !== 'battlefield-editor') return
+                    event.preventDefault()
+
                     if (!this.locked){
                         if (event.target === this.tiles[x][y].div){
-                            this.tiles[x][y].hover()
-                            console.log(this.tiles[x][y])
+                            let activeLayer = this.layers.find(layer => layer.active)
+                            let correctTile = activeLayer.tiles[x][y]
+                            correctTile.hover()
+                            if (event.button === 0){
+                                console.log(correctTile, window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
+                                correctTile.click(window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
+                            } else if (event.button === 2){
+                                console.log(correctTile, window.BattlefieldEditorTileInfo, 'erase')
+                                correctTile.click(window.BattlefieldEditorTileInfo, 'erase')
+                            }
                         }
                     }
                 })
-                document.addEventListener('mouseup', (event) => {
 
+                document.addEventListener('mouseup', (event) => {
                     if (event.target === this.tiles[x][y].div){
-                        this.tiles[x][y].unhover()
+                        let activeLayer = this.layers.find(layer => layer.active)
+                        let correctTile = activeLayer.tiles[x][y]
+                        correctTile.unhover()
                     }
                 })
             }
         }
+    }
+
+    setLayers(layers) {
+        this.layers = layers
     }
 
     lock() {
