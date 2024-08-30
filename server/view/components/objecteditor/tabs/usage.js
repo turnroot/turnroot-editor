@@ -7,6 +7,7 @@ import handleTab from '../functions/handleTab.js'
 let config = {
     name: 'object-editor-usage-fields',
     record: {
+        'consumableEffectStatAmount': 0,
     },
     fields: [
         {
@@ -122,6 +123,7 @@ let config = {
             field: 'scopeDescription',
             html: {
                 html: '<small>Some items can be used in or out of combat, some can be used in one or the other. If you\'re unsure, leave it at \'both\'.</small>',
+                class: 'no-label',
                 column: 0,
             }
         },
@@ -213,7 +215,103 @@ let config = {
                 class: 'no-label',
                 column: 1,
             }
+        },
+        {
+            type: 'html',
+            field: 'consumableEffectsHeading',
+            hidden: true,
+            html: {
+                html: `<h3>Consumable Effect</h3>
+                <p>
+                This item will affect %attach4% by %attach5% %attach6% 
+                </p>`,
+                class: 'no-label',
+                column: 1,
+            }
+        },
+        {
+            field: 'consumableEffectAffectScope',
+            type: 'select',
+            hidden: true,
+            options: {items: ['an object', 'the unit', 'the battlefield', 'all units', 'the world map']},
+            html: {
+                label: '',
+                anchor: '%attach4%',
+                class: 'no-label',
+            }
+        },
+        {
+            field: 'consumableEffectAffectWhat',
+            type: 'select',
+            hidden: true,
+            options: {items: []},
+            html: {
+                label: '',
+                anchor: '%attach5%',
+                class: 'no-label',
+            }
+        },
+        {
+            field: 'consumableEffectDuration',
+            type: 'select',
+            hidden: true,
+            options: {
+                items: [
+                    'permanently',
+                    'once on use',
+                    'for the rest of the turn',
+                    'for the rest of the battle',
+                    'for two turns',
+                    'for three turns',
+                    'for four turns',
+                    'for five turns',
+                    'for six turns',
+                    'for seven turns',
+                    'for eight turns',
+                    'for nine turns',
+                    'for ten turns',
+                ]
+            },
+            html: {
+                label: '',
+                anchor: '%attach6%',
+                class: 'no-label',
+            }
+        },
+        {
+            field: 'consumableEffectDetails',
+            type: 'html',
+            html: {
+                html: `<h3>Effect Details</h3>`,
+                class: 'no-label',
+                column: 1,
+                label: '',
+            }
+        },
+        {
+            field: "consumableEffectStatWhich",
+            type: 'enum',
+            hidden: true,
+            html: {
+                label: 'Which stats?',
+                column: 1,
+            },
+            options: {
+                items: []
+            }
+        },
+        {
+            field: 'consumableEffectStatAmount',
+            type: 'number',
+            hidden: true,
+            html: {
+                label: 'How much?',
+                column: 1,
+                attr: 'min="0"',
+            },
         }
+
+
     ]
 }
 
@@ -221,6 +319,17 @@ let form = new w2form(config)
 
 form.on('change', (event) => {
     handleTab(form, event)
+})
+
+form.on('render:after', (event) => {
+    if (window.currentObject.subtype !== "Consumable"){
+        form.hide('consumableEffectStatWhich')
+        form.hide('consumableEffectStatAmount')
+        form.hide('consumableEffectDuration')
+        form.hide('consumableEffectAffectWhat')
+        form.hide('consumableEffectDetails')
+        form.hide('consumableEffectsHeading')
+    }
 })
 
 form.updateGlobals = () => {

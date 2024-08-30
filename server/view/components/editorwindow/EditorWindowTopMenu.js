@@ -86,6 +86,11 @@ let toolbar = new w2toolbar({
                 text: 'Class Editor',
                 checked: startupView === 'default-editor-class-editor',
                 id: 'default-editor-class-editor',
+            },
+            {
+                text: 'Object Editor',
+                id: 'default-editor-object-editor',
+                checked: startupView === 'default-editor-object-editor'
             }
         ]
     },

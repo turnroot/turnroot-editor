@@ -1,7 +1,7 @@
 import updateUiTheme from './updateTheme.js'
 import { w2ui } from '../../lib/w2ui.es6.min.js'
 
-let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor"]
+let startupViews = ["settings:default-editor-welcome-message", "settings:default-editor-unit-editor", "settings:default-editor-object-editor", "settings:default-editor-class-editor",]
 
 const handleEvent = (event, toolbar) => {
 

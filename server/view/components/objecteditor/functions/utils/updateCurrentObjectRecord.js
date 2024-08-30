@@ -133,6 +133,14 @@ const updateCurrentObjectRecord = async (n) => {
         window.objectEditorUsageFields.hide('hasUses')
         window.objectEditorUsageFields.record['hasUses'] = true
         window.objectEditorUsageFields.show('maxUses')
+        window.objectEditorUsageFields.show('consumableEffectsHeading')
+        window.objectEditorUsageFields.show('consumableEffectAffectWhat')
+        window.objectEditorUsageFields.show('consumableEffectAffectScope')
+    } else {
+        window.objectEditorUsageFields.hide('consumableEffectsHeading')
+        window.objectEditorUsageFields.hide('consumableEffectAffectWhat')
+        window.objectEditorUsageFields.hide('consumableEffectAffectScope')
+        window.objectEditorUsageFields.hide('consumableEffectDuration')
     }
 
     if (window.currentObject.rangeAdjustedByStat) {

@@ -2,14 +2,16 @@ import { w2sidebar, w2ui } from '../../lib/w2ui.es6.min.js'
 import UnitEditor from '../uniteditor/UnitEditor.js'
 import ClassEditor from '../classeditor/ClassEditor.js'
 import GameEditor from '../gameeditor/GameEditor.js'
-import ObjectEditor from '../objecteditor/ObjectEditor.js'
+// import ObjectEditor from '../objecteditor/ObjectEditor.js'
 import IconEditor from '../iconeditor/IconEditor.js'
+import BattlefieldEditor from '../battlefieldeditor/BattlefieldEditor.js'
 
 window.UnitEditor = UnitEditor
 window.ClassEditor = ClassEditor
 window.GameEditor = GameEditor
-window.ObjectEditor = ObjectEditor
+// window.ObjectEditor = ObjectEditor
 window.IconEditor = IconEditor
+window.BattlefieldEditor = BattlefieldEditor
 
 let sidebar = new w2sidebar({
     name: 'EditorWindowSidebar',
@@ -66,7 +68,7 @@ let sidebar = new w2sidebar({
                 return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-box"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z"/><path d="m3.3 7 8.7 5 8.7-5"/><path d="M12 22V12"/></svg>`
             } else if (node.id === 'sidebar-editors-filters-editor'){
                 return `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-sparkles"><path d="M9.937 15.5A2 2 0 0 0 8.5 14.063l-6.135-1.582a.5.5 0 0 1 0-.962L8.5 9.936A2 2 0 0 0 9.937 8.5l1.582-6.135a.5.5 0 0 1 .963 0L14.063 8.5A2 2 0 0 0 15.5 9.937l6.135 1.581a.5.5 0 0 1 0 .964L15.5 14.063a2 2 0 0 0-1.437 1.437l-1.582 6.135a.5.5 0 0 1-.963 0z"/><path d="M20 3v4"/><path d="M22 5h-4"/><path d="M4 17v2"/><path d="M5 18H3"/></svg>`
-            }
+            } 
         }
     },
     nodes: [
@@ -148,10 +150,14 @@ sidebar.on('render:after', function(event) {
         sidebar.enable('sidebar-editors-combatarts-editor')
     }
     if (!combatCombatArts){
-        sidebar.disable('sidebar-editors-combatarts-editor')
+        sidebar.hide('sidebar-editors-combatarts-editor')
+    } else {
+        sidebar.show('sidebar-editors-combatarts-editor')
     }
     if (!combatBattalions){
-        sidebar.disable('sidebar-editors-battalion-editor')
+        sidebar.hide('sidebar-editors-battalion-editor')
+    } else {
+        sidebar.show('sidebar-editors-battalion-editor')
     }
     if (sessionStorage.getItem('startupView')){
         let startupView = sessionStorage.getItem('startupView')
@@ -165,6 +171,7 @@ sidebar.on('render:after', function(event) {
             sidebar.click('sidebar-editors-game-editor')
         }
     }
+    sidebar.refresh()
 })
 
 sidebar.on('click', function(event) {
@@ -214,13 +221,12 @@ sidebar.on('click', function(event) {
         w2ui['unit-editor-bottom-toolbar'].click('game-editor-bottom-toolbar-game-settings')
         layout.html('main', GameEditor).removed()
         window.activeEditor = 'game-editor'
-    } else if (event.target === 'sidebar-editors-object-editor') {
-        w2ui['unit-editor-bottom-toolbar'].click('object-editor-bottom-toolbar-basic')
-        layout.html('main', ObjectEditor).removed()
-        window.activeEditor = 'object-editor'
     } else if (event.target === 'sidebar-editors-icons-editor'){
         layout.html('main', IconEditor).removed()
         window.activeEditor = 'icon-editor'
+    } else if (event.target === 'sidebar-editors-level-editor'){
+        layout.html('main', BattlefieldEditor).removed()
+        window.activeEditor = 'battlefield-editor'
     }
 })
 

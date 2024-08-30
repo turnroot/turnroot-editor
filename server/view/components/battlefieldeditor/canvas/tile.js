@@ -1,0 +1,125 @@
+import floodFill from './algorithims/floodFill.js'
+
+
+class Tile {
+    constructor(x, y, width, height){
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+        this.filled = false
+        this.tileGlyph = null
+        this.active = false
+        this.opacity = 1
+        this.div = null
+        this.layer = null
+    }
+
+    initializeTile(x,y,width,height){
+        let div = document.createElement('div')
+        div.style.position = 'absolute'
+        div.style.left = `${width * x}px`
+        div.style.top = `${height * y}px`
+        div.style.width = `${width}px`
+        div.style.height = `${height}px`
+        if (x % 2 === 0){
+            if (y % 2 === 0){
+                div.style.backgroundColor = '#222'
+            } else {
+                div.style.backgroundColor = 'black'
+            }
+        } else {
+            if (y % 2 === 0){
+                div.style.backgroundColor = 'black'
+            } else {
+                div.style.backgroundColor = '#222'
+            }
+        }
+        this.div = div
+    }
+
+    hover(){
+        this.div.style.border = '2px solid var(--accent)'
+        this.tileInfoDiv.innerHTML = `<div style = "display:flex;align-items:center">${this.tileInfoDiv.permanentContent} <p>${this.x}, ${this.y}</p></div>`
+    }
+
+    click(tileInfo, brush){
+        this.active = true
+        
+        if (brush === 'brush'){
+            this.div.style.border = '2px solid var(--accent)'
+            this.tileGlyph = tileInfo.glyph
+            this.filled = true
+
+        } else if (brush === 'erase'){
+            this.tileGlyph = null
+            this.filled = false
+            
+        } else if (brush === 'fill'){
+            let {pre, post} = floodFill(this.x, this.y, this.layer, tileInfo)
+            let div = document.createElement('div')
+            div.style.position = 'absolute'
+            div.style.left = '50%'
+            div.style.bottom = '2rem'
+            div.style.zIndex = 98
+            div.id = 'battlefieldEditor-applyFill'
+            div.style.backgroundColor = 'var(--node-title)'
+            div.style.paddingLeft = '.25rem'
+            div.style.paddingRight = '.25rem'
+            div.style.borderRadius = '5px'
+            div.style.color = 'var(--node-title-background)'
+            div.innerHTML = `<button class = "w2ui-btn" id = "battlefieldEditor-applyFill-buttonApply">Apply</button><button class = "w2ui-btn slider1" id = "battlefieldEditor-applyFill-buttonCancel">Cancel</button>`
+            this.layer.container.appendChild(div)
+
+            document.getElementById('battlefieldEditor-applyFill-buttonApply').addEventListener('click', () => {
+                this.layer.container.removeChild(div)
+                this.layer.tiles = post
+                this.layer.tiles.forEach(row => {
+                    row.forEach(tile => {
+                        if (tile.filled){
+                            tile.fill(tileInfo)
+                        } else {
+                            tile.clear()
+                        }
+                    })
+                })
+            })
+
+            document.getElementById('battlefieldEditor-applyFill-buttonCancel').addEventListener('click', () => {
+                this.layer.container.removeChild(div)
+                this.layer.tiles = pre
+                this.layer.tiles.forEach(row => {
+                    row.forEach(tile => {
+                        if (tile.filled){
+                            tile.fill(tileInfo)
+                        } else {
+                            tile.clear()
+                        }
+                    })
+                })
+            })
+        }
+
+        else {}
+    }
+
+    fill(tileInfo){
+        this.tileGlyph = tileInfo.glyph
+        this.filled = true
+    }
+
+    clear(){
+        this.tileGlyph = null
+        this.filled = false
+    }
+
+    unhover(){
+        this.div.style.border = 'none'
+    }
+
+    div(){
+        return this.div
+    }
+}
+
+export default Tile
