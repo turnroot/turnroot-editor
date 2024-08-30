@@ -50,21 +50,20 @@ class Layer {
                 document.addEventListener('mousedown', (event) => {
                     if (window.activeEditor !== 'battlefield-editor') return
                     event.preventDefault()
-
-                    if (!this.locked){
-                        if (event.target === this.tiles[x][y].div){
-                            let activeLayer = this.layers.find(layer => layer.active)
-                            let correctTile = activeLayer.tiles[x][y]
-                            correctTile.hover()
-                            if (event.button === 0){
-                                console.log(correctTile, window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
-                                correctTile.click(window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
-                            } else if (event.button === 2){
-                                console.log(correctTile, window.BattlefieldEditorTileInfo, 'erase')
-                                correctTile.click(window.BattlefieldEditorTileInfo, 'erase')
-                            }
+                    if (event.target === this.tiles[x][y].div){
+                        let activeLayer = this.layers.find(layer => layer.active)
+                        let correctTile = activeLayer.tiles[x][y]
+                        if (activeLayer.locked) return
+                        correctTile.hover()
+                        if (event.button === 0){
+                            console.log(correctTile, window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
+                            correctTile.click(window.BattlefieldEditorTileInfo, window.BattlefieldEditorBrush)
+                        } else if (event.button === 2){
+                            console.log(correctTile, window.BattlefieldEditorTileInfo, 'erase')
+                            correctTile.click(window.BattlefieldEditorTileInfo, 'erase')
                         }
                     }
+                    
                 })
 
                 document.addEventListener('mouseup', (event) => {
@@ -84,6 +83,13 @@ class Layer {
 
     lock() {
         this.locked = true
+    }
+    show(){
+        this.container.style.display = 'block'
+    }
+
+    hide(){
+        this.container.style.display = 'none'
     }
 
     unlock() {
