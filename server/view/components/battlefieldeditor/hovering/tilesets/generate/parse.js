@@ -9,6 +9,7 @@ const importTilesets = () => {
                     .then(data => {
                         console.log(sheet.name)
                         window.BattlefieldEditorTilesets[sheet.name] = data
+                        window.BattlefieldEditorTilesetsResolution[sheet.name] = sheet.square_size
                         let i = -1
                         data.forEach(tile => {
                             i++

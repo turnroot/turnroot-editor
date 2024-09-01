@@ -28,5 +28,6 @@ let layout = new w2layout({
 
 window.BattlefieldEditorLayers = layers 
 window.BattlefieldEditorTilesetsUnparsed = tilesets.tilesets
+window.BattlefieldEditorTilesetsResolution = {}
 
 export default layout
