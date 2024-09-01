@@ -148,13 +148,13 @@ let toolbar = new w2toolbar({
     },
         {
             type: 'menu',
-            id: 'import-menu',
-            text: 'Import assets',
-            tooltip: 'Import graphics, models, music, sound effects, tilesets, or other assets',
+            id: 'assets-menu',
+            text: 'Manage assets',
+            tooltip: 'Manage graphics, models, music, sound effects, tilesets, and other assets',
             items: [
                 {
-                    text: 'Import from file',
-                    id: 'import-file'
+                    text: 'Tilesets',
+                    id: 'assets-tilesets'
                 },
             ]
         },
