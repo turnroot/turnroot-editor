@@ -11,6 +11,7 @@ const importTilesets = () => {
             tileset.sheets.forEach(sheet => {
                 if (window.BattlefieldEditorTilesetsSheets && window.BattlefieldEditorTilesetsSheets[sheet.name]) {
                     console.log('Sheet already loaded')
+                    return
                 }
                 fetch(sheet.path)
                     .then(response => response.json())
