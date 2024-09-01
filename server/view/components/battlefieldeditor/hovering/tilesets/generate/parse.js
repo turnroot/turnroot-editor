@@ -1,9 +1,17 @@
+import { w2alert } from '../../../../../lib/w2ui.es6.js'
+
 const importTilesets = () => {
-    if (!window.BattlefieldEditorTilesetsUnparsed) return
+    if (!window.BattlefieldEditorTilesetsUnparsed) {
+        w2alert('No tilesets were found. Since a default tileset is included, check your internet connection.', 'Fatal Connection Error')
+        console.error('window.BattlefieldEditorTilesetsUnparsed is not defined')
+        return
+    }
     try {
         window.BattlefieldEditorTilesetsUnparsed.forEach(tileset => {
             tileset.sheets.forEach(sheet => {
-                if (window.BattlefieldEditorTilesetsSheets && window.BattlefieldEditorTilesetsSheets[sheet.name]) return
+                if (window.BattlefieldEditorTilesetsSheets && window.BattlefieldEditorTilesetsSheets[sheet.name]) {
+                    console.log('Sheet already loaded')
+                }
                 fetch(sheet.path)
                     .then(response => response.json())
                     .then(data => {
