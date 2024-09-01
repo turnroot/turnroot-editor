@@ -1,4 +1,4 @@
-import { w2alert } from '../../../../../lib/w2ui.es6.js'
+import { w2alert } from '../../../../../../view/lib/w2ui.es6.min.js'
 
 const importTilesets = () => {
     if (!window.BattlefieldEditorTilesetsUnparsed) {
