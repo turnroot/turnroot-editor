@@ -6,6 +6,8 @@ import GameEditor from '../gameeditor/GameEditor.js'
 import IconEditor from '../iconeditor/IconEditor.js'
 import BattlefieldEditor from '../battlefieldeditor/BattlefieldEditor.js'
 
+import importTilesets from '../battlefieldeditor/hovering/tilesets/generate/parse.js'
+
 window.UnitEditor = UnitEditor
 window.ClassEditor = ClassEditor
 window.GameEditor = GameEditor
@@ -227,6 +229,7 @@ sidebar.on('click', function(event) {
     } else if (event.target === 'sidebar-editors-level-editor'){
         layout.html('main', BattlefieldEditor).removed()
         window.activeEditor = 'battlefield-editor'
+        window.BattlefieldEditorImportTilesets()
     }
 })
 

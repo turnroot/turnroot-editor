@@ -4,6 +4,9 @@ import tileInfoDiv from './hovering/tileInfo.js'
 import {div, minDiv} from './hovering/layers.js'
 import sidebar from './BattlefieldEditorToolbar.js'
 
+import tilesets from '../../style/img/defaultAssets/tilesets/tilesets.json' assert { type: 'json' }
+window.BattlefieldEditorTilesets = {}
+
 let layers = new Layers(35, 40, 64)
 layers.setLayersDiv(div)
 layers.setLayersDivMin(minDiv)
@@ -24,5 +27,6 @@ let layout = new w2layout({
 })
 
 window.BattlefieldEditorLayers = layers 
+window.BattlefieldEditorTilesetsUnparsed = tilesets.tilesets
 
 export default layout
