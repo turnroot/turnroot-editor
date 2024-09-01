@@ -24,15 +24,15 @@ class Tile {
         div.style.height = `${height}px`
         if (x % 2 === 0){
             if (y % 2 === 0){
-                div.style.backgroundColor = '#222'
+                div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
             } else {
-                div.style.backgroundColor = 'black'
+                div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
             }
         } else {
             if (y % 2 === 0){
-                div.style.backgroundColor = 'black'
+                div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
             } else {
-                div.style.backgroundColor = '#222'
+                div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
             }
         }
         this.div = div
@@ -105,11 +105,13 @@ class Tile {
 
     fill(tileInfo){
         this.tileGlyph = tileInfo.glyph
+        this.opacity = tileInfo.opacity
         this.filled = true
     }
 
     clear(){
         this.tileGlyph = null
+        this.opacity = 1
         this.filled = false
     }
 
