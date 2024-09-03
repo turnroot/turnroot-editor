@@ -13,26 +13,31 @@ class Tile {
         this.opacity = 1
         this.div = null
         this.layer = null
+        this.layers = []
     }
 
-    initializeTile(x,y,width,height){
+    initializeTile(x,y,width,height,background){
         let div = document.createElement('div')
         div.style.position = 'absolute'
         div.style.left = `${width * x}px`
         div.style.top = `${height * y}px`
         div.style.width = `${width}px`
         div.style.height = `${height}px`
-        if (x % 2 === 0){
-            if (y % 2 === 0){
-                div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
+        div.style.backgroundImage = 'none'
+        div.style.backgroundSize = 'cover'
+        if (background){
+            if (x % 2 === 0){
+                if (y % 2 === 0){
+                    div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
+                } else {
+                    div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
+                }
             } else {
-                div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
-            }
-        } else {
-            if (y % 2 === 0){
-                div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
-            } else {
-                div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
+                if (y % 2 === 0){
+                    div.style.backgroundColor = 'color-mix(in oklab, var(--slider-0), 60% var(--list-background))'
+                } else {
+                    div.style.backgroundColor = 'color-mix(in oklab, var(--window-background-alt), 60% var(--list-background))'
+                }
             }
         }
         this.div = div
@@ -45,14 +50,18 @@ class Tile {
 
     click(tileInfo, brush){
         this.active = true
-        
         if (brush === 'brush'){
             this.div.style.border = '2px solid var(--accent)'
-            this.tileGlyph = tileInfo.glyph
+            this.tileGlyph = tileInfo.glyph.split(" ").join("")
+            this.tileName = tileInfo.tileset + ":" + tileInfo.sheet + ":" + tileInfo.name
+            this.div.style.backgroundImage = tileInfo.glyph
+
             this.filled = true
+            console.log(this.tileGlyph)
 
         } else if (brush === 'erase'){
             this.tileGlyph = null
+            this.div.style.backgroundImage = null
             this.filled = false
             
         } else if (brush === 'fill'){
@@ -63,7 +72,6 @@ class Tile {
             div.style.bottom = '2rem'
             div.style.zIndex = 98
             div.id = 'battlefieldEditor-applyFill'
-            div.style.backgroundColor = 'var(--node-title)'
             div.style.paddingLeft = '.25rem'
             div.style.paddingRight = '.25rem'
             div.style.borderRadius = '5px'

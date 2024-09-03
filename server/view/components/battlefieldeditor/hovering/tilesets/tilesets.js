@@ -9,11 +9,13 @@ fullWidth.style.justifyContent = 'start'
 fullWidth.style.alignItems = 'flex-end'
 fullWidth.style.position = 'fixed'
 fullWidth.style.zIndex = 1000
+fullWidth.style.pointerEvents = 'none'
 
 let div = document.createElement('div')
 div.id = 'battlefieldEditor-TilesetsBox'
 div.style.position = 'fixed'
 div.style.width = '60%'
+div.style.maxWidth = '80vw'
 div.style.marginLeft = '1rem'
 div.style.bottom = '2rem'
 div.style.zIndex = 98
@@ -23,6 +25,7 @@ div.style.paddingRight = '.25rem'
 div.style.borderRadius = '5px'
 div.style.color = 'var(--node-title)'
 div.style.height = "276px"
+div.style.pointerEvents = 'all'
 
 div.addEventListener('mousedown', (e) => {
     if (!e.shiftKey) return
@@ -90,8 +93,6 @@ let layout2 = new w2layout({
 })
 
 window.BattlefieldEditorTilesetsLayoutMain = layout2
-
-import handleSheet from './functions/handleSheet.js'
 
 let config = [
     {type: 'radio', group: '1', id: 'unit-editor-bottom-toolbar-basic', text: 'Basic Info', class: 'panel-tabs', checked: true},
