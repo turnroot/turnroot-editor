@@ -2,7 +2,7 @@
     "tilesets":[
         {
             "name":"LPC",
-            "scaling_factor":1,
+            "square_size":32,
             "sheets":[
                 {
                     "path": "http://localhost:26068/style/img/defaultAssets/tilesets/lpc_sand/tiles.json",
@@ -17,6 +17,11 @@
                 {
                     "path": "http://localhost:26068/style/img/defaultAssets/tilesets/lpc_terrain2/tiles.json",
                     "name": "lpc_terrain2",
+                    "columns": 12
+                },
+                {
+                    "path": "http://localhost:26068/style/img/defaultAssets/tilesets/lpc_animated_decorations/tiles.json",
+                    "name": "lpc_animated_decorations",
                     "columns": 12
                 }
             ]

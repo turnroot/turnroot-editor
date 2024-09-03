@@ -30,6 +30,14 @@ class Layers {
         }
     }
 
+    setTilesetsDiv(tilesetsDiv){
+        this.container.appendChild(tilesetsDiv)
+        this.tilesetsDiv = tilesetsDiv
+        for (let layer of this.layers) {
+            layer.tilesetsDiv = tilesetsDiv
+        }
+    }
+
     setLayersDivMin(layersDivMin){
         this.container.appendChild(layersDivMin)
         this.layersDivMin = layersDivMin
