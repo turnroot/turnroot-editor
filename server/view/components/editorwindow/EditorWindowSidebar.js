@@ -178,6 +178,8 @@ sidebar.on('render:after', function(event) {
 
 sidebar.on('click', function(event) {
     if (window.newUserOnboardingGameDetails === false){
+        let statusbar = w2ui['EditorWindowStatusBar']
+        statusbar.hide('status-bar-project-status')
         sidebar.enable('sidebar-editors-unit-editor')
         sidebar.enable('sidebar-editors-class-editor')
         sidebar.enable('sidebar-editors-object-editor')
@@ -230,6 +232,9 @@ sidebar.on('click', function(event) {
         layout.html('main', BattlefieldEditor).removed()
         window.activeEditor = 'battlefield-editor'
         window.BattlefieldEditorImportTilesets()
+        let statusbar = w2ui['EditorWindowStatusBar']
+        statusbar.set('status-bar-project-status', {text: 'Shift + Drag: Move Tiles Box | Alt: Hide Tiles Box | Double Click / X: Deselect Tile in Tiles Box'})
+        statusbar.show('status-bar-project-status')
     }
 })
 

@@ -94,8 +94,6 @@ let layout2 = new w2layout({
 
 window.BattlefieldEditorTilesetsLayoutMain = layout2
 
-import handleSheet from './functions/handleSheet.js'
-
 let config = [
     {type: 'radio', group: '1', id: 'unit-editor-bottom-toolbar-basic', text: 'Basic Info', class: 'panel-tabs', checked: true},
     {type: 'radio', group: '1', id: 'unit-editor-bottom-toolbar-subtype', text: 'Subtype', class: 'panel-tabs'},

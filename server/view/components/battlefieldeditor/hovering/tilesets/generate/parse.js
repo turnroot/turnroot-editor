@@ -48,7 +48,11 @@ const importTilesets = () => {
                                 .then(response => response.blob())
                                 .then(blob => {
                                     let url = URL.createObjectURL(blob)
-                                    tile.image = url
+                                    let reader = new FileReader()
+                                    reader.readAsDataURL(blob)
+                                    reader.onloadend = () => {
+                                        tile.image = reader.result
+                                    }
                                     window.BattlefieldEditorTilesetsSheets[sheet.name][i] = tile
                                 })
                                 .catch(err => console.error(err))
@@ -139,12 +143,59 @@ const secondHalf = () => {
                 div.style.backgroundSize = '64px'
                 div.style.cursor = 'pointer'
 
+                div.ariaLabel = tile.type
+                div.setAttribute('data-balloon-pos', 'up')
+
                 div.style.gridColumn = column
                 div.style.gridRow = row
+
+                div.onmouseenter = () => {
+                    if (div.active) return
+                    div.style.border = 'solid 1px var(--accent)'
+                }
+
+                div.onmouseout = () => {
+                    if (div.active) return
+                    div.style.border = 'none'
+                }
+
+                div.onclick = () => {
+                    window.BattlefieldEditorTileInfo = {
+                        glyph: div.style.backgroundImage,
+                        type: tile.type,
+                        name: tile.name,
+                        sheet: window.BattlefieldEditorActiveTilesetSheetName,
+                        tileset: window.BattlefieldEditorTilesets[window.BattlefieldEditorActiveTilesetIndex].name
+                    }
+                    div.style.border = 'solid 3px var(--slider-1)'
+                    div.style.opacity = 1
+                    div.active = true
+
+                    let otherDivs = tileContainer.querySelectorAll('div')
+                    otherDivs.forEach(otherDiv => {
+                        if (otherDiv !== div) {
+                            otherDiv.style.border = 'none'
+                            otherDiv.style.opacity = .5
+                            otherDiv.active = false
+                        }
+                    })
+                }
+
+                div.ondblclick = () => {
+                    window.BattlefieldEditorTileInfo = {}
+                    let divs = tileContainer.querySelectorAll('div')
+                    divs.forEach(d => {
+                        d.style.opacity = 1
+                        d.active = false
+                        d.style.border = 'none'
+                    })
+                }
+
                 tileContainer.appendChild(div)
             })
 
             BattlefieldEditorTilesetsLayoutMain.html('main', tileContainer)
+            window.BattlefieldEditorTilesetsLayoutTileContainer = tileContainer
         }
     } else {
         console.error('window.BattlefieldEditorTilesetsSheets is not currently defined')

@@ -150,6 +150,20 @@
     }, 12000)
 
     document.addEventListener('keydown', function(event) {
+        if (window.activeEditor && window.activeEditor === 'battlefield-editor'){
+            if (event.altKey){
+                window.window.BattlefieldEditorLayers.tilesetsDiv.style.display = 'none'
+            }
+            if (event.key === 'x'){
+                window.BattlefieldEditorTileInfo = {}
+                let divs = window.BattlefieldEditorTilesetsLayoutTileContainer.querySelectorAll('div')
+                divs.forEach(d => {
+                    d.style.opacity = 1
+                    d.active = false
+                    d.style.border = 'none'
+                })
+            }
+        }
         if ((event.ctrlKey || event.metaKey) && event.key === 's') {
             event.preventDefault()
             window.sendQueue()
@@ -172,6 +186,14 @@
             } 
         }
     })}
+
+    document.addEventListener('keyup', function(event) {
+        if (window.activeEditor && window.activeEditor === 'battlefield-editor'){
+            if (event.key === 'Alt'){
+                window.window.BattlefieldEditorLayers.tilesetsDiv.style.display = 'block'
+            }
+        }
+    })
     
 </script>
 

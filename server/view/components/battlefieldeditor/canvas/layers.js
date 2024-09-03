@@ -50,7 +50,7 @@ class Layers {
         let layer = new Layer(name, this.x, this.y, this.resolution)
         this.layers.push(layer)
         layer.setLayers(this.layers)
-        if (this.layers.length === 1){
+        if (this.layers.length === 2){
             layer.active = true
             console.log(layer)
         }
@@ -64,7 +64,7 @@ class Layers {
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-lock-keyhole-open"><circle cx="12" cy="16" r="1"/><rect width="18" height="12" x="3" y="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 9.33-2.5"/></svg>
         `
 
-        this.layersDiv.inner += div.outerHTML
+        if (layer.name !== 'hidden'){this.layersDiv.inner += div.outerHTML}
         this.layersDiv.innerHTML = this.layersDiv.pre + this.layersDiv.inner + this.layersDiv.post
 
         this.layersDiv.addEventListener('click', (event) => {

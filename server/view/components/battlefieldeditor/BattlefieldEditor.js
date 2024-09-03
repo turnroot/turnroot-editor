@@ -7,11 +7,14 @@ import sidebar from './BattlefieldEditorToolbar.js'
 
 import tilesets from '../../style/img/defaultAssets/tilesets/tilesets.json' assert { type: 'json' }
 window.BattlefieldEditorTilesets = {}
+window.BattlefieldEditorTileInfo = {}
+window.BattlefieldEditorBrush = "brush"
 
 let layers = new Layers(35, 40, 64)
 layers.setLayersDiv(div)
 layers.setLayersDivMin(minDiv)
 layers.setTilesetsDiv(tilesetsDiv)
+layers.addLayer('hidden')
 layers.addLayer('terrain')
 layers.addLayer('details')
 layers.addLayer('buildings')

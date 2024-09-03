@@ -21,19 +21,21 @@ class Layer {
             this.tiles[x] = []
             for (let y = 0; y < this.y; y++) {
                 this.tiles[x][y] = new Tile(x, y, this.resolution, this.resolution)
-                this.tiles[x][y].initializeTile(x, y, this.resolution, this.resolution)
+                this.tiles[x][y].initializeTile(x, y, this.resolution, this.resolution, this.name === 'hidden' ? true: false)
                 this.tiles[x][y].tileInfoDiv = this.tileInfoDiv
                 this.tiles[x][y].layer = this.name
                 this.container.appendChild(this.tiles[x][y].div)
 
                 document.addEventListener('mouseover', (event) => {
                     if (window.activeEditor !== 'battlefield-editor') return
+                    if (this.name === 'hidden') return
                     if (event.target === this.tiles[x][y].div){
                         this.tiles[x][y].hover()
                     }
 
                 })
                 document.addEventListener('mouseout', (event) => {
+                    if (this.name === 'hidden') return
                     if (window.activeEditor !== 'battlefield-editor') return
                     if (event.target === this.tiles[x][y].div){
                         this.tiles[x][y].unhover()
@@ -42,12 +44,14 @@ class Layer {
                 })
 
                 document.addEventListener('contextmenu', (event) => {
+                    if (this.name === 'hidden') return
                     if (window.activeEditor !== 'battlefield-editor') return
                     if (event.target === this.tiles[x][y].div){
                     event.preventDefault()}
                 })
 
                 document.addEventListener('mousedown', (event) => {
+                    if (this.name === 'hidden') return
                     if (window.activeEditor !== 'battlefield-editor') return
                     event.preventDefault()
                     if (event.target === this.tiles[x][y].div){
@@ -67,6 +71,7 @@ class Layer {
                 })
 
                 document.addEventListener('mouseup', (event) => {
+                    if (this.name === 'hidden') return
                     if (event.target === this.tiles[x][y].div){
                         let activeLayer = this.layers.find(layer => layer.active)
                         let correctTile = activeLayer.tiles[x][y]
